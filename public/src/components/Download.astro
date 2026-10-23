@@ -1,0 +1,158 @@
+---
+/**
+ * The download CTA shared by all three designs: Download for macOS, Star on GitHub, the honest limits of the
+ * current build and a small "First launch?" disclosure. Copy lives in `download` / `repo` in src/copy.ts.
+ *
+ * Each design passes its own button classes and themes the rest through custom properties on `.download`
+ * (`--download-soft`, `--download-muted`, `--download-line`, `--download-code`), so this file holds layout only, no colors.
+ * Clicks are tracked as `download_click` / `github_clicked` with `placement` (src/scripts/instrumentation.ts).
+ */
+import { download, repo } from '../copy';
+
+interface Props {
+  placement: string;
+  /** Classes for the download button, e.g. `btn btn-primary`. */
+  primary: string;
+  /** Classes for the GitHub button, e.g. `btn btn-ghost`. */
+  secondary: string;
+  align?: 'center' | 'start';
+  class?: string;
+}
+const { placement, primary, secondary, align = 'start', class: cls } = Astro.props;
+---
+
+<div class:list={['download', `download-${align}`, cls]}>
+  <div class="download-actions">
+    <a class:list={[primary, 'download-btn']} href={download.url} data-track="download_click" data-placement={placement}>
+      <svg class="download-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+        <path
+          d="M10 3v9.5m0 0-4-4m4 4 4-4M4 16.5h12"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+      <span>{download.label}</span>
+    </a>
+    <a class:list={[secondary, 'download-gh']} href={repo.url} data-track="github_clicked" data-placement={placement}>
+      <svg class="download-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <path
+          fill="currentColor"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+        ></path>
+      </svg>
+      <span>{repo.star}</span>
+    </a>
+  </div>
+  <p class="download-meta">
+    <span>{download.meta.join(' · ')}</span>
+    <a href={repo.releases} data-track="github_clicked" data-placement={`${placement}-releases`}>{download.releases}</a>
+  </p>
+  <p class="download-other" data-download-other hidden>{download.otherOs}</p>
+  <p class="download-free">{download.free}</p>
+  <details class="download-first">
+    <summary>{download.firstLaunch.summary}</summary>
+    <p>{download.firstLaunch.body}</p>
+    <code>{download.firstLaunch.command}</code>
+  </details>
+</div>
+
+<script>
+  import { isMac } from '../scripts/platform';
+
+  // Visitors on Windows, Linux or a phone learn up front that this build is macOS only.
+  if (!isMac(navigator)) {
+    for (const note of document.querySelectorAll<HTMLElement>('[data-download-other]')) note.hidden = false;
+  }
+</script>
+
+<style>
+  /* Designs set --download-* on their own class; the fallbacks derive from the inherited text color. */
+  .download {
+    display: grid;
+    gap: 10px;
+    width: min(100%, 560px);
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: var(--download-muted, color-mix(in srgb, currentColor 70%, transparent));
+  }
+  .download-center {
+    justify-items: center;
+    text-align: center;
+  }
+  .download-start {
+    justify-items: start;
+    text-align: start;
+  }
+  .download-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .download-center .download-actions {
+    justify-content: center;
+  }
+  .download-icon {
+    flex: none;
+    width: 1.1em;
+    height: 1.1em;
+  }
+  .download-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1.1em;
+    margin: 0;
+    color: var(--download-soft, currentColor);
+  }
+  .download-center .download-meta {
+    justify-content: center;
+  }
+  .download-meta a {
+    color: inherit;
+    text-underline-offset: 3px;
+  }
+  .download-other,
+  .download-free {
+    max-width: 60ch;
+    margin: 0;
+  }
+  .download-other {
+    color: var(--download-soft, currentColor);
+  }
+  .download-first {
+    max-width: 60ch;
+  }
+  .download-first summary {
+    display: inline-block;
+    color: var(--download-soft, currentColor);
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  .download-first summary::-webkit-details-marker {
+    display: none;
+  }
+  .download-first p {
+    margin: 8px 0 6px;
+  }
+  .download-first code {
+    display: block;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    color: var(--download-soft, currentColor);
+    text-align: start;
+    overflow-wrap: anywhere;
+    user-select: all;
+    border: 1px solid var(--download-line, color-mix(in srgb, currentColor 20%, transparent));
+    border-radius: 8px;
+    background: var(--download-code, color-mix(in srgb, currentColor 7%, transparent));
+  }
+  @media (max-width: 480px) {
+    .download-actions,
+    .download-actions > a {
+      width: 100%;
+    }
+  }
+</style>

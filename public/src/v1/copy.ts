@@ -44,17 +44,17 @@ export const hero = {
   titleBottom: 'at arcade speed.',
   lede: 'adoken is a native desktop client for Azure DevOps that keeps your PRs, work items, pipelines and mentions on your own machine. ⌘P answers before you finish typing, reviews never spin, and your inbox finally hits back.',
   equation: { left: 'ADO', right: '拳', note: 'ken · Japanese for “fist”' },
-  chips: ['Rust + GPUI', 'Local-first', 'Works offline', 'Windows next'],
+  chips: ['Open source · MIT', 'Rust + GPUI', 'Local-first', 'Works offline', 'Windows next'],
   follow: 'Follow the build on X',
 } as const;
 
 export const launch = {
-  emailLabel: 'One email when the macOS beta drops.',
+  emailLabel: 'Release notes: one email per new build.',
   placeholder: 'you@company.com',
-  submit: 'Email me at launch',
+  submit: 'Get release notes',
   osLegend: 'Your machine',
   os: sharedLaunchList.os,
-  fine: 'No waitlist, no spam. One email at launch, then short release notes. Unsubscribe in one click.',
+  fine: 'No spam. One short email per release, then nothing until the next one. Unsubscribe in one click.',
   privacy: 'Privacy',
 } as const;
 
@@ -369,7 +369,7 @@ export const stages = {
       version: 'v0.0',
       name: 'Training',
       state: 'clear',
-      body: 'A native window in 305 ms, sign-in in a minute, your org synced to disk.',
+      body: 'A native window in 305 ms, sign-in in a minute, your org synced to disk. Early macOS preview out now.',
     },
     {
       version: 'v0.1',
@@ -403,7 +403,7 @@ export const stages = {
 export const finale = {
   continueLabel: 'Next round in',
   title: 'Insert coin.',
-  body: 'Get one email when the macOS beta is ready to download. Or watch it get built: three posts a week and a demo video every Friday.',
+  body: 'The early macOS preview is free to play. Get one email per release, or watch it get built: three posts a week and a demo video every Friday.',
   follow: `Follow ${x.handle} on X`,
 } as const;
 

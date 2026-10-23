@@ -260,6 +260,15 @@ kbd {
   border-color: var(--ink);
 }
 
+/* The shared download CTA (src/components/Download.astro), set on paper. */
+.v3-download {
+  --download-soft: var(--ink-2);
+  --download-muted: var(--dim);
+  --download-line: var(--rule);
+  --download-code: var(--paper-2);
+  font-family: var(--sans);
+}
+
 .xmark {
   width: 1em;
   height: 1em;

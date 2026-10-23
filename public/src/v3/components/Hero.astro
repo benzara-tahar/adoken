@@ -2,6 +2,7 @@
 import BrushKen from './BrushKen.astro';
 import Hanko from './Hanko.astro';
 import Follow from './Follow.astro';
+import Download from '../../components/Download.astro';
 import LaunchForm from './LaunchForm.astro';
 import HeroMock from './HeroMock.astro';
 import { hero, masthead } from '../copy';
@@ -33,6 +34,7 @@ const [l1, l2, l3] = hero.title;
       <em class="stroke-word">{l3}</em>
     </h1>
     <p class="dek hero-lede">{hero.lede}</p>
+    <Download placement="v3-hero" primary="btn" secondary="btn btn-ghost" class="v3-download" />
     <LaunchForm placement="v3-hero" />
     <div class="hero-follow">
       <Follow class="btn-ghost" label={hero.follow} placement="v3-hero" />

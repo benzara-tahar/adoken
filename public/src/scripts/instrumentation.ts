@@ -8,6 +8,8 @@ const SECTIONS: Record<string, Record<string, string>> = {
 };
 const OS = new Set(['macOS', 'Windows', 'Linux']);
 const PLACEMENTS = new Set(['v1-hero', 'v1-footer', 'v2-hero', 'v2-footer', 'v3-hero', 'v3-footer']);
+// Outbound links tagged with `data-track` + `data-placement` in markup (X, the macOS download, GitHub).
+const LINK_EVENTS = new Set(['follow_x_clicked', 'download_click', 'github_clicked']);
 
 export function siteDesign(pathname: string): string {
   return pathname === '/' ? 'v2' : /^\/v[13]\/?$/.test(pathname) ? pathname.slice(1, 3) : 'notice';
@@ -125,10 +127,11 @@ export function instrument(capture: Capture, doc: Document = document, win: Wind
     if (!control) return;
     const interaction = interactions.get(control);
     if (interaction) capture('site_interaction', interaction, control.tagName === 'A');
-    if (control instanceof HTMLElement && control.dataset.track === 'follow_x_clicked') {
+    const tracked = control instanceof HTMLElement ? control.dataset.track ?? '' : '';
+    if (control instanceof HTMLElement && LINK_EVENTS.has(tracked)) {
       // Placement is authored markup, never visitor input; keep its bounded label only.
       const placement = control.dataset.placement;
-      if (placement && /^[a-z0-9-]{1,40}$/.test(placement)) capture('follow_x_clicked', { placement }, true);
+      if (placement && /^[a-z0-9-]{1,40}$/.test(placement)) capture(tracked, { placement }, true);
     }
   });
   let searchUsed = false;

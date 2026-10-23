@@ -290,6 +290,22 @@ button {
   border-color: rgb(255 255 255 / 0.2);
 }
 
+/* The shared download CTA (src/components/Download.astro), themed for this design. */
+.v2-download {
+  --download-soft: var(--soft);
+  --download-muted: var(--muted);
+  --download-line: var(--line-2);
+  --download-code: var(--glass-2);
+}
+.v2-download .download-btn {
+  height: 48px;
+  padding: 0 22px;
+  font-size: 1rem;
+}
+.v2-download .download-gh {
+  height: 48px;
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;

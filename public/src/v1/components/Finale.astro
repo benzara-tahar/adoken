@@ -1,5 +1,6 @@
 ---
 import { finale, footer, x } from '../copy';
+import Download from '../../components/Download.astro';
 import LaunchForm from './LaunchForm.astro';
 import PixelFist from './PixelFist.astro';
 ---
@@ -14,6 +15,7 @@ import PixelFist from './PixelFist.astro';
     <div class="finale-copy">
       <h2 class="display" id="finale-title"><span class="grad-text">{finale.title}</span></h2>
       <p class="finale-body">{finale.body}</p>
+      <Download placement="v1-footer" primary="btn" secondary="btn btn-ghost" class="v1-download" />
       <LaunchForm placement="v1-footer" />
       <a class="btn btn-ghost" href={x.url} rel="me" data-track="follow_x_clicked" data-placement="v1-footer">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"

@@ -2,6 +2,7 @@
 /** 奥付: the closing call to action, set like a book's colophon page. */
 import Hanko from './Hanko.astro';
 import Follow from './Follow.astro';
+import Download from '../../components/Download.astro';
 import LaunchForm from './LaunchForm.astro';
 import { colophon } from '../copy';
 ---
@@ -18,6 +19,7 @@ import { colophon } from '../copy';
         </h2>
         <p class="dek co-body">{colophon.body}</p>
         <div class="co-actions">
+          <Download placement="v3-footer" primary="btn" secondary="btn btn-ghost" class="v3-download" />
           <LaunchForm placement="v3-footer" />
           <Follow label={colophon.follow} placement="v3-footer" class="co-follow" />
         </div>

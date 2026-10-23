@@ -6,14 +6,14 @@
  *   k keyword · s string · f function · t type · n number · c comment · p property · o operator
  * (see `hl()` in ./lib.ts). Everything else is plain text.
  */
-import { launchList as sharedLaunchList, x, footer as sharedFooter } from '../copy';
+import { launchList as sharedLaunchList, x, footer as sharedFooter, download, repo } from '../copy';
 
-export { x };
+export { x, download, repo };
 
 export const meta = {
   title: 'adoken: Azure DevOps, twelve milliseconds away',
   description:
-    'A native, local-first desktop client for Azure DevOps. Cmd+P over 100,000 items in 12 ms, PR reviews without the spinner, and one quiet inbox instead of an email flood.',
+    'A native, local-first desktop client for Azure DevOps. Cmd+P over 100,000 items in 12 ms, PR reviews without the spinner, and one quiet inbox instead of an email flood. Free, open source, early macOS preview out now.',
   themeColor: '#07070b',
 };
 
@@ -26,7 +26,8 @@ export const nav = {
     { href: '#horizon', label: 'Roadmap' },
   ],
   follow: 'Follow the build',
-  cta: 'Get launch email',
+  github: repo.short,
+  cta: 'Download',
 };
 
 export const switcher = {
@@ -39,9 +40,11 @@ export const switcher = {
 };
 
 export const hero = {
-  badge: { tag: 'New', text: 'Native on macOS · Windows in v0.3' },
+  badge: { tag: 'New', text: 'Now open source · MIT' },
   title: ['Everything in Azure DevOps.', 'Twelve milliseconds away.'],
   lede: 'adoken is a native, local-first client for Azure DevOps. Your pull requests, work items, pipelines and people live on your machine, so search, review and triage move at the speed you think. Not the speed of a spinner.',
+  /** Above the release-notes form, under the download. */
+  notes: 'Hear when the next build lands: one short email per release.',
   follow: `Follow ${x.handle} on X`,
   stat: { value: '12 ms', label: '⌘P over 100,000 items' },
   keysHint: 'Press',
@@ -49,8 +52,8 @@ export const hero = {
 
 export const launchList = {
   ...sharedLaunchList,
-  emailLabel: 'Your email address for the v0.1 launch',
-  submit: 'Get launch email',
+  emailLabel: 'Your email address for release notes',
+  submit: 'Get release notes',
 };
 
 /** The hero app window: sidebar, "waiting on you" list, palette script, and two PR detail views. */
@@ -395,12 +398,13 @@ export const horizon = {
 
 export const closing = {
   title: ['Stop waiting on', 'Azure DevOps.'],
-  lede: 'Be first to get the download, or watch it get built one commit at a time.',
+  lede: 'Grab the early macOS preview, get one email per release, or watch it get built one commit at a time.',
   follow: `Follow ${x.handle} on X`,
 };
 
 export const footer = {
   made: `Designed and built in public by ${x.handle}.`,
+  source: 'Source on GitHub (MIT)',
   legal: sharedFooter.legal,
   privacy: 'Privacy',
   mock: 'Every window on this page is a hand-built HTML mock with fictional data.',

@@ -1,8 +1,8 @@
 # adoken.dev
 
-The pre-launch site for adoken. The homepage (`/`, "Instant") and two alternative designs, `/v1/` ("Arcade Dojo")
-and `/v3/` ("Ink & Iron"), plus the launch list. Every product visual is a hand-built HTML/CSS/TS mock on fictional
-data, not an app screenshot. Astro, static output, deployed to Cloudflare. Client JS is vanilla TS bundled per page
+The site for adoken. The homepage (`/`, "Instant") and two alternative designs, `/v1/` ("Arcade Dojo")
+and `/v3/` ("Ink & Iron"), the macOS download (GitHub Releases) and the release-notes list. Every product visual
+is a hand-built HTML/CSS/TS mock on fictional data, not an app screenshot. Astro, static output, deployed to Cloudflare. Client JS is vanilla TS bundled per page
 (mock animations, cookieless analytics loaded on idle, and a tiny script that tags launch-list signups with their source).
 
 
@@ -24,12 +24,12 @@ Astro runs on the Bun runtime (`bunx --bun astro …`), so a local Node older th
 
 | Path                          | Purpose                                                                   |
 | :---------------------------- | :------------------------------------------------------------------------ |
-| `src/copy.ts`                 | Shared copy: `meta`, `og` (OG image), `launchList`, footer legal line, and the privacy/404/subscribed/confirmed pages. |
+| `src/copy.ts`                 | Shared copy: `meta`, `og` (OG image), `repo`, `download`, `launchList`, footer legal line, and the privacy/404/subscribed/confirmed pages. |
 | `src/v1/`, `src/v2/`, `src/v3/` | One design each: `Layout.astro`, `copy.ts` (every word and all fake mock data), components, scripts, styles. |
 | `src/pages/index.astro`       | Homepage, built from `src/v2/`. `v1/` and `v3/` are the alternative designs (`noindex`). `privacy.astro` is the privacy page. `404`, `subscribed`, `confirmed` use `layouts/Notice.astro`. |
 | `src/theme.ts`                | Color tokens for `layouts/Base.astro` pages, the art and the OG image.    |
 | `src/art/fist.ts`             | The original pixel-art fist (grid → SVG rects).                           |
-| `src/components/`             | Fist and follow-on-X button used by the privacy and notice pages.         |
+| `src/components/`             | Fist and follow-on-X button used by the privacy and notice pages; `Download.astro`, the download CTA all three designs share. |
 | `src/integrations.ts`         | PostHog token + proxy host, Buttondown form URL. Public values only.      |
 | `src/scripts/analytics.ts`    | Cookieless PostHog loader, production guard and privacy filtering.       |
 | `src/scripts/instrumentation.ts` | Explicit section, demo, navigation and launch-form event wiring.    |
@@ -111,6 +111,7 @@ for unknown paths automatically by Pages.
   URLs, and masks email-bearing attributes. Console, network, payload, canvas and iframe capture are disabled.
 - Production domain only: `analytics.ts` never loads the SDK on local or preview hosts, or when DNT/GPC is enabled.
 - Explicit events: `launch_list_started`, `launch_list_os_selected`, `launch_list_submitted`, `follow_x_clicked`,
+  `download_click` (the macOS DMG link), `github_clicked` (repo and releases links),
   `site_interaction` (theme/replay/navigation/design choices and visitor input in the v1 search demo),
   `section_viewed`, `section_engaged`, and `scroll_depth_reached` (25/50/75/90%). Animated examples do not count as input.
 - `instrumentation.ts` uses existing public element attributes and fixed section maps for all three designs.
@@ -130,7 +131,7 @@ for unknown paths automatically by Pages.
   `Production — monthly launch conversion` preset. The dashboard includes a reading guide and 12 reports;
   the average-time SQL sums increments per page visit before averaging. Publication and verification are
   recorded in `docs/specs/0013-website-analytics.md` at the repository root.
-- Tests: `bun test src/scripts/engagement.test.ts src/scripts/recording.test.ts` (fake capture/time/storage; no real service calls).
+- Tests: `bun test src/scripts` (engagement, recording and platform detection; fake capture/time/storage, no real service calls).
 - Managed reverse proxy: `e.adoken.dev`, a DNS-only CNAME in Cloudflare → PostHog EU (Organization settings →
   Managed reverse proxy). Keep it grey-clouded.
 - "Filter out internal and test users" excludes `$host` localhost/127.0.0.1 (on by default in insights).
@@ -163,5 +164,6 @@ scripts (`vite.build.assetsInlineLimit: 0`), because the CSP has no hashes.
   in its first frame: entrances move content, they don't fade it in from invisible, so a throttled or frozen
   animation clock still shows a finished page.
 - Original art only. No Capcom / Street Fighter names, sprites, poses or audio.
-- Primary CTA: the launch list (one email when v0.1 is downloadable). Secondary: follow @BenzyPrime on X.
-  It's a launch list, not a waitlist: nobody queues, nothing is gated.
+- Primary CTA: Download for macOS (`download.url`, the stable `releases/latest/download/adoken-macos-arm64.dmg`
+  asset), with the build's limits stated next to it. Secondary: Star on GitHub, the release-notes list (one email per
+  release) and follow @BenzyPrime on X. Nothing is gated behind the list.

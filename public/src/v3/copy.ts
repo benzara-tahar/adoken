@@ -236,12 +236,13 @@ export const roadmap = {
 
 export const colophon = {
   eyebrow: '奥付 · Colophon',
-  title: ['Be there for', 'the first printing.'],
-  body: 'One email the day v0.1 is ready to download. Or follow along on X for the build log: three posts a week and a short demo every Friday.',
+  title: ['The proof copy', 'is off the press.'],
+  body: 'An early macOS preview is out: free, open source, a few pages still wet. Get one short email per release, or follow along on X for the build log: three posts a week and a short demo every Friday.',
   follow: `Follow ${x.handle} on X`,
   details: [
     ['Set in', 'New York and Hiragino Mincho, or whatever serif your system keeps'],
     ['Built with', 'Rust and GPUI. Native, not a browser in a box'],
+    ['Licensed', 'MIT. The source is on GitHub'],
     ['Printed on', 'Your own disk. SQLite, a keychain, nothing else'],
     ['Made by', `${x.handle}, in public`],
   ],

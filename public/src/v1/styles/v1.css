@@ -264,6 +264,14 @@ p {
   box-shadow: inset 0 0 0 1.5px var(--cyan);
 }
 
+/* The shared download CTA (src/components/Download.astro), themed for the arcade. */
+.v1-download {
+  --download-soft: var(--text);
+  --download-muted: var(--muted);
+  --download-line: var(--line);
+  --download-code: var(--panel);
+}
+
 /* ---------- Top bar ---------- */
 .topbar {
   position: sticky;

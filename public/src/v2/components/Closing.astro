@@ -1,5 +1,6 @@
 ---
-import { closing, footer, x } from '../copy';
+import { closing, footer, repo, x } from '../copy';
+import Download from '../../components/Download.astro';
 import LaunchForm from './LaunchForm.astro';
 import Logo from './Logo.astro';
 import { recordingConsent } from '../../copy';
@@ -15,6 +16,7 @@ import { recordingConsent } from '../../copy';
     </h2>
     <p class="lede rv" style="--d:.1s">{closing.lede}</p>
     <div class="close-form rv" style="--d:.15s">
+      <Download placement="v2-footer" primary="btn btn-primary" secondary="btn btn-ghost" align="center" class="v2-download" />
       <LaunchForm placement="v2-footer" />
       <a class="btn btn-ghost" href={x.url} rel="me noopener" data-track="follow_x_clicked" data-placement="v2-footer">
         <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"
@@ -35,6 +37,7 @@ import { recordingConsent } from '../../copy';
       <Logo size={22} />
       <span>{footer.made}</span>
     </div>
+    <a href={repo.url} data-track="github_clicked" data-placement="v2-foot">{footer.source}</a>
     <a href="/privacy/">{footer.privacy}</a>
     <button class="recording-settings" data-recording-settings type="button" hidden>{recordingConsent.settings}</button>
     <p class="foot-legal">{footer.legal} {footer.mock}</p>
@@ -94,7 +97,7 @@ import { recordingConsent } from '../../copy';
   .close-form {
     display: grid;
     justify-items: center;
-    gap: 18px;
+    gap: 28px;
     width: 100%;
     margin-top: 12px;
   }

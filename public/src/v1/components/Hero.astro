@@ -1,6 +1,7 @@
 ---
 import { hero, x } from '../copy';
 import HeroCabinet from './HeroCabinet.astro';
+import Download from '../../components/Download.astro';
 import LaunchForm from './LaunchForm.astro';
 ---
 
@@ -26,6 +27,7 @@ import LaunchForm from './LaunchForm.astro';
         <small>{hero.equation.note}</small>
       </p>
       <p class="hero-lede">{hero.lede}</p>
+      <Download placement="v1-hero" primary="btn" secondary="btn btn-ghost" class="v1-download" />
       <LaunchForm placement="v1-hero" />
       <a class="hero-follow" href={x.url} rel="me" data-track="follow_x_clicked" data-placement="v1-hero">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"
