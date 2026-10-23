@@ -3,6 +3,19 @@
 All notable changes to adoken are documented here. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning: [SemVer](https://semver.org/).
 
 ## [Unreleased]
+
+## [0.0.1] - 2026-10-23
+
+First public build, an early preview for macOS 12+ on Apple silicon. Not notarized yet. Highlights:
+
+- **⌘P everywhere:** pull requests, work items, runs, people and commands from a local index, with filters like `author:@me`, `state:`, `updated:<7d`.
+- **Pull request review:** side-by-side diffs computed locally, inline threads, viewed files, votes, comments and status changes without opening the browser.
+- **Inbox and smart nudges:** one row per item instead of an email per event, priorities, snooze, mute, quiet hours; nudges for reviews waiting, failing builds and stale PRs.
+- **Work items:** detail view with in-place editing of state, assignee, area, iteration, description, links and comments, guarded against conflicting edits.
+- **Today, pins and activity:** your day at a glance, up to 20 pinned items, and a live log of every request adoken sends.
+- **33 built-in theme variants, custom backgrounds, optional sounds** and the opt-in Ken arcade layer, all respecting Reduce Motion.
+- **Local-first:** one SQLite store per org, a PAT in the Keychain only, no adoken server between you and Azure DevOps. Try it on a fictional org with `ADOKEN_DEMO=1`.
+
 ### Added
 - Pins (spec 0014): up to 20 pull requests, work items and pipeline definitions in a persistent sidebar group; the rail shows status glyphs and a hover/keyboard peek without shrinking the content pane. Pin/unpin with `⌘D`, open pins from the sidebar, or search them with `⌘J` / `pin:`. Reorder by drag or `⌥⌘↑`/`⌥⌘↓`; rename locally, fold the group, and Undo an unpin. Status headlines and change dots update from local sync; closed PRs and work items auto-unpin after 24 hours unless disabled. Pinned pipeline failures notify at P2. Demo pins and all eight pin stories have snapshots across the 33 built-in variants.
 - Work item detail and editing (spec 0015 slices A+B, design `docs/design/work-item-detail.md`): a redesigned detail with the state chip in the header, a fields grid (a properties rail when the pane is 1000 px or wider), a rich description (headings, lists, code, links, @mentions, tables; images show as a chip that opens the browser), Repro steps and Acceptance criteria, links grouped by type, discussion with avatars, and history. Edit in place without opening the browser: title `t`, state `s`, assignee `a` (people picker with recent and directory search), assign to me `i`, area `⇧A` and iteration `⇧I` (tree pickers with Current/Next/Recent sprints), description `d` (Markdown editor with Write/Preview `⌘E`; HTML descriptions round-trip as HTML and stay closed with the reason when they hold tables, images or colors), add `l` and remove `⌫` work item links, and comment `c` with @mention chips. Every edit is one Azure DevOps update guarded by the revision you saw: it shows "Sending…" until Azure DevOps confirms, resends once when someone else changed a different field, shows both values with Apply mine / Keep theirs when they changed the same one, and offers an inline fix when a process rule needs another field. Confirmed edits are announced to screen readers. Descriptions and comments keep local drafts across restarts. The header shows when the item was last confirmed from Azure DevOps ("Synced 2m ago", "Partly synced"), and Sync this work item (`⌘⇧R`) refreshes just this item at user priority, even while sync is paused. Keys never fire while you type; every action is also a `⌘P` command, and `⌘K` on a work item result offers Change state…, Assign…, Assign to me, Comment… and Sync. Tokens without `vso.work_write` show values read-only with a hint naming the missing permission, and their edit commands stay listed in `⌘P`, dimmed with that reason. Moving an item to another project is planned for v0.2.
@@ -51,6 +64,7 @@ All notable changes to adoken are documented here. Format: [Keep a Changelog](ht
 - Resource meter (spec 0023, off by default): Settings › General › "Show memory and CPU in the statusbar" or ⌘P › "Statusbar: Show or hide memory and CPU" shows adoken's own memory (as Activity Monitor counts it) and CPU in the statusbar ("260 MB · 3% CPU"). It samples off the UI thread every 2 s while adoken is in front and every 10 s behind it, stops while hidden or off, changes its text at most every 5 s and only for a real change, and drops CPU first when the statusbar is narrow. Its menu has Copy resource usage (a one-line report for bug reports with no org or item data, also in ⌘P) and Hide from statusbar. Saved as `[activity] resource_meter`.
 
 ### Fixed
+- Work items from any process template: Product Backlog Items (Scrum), Requirements (CMMI) and custom types were dropped by sync, because only six stock types were recognized. Every type is now kept under its Azure DevOps name, and open vs. closed comes from the state categories Azure DevOps returns for each type (fetched once a day), so custom states such as "Shipped" count as done.
 - The request log (`ADOKEN_SYNC_LOG` and the in-memory ledger) recorded two things its "ids replaced" promise excludes: the git object id of each downloaded pull request file (`…/blobs/{sha}`), and the project's name when a pinned work item's project wasn't selected (`_apis/projects/{project}`). Both are now templated.
 - Jumping between pull requests while a comment composer is focused now flushes the unsent draft before navigation drops the editor, rather than losing text inside the autosave debounce.
 - Icons without an explicit color now use the inherited text color; Unpin and disclosure glyphs were otherwise invisible in the current GPUI renderer. The Unpin hover control keeps a stable layout, avoiding GPUI's “must call prepaint before paint” panic.
@@ -75,3 +89,6 @@ All notable changes to adoken are documented here. Format: [Keep a Changelog](ht
 
 ### Removed
 - Spec 0025 (feature diet): ⌘1–⌘9 and their number badges in ⌘P; ⌘↑/⌘↓ (first/last) and ⌃N/⌃P in ⌘P, pickers and menus; ⌃1–⌃9 pin jumps, the "Jump to pin N" commands and pin numbers; digit picks in the vote, link-type and Inbox menus; the ⌘\ alias for ⌘B; the global ⌘= / ⌘- / ⌘0 code size keys (the ⌘P commands stay); the 33 "Theme: <name>" ⌘P rows; "Import VS Code theme…"; the second global shortcut ("Show adoken with search open", `[hotkey] summon_palette`); the sound pack picker, per-category and per-event sound settings, "Play sounds while adoken is in the background" and the quiet-hours sound options; the calm mode, "Toggle sounds", "Mute sounds for 1 hour" and "Turn celebrations on/off" commands (replaced by Quiet mode).
+
+[Unreleased]: https://github.com/benzara-tahar/adoken/compare/v0.0.1...HEAD
+[0.0.1]: https://github.com/benzara-tahar/adoken/releases/tag/v0.0.1

@@ -1,0 +1,81 @@
+name: Release
+
+# Push a tag that matches the workspace version (`git tag v0.0.1 && git push origin v0.0.1`).
+# Builds the release bundle, packages the dmg and publishes a GitHub Release with the notes
+# from CHANGELOG.md. `adoken-macos-arm64.dmg` keeps the same name in every release, so
+# https://github.com/benzara-tahar/adoken/releases/latest/download/adoken-macos-arm64.dmg
+# always serves the newest build (adoken.dev links there).
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  macos:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # bundle.sh uses the commit count as CFBundleVersion
+      - name: Install toolchain (rust-toolchain.toml)
+        run: rustup show
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Check the tag matches the workspace version
+        run: |
+          version="$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)"
+          [[ "${GITHUB_REF_NAME}" == "v${version}" ]] || {
+            echo "::error::tag ${GITHUB_REF_NAME} doesn't match Cargo.toml version ${version}"; exit 1; }
+          echo "VERSION=${version}" >> "$GITHUB_ENV"
+
+      - name: Build and package (ad hoc signature)
+        run: scripts/dmg.sh
+
+      - name: Name the assets
+        run: |
+          cd target/bundle
+          cp "adoken-${VERSION}.dmg" adoken-macos-arm64.dmg
+          shasum -a 256 "adoken-${VERSION}.dmg" adoken-macos-arm64.dmg > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+
+      - name: Release notes from CHANGELOG.md
+        run: |
+          {
+            cat <<'EOF'
+          **macOS 12+ on Apple silicon.** Download `adoken-macos-arm64.dmg`, open it and drag adoken onto Applications.
+
+          This build isn't notarized yet, so macOS blocks the first launch. Open the app once, dismiss the warning,
+          then go to System Settings → Privacy & Security → **Open Anyway**. Or run:
+          `xattr -dr com.apple.quarantine /Applications/adoken.app`
+
+          Try it without an Azure DevOps org: `open --env ADOKEN_DEMO=1 /Applications/adoken.app`.
+
+          EOF
+            awk -v v="${VERSION}" '
+              $0 ~ "^## \\[" v "\\]" { on = 1; next }
+              on && /^## \[/ { exit }
+              on { print }
+            ' CHANGELOG.md
+          } > target/bundle/NOTES.md
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        # Not --prerelease, even for 0.0.x: GitHub never marks a prerelease as latest,
+        # and releases/latest/download/... must resolve.
+        run: |
+          title="adoken ${VERSION}"
+          [[ "${VERSION}" == 0.* ]] && title="adoken ${VERSION} (early preview)"
+          gh release create "${GITHUB_REF_NAME}" \
+            --title "${title}" \
+            --notes-file target/bundle/NOTES.md \
+            --latest \
+            "target/bundle/adoken-${VERSION}.dmg" \
+            target/bundle/adoken-macos-arm64.dmg \
+            target/bundle/SHA256SUMS.txt
