@@ -46,6 +46,16 @@ mod macos {
     /// Share of pixels allowed beyond the channel tolerance.
     const MAX_DIFFERENT_PIXELS: f64 = 0.002;
 
+    /// `MAX_DIFFERENT_PIXELS`, or `ADOKEN_SNAPSHOT_MAX_DIFF` when set: CI's
+    /// runners lay text out on another macOS release than the goldens, which
+    /// shifts glyphs by a subpixel (up to ~0.4% of pixels).
+    fn max_different_pixels() -> f64 {
+        std::env::var("ADOKEN_SNAPSHOT_MAX_DIFF")
+            .ok()
+            .and_then(|v| v.parse().ok())
+            .unwrap_or(MAX_DIFFERENT_PIXELS)
+    }
+
     pub fn run() -> anyhow::Result<()> {
         let manifest = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
         let golden_dir = manifest.join("snapshots");
@@ -145,7 +155,7 @@ mod macos {
             .count();
         let total = (actual.width() * actual.height()) as f64;
         let share = different as f64 / total;
-        if share > MAX_DIFFERENT_PIXELS {
+        if share > max_different_pixels() {
             return Err(format!("{:.3}% of pixels differ", share * 100.0));
         }
         Ok(())

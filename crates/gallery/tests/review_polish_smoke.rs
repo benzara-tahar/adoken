@@ -321,7 +321,7 @@ mod macos {
             ms(summary.p99),
             ms(summary.max)
         );
-        ensure!(check.passed(), "{name} over budget: {}", check.row());
+        adoken_perf::ensure_budget!(check.passed(), "{name} over budget: {}", check.row());
         Ok(())
     }
 

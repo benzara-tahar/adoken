@@ -572,6 +572,13 @@ mod macos {
                 );
             } else {
                 ensure!(
+                    blended >= 1,
+                    "{:?}: the art crossfades instead of swapping ({} frames)",
+                    moods[ix],
+                    shown.len()
+                );
+                // Two or more at 60 fps; slower frames see fewer of them.
+                adoken_perf::ensure_budget!(
                     blended >= 2,
                     "{:?}: the art crossfades ({blended} blended frames of {})",
                     moods[ix],

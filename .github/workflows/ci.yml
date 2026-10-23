@@ -14,6 +14,8 @@ env:
   # Hosted runners render on a virtual GPU: frame budgets are reported, not enforced
   # (scripts/perf.sh on a real Mac is the gate).
   ADOKEN_PERF_ADVISORY: 1
+  # Runners are on an older macOS than the goldens: allow subpixel glyph shifts.
+  ADOKEN_SNAPSHOT_MAX_DIFF: 0.006
 
 jobs:
   check:
