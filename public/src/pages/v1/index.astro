@@ -1,0 +1,31 @@
+---
+/** /v1/ "Arcade Dojo": design variant of the landing page. Copy in src/v1/copy.ts. */
+import Layout from '../../v1/Layout.astro';
+import TopBar from '../../v1/components/TopBar.astro';
+import Hero from '../../v1/components/Hero.astro';
+import Ticker from '../../v1/components/Ticker.astro';
+import Moves from '../../v1/components/Moves.astro';
+import Bosses from '../../v1/components/Bosses.astro';
+import HiScores from '../../v1/components/HiScores.astro';
+import ThemeSelect from '../../v1/components/ThemeSelect.astro';
+import FightCard from '../../v1/components/FightCard.astro';
+import Dojo from '../../v1/components/Dojo.astro';
+import Stages from '../../v1/components/Stages.astro';
+import Finale from '../../v1/components/Finale.astro';
+---
+
+<Layout>
+  <TopBar />
+  <main id="main">
+    <Hero />
+    <Ticker />
+    <Moves />
+    <Bosses />
+    <HiScores />
+    <ThemeSelect />
+    <FightCard />
+    <Dojo />
+    <Stages />
+    <Finale />
+  </main>
+</Layout>

@@ -1,0 +1,100 @@
+[package]
+name = "adoken"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "adoken desktop app."
+
+# The app is a lib (views, shell, palette) so crates/gallery can render real
+# views; the bin is a thin entry point.
+[lib]
+name = "adoken_app"
+path = "src/lib.rs"
+
+[[bin]]
+name = "adoken"
+path = "src/main.rs"
+
+[dependencies]
+adoken-ado.workspace = true
+adoken-demo.workspace = true
+adoken-diff.workspace = true
+adoken-model.workspace = true
+adoken-notify.workspace = true
+adoken-nudge.workspace = true
+adoken-ken.workspace = true
+adoken-perf = { workspace = true, features = ["gpui"] }
+adoken-richtext.workspace = true
+adoken-search.workspace = true
+adoken-settings.workspace = true
+adoken-sound.workspace = true
+adoken-store.workspace = true
+adoken-sync.workspace = true
+adoken-theme.workspace = true
+adoken-ui.workspace = true
+futures.workspace = true
+gpui.workspace = true
+gpui_platform.workspace = true
+gpui_tokio.workspace = true
+log.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+time.workspace = true
+tokio.workspace = true
+toml.workspace = true
+# Custom backgrounds (spec 0007 FR-4, tokens.md §10.3): import formats, content hashes.
+dirs.workspace = true
+image = { workspace = true, features = ["jpeg", "webp", "gif"] }
+sha2.workspace = true
+thiserror.workspace = true
+# PR web links (review::web): path-segment escaping.
+url.workspace = true
+# Resource meter's shared latest-details slot (spec 0023).
+parking_lot.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+criterion.workspace = true
+
+[[bench]]
+name = "pins"
+harness = false
+
+[[bench]]
+name = "path_dropdown"
+harness = false
+
+# Spec 0023 AC-12: one resource meter sample < 5 µs.
+[[bench]]
+name = "resource_meter"
+harness = false
+
+# Spec 0022 AC-17: celebration simulation ≤ 2 ms per frame at 64 particles.
+[[bench]]
+name = "celebrate"
+harness = false
+
+# Spec 0019 AC-A6: a review file filter keystroke < 1 ms at 300 files,
+# < 5 ms at 5,000.
+[[bench]]
+name = "review_filter"
+harness = false
+
+# Reads macOS "Reduce motion" (NSWorkspace) without a subprocess.
+[target.'cfg(target_os = "macos")'.dependencies]
+objc = "0.2"
+# OS banners + dock badge (os_notify, spec 0005 FR-7): the same objc2 crates
+# and versions gpui_macos already links, so no new compile units.
+block2 = "0.6"
+objc2 = "0.6"
+objc2-foundation = { version = "0.3.2", default-features = false, features = ["std", "NSArray", "NSBundle", "NSError", "NSObject", "NSSet", "NSString"] }
+objc2-user-notifications = "0.3"
+# Resource meter (spec 0023 FR-4): proc_pid_rusage / getrusage (libc), the
+# Mach timebase and task_info (mach2; already in the lockfile via gpui).
+libc.workspace = true
+mach2 = "0.5"
+# NSWindow behind a gpui window (meter visibility, summon; 0021/0023); the
+# version gpui already links.
+raw-window-handle = "0.6"

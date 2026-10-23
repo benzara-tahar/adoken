@@ -1,0 +1,26 @@
+{
+  "name": "adoken-site",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "bunx --bun astro dev",
+    "build": "bunx --bun astro build",
+    "preview": "bunx --bun astro preview",
+    "assets": "bun scripts/render-assets.ts"
+  },
+  "dependencies": {
+    "astro": "^7.3.5",
+    "posthog-js": "^1.434.14"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@types/bun": "^1.4.2"
+  },
+  "allowScripts": {
+    "esbuild": true
+  }
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Template for adoken.app/Contents/Info.plist. scripts/bundle.sh replaces
+     __VERSION__ (workspace version) and __BUILD__; see docs/release.md. -->
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleDisplayName</key>
+    <string>adoken</string>
+    <key>CFBundleExecutable</key>
+    <string>adoken</string>
+    <key>CFBundleIconFile</key>
+    <string>adoken.icns</string>
+    <key>CFBundleIdentifier</key>
+    <string>dev.adoken.app</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>adoken</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>__VERSION__</string>
+    <key>CFBundleVersion</key>
+    <string>__BUILD__</string>
+    <key>LSApplicationCategoryType</key>
+    <string>public.app-category.developer-tools</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>12.0</string>
+    <!-- A regular dock app: the dock badge carries the unread P0+P1 count. -->
+    <key>LSUIElement</key>
+    <false/>
+    <key>NSHighResolutionCapable</key>
+    <true/>
+    <!-- gpui renders via Metal. -->
+    <key>NSSupportsAutomaticGraphicsSwitching</key>
+    <true/>
+    <key>NSUserNotificationsUsageDescription</key>
+    <string>adoken shows a banner when something in Azure DevOps needs you: mentions, review requests, your failed builds. Your delivery rules and quiet hours decide which ones.</string>
+    <key>NSHumanReadableCopyright</key>
+    <string>© 2026 adoken</string>
+</dict>
+</plist>

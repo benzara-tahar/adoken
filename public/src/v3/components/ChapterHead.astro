@@ -1,0 +1,16 @@
+---
+/** Chapter opener: a big mincho numeral, the kicker and the headline. */
+interface Props {
+  numeral: string;
+  kicker: string;
+  title: string;
+  id: string;
+}
+const { numeral, kicker, title, id } = Astro.props;
+---
+
+<header class="chapter-head">
+  <span class="numeral" lang="ja" aria-hidden="true">{numeral}</span>
+  <p class="eyebrow">{kicker}</p>
+  <h2 {id} class="h2">{title}</h2>
+</header>

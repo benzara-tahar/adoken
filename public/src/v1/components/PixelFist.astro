@@ -1,0 +1,56 @@
+---
+/**
+ * The original adoken pixel fist (src/art/fist.ts). Pass `sprite` once per page (Layout does) to emit the
+ * <symbol>s; every other instance is a tiny <use> of them, in brand colors or the v1 neon palette.
+ */
+import { FIST_W, FIST_H, fistRuns } from '../../art/fist';
+import { colors } from '../../theme';
+
+const NEON = {
+  ink: '#12021a',
+  punchHi: '#ffc2f4',
+  punch: '#ff2bd6',
+  punchLo: '#a2138a',
+  volt: '#22e5ff',
+  voltHi: '#b5f6ff',
+} as const;
+
+interface Props {
+  class?: string;
+  palette?: 'brand' | 'neon';
+  sprite?: boolean;
+}
+const { class: className, palette = 'brand', sprite = false } = Astro.props;
+const viewBox = `0 0 ${FIST_W} ${FIST_H}`;
+const symbols = sprite
+  ? (['brand', 'neon'] as const)
+      .map((name) => {
+        const rects = fistRuns
+          .map((r) => {
+            const fill = name === 'neon' ? NEON[r.token as keyof typeof NEON] : colors[r.token];
+            return `<rect x="${r.x}" y="${r.y}" width="${r.w}" height="1" fill="${fill}"/>`;
+          })
+          .join('');
+        return `<symbol id="v1-fist-${name}" viewBox="${viewBox}">${rects}</symbol>`;
+      })
+      .join('')
+  : '';
+---
+
+{
+  sprite ? (
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false" set:html={symbols} />
+  ) : (
+    <svg
+      class={className}
+      viewBox={viewBox}
+      width={FIST_W * 4}
+      height={FIST_H * 4}
+      shape-rendering="crispEdges"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <use href={`#v1-fist-${palette}`} />
+    </svg>
+  )
+}

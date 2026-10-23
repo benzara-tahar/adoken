@@ -1,0 +1,435 @@
+/* Homepage "Instant" (the v2 design): near-black canvas, slow aurora, frosted glass, hairlines, one sharp accent. */
+
+@property --app-bg { syntax: '<color>'; inherits: true; initial-value: #0e0f13; }
+@property --app-panel { syntax: '<color>'; inherits: true; initial-value: #15161c; }
+@property --app-raise { syntax: '<color>'; inherits: true; initial-value: #1b1d24; }
+@property --app-line { syntax: '<color>'; inherits: true; initial-value: #27282d; }
+@property --app-text { syntax: '<color>'; inherits: true; initial-value: #ecedf1; }
+@property --app-muted { syntax: '<color>'; inherits: true; initial-value: #9296a6; }
+@property --app-accent { syntax: '<color>'; inherits: true; initial-value: #f26b3a; }
+@property --app-add { syntax: '<color>'; inherits: true; initial-value: #3fd18a; }
+@property --app-del { syntax: '<color>'; inherits: true; initial-value: #ff5c6c; }
+@property --syn-k { syntax: '<color>'; inherits: true; initial-value: #ff8a5f; }
+@property --syn-s { syntax: '<color>'; inherits: true; initial-value: #9bdb8a; }
+@property --syn-f { syntax: '<color>'; inherits: true; initial-value: #8fb4ff; }
+@property --syn-t { syntax: '<color>'; inherits: true; initial-value: #6fd6d6; }
+@property --syn-n { syntax: '<color>'; inherits: true; initial-value: #ffc46b; }
+@property --syn-c { syntax: '<color>'; inherits: true; initial-value: #a0a4b3; }
+@property --syn-p { syntax: '<color>'; inherits: true; initial-value: #c9b6ff; }
+
+:root {
+  color-scheme: dark;
+  --bg: #07070b;
+  --bg-2: #0b0b12;
+  --text: #f3f3f6;
+  --soft: #b6b9c5;
+  --muted: #9296a6;
+  --faint: #7d8091;
+  --line: rgb(255 255 255 / 0.08);
+  --line-2: rgb(255 255 255 / 0.13);
+  --glass: rgb(20 20 30 / 0.55);
+  --glass-2: rgb(255 255 255 / 0.035);
+  /* Ember: the app's Dojo Night accent (crates/theme/themes/adoken.adoken-theme.toml). Every accent
+     tint on the page derives from these; alphas go through color-mix(), never a literal. */
+  --accent: #f26b3a; /* accent.solid: fills, dots, glows */
+  --accent-fg: #ff8a5f; /* accent.fg: brighter ember for gradients and marks */
+  --accent-hi: #ffb199; /* peach: accent text on dark, light pills, rings */
+  --accent-pale: #ffe4d6; /* cream: top of the primary button, start of the headline gradient */
+  --accent-ink: #1a0a04; /* accent.on: text on ember / peach */
+  --amber: #ffc46b; /* warm partner (Dojo syntax.number) */
+  --cool: #62a8ff; /* the one cool counterweight in the aurora (Dojo status.info) */
+  --ok: #3ddc97;
+  --bad: #ff6b81;
+  --warn: #ffcf7a;
+  --sans: 'SF Pro Display', -apple-system, BlinkMacSystemFont, ui-sans-serif, system-ui, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Hiragino Sans', sans-serif;
+  --text-font: 'SF Pro Text', -apple-system, BlinkMacSystemFont, ui-sans-serif, system-ui, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Hiragino Sans', sans-serif;
+  --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  --ken: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Noto Sans JP', sans-serif;
+  --radius: 20px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --wrap: min(1200px, 100% - 48px);
+
+  /* The app mock's default theme ("adoken Night"). Themes.astro overrides these per theme. */
+  --app-bg: #0e0f13;
+  --app-panel: #15161c;
+  --app-raise: #1b1d24;
+  --app-line: #27282d;
+  --app-text: #ecedf1;
+  --app-muted: #9296a6;
+  --app-accent: #f26b3a;
+  --app-add: #3fd18a;
+  --app-del: #ff5c6c;
+  --syn-k: #ff8a5f;
+  --syn-s: #9bdb8a;
+  --syn-f: #8fb4ff;
+  --syn-t: #6fd6d6;
+  --syn-n: #ffc46b;
+  --syn-c: #a0a4b3;
+  --syn-p: #c9b6ff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background: var(--bg);
+  font: 400 16px/1.55 var(--text-font);
+  font-feature-settings: 'ss01', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+a {
+  color: inherit;
+}
+button {
+  font: inherit;
+  color: inherit;
+}
+::selection {
+  background: color-mix(in srgb, var(--accent) 45%, transparent);
+  color: #fff;
+}
+:focus-visible {
+  outline: 2px solid var(--accent-hi);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.wrap {
+  width: var(--wrap);
+  margin-inline: auto;
+}
+
+/* ───────────── Aurora canvas ───────────── */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 70% at 50% -10%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 60%),
+    var(--bg);
+}
+.aurora i {
+  position: absolute;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 50%;
+  opacity: 0.55;
+  will-change: transform;
+}
+.aurora i:nth-child(1) {
+  top: -40vmax;
+  left: -20vmax;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 34%, transparent), transparent);
+}
+.aurora i:nth-child(2) {
+  top: -30vmax;
+  right: -30vmax;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--cool) 12%, transparent), transparent);
+}
+.aurora i:nth-child(3) {
+  bottom: -45vmax;
+  left: 10vmax;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--amber) 16%, transparent), transparent);
+}
+.aurora::after {
+  /* grain keeps the gradients from banding */
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (prefers-reduced-motion: no-preference) {
+  .aurora i:nth-child(1) {
+    animation: drift-a 38s ease-in-out infinite alternate;
+  }
+  .aurora i:nth-child(2) {
+    animation: drift-b 46s ease-in-out infinite alternate;
+  }
+  .aurora i:nth-child(3) {
+    animation: drift-c 52s ease-in-out infinite alternate;
+  }
+}
+@keyframes drift-a {
+  to {
+    transform: translate3d(22vmax, 14vmax, 0) scale(1.15);
+  }
+}
+@keyframes drift-b {
+  to {
+    transform: translate3d(-26vmax, 20vmax, 0) scale(0.9);
+  }
+}
+@keyframes drift-c {
+  to {
+    transform: translate3d(18vmax, -24vmax, 0) scale(1.2);
+  }
+}
+
+/* ───────────── Primitives ───────────── */
+.glass {
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.055), rgb(255 255 255 / 0.015)), var(--glass);
+  border: 1px solid var(--line);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.06),
+    0 30px 80px -40px rgb(0 0 0 / 0.8);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+}
+
+.kbd {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+  vertical-align: middle;
+}
+.kbd kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.6em;
+  height: 1.6em;
+  padding: 0 0.4em;
+  font: 500 0.72rem/1 var(--text-font);
+  color: var(--soft);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.09), rgb(255 255 255 / 0.03));
+  border: 1px solid var(--line-2);
+  border-bottom-color: rgb(255 255 255 / 0.05);
+  border-radius: 6px;
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.5);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  height: 44px;
+  padding: 0 18px;
+  font: 600 0.94rem/1 var(--text-font);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.2s var(--ease),
+    background-color 0.2s,
+    box-shadow 0.2s,
+    border-color 0.2s;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn-primary {
+  color: var(--accent-ink);
+  background: linear-gradient(180deg, var(--accent-pale), var(--accent) 120%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.6),
+    0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent),
+    0 10px 30px -8px color-mix(in srgb, var(--accent) 65%, transparent);
+}
+.btn-primary:hover {
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.6),
+    0 0 0 1px color-mix(in srgb, var(--accent-hi) 70%, transparent),
+    0 14px 40px -8px color-mix(in srgb, var(--accent) 85%, transparent);
+}
+.btn-ghost {
+  color: var(--text);
+  background: rgb(255 255 255 / 0.04);
+  border-color: var(--line-2);
+}
+.btn-ghost:hover {
+  background: rgb(255 255 255 / 0.08);
+  border-color: rgb(255 255 255 / 0.2);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 0.8rem/1 var(--text-font);
+  letter-spacing: 0.02em;
+  color: var(--accent-hi);
+}
+.eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+}
+
+.section {
+  position: relative;
+  padding-block: clamp(72px, 9vw, 128px);
+}
+.section-head {
+  display: grid;
+  gap: 18px;
+  max-width: 760px;
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+.section-head.center {
+  margin-inline: auto;
+  text-align: center;
+  justify-items: center;
+}
+.h2 {
+  font: 600 clamp(2.1rem, 4.6vw, 3.6rem) / 1.04 var(--sans);
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+  background: linear-gradient(180deg, #fff 30%, rgb(255 255 255 / 0.62));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.lede {
+  font-size: clamp(1.02rem, 1.3vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--soft);
+  text-wrap: pretty;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+/* Code tokens (shared by every mock) */
+.t-k {
+  color: var(--syn-k);
+}
+.t-s {
+  color: var(--syn-s);
+}
+.t-f {
+  color: var(--syn-f);
+}
+.t-t {
+  color: var(--syn-t);
+}
+.t-n {
+  color: var(--syn-n);
+}
+.t-c {
+  color: var(--syn-c);
+  font-style: italic;
+}
+.t-p {
+  color: var(--syn-p);
+}
+
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  font: 700 0.56rem/1 var(--text-font);
+  letter-spacing: 0.02em;
+  color: rgb(0 0 0 / 0.72);
+  border-radius: 50%;
+}
+
+/*
+ * Entrances only ever move content, never hide it: the starting frame is fully legible. If the
+ * animation clock stalls (background/throttled tab, screenshot and preview bots, low-power mode),
+ * the page still reads; with a running clock it glides into place.
+ */
+/* Scroll reveal: one-shot, only when scripts run and motion is welcome. */
+@media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
+  .rv {
+    transform: translateY(28px);
+    transition: transform 0.9s var(--ease);
+    transition-delay: var(--d, 0s);
+  }
+  .rv.is-in {
+    transform: none;
+  }
+}
+
+/* Above-the-fold entrance: CSS only, so first paint never waits on a script. */
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.9s var(--ease) both;
+    animation-delay: var(--d, 0s);
+  }
+}
+@keyframes rise {
+  from {
+    transform: translateY(18px);
+  }
+}
+
+/* Loops pause when their scene is off-screen. */
+.is-paused,
+.is-paused * {
+  animation-play-state: paused !important;
+}
+
+/* A slice of the app window inside a bento card, flush with the card's bottom edge. */
+.mock {
+  position: relative;
+  margin: 0 22px;
+  overflow: hidden;
+  color: var(--app-text);
+  font: 400 12.5px/1.45 var(--text-font);
+  background: color-mix(in srgb, var(--app-bg) 90%, transparent);
+  border: 1px solid var(--app-line);
+  border-bottom: 0;
+  border-radius: 14px 14px 0 0;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.05),
+    0 -24px 60px -36px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.mock svg {
+  display: block;
+}

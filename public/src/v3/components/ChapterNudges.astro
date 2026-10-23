@@ -1,0 +1,265 @@
+---
+/** Chapter four: smart nudges. An ensō around Microsoft Research's 60%, and the three nudges. */
+import ChapterHead from './ChapterHead.astro';
+import Icon from './Icon.astro';
+import { drawVars, ensoStroke } from '../art/brush';
+import { demo, nudges } from '../copy';
+
+const enso = ensoStroke();
+const icons = ['hourglass', 'clock', 'bolt'] as const;
+---
+
+<section id="ch-nudges" class="section nudges" aria-labelledby="ch-nudges-title">
+  <div class="wrap nudges-grid">
+    <figure class="stat">
+      <svg class="enso" viewBox="0 0 1000 1000" aria-hidden="true">
+        <defs>
+          <mask id="v3-enso-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1000">
+            <path
+              class="enso-mask"
+              d={enso.path}
+              style={drawVars(enso)}
+              fill="none"
+              stroke="#fff"
+              stroke-width={enso.maskWidth}
+              stroke-linecap="round"
+            />
+          </mask>
+        </defs>
+        <path class="enso-ink" d={enso.fill} mask="url(#v3-enso-mask)" filter="url(#v3-sumi)" />
+      </svg>
+      <div class="stat-inner">
+        <b class="stat-value">{nudges.stat.value}</b>
+        <span class="stat-label">{nudges.stat.label}</span>
+      </div>
+      <figcaption class="fig stat-src"><a href={nudges.stat.href} rel="noopener">{nudges.stat.source}</a></figcaption>
+    </figure>
+
+    <div class="ch-text">
+      <ChapterHead numeral={nudges.numeral} kicker={nudges.kicker} title={nudges.title} id="ch-nudges-title" />
+      <p class="body dropcap">{nudges.body}</p>
+      <p class="aside">{nudges.aside}</p>
+      <div class="win nudge-win" data-ink="dojo-night" role="img" aria-label="Three nudges in adoken's Today view: a review waiting two days, your own PR gathering dust, and a build that broke overnight.">
+        <div class="win-bar"><i></i><i></i><i></i><span class="win-title">Today · 3 nudges</span></div>
+        <div class="nudge-list">
+          {
+            demo.nudgeCards.map(([title, body, cta], i) => (
+              <div class="nd rv" style={`--i:${i}`}>
+                <span class="nd-icon">
+                  <Icon name={icons[i]} />
+                </span>
+                <span class="nd-main">
+                  <b>{title}</b>
+                  <span>{body}</span>
+                </span>
+                <span class="nd-cta">{cta}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .nudges {
+    border-top: 1px solid var(--ink);
+  }
+
+  .nudges-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: center;
+  }
+
+  .ch-text {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .aside {
+    margin: 0;
+    padding-left: 1rem;
+    font: italic 400 1.25rem/1.4 var(--serif);
+    border-left: 3px solid var(--shu);
+  }
+
+  .stat {
+    position: relative;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    max-width: 38rem;
+    width: 100%;
+    justify-self: center;
+  }
+
+  .enso {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .enso-ink {
+    fill: var(--ink);
+  }
+
+  .stat-inner {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: 0.6rem;
+    max-width: 62%;
+  }
+
+  .stat-value {
+    font: 500 clamp(5rem, 13vw, 11rem) / 0.85 var(--serif);
+    letter-spacing: -0.06em;
+    color: var(--shu);
+  }
+
+  .stat-label {
+    font: italic 400 clamp(1.05rem, 1.6vw, 1.35rem) / 1.3 var(--serif);
+  }
+
+  .stat-src {
+    position: absolute;
+    bottom: -2.2rem;
+    text-align: center;
+    max-width: none;
+  }
+
+  .stat-src a {
+    color: var(--ink);
+  }
+
+  .nudge-win {
+    font-size: clamp(9px, 1vw, 13.5px);
+    margin-top: 0.6rem;
+    box-shadow:
+      0 0 0 1px rgb(28 25 21 / 0.25),
+      0 30px 50px -26px rgb(60 38 16 / 0.55);
+    rotate: 0.6deg;
+  }
+
+  .nudge-list {
+    display: grid;
+    gap: 0.6em;
+    padding: 1em;
+    background: var(--surf);
+  }
+
+  .nd {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.9em;
+    padding: 0.8em 0.9em;
+    background: var(--raised);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--warn);
+    border-radius: 0.6em;
+  }
+
+  .nd:nth-child(2) {
+    border-left-color: var(--info);
+  }
+
+  .nd:nth-child(3) {
+    border-left-color: var(--bad);
+  }
+
+  .nd-icon {
+    color: var(--warn);
+  }
+
+  .nd:nth-child(2) .nd-icon {
+    color: var(--info);
+  }
+
+  .nd:nth-child(3) .nd-icon {
+    color: var(--bad);
+  }
+
+  .nd-main {
+    display: grid;
+  }
+
+  .nd-main b {
+    font-size: 0.8em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--tx2);
+  }
+
+  .nd-main span {
+    font-size: 0.95em;
+  }
+
+  .nd-cta {
+    font-size: 0.85em;
+    font-weight: 600;
+    padding: 0.35em 0.8em;
+    color: var(--bg);
+    background: var(--acc);
+    border-radius: 0.45em;
+    white-space: nowrap;
+  }
+
+  /* Dashes exist only inside the keyframes and fill backwards: at rest the ensō is whole. */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .enso-mask {
+        animation: v3-enso linear backwards;
+        animation-timeline: view();
+        animation-range: entry 10% cover 45%;
+      }
+
+      .stat-value {
+        animation: v3-rise linear backwards;
+        animation-timeline: view();
+        animation-range: entry 30% cover 40%;
+      }
+    }
+  }
+
+  @keyframes v3-enso {
+    from {
+      stroke-dasharray: var(--len) var(--gap);
+      stroke-dashoffset: var(--off);
+    }
+    to {
+      stroke-dasharray: var(--len) var(--gap);
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .nudges-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .stat {
+      max-width: 26rem;
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .nd {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .nd-cta {
+      grid-column: 2;
+      justify-self: start;
+    }
+  }
+</style>

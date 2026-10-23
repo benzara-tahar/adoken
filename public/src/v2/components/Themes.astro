@@ -1,0 +1,547 @@
+---
+/**
+ * A mini adoken window that morphs through themes. Every color is a registered custom property, so
+ * the whole window interpolates instead of snapping. Buttons switch themes by hand (and stop autoplay).
+ */
+import { themes } from '../copy';
+import { avatarStyle, hl, icons } from '../lib';
+---
+
+<section class="section" id="themes">
+  <div class="wrap thm">
+    <div class="thm-copy">
+      <div class="section-head rv">
+        <span class="eyebrow">{themes.eyebrow}</span>
+        <h2 class="h2">{themes.title}</h2>
+        <p class="lede">{themes.lede}</p>
+      </div>
+      <div class="thm-list rv" style="--d:.08s" role="group" aria-label="Preview a theme">
+        {
+          themes.list.map((theme, i) => (
+            <button type="button" data-pick={theme.id} aria-pressed={i === 0 ? 'true' : 'false'}>
+              <span class:list={['thm-sw', `th-${theme.id}`]}>
+                <i />
+                <i />
+                <i />
+              </span>
+              {theme.name}
+            </button>
+          ))
+        }
+        <span class="thm-more">{themes.more}</span>
+      </div>
+      <ul class="thm-toggles rv" style="--d:.14s">
+        {
+          themes.toggles.map((toggle) => (
+            <li>
+              <span>{toggle.label}</span>
+              <b>{toggle.value}</b>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="thm-stage rv" style="--d:.1s">
+      <div class="thm-win th-adoken" data-theme-win aria-hidden="true">
+        <div class="thm-wall"></div>
+        <div class="thm-bar">
+          <span class="thm-lights"><i></i><i></i><i></i></span>
+          <span class="thm-name" data-theme-name>{themes.list[0].name}</span>
+        </div>
+        <div class="thm-body">
+          <aside class="thm-side">
+            {
+              ['sun', 'inbox', 'pr', 'item', 'pipe'].map((icon, i) => (
+                <span class:list={{ 'is-on': i === 1 }} set:html={icons[icon]} />
+              ))
+            }
+          </aside>
+          <div class="thm-main">
+            <div class="thm-panel">
+              <div class="thm-h">
+                <b>Inbox</b>
+                <span class="thm-chip">4 new</span>
+                <span class="thm-filter">Priority</span>
+              </div>
+              <ul class="thm-rows">
+                {
+                  themes.inbox.map((row) => (
+                    <li>
+                      <span class="avatar" style={avatarStyle(row.hue)}>
+                        {row.who}
+                      </span>
+                      <span class="thm-row-main">
+                        <span class="thm-row-t">{row.title}</span>
+                        <span class="thm-row-m">{row.meta}</span>
+                      </span>
+                      {row.unread && <i class="thm-unread" />}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+            <div class="thm-panel thm-code">
+              {
+                themes.code.map(([kind, code]) => (
+                  <div class:list={['thm-l', kind === '+' ? 'is-add' : kind === '-' ? 'is-del' : '']}>
+                    <span>{kind.trim()}</span>
+                    <code set:html={hl(code)} />
+                  </div>
+                ))
+              }
+              <div class="thm-actions">
+                <span class="thm-btn">Approve</span>
+                <span class="thm-btn thm-btn-ghost">Comment</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { themes } from '../copy';
+  import { loop } from '../scripts/motion';
+
+  const win = document.querySelector<HTMLElement>('[data-theme-win]');
+  const name = document.querySelector<HTMLElement>('[data-theme-name]');
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-pick]')];
+  let current = 0;
+  let manual = false;
+
+  const apply = (index: number) => {
+    if (!win || !name) return;
+    current = index;
+    const theme = themes.list[index];
+    win.className = `thm-win th-${theme.id}`;
+    name.textContent = theme.name;
+    buttons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
+  };
+
+  buttons.forEach((button, i) =>
+    button.addEventListener('click', () => {
+      manual = true;
+      apply(i);
+    }),
+  );
+
+  loop(win?.parentElement ?? null, async (scene) => {
+    await scene.sleep(2600);
+    if (!manual) apply((current + 1) % themes.list.length);
+  });
+</script>
+
+<style is:global>
+  @property --wall-a { syntax: '<color>'; inherits: true; initial-value: #f26b3a; }
+  @property --wall-b { syntax: '<color>'; inherits: true; initial-value: #62a8ff; }
+
+  /* ───────── theme palettes (ports; colors from each theme's public spec) ───────── */
+  /* adoken Night = the app's Dojo Night (crates/theme/themes/adoken.adoken-theme.toml) */
+  .th-adoken {
+    --app-bg: #0e0f13; --app-panel: #15161c; --app-raise: #1b1d24; --app-line: #27282d; --app-text: #ecedf1;
+    --app-muted: #9296a6; --app-accent: #f26b3a; --app-add: #3fd18a; --app-del: #ff5c6c; --syn-k: #ff8a5f;
+    --syn-s: #9bdb8a; --syn-f: #8fb4ff; --syn-t: #6fd6d6; --syn-n: #ffc46b; --syn-c: #a0a4b3; --syn-p: #c9b6ff;
+    --wall-a: #f26b3a; --wall-b: #62a8ff;
+  }
+  .th-catppuccin {
+    --app-bg: #1e1e2e; --app-panel: #181825; --app-raise: #313244; --app-line: #45475a; --app-text: #cdd6f4;
+    --app-muted: #a6adc8; --app-accent: #cba6f7; --app-add: #a6e3a1; --app-del: #f38ba8; --syn-k: #cba6f7;
+    --syn-s: #a6e3a1; --syn-f: #89b4fa; --syn-t: #f9e2af; --syn-n: #fab387; --syn-c: #7f849c; --syn-p: #94e2d5;
+    --wall-a: #cba6f7; --wall-b: #f5c2e7;
+  }
+  .th-tokyo {
+    --app-bg: #1a1b26; --app-panel: #16161e; --app-raise: #24283b; --app-line: #2f344d; --app-text: #c0caf5;
+    --app-muted: #7f86ad; --app-accent: #7aa2f7; --app-add: #9ece6a; --app-del: #f7768e; --syn-k: #bb9af7;
+    --syn-s: #9ece6a; --syn-f: #7aa2f7; --syn-t: #e0af68; --syn-n: #ff9e64; --syn-c: #565f89; --syn-p: #7dcfff;
+    --wall-a: #7aa2f7; --wall-b: #bb9af7;
+  }
+  .th-nord {
+    --app-bg: #2e3440; --app-panel: #2a2f3a; --app-raise: #3b4252; --app-line: #4c566a; --app-text: #eceff4;
+    --app-muted: #a3adc2; --app-accent: #88c0d0; --app-add: #a3be8c; --app-del: #bf616a; --syn-k: #81a1c1;
+    --syn-s: #a3be8c; --syn-f: #88c0d0; --syn-t: #ebcb8b; --syn-n: #b48ead; --syn-c: #7b88a1; --syn-p: #8fbcbb;
+    --wall-a: #5e81ac; --wall-b: #88c0d0;
+  }
+  .th-github {
+    --app-bg: #ffffff; --app-panel: #f6f8fa; --app-raise: #ffffff; --app-line: #d0d7de; --app-text: #1f2328;
+    --app-muted: #59636e; --app-accent: #0969da; --app-add: #1a7f37; --app-del: #cf222e; --syn-k: #cf222e;
+    --syn-s: #0a3069; --syn-f: #8250df; --syn-t: #953800; --syn-n: #0550ae; --syn-c: #6e7781; --syn-p: #0550ae;
+    --wall-a: #9ecbff; --wall-b: #ffd8b5;
+  }
+  .th-rose {
+    --app-bg: #191724; --app-panel: #1f1d2e; --app-raise: #26233a; --app-line: #403d52; --app-text: #e0def4;
+    --app-muted: #908caa; --app-accent: #ebbcba; --app-add: #9ccfd8; --app-del: #eb6f92; --syn-k: #c4a7e7;
+    --syn-s: #f6c177; --syn-f: #ebbcba; --syn-t: #9ccfd8; --syn-n: #f6c177; --syn-c: #6e6a86; --syn-p: #9ccfd8;
+    --wall-a: #eb6f92; --wall-b: #c4a7e7;
+  }
+  .th-gruvbox {
+    --app-bg: #282828; --app-panel: #1d2021; --app-raise: #3c3836; --app-line: #504945; --app-text: #ebdbb2;
+    --app-muted: #a89984; --app-accent: #fe8019; --app-add: #b8bb26; --app-del: #fb4934; --syn-k: #fb4934;
+    --syn-s: #b8bb26; --syn-f: #8ec07c; --syn-t: #fabd2f; --syn-n: #d3869b; --syn-c: #928374; --syn-p: #83a598;
+    --wall-a: #d65d0e; --wall-b: #98971a;
+  }
+  .th-dracula {
+    --app-bg: #282a36; --app-panel: #21222c; --app-raise: #343746; --app-line: #44475a; --app-text: #f8f8f2;
+    --app-muted: #a4a9c9; --app-accent: #bd93f9; --app-add: #50fa7b; --app-del: #ff5555; --syn-k: #ff79c6;
+    --syn-s: #f1fa8c; --syn-f: #50fa7b; --syn-t: #8be9fd; --syn-n: #bd93f9; --syn-c: #6272a4; --syn-p: #8be9fd;
+    --wall-a: #bd93f9; --wall-b: #ff79c6;
+  }
+
+  /* ───────── layout ───────── */
+  .thm {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    align-items: center;
+    gap: clamp(32px, 5vw, 72px);
+  }
+  .thm-copy .section-head {
+    margin-bottom: 28px;
+  }
+  .thm-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .thm-list button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px 7px 8px;
+    font-size: 0.86rem;
+    color: var(--soft);
+    cursor: pointer;
+    border-radius: 99px;
+    border: 1px solid var(--line-2);
+    background: rgb(255 255 255 / 0.03);
+    transition:
+      color 0.2s,
+      border-color 0.2s,
+      background-color 0.2s;
+  }
+  .thm-list button:hover {
+    color: var(--text);
+    border-color: rgb(255 255 255 / 0.25);
+  }
+  .thm-list button[aria-pressed='true'] {
+    color: var(--text);
+    border-color: color-mix(in srgb, var(--accent-hi) 60%, transparent);
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+    box-shadow: 0 0 20px -6px color-mix(in srgb, var(--accent) 70%, transparent);
+  }
+  .thm-sw {
+    display: flex;
+  }
+  .thm-sw i {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--app-bg);
+    box-shadow: 0 0 0 1.5px #0b0b12;
+  }
+  .thm-sw i + i {
+    margin-left: -4px;
+  }
+  .thm-sw i:nth-child(2) {
+    background: var(--app-accent);
+  }
+  .thm-sw i:nth-child(3) {
+    background: var(--syn-s);
+  }
+  .thm-more {
+    align-self: center;
+    padding: 0 6px;
+    font-size: 0.84rem;
+    color: var(--muted);
+  }
+  .thm-toggles {
+    display: grid;
+    gap: 0;
+    margin: 28px 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+  .thm-toggles li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 2px;
+    font-size: 0.9rem;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+  }
+  .thm-toggles b {
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  /* ───────── the morphing window ───────── */
+  .thm-stage {
+    position: relative;
+  }
+  .thm-stage::before {
+    content: '';
+    position: absolute;
+    inset: 10% 0 -8%;
+    background: radial-gradient(50% 50% at 50% 50%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 70%);
+    filter: blur(40px);
+  }
+  .thm-win {
+    position: relative;
+    height: 460px;
+    overflow: hidden;
+    color: var(--app-text);
+    font: 400 12.5px/1.45 var(--text-font);
+    border-radius: 14px;
+    background: var(--app-bg);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--app-text) 14%, transparent),
+      0 40px 100px -30px rgb(0 0 0 / 0.9);
+    transition:
+      --app-bg 0.8s,
+      --app-panel 0.8s,
+      --app-raise 0.8s,
+      --app-line 0.8s,
+      --app-text 0.8s,
+      --app-muted 0.8s,
+      --app-accent 0.8s,
+      --app-add 0.8s,
+      --app-del 0.8s,
+      --syn-k 0.8s,
+      --syn-s 0.8s,
+      --syn-f 0.8s,
+      --syn-t 0.8s,
+      --syn-n 0.8s,
+      --syn-c 0.8s,
+      --syn-p 0.8s,
+      --wall-a 1.2s,
+      --wall-b 1.2s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .thm-win {
+      transition: none;
+    }
+  }
+  .thm-wall {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(60% 70% at 85% 110%, color-mix(in srgb, var(--wall-b) 55%, transparent), transparent 70%),
+      radial-gradient(70% 60% at 10% 0%, color-mix(in srgb, var(--wall-a) 45%, transparent), transparent 70%),
+      var(--app-bg);
+  }
+  .thm-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 34px;
+    padding: 0 12px;
+    border-bottom: 1px solid color-mix(in srgb, var(--app-line) 70%, transparent);
+    background: color-mix(in srgb, var(--app-panel) 55%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .thm-lights {
+    display: flex;
+    gap: 6px;
+  }
+  .thm-lights i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ff5f57;
+  }
+  .thm-lights i:nth-child(2) {
+    background: #febc2e;
+  }
+  .thm-lights i:nth-child(3) {
+    background: #28c840;
+  }
+  .thm-name {
+    position: absolute;
+    left: 50%;
+    translate: -50% 0;
+    font-weight: 600;
+    font-size: 11.5px;
+    color: var(--app-muted);
+  }
+  .thm-body {
+    position: relative;
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    height: calc(100% - 34px);
+  }
+  .thm-side {
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    gap: 6px;
+    padding-top: 12px;
+    border-right: 1px solid color-mix(in srgb, var(--app-line) 70%, transparent);
+    background: color-mix(in srgb, var(--app-panel) 55%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .thm-side span {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    color: var(--app-muted);
+    border-radius: 8px;
+  }
+  .thm-side span.is-on {
+    color: var(--app-accent);
+    background: color-mix(in srgb, var(--app-accent) 16%, transparent);
+  }
+  .thm-side svg {
+    width: 16px;
+  }
+  .thm-main {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 12px;
+    min-width: 0;
+    padding: 14px;
+  }
+  .thm-panel {
+    min-width: 0;
+    padding: 12px;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--app-panel) 72%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--app-line) 80%, transparent);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+  }
+  .thm-h {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 4px 8px;
+  }
+  .thm-h b {
+    font: 600 14px/1 var(--sans);
+  }
+  .thm-chip {
+    padding: 2px 7px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--app-bg);
+    border-radius: 99px;
+    background: var(--app-accent);
+  }
+  .thm-filter {
+    margin-left: auto;
+    padding: 2px 8px;
+    font-size: 11px;
+    color: var(--app-muted);
+    border-radius: 6px;
+    box-shadow: inset 0 0 0 1px var(--app-line);
+  }
+  .thm-rows {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .thm-rows li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 4px;
+  }
+  .thm-rows li + li {
+    border-top: 1px solid color-mix(in srgb, var(--app-line) 60%, transparent);
+  }
+  .thm-row-main {
+    display: grid;
+    min-width: 0;
+  }
+  .thm-row-t {
+    overflow: hidden;
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .thm-row-m {
+    font-size: 11px;
+    color: var(--app-muted);
+  }
+  .thm-unread {
+    flex: none;
+    width: 7px;
+    height: 7px;
+    margin-left: auto;
+    border-radius: 50%;
+    background: var(--app-accent);
+  }
+  .thm-code {
+    display: grid;
+    align-content: start;
+    font: 11.5px/1.8 var(--mono);
+  }
+  .thm-l {
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    padding: 0 6px;
+    white-space: pre;
+    border-radius: 4px;
+  }
+  .thm-l code {
+    font: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .thm-l.is-add {
+    background: color-mix(in srgb, var(--app-add) 13%, transparent);
+  }
+  .thm-l.is-add > span {
+    color: var(--app-add);
+  }
+  .thm-l.is-del {
+    background: color-mix(in srgb, var(--app-del) 13%, transparent);
+  }
+  .thm-l.is-del > span {
+    color: var(--app-del);
+  }
+  .thm-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    font-family: var(--text-font);
+  }
+  .thm-btn {
+    padding: 5px 12px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--app-bg);
+    border-radius: 7px;
+    background: var(--app-accent);
+  }
+  .thm-btn-ghost {
+    color: var(--app-text);
+    background: none;
+    box-shadow: inset 0 0 0 1px var(--app-line);
+  }
+
+  @media (max-width: 960px) {
+    .thm {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 520px) {
+    .thm-win,
+    .thm-body {
+      height: auto;
+    }
+    .thm-body {
+      grid-template-columns: 1fr;
+    }
+    .thm-side {
+      display: none;
+    }
+    .thm-main {
+      padding: 10px;
+    }
+  }
+</style>

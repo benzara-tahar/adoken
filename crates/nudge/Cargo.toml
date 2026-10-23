@@ -1,0 +1,26 @@
+[package]
+name = "adoken-nudge"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Smart nudges (spec 0006): rules N1-N7 over local store data, daily cap, snooze and opt-outs. Never contacts ADO, never messages anyone."
+
+[dependencies]
+adoken-model.workspace = true
+adoken-store.workspace = true
+adoken-notify.workspace = true
+
+[target.'cfg(unix)'.dependencies]
+# Local UTC offset via localtime_r (the `time` crate refuses on multi-threaded Unix).
+libc.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+adoken-demo.workspace = true
+tempfile.workspace = true
+
+[[bench]]
+name = "evaluate"
+harness = false

@@ -1,0 +1,112 @@
+Adoken Today — final mood image prompts
+
+Generator: built-in image_gen tool.
+
+Each image was generated separately with transparent_background=true.
+
+Final set: eight distinct mood scenes and one onboarding welcome image. The mood scenes replace the earlier nearly identical garden variants.
+
+All output paths below are relative to this file.
+
+
+OUTPUT: images/01-fresh-start.png
+
+Use case: illustration-story.
+Asset type: one standalone mood illustration for a desktop application's Today panel. Generate ONE scene only, not a collage or UI. Horizontal 3:2 canvas, ideally 1536x1024. Genuinely transparent alpha background. No text, letters, numbers, labels, interface, frame, watermark, people, mascot or logos.
+Shared series style: sophisticated hand-painted ink and watercolor with fine dark ink accents, matte pigment texture, restrained detail, large bold readable shapes, a compact organic landscape vignette. Original garden/nature symbolism. This series must have STRONGLY DIFFERENT scenes and dominant colors per mood, recognizable even at 200px wide. Shape and composition matter as much as color. One clear main visual idea; avoid clutter.
+Composition: artwork fits within central 85% of canvas, transparent margin around all sides, nothing cropped. Terrain and watercolor edges dissolve softly into transparent alpha. No flat white rectangle, black fill or painted checkerboard. No giant glows reaching the canvas edges. Substantial contrast for placement on light or dark UI. The illustration is decorative artwork only.
+MOOD: A FRESH START.
+Dominant PALE PEACH, CREAM and SOFT SKY BLUE, with one tiny fresh green accent. Light optimistic sparse composition, radically distinct from mature gardens, dark storms and dried orange landscapes.
+Scene: a SINGLE SMALL TWO-LEAF SPROUT rises from a rounded mound of fresh dark soil in the lower center. A smooth stepping-stone path curves in from the lower left toward it. Behind it, a LARGE PALE PEACH HALF-SUN just rises above two very soft blue hills, with a few delicate dawn rays. A tiny unlit coral lantern stands at the very left of the path. Dew droplets catch light. The sprout is young and just beginning, not an accomplishment or blooming tree. Avoid bridges, rivers, dense foliage, full trees, flowers and confetti. The central sprout and half-sun create a simple round centered silhouette. Keep much open transparent space and delicate pastel colors. Make the tiny sprout clearly recognizable at thumbnail size.
+
+
+OUTPUT: images/02-finding-flow.png
+
+Use case: illustration-story.
+Asset type: one standalone mood illustration for a desktop application's Today panel. Generate ONE scene only, not a collage or UI. Horizontal 3:2 canvas, ideally 1536x1024. Genuinely transparent alpha background. No text, letters, numbers, labels, interface, frame, watermark, people, mascot or logos.
+Shared series style: sophisticated hand-painted ink and watercolor with fine dark ink accents, matte pigment texture, restrained detail, large bold readable shapes, a compact organic landscape vignette. Original garden/nature symbolism. This series must have STRONGLY DIFFERENT scenes and dominant colors per mood, recognizable even at 200px wide. Shape and composition matter as much as color. One clear main visual idea; avoid clutter.
+Composition: artwork fits within central 85% of canvas, transparent margin around all sides, nothing cropped. Terrain and watercolor edges dissolve softly into transparent alpha. No flat white rectangle, black fill or painted checkerboard. No giant glows reaching the canvas edges. Substantial contrast for placement on light or dark UI. The illustration is decorative artwork only.
+MOOD: FINDING YOUR FLOW.
+Dominant BRIGHT TEAL and DEEP AQUA BLUE with white water highlights and small coral accents. Energetic, dynamic, unmistakable motion, still refined watercolor.
+Scene: a STREAM CASCADE sweeps DIAGONALLY from UPPER LEFT to LOWER RIGHT over three broad smooth stone terraces, forming an elegant S curve. Clear water splashes lightly and ribbons around the rocks. Several small fresh green reeds bend gently with the breeze along the banks. A compact coral-orange garden lantern on the highest left rock gives a tiny brand accent. The waterfall itself is the hero, filling the organic vignette with forward motion. No bridge, no tree, no large sun or moon, no paper boat, no flowers, no confetti. Bold white strokes in the moving blue water convey active progress. Landscape silhouette follows a rising diagonal rather than a wide flat garden.
+
+
+OUTPUT: images/03-helping-grow.png
+
+Use case: illustration-story.
+Asset type: one standalone mood illustration for a desktop application's Today panel. Generate ONE scene only, not a collage or UI. Horizontal 3:2 canvas, ideally 1536x1024. Genuinely transparent alpha background. No text, letters, numbers, labels, interface, frame, watermark, people, mascot or logos.
+Shared series style: sophisticated hand-painted ink and watercolor with fine dark ink accents, matte pigment texture, restrained detail, large bold readable shapes, a compact organic landscape vignette. Original garden/nature symbolism. This series must have STRONGLY DIFFERENT scenes and dominant colors per mood, recognizable even at 200px wide. Shape and composition matter as much as color. One clear main visual idea; avoid clutter.
+Composition: artwork fits within central 85% of canvas, transparent margin around all sides, nothing cropped. Terrain and watercolor edges dissolve softly into transparent alpha. No flat white rectangle, black fill or painted checkerboard. No giant glows reaching the canvas edges. Substantial contrast for placement on light or dark UI. The illustration is decorative artwork only.
+MOOD: HELPING THINGS GROW.
+Dominant HONEY GOLD, WARM AMBER and CREAM with muted sage highlights. Main visual metaphor is CONNECTION and helping others.
+Scene: THREE SMALL ROUNDED ROCK ISLANDS arranged as a triangle, each with a luminous warm lantern and a modest patch of healthy small plants. Two delicate curved wooden footbridges connect the islands into one community. Center island is slightly farther back; foreground islands left and right. Tiny shared light reflections pool beneath them in a restrained soft watercolor wash. One lantern is coral, two warm amber. The three distinct warm light points and connected three-part silhouette are instantly visible. No mature trees, flowering canopy, waterfall, paper boat, crescent moon or full background scene. Gentle helpful abundant feeling, not a big celebration. Highest detail on the lanterns and bridge connections, the rest simplified.
+
+
+OUTPUT: images/04-waiting.png
+
+Use case: illustration-story.
+Asset type: one standalone mood illustration for a desktop application's Today panel. Generate ONE scene only, not a collage or UI. Horizontal 3:2 canvas, ideally 1536x1024. Genuinely transparent alpha background. No text, letters, numbers, labels, interface, frame, watermark, people, mascot or logos.
+Shared series style: sophisticated hand-painted ink and watercolor with fine dark ink accents, matte pigment texture, restrained detail, large bold readable shapes, a compact organic landscape vignette. Original garden/nature symbolism. This series must have STRONGLY DIFFERENT scenes and dominant colors per mood, recognizable even at 200px wide. Shape and composition matter as much as color. One clear main visual idea; avoid clutter.
+Composition: artwork fits within central 85% of canvas, transparent margin around all sides, nothing cropped. Terrain and watercolor edges dissolve softly into transparent alpha. No flat white rectangle, black fill or painted checkerboard. No giant glows reaching the canvas edges. Substantial contrast for placement on light or dark UI. The illustration is decorative artwork only.
+MOOD: WAITING TO BLOOM / AWAITING OTHERS.
+Dominant MUTED LAVENDER, PEARL GRAY and PALE SLATE BLUE; no lush green or orange dominance. Quiet uncertainty and patient waiting, neither cheerful celebration nor failure.
+Scene: a LARGE IVORY FOLDED PAPER BOAT floats motionless in the foreground on a little mirror-smooth lavender pool. Behind it, a narrow elegant wooden footbridge starts at the RIGHT and recedes DIAGONALLY into a soft bank of violet-gray mist, its far end obscured. Beside the start of the bridge, a tiny branch with THREE CLOSED flower buds leans toward the water. A small dim coral lantern is barely visible in the mist. The paper boat is the main foreground silhouette, bridge smaller behind it. No mature tree, no flowers, no stream cascade, no sun, no moon, no storm, no broken bridge. Peaceful waiting with a visibly different composition from other scenes, lots of airy negative space. The mist must dissolve into transparent alpha, not a rectangular backdrop.
+
+
+OUTPUT: images/05-blocked.png
+
+Use case: illustration-story.
+Asset type: one standalone mood illustration for a desktop application's Today panel. Generate ONE scene only, not a collage or UI. Horizontal 3:2 canvas, ideally 1536x1024. Genuinely transparent alpha background. No text, letters, numbers, labels, interface, frame, watermark, people, mascot or logos.
+Shared series style: sophisticated hand-painted ink and watercolor with fine dark ink accents, matte pigment texture, restrained detail, large bold readable shapes, a compact organic landscape vignette. Original garden/nature symbolism. This series must have STRONGLY DIFFERENT scenes and dominant colors per mood, recognizable even at 200px wide. Shape and composition matter as much as color. One clear main visual idea; avoid clutter.
+Composition: artwork fits within central 85% of canvas, transparent margin around all sides, nothing cropped. Terrain and watercolor edges dissolve softly into transparent alpha. No flat white rectangle, black fill or painted checkerboard. No giant glows reaching the canvas edges. Substantial contrast for placement on light or dark UI. The illustration is decorative artwork only.
+MOOD: BLOCKED.
+A distinctly negative tense composition dominated by DEEP BRICK RED, BURGUNDY and CHARCOAL GRAY, with small amber highlights. Absolutely no lush green leaves, blossom trees, serene turquoise river or happy sunny garden.
+Scene: an ANGULAR ROCKY RAVINE, its two sides forming a dramatic V shape. A short wooden crossing is clearly broken in the middle, with missing planks and two ends separated by a visible gap. One jagged boulder obstructs the near approach. A compact dark watercolor storm cloud hangs above the gap with two or three slanted rain strokes. A single small amber lantern on the near side provides a modest point of hope. No characters, warning symbols, text, danger signs, flames or violence. The main readable symbol is a BROKEN PATH, not a tranquil bridge. Keep rocks broad and simplified and cloud dark for immediate visual distinction. Dramatic but tasteful.
+
+
+OUTPUT: images/06-shipped.png
+
+Use case: illustration-story.
+Asset type: one standalone mood illustration for a desktop application's Today panel. Generate ONE scene only, not a collage or UI. Horizontal 3:2 canvas, ideally 1536x1024. Genuinely transparent alpha background. No text, letters, numbers, labels, interface, frame, watermark, people, mascot or logos.
+Shared series style: sophisticated hand-painted ink and watercolor with fine dark ink accents, matte pigment texture, restrained detail, large bold readable shapes, a compact organic landscape vignette. Original garden/nature symbolism. This series must have STRONGLY DIFFERENT scenes and dominant colors per mood, recognizable even at 200px wide. Shape and composition matter as much as color. One clear main visual idea; avoid clutter.
+Composition: artwork fits within central 85% of canvas, transparent margin around all sides, nothing cropped. Terrain and watercolor edges dissolve softly into transparent alpha. No flat white rectangle, black fill or painted checkerboard. No giant glows reaching the canvas edges. Substantial contrast for placement on light or dark UI. The illustration is decorative artwork only.
+MOOD: SOMETHING SHIPPED.
+The MOST JOYOUS, clearly celebratory illustration in the set. Dominant VIVID EMERALD and CORAL PINK, with small GOLD highlights.
+Scene: one full splendid CORAL-PINK BLOSSOM TREE rises from a small mossy rounded island on the RIGHT. A broad clean emerald brushstroke-like WAVE curves upward from the lower left around the island, then gently curls toward the tree, symbolizing work arriving successfully. A handful of large pink petals and exactly a few tiny gold flecks travel in a celebratory upward arc toward the upper left. A warm little coral lantern nestled at the tree's base. Strong asymmetric celebratory silhouette, bright lush green at the base, abundant blooms; keep the wave elegant, not destructive. No bridge, no paper boat, no cup, no gray storm clouds, no dry branches, no fireworks, no trophy or text. Rich enough to feel earned and visibly different from the other scenes, restrained watercolor craft rather than glossy clipart.
+
+
+OUTPUT: images/07-clear.png
+
+Use case: illustration-story.
+Asset type: one standalone mood illustration for a desktop application's Today panel. Generate ONE scene only, not a collage or UI. Horizontal 3:2 canvas, ideally 1536x1024. Genuinely transparent alpha background. No text, letters, numbers, labels, interface, frame, watermark, people, mascot or logos.
+Shared series style: sophisticated hand-painted ink and watercolor with fine dark ink accents, matte pigment texture, restrained detail, large bold readable shapes, a compact organic landscape vignette. Original garden/nature symbolism. This series must have STRONGLY DIFFERENT scenes and dominant colors per mood, recognizable even at 200px wide. Shape and composition matter as much as color. One clear main visual idea; avoid clutter.
+Composition: artwork fits within central 85% of canvas, transparent margin around all sides, nothing cropped. Terrain and watercolor edges dissolve softly into transparent alpha. No flat white rectangle, black fill or painted checkerboard. No giant glows reaching the canvas edges. Substantial contrast for placement on light or dark UI. The illustration is decorative artwork only.
+MOOD: CLEAR FOR NOW / CAUGHT UP.
+Dominant DEEP INDIGO, SOFT PERIWINKLE and SILVERY BLUE, with one small warm amber accent. Calm restful satisfied twilight, not a gloomy blocked day.
+Scene: a large beautiful simple ivory CERAMIC TEACUP WITH VISIBLE CURL OF STEAM rests on a smooth broad flat blue-gray stone in the foreground LEFT. Behind it on the right, a small still moonlit pool reflects a gently luminous CRESCENT MOON suspended above. A few elegant reeds frame the water, and a single tiny amber garden lantern sits near the stone. The crescent and steam echo each other's curves. Low rounded restful composition, open space between cup and moon. No bridges, no large trees, no pink blossoms, no waterfalls, no rocks obstructing a path, no clouds, no storm, no confetti. Quiet completion and room to breathe. The cup is the unmistakable main symbol at thumbnail size, with the crescent as second focal point. Keep transparent background; night colors are on illustrated objects and small organic washes, not a full rectangular night sky.
+
+
+OUTPUT: images/08-stalled.png
+
+Use case: illustration-story.
+Asset type: one standalone mood illustration for a desktop application's Today panel. Generate ONE scene only, not a collage or UI. Horizontal 3:2 canvas, ideally 1536x1024. Genuinely transparent alpha background. No text, letters, numbers, labels, interface, frame, watermark, people, mascot or logos.
+Shared series style: sophisticated hand-painted ink and watercolor with fine dark ink accents, matte pigment texture, restrained detail, large bold readable shapes, a compact organic landscape vignette. Original garden/nature symbolism. This series must have STRONGLY DIFFERENT scenes and dominant colors per mood, recognizable even at 200px wide. Shape and composition matter as much as color. One clear main visual idea; avoid clutter.
+Composition: artwork fits within central 85% of canvas, transparent margin around all sides, nothing cropped. Terrain and watercolor edges dissolve softly into transparent alpha. No flat white rectangle, black fill or painted checkerboard. No giant glows reaching the canvas edges. Substantial contrast for placement on light or dark UI. The illustration is decorative artwork only.
+MOOD: NOTHING MOVED TODAY / STALLED.
+Strong negative but quiet mood, unmistakably NOT a lush happy garden. Dominant BURNT ORANGE, TERRACOTTA, RUST RED and dusty ochre, with dark brown ink accents. Absolutely NO green foliage, no emerald water, no blooming trees.
+Scene: a WIDE HORIZONTAL EMPTY CRACKED STREAMBED curves across a small sunbaked island of earth. On the far left stands a slender bare crooked tree with only two shriveled orange leaves; several fallen rust-colored leaves lie still in the dry channel. At the right bank, a small coral lantern is UNLIT and partly dusty. A faded flat amber setting-sun disk behind the bare branches suggests a day passing without movement. No bridge, no water flow, no flowers. Stillness, dryness, stuckness, frustration. Keep the landscape sparse and the empty dry channel as the main visual symbol. Beautiful intentional editorial illustration, not horror, disaster or flames. The overall silhouette is low and wide with one bare vertical branch on the left.
+
+
+OUTPUT: images/09-onboarding-welcome.png
+
+Reference image: references/adoken-app-icon.png (copy of public/static/apple-touch-icon.png).
+Generator: built-in image_gen; transparent_background=true.
+
+Use case: compositing / product illustration.
+Create ONE polished welcoming hero illustration for the FIRST onboarding screen of the desktop app "adoken". This is a standalone transparent PNG ASSET, not a UI screenshot. Horizontal 3:2 canvas, preferably 1536x1024. Truly transparent alpha background with comfortable margins on all four sides.
+Reference image role: the attached small app icon supplies Adoken's EXISTING ORIGINAL PIXEL FIST. Reuse that recognizable front-facing coral-orange pixel fist, dark ink outline, three raised top knuckle shapes with the right thumb form, and golden yellow wrist wrap. Remove its flat dark square icon background. Preserve the recognizable pixel geometry and the colors, make the scaled fist crisp rather than blurry. Do not add fingers, arm, person, headband, or fighter. This is a friendly fist-bump emblem, not an aggressive punching scene.
+Composition: centered in the upper-middle, the large pixel fist is framed by a graceful OPEN CIRCULAR INK-AND-WATERCOLOR BRUSHSTROKE HALO. The halo sweeps from warm coral at lower left into luminous golden peach at upper right, expressing arrival and welcome. The top opening of the circle creates room to breathe. A few small golden FOUR-POINT sparks and three or four coral pixel fragments rise gently around it; restrained, no huge explosion. Under the fist, the product name is large and perfectly legible:
+"adoken"
+Spell exactly a-d-o-k-e-n, all lowercase, no additional characters or symbols. Heavy clean geometric monospaced-style sans typography, warm deep charcoal lettering with a subtle warm ivory edge to remain legible on a dark background. Six letters only. The wordmark sits in the LOWER THIRD, fully separate from and beneath the fist, with generous spacing. A small warm watercolor swoosh gently grounds the wordmark; no rectangle or banner behind it.
+Visual character: premium, friendly, inventive desktop-tool identity. A deliberate combination of CRISP ORIGINAL PIXEL EMBLEM and loose sophisticated hand-painted ink watercolor around it. Welcoming optimistic coral, peach, golden yellow, warm ivory and deep charcoal, with no green garden. Strong central silhouette, airy composition, quality fine-pigment texture on the halo. It should feel like a warm invitation into a focused creative workspace.
+No tagline, no "welcome" text inside the asset, no buttons, panels, cards, window chrome, UI, screens, extra logos, kanji, trophy, known game imagery, watermark, hard rectangular background, black square or checkerboard pattern. Keep all edges gently fading into transparency except the crisp fist and clean lettering. No objects cropped.

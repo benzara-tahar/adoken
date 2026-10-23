@@ -1,0 +1,19 @@
+---
+import { FIST_W, FIST_H, fistRects } from '../art/fist';
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox={`0 0 ${FIST_W} ${FIST_H}`}
+  width={FIST_W * 8}
+  height={FIST_H * 8}
+  shape-rendering="crispEdges"
+  aria-hidden="true"
+  focusable="false"
+  set:html={fistRects()}
+/>

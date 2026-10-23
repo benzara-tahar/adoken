@@ -1,0 +1,257 @@
+---
+import { hero, nav, x } from '../copy';
+import LaunchForm from './LaunchForm.astro';
+import HeroWindow from './HeroWindow.astro';
+import Logo from './Logo.astro';
+---
+
+<header class="nav">
+  <div class="nav-in wrap">
+    <a class="nav-brand" href="/">
+      <Logo />
+      <span>adoken</span>
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      {nav.links.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+    <div class="nav-cta">
+      <a class="nav-x" href={x.url} rel="me noopener" data-track="follow_x_clicked" data-placement="v2-nav">
+        <svg viewBox="0 0 24 24" aria-hidden="true"
+          ><path
+            fill="currentColor"
+            d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.3L5.3 21H2.2l7.2-8.3L1.8 3h6.4l4.4 5.8zm-1.1 16.2h1.7L7.4 4.7H5.6z"
+          ></path></svg
+        >
+        <span>{nav.follow}</span>
+      </a>
+      <a class="btn btn-primary nav-btn" href="#launch">{nav.cta}</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="search">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="wrap hero-in">
+    <a class="hero-badge rise" href={x.url} rel="me noopener" data-track="follow_x_clicked" data-placement="v2-badge">
+      <span class="hero-badge-tag">{hero.badge.tag}</span>
+      <span>{hero.badge.text}</span>
+      <span aria-hidden="true">→</span>
+    </a>
+    <h1 class="hero-title rise" style="--d:.06s">
+      <span>{hero.title[0]}</span>
+      <span class="hero-accent">{hero.title[1]}</span>
+    </h1>
+    <p class="hero-lede lede rise" style="--d:.12s">{hero.lede}</p>
+    <div class="hero-form rise" style="--d:.18s">
+      <LaunchForm placement="v2-hero" />
+      <a class="hero-follow" href={x.url} rel="me noopener" data-track="follow_x_clicked" data-placement="v2-hero">
+        {hero.follow}
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <HeroWindow />
+  </div>
+</section>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    border-bottom: 1px solid transparent;
+    background: linear-gradient(180deg, rgb(7 7 11 / 0.82), rgb(7 7 11 / 0.55));
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    border-bottom-color: var(--line);
+  }
+  .nav-in {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    height: 64px;
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font: 650 1.08rem/1 var(--sans);
+    letter-spacing: -0.03em;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 4px;
+  }
+  .nav-links a {
+    padding: 7px 12px;
+    font-size: 0.88rem;
+    color: var(--soft);
+    text-decoration: none;
+    border-radius: 8px;
+    transition:
+      color 0.2s,
+      background-color 0.2s;
+  }
+  .nav-links a:hover {
+    color: var(--text);
+    background: rgb(255 255 255 / 0.05);
+  }
+  .nav-cta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+  }
+  .nav-x {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    font-size: 0.88rem;
+    color: var(--soft);
+    text-decoration: none;
+    border-radius: 8px;
+  }
+  .nav-x:hover {
+    color: var(--text);
+  }
+  .nav-x svg {
+    width: 15px;
+    height: 15px;
+  }
+  .nav-btn {
+    height: 36px;
+    padding: 0 14px;
+    font-size: 0.86rem;
+    border-radius: 10px;
+  }
+
+  .hero {
+    position: relative;
+    padding: clamp(40px, 6vw, 72px) 0 clamp(64px, 8vw, 96px);
+    text-align: center;
+  }
+  .hero-grid {
+    position: absolute;
+    inset: -64px 0 auto;
+    height: 760px;
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+    background-size: 64px 64px;
+    background-position: center top;
+    mask-image: radial-gradient(60% 70% at 50% 0%, #000 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(60% 70% at 50% 0%, #000 20%, transparent 75%);
+    pointer-events: none;
+  }
+  .hero-in {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 12px 5px 5px;
+    font-size: 0.84rem;
+    color: var(--soft);
+    text-decoration: none;
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.035);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: border-color 0.2s;
+  }
+  .hero-badge:hover {
+    border-color: color-mix(in srgb, var(--accent-hi) 50%, transparent);
+  }
+  .hero-badge-tag {
+    padding: 3px 9px;
+    font-weight: 600;
+    font-size: 0.74rem;
+    color: var(--accent-ink);
+    border-radius: 999px;
+    background: var(--accent-hi);
+  }
+  .hero-title {
+    display: grid;
+    margin-top: 24px;
+    font: 650 clamp(2.6rem, 6.6vw, 5.4rem) / 0.98 var(--sans);
+    letter-spacing: -0.055em;
+    text-wrap: balance;
+  }
+  .hero-title span:first-child {
+    background: linear-gradient(180deg, #fff 35%, rgb(255 255 255 / 0.66));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero-accent {
+    padding-bottom: 0.08em;
+    background: linear-gradient(92deg, var(--accent-pale) 0%, var(--accent-hi) 34%, var(--accent-fg) 62%, var(--amber) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero-lede {
+    max-width: 640px;
+    margin-top: 22px;
+  }
+  .hero-form {
+    display: grid;
+    justify-items: center;
+    gap: 18px;
+    width: 100%;
+    margin-top: 30px;
+  }
+  .hero-form :global(.lf) {
+    justify-items: center;
+  }
+  .hero-form :global(.lf-os) {
+    justify-content: center;
+  }
+  .hero-follow {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--soft);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-2);
+    padding-bottom: 2px;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+  }
+  .hero-follow:hover {
+    color: var(--text);
+    border-color: var(--accent-hi);
+  }
+
+  @media (max-width: 900px) {
+    .nav-links {
+      display: none;
+    }
+  }
+  @media (max-width: 560px) {
+    .nav-x span {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+    .nav-in {
+      gap: 12px;
+    }
+    .hero-title {
+      font-size: clamp(1.9rem, 8.1vw, 3rem);
+      letter-spacing: -0.05em;
+    }
+    .hero-badge {
+      font-size: 0.78rem;
+    }
+  }
+</style>

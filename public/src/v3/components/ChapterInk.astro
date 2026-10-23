@@ -1,0 +1,327 @@
+---
+/**
+ * Chapter five: themes. Scrolling through eight inks re-inks a sticky window; below them, the full
+ * ink box (every built-in theme) re-inks it on click. Without JS the window stays in Dojo Night.
+ */
+import ChapterHead from './ChapterHead.astro';
+import AppSide from './AppSide.astro';
+import PrView from './mock/PrView.astro';
+import { theme } from '../copy';
+import { inkById, inks } from '../themes';
+
+const steps = theme.steps.map((id) => inkById[id]);
+---
+
+<section id="ch-ink" class="section ink-sec" aria-labelledby="ch-ink-title">
+  <div class="wrap ink-head">
+    <ChapterHead numeral={theme.numeral} kicker={theme.kicker} title={theme.title} id="ch-ink-title" />
+    <p class="body dropcap">{theme.body}</p>
+  </div>
+
+  <div class="wrap ink-scrolly" data-inks>
+    <div class="ink-steps">
+      {
+        steps.map((ink, i) => (
+          <div class:list={['ink-step', { on: i === 0 }]} data-step={ink.id}>
+            <span class="ink-no">{String(i + 1).padStart(2, '0')}</span>
+            <p class="ink-name">{ink.name}</p>
+            <p class="ink-family">
+              {ink.family} · {ink.dark ? 'dark' : 'light'}
+            </p>
+            <span class="ink-dabs" aria-hidden="true">
+              {[ink.ui[0], ink.ui[2], ink.ui[5], ink.syntax[0], ink.syntax[1], ink.syntax[4]].map((c) => (
+                <i style={`--c:${c}`} />
+              ))}
+            </span>
+          </div>
+        ))
+      }
+
+      <div class="ink-box">
+        <p class="eyebrow">{theme.swatchTitle}</p>
+        <p class="ink-hint">{theme.swatchHint}</p>
+        <div class="ink-grid">
+          {
+            inks.map((ink) => (
+              <button
+                type="button"
+                class="chip"
+                data-pick={ink.id}
+                aria-pressed={ink.id === steps[0].id ? 'true' : 'false'}
+                style={`--a:${ink.ui[0]};--b:${ink.ui[5]};--c:${ink.syntax[1]};--d:${ink.syntax[0]}`}
+              >
+                <span class="chip-sw" aria-hidden="true"><i /><i /><i /></span>
+                <span class="chip-name">{ink.name}</span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="ink-stage">
+      <figure class="photo" style="--tilt:0.7deg">
+        <span class="tape tape-tl"></span>
+        <div class="photo-frame">
+          <div
+            class="win mock ink-win is-pr is-thread is-reply is-approved"
+            data-ink={steps[0].id}
+            role="img"
+            aria-label="The same pull request review window, re-colored in the selected theme."
+          >
+            <div class="win-bar"><i></i><i></i><i></i><span class="win-title ink-title">adoken · {steps[0].name}</span></div>
+            <div class="app">
+              <AppSide active={2} />
+              <div class="main"><PrView slam={false} /></div>
+            </div>
+          </div>
+        </div>
+        <figcaption class="fig"><b>{theme.figure.split(' · ')[0]}</b> · {theme.figure.split(' · ').slice(1).join(' · ')}</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-inks]');
+  if (root) {
+    const win = root.querySelector<HTMLElement>('.ink-win')!;
+    const title = root.querySelector('.ink-title')!;
+    const steps = [...root.querySelectorAll<HTMLElement>('.ink-step')];
+    const chips = [...root.querySelectorAll<HTMLButtonElement>('[data-pick]')];
+
+    const reink = (id: string) => {
+      if (win.dataset.ink === id) return;
+      win.dataset.ink = id;
+      const chip = chips.find((c) => c.dataset.pick === id);
+      title.textContent = `adoken · ${chip?.querySelector('.chip-name')?.textContent ?? ''}`;
+      for (const c of chips) c.setAttribute('aria-pressed', String(c === chip));
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          for (const s of steps) s.classList.toggle('on', s === e.target);
+          reink((e.target as HTMLElement).dataset.step!);
+        }
+      },
+      { rootMargin: '-45% 0px -45% 0px' },
+    );
+    for (const s of steps) io.observe(s);
+    for (const c of chips) c.addEventListener('click', () => reink(c.dataset.pick!));
+  }
+</script>
+
+<style>
+  .ink-sec {
+    background: rgb(200 180 145 / 0.2);
+    border-block: 1px solid var(--ink);
+  }
+
+  .ink-head {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 2rem clamp(2rem, 5vw, 5rem);
+    align-items: end;
+  }
+
+  .ink-scrolly {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    margin-top: clamp(2rem, 5vw, 4rem);
+  }
+
+  .ink-step {
+    display: grid;
+    align-content: center;
+    gap: 0.35rem;
+    min-height: 50vh;
+    padding-left: 1.2rem;
+    border-left: 1px solid var(--rule);
+    color: var(--dim);
+    transition:
+      color 0.4s,
+      border-color 0.4s;
+  }
+
+  .ink-step:not(.on) .ink-dabs {
+    opacity: 0.4;
+  }
+
+  .ink-step.on {
+    color: var(--ink);
+    border-left: 3px solid var(--shu);
+    padding-left: calc(1.2rem - 2px);
+  }
+
+  .ink-no {
+    font: 500 0.8rem/1 var(--mono);
+    color: var(--dim);
+  }
+
+  .ink-name {
+    margin: 0;
+    font: italic 400 clamp(2.2rem, 4vw, 3.6rem) / 1 var(--serif);
+    letter-spacing: -0.03em;
+  }
+
+  .ink-family {
+    margin: 0;
+    font: 600 0.74rem/1.3 var(--sans);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  .ink-dabs {
+    display: flex;
+    margin-top: 0.8rem;
+  }
+
+  .ink-dabs i {
+    width: 2.4rem;
+    height: 1.6rem;
+    margin-right: -0.5rem;
+    background: var(--c);
+    border: 1.5px solid var(--paper-2);
+    border-radius: 48% 52% 44% 56% / 60% 45% 55% 40%;
+    rotate: calc(var(--r, 0) * 1deg);
+  }
+
+  .ink-dabs i:nth-child(odd) {
+    --r: -6;
+  }
+
+  .ink-dabs i:nth-child(3n) {
+    --r: 8;
+  }
+
+  .ink-stage {
+    position: relative;
+  }
+
+  .ink-stage .photo {
+    position: sticky;
+    top: 12vh;
+  }
+
+  .ink-win {
+    --app-h: 38em;
+    font-size: clamp(6px, calc(100cqw / 66), 13px);
+  }
+
+  .ink-win :global(.tree) {
+    display: none;
+  }
+
+  .ink-win :global(.pr-body) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ink-box {
+    padding: 3rem 0 1rem;
+  }
+
+  .ink-hint {
+    margin: 0.6rem 0 1.2rem;
+    font: 400 0.9rem/1.4 var(--sans);
+    color: var(--ink-2);
+  }
+
+  .ink-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9.2rem, 1fr));
+    gap: 0.45rem;
+  }
+
+  .chip {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.4rem 0.55rem 0.4rem 0.4rem;
+    font: 500 0.78rem/1.2 var(--sans);
+    text-align: left;
+    color: var(--ink);
+    background: rgb(255 252 245 / 0.55);
+    border: 1px solid var(--rule);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition:
+      border-color 0.15s,
+      background 0.15s,
+      transform 0.15s var(--ease);
+  }
+
+  .chip:hover {
+    border-color: var(--ink);
+    transform: translateY(-1px);
+  }
+
+  .chip[aria-pressed='true'] {
+    color: var(--paper);
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .chip-sw {
+    display: grid;
+    grid-template-columns: repeat(3, 0.5rem);
+    height: 1.5rem;
+    flex: none;
+    border-radius: 0.3rem;
+    overflow: hidden;
+    background: var(--a);
+    padding: 0.25rem;
+    gap: 0.12rem;
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.12);
+  }
+
+  .chip-sw i {
+    border-radius: 0.15rem;
+    background: var(--b);
+  }
+
+  .chip-sw i:nth-child(2) {
+    background: var(--c);
+  }
+
+  .chip-sw i:nth-child(3) {
+    background: var(--d);
+  }
+
+  @media (max-width: 960px) {
+    .ink-head {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ink-scrolly {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+
+    .ink-stage {
+      order: -1;
+      position: sticky;
+      top: 0.6rem;
+      z-index: 3;
+    }
+
+    .ink-stage .photo {
+      position: static;
+    }
+
+    .ink-stage .fig {
+      display: none;
+    }
+
+    .ink-step {
+      min-height: 40vh;
+    }
+
+    .ink-win {
+      font-size: calc(100cqw / 44);
+    }
+  }
+</style>

@@ -1,0 +1,314 @@
+---
+/**
+ * Character-select style theme picker. Each tile carries its theme as --a-* custom properties;
+ * scripts/themes.ts copies the selected tile's properties onto the preview window.
+ */
+import { demo, themeList, themes, type Theme } from '../copy';
+import { highlight } from '../lib/highlight';
+import Icon from './Icon.astro';
+
+const vars = (t: Theme) =>
+  [
+    ['bg', t.bg],
+    ['panel', t.panel],
+    ['side', t.panel],
+    ['line', t.line],
+    ['text', t.text],
+    ['muted', t.muted],
+    ['accent', t.accent],
+    ['accent-2', t.fn],
+    ['add', t.add],
+    ['del', t.del],
+    ['warn', t.str],
+    ['kw', t.kw],
+    ['str', t.str],
+    ['fn', t.fn],
+    ['num', t.num],
+    ['ty', t.add],
+    ['com', t.muted],
+  ]
+    .map(([k, v]) => `--a-${k}:${v}`)
+    .join(';');
+const first = themeList[0];
+const code = demo.review.diff.slice(3, 13).filter((row) => row.t !== '-');
+---
+
+<section class="section themes" id="themes" aria-labelledby="themes-title">
+  <div class="wrap">
+    <header class="section-head" data-reveal>
+      <p class="eyebrow hud">{themes.eyebrow}</p>
+      <h2 class="display" id="themes-title">{themes.title}</h2>
+      <p>{themes.intro}</p>
+    </header>
+
+    <div class="select" data-themes data-reveal>
+      <div class="preview">
+        <p class="preview-name">
+          <span class="hud preview-p1">{themes.player}</span>
+          <b data-theme-name aria-live="polite">{first.name}</b>
+          <span class="hud preview-label">{themes.previewLabel}</span>
+        </p>
+        <div class="app preview-app" data-preview style={vars(first)} aria-hidden="true">
+          <div class="app-bar">
+            <span class="lights"><i></i><i></i><i></i></span>
+            <span class="app-title">{demo.org} / {demo.project}</span>
+          </div>
+          <div class="app-body preview-body">
+            <aside class="side">
+              <p class="side-org"><i>F</i>{demo.org}</p>
+              {
+                demo.sidebar.slice(0, 5).map((item, i) => (
+                  <p class:list={['side-item', { 'is-on': i === 2 }]}>
+                    <Icon name={item.icon} />
+                    {item.label}
+                    {'badge' in item && <em>{item.badge}</em>}
+                  </p>
+                ))
+              }
+            </aside>
+            <div class="app-main">
+              <div class="prs">
+                {
+                  demo.prs.slice(0, 3).map((pr) => (
+                    <div class="pr">
+                      <span class="av" data-tone={pr.tone}>
+                        {pr.who}
+                      </span>
+                      <div>
+                        <p class="pr-t">{pr.title}</p>
+                        <p class="pr-m">
+                          <b>{pr.id}</b> · {pr.repo}
+                        </p>
+                      </div>
+                      <span class="pr-r">
+                        <span class:list={['dot', pr.status]} />
+                      </span>
+                    </div>
+                  ))
+                }
+              </div>
+              <div class="diff preview-code">
+                {
+                  code.map((row) => (
+                    <div class:list={['drow', { add: row.t === '+' }]}>
+                      <span>{row.a || ''}</span>
+                      <span>{row.b}</span>
+                      <span>{row.t.trim()}</span>
+                      <code set:html={highlight(row.code)} />
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul class="extras hud">
+          {themes.extras.map((e) => <li>{e}</li>)}
+        </ul>
+      </div>
+
+      <div class="grid" role="group" aria-label={themes.pick}>
+        {
+          themeList.map((t, i) => (
+            <button type="button" class="tile" style={vars(t)} data-name={t.name} aria-pressed={i === 0 ? 'true' : 'false'}>
+              <span class="tile-sw" aria-hidden="true">
+                <i />
+                <i />
+                <i />
+              </span>
+              <span class="tile-n">{t.name}</span>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/themes';
+</script>
+
+<style>
+  .select {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: start;
+  }
+  @media (max-width: 1020px) {
+    .select {
+      grid-template-columns: 1fr;
+    }
+  }
+  .preview {
+    display: grid;
+    gap: 1rem;
+    min-width: 0;
+  }
+  .preview-name {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .preview-name b {
+    font: italic 900 clamp(1.6rem, 3vw, 2.3rem) / 1 var(--f-display);
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow:
+      0 0 12px var(--mag),
+      0 0 30px rgb(255 43 214 / 0.5);
+  }
+  .preview-p1 {
+    padding: 0.35rem 0.5rem;
+    color: #1a0418;
+    background: var(--mag);
+    border-radius: 0.3rem;
+    box-shadow: 0 0 16px -2px var(--mag);
+  }
+  .preview-label {
+    margin-left: auto;
+    color: var(--dim);
+    font-size: 0.65rem;
+  }
+  .preview-app {
+    box-shadow:
+      0 0 0 1px rgb(0 0 0 / 0.6),
+      0 30px 70px -20px #000,
+      0 0 60px -20px var(--a-accent);
+  }
+  .preview-body {
+    height: auto;
+  }
+  .preview-app :global(.prs) {
+    border-bottom: 1px solid var(--a-line);
+  }
+  .preview-code {
+    padding: 8px 0;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .preview-app,
+    .preview-app :global(*) {
+      transition:
+        background-color 380ms ease,
+        color 380ms ease,
+        border-color 380ms ease,
+        box-shadow 380ms ease;
+    }
+  }
+  .extras {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .extras li {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.66rem;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 0.35rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.55rem;
+  }
+  @media (max-width: 520px) {
+    .grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.4rem;
+    }
+  }
+  .tile {
+    position: relative;
+    display: grid;
+    gap: 0.35rem;
+    padding: 0.35rem;
+    font: inherit;
+    color: var(--muted);
+    text-align: left;
+    background: var(--panel);
+    border: 1.5px solid var(--line);
+    border-radius: 0.6rem;
+    cursor: pointer;
+    transition:
+      border-color 150ms,
+      translate 150ms var(--ease-out),
+      box-shadow 150ms;
+  }
+  .tile:hover {
+    translate: 0 -2px;
+    border-color: var(--dim);
+  }
+  .tile:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 2px;
+  }
+  .tile[aria-pressed='true'] {
+    color: var(--text);
+    border-color: var(--mag);
+    box-shadow:
+      0 0 0 2px rgb(255 43 214 / 0.35),
+      0 0 22px -2px var(--mag);
+  }
+  .tile[aria-pressed='true']::after {
+    content: '1P';
+    position: absolute;
+    top: -0.55rem;
+    right: -0.4rem;
+    padding: 0.15rem 0.3rem;
+    font: 800 0.6rem/1 var(--f-mono);
+    color: #1a0418;
+    background: var(--mag);
+    border-radius: 0.2rem;
+    box-shadow: 0 0 10px var(--mag);
+  }
+  .tile-sw {
+    position: relative;
+    display: grid;
+    gap: 3px;
+    align-content: center;
+    height: 2.6rem;
+    padding: 0 0.5rem 0 1.4rem;
+    background: var(--a-bg);
+    border: 1px solid var(--a-line);
+    border-radius: 0.35rem;
+  }
+  .tile-sw::before {
+    content: '';
+    position: absolute;
+    left: 0.45rem;
+    top: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    translate: 0 -50%;
+    border-radius: 50%;
+    background: var(--a-accent);
+    box-shadow: 0 0 8px var(--a-accent);
+  }
+  .tile-sw i {
+    display: block;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--a-kw);
+  }
+  .tile-sw i:nth-child(2) {
+    width: 70%;
+    background: var(--a-str);
+  }
+  .tile-sw i:nth-child(3) {
+    width: 45%;
+    background: var(--a-fn);
+  }
+  .tile-n {
+    overflow: hidden;
+    padding: 0 0.15rem;
+    font: 600 0.7rem/1.2 var(--f-mono);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+</style>

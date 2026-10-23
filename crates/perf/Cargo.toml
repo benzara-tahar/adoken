@@ -1,0 +1,25 @@
+[package]
+name = "adoken-perf"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Perf harness: latency stats, budgets, cold-start probe, frame recorder, and the runners behind scripts/perf.sh."
+
+[features]
+# The in-app half (cold-start probe, gpui frame recorder). The runners and the
+# stats/budget core stay gpui-free so they build and test fast.
+gpui = ["dep:gpui"]
+
+[dependencies]
+adoken-search.workspace = true
+gpui = { workspace = true, optional = true }
+
+[[bin]]
+name = "perf-cold-start"
+path = "src/bin/perf_cold_start.rs"
+
+[[bin]]
+name = "perf-search"
+path = "src/bin/perf_search.rs"

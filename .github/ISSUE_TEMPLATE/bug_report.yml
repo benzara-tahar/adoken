@@ -1,0 +1,59 @@
+name: Bug report
+description: Something in adoken is broken, slow or noisy.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Don't paste tokens, private org URLs or real work item / PR content. If you can, reproduce in demo mode (`ADOKEN_DEMO=1`).
+        Security problems go through **Security › Report a vulnerability**, not here.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Pull requests
+        2. Press ⌘P and type…
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: adoken version
+      description: Settings › About, or the commit you built.
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version and chip
+      placeholder: macOS 15.4, M2
+    validations:
+      required: true
+  - type: dropdown
+    id: hosting
+    attributes:
+      label: Azure DevOps
+      options:
+        - Azure DevOps Services (dev.azure.com)
+        - Azure DevOps Services (*.visualstudio.com)
+        - Azure DevOps Server (on-premises)
+        - Demo mode
+  - type: input
+    id: process
+    attributes:
+      label: Process template
+      description: Agile, Scrum, Basic, CMMI, or a custom inherited process. Matters for work item bugs.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Terminal output from `target/bundle/adoken.app/Contents/MacOS/adoken`, or a redacted `ADOKEN_SYNC_LOG` excerpt.
+      render: text

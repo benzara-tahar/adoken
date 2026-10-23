@@ -1,0 +1,68 @@
+{
+  "value": [
+    {
+      "id": 1,
+      "description": "adoken smoke: add file",
+      "author": {
+        "displayName": "Ada Reviewer",
+        "url": "https://spsprodweu1.vssps.visualstudio.com/A00000000-0000-0000-0000-000000000000/_apis/Identities/11111111-2222-3333-4444-555555555555",
+        "_links": {
+          "avatar": {
+            "href": "https://dev.azure.com/contoso/_apis/GraphProfile/MemberAvatars/aad.MTExMTExMTEtMjIyMi0zMzMzLTQ0NDQtNTU1NTU1NTU1NTU1"
+          }
+        },
+        "id": "11111111-2222-3333-4444-555555555555",
+        "uniqueName": "ada@contoso.com",
+        "imageUrl": "https://dev.azure.com/contoso/_apis/GraphProfile/MemberAvatars/aad.MTExMTExMTEtMjIyMi0zMzMzLTQ0NDQtNTU1NTU1NTU1NTU1",
+        "descriptor": "aad.MTExMTExMTEtMjIyMi0zMzMzLTQ0NDQtNTU1NTU1NTU1NTU1"
+      },
+      "createdDate": "2026-09-30T19:04:31.8667185Z",
+      "updatedDate": "2026-09-30T19:04:31.8667185Z",
+      "sourceRefCommit": {
+        "commitId": "489d5f4d0a1ae62c4fc07395f3adbc450ebd606a"
+      },
+      "targetRefCommit": {
+        "commitId": "55df94856ce8592136e6ab3f7211ae23adf79819"
+      },
+      "commonRefCommit": {
+        "commitId": "55df94856ce8592136e6ab3f7211ae23adf79819"
+      },
+      "hasMoreCommits": false,
+      "reason": "push"
+    },
+    {
+      "id": 2,
+      "description": "adoken smoke: second commit",
+      "author": {
+        "displayName": "Ada Reviewer",
+        "url": "https://spsprodweu1.vssps.visualstudio.com/A00000000-0000-0000-0000-000000000000/_apis/Identities/11111111-2222-3333-4444-555555555555",
+        "_links": {
+          "avatar": {
+            "href": "https://dev.azure.com/contoso/_apis/GraphProfile/MemberAvatars/aad.MTExMTExMTEtMjIyMi0zMzMzLTQ0NDQtNTU1NTU1NTU1NTU1"
+          }
+        },
+        "id": "11111111-2222-3333-4444-555555555555",
+        "uniqueName": "ada@contoso.com",
+        "imageUrl": "https://dev.azure.com/contoso/_apis/GraphProfile/MemberAvatars/aad.MTExMTExMTEtMjIyMi0zMzMzLTQ0NDQtNTU1NTU1NTU1NTU1",
+        "descriptor": "aad.MTExMTExMTEtMjIyMi0zMzMzLTQ0NDQtNTU1NTU1NTU1NTU1"
+      },
+      "createdDate": "2026-09-30T19:04:38.0204693Z",
+      "updatedDate": "2026-09-30T19:04:38.0204693Z",
+      "sourceRefCommit": {
+        "commitId": "1bb846f649afbe5d14b2c4091cc51f9006be9cbe"
+      },
+      "targetRefCommit": {
+        "commitId": "55df94856ce8592136e6ab3f7211ae23adf79819"
+      },
+      "commonRefCommit": {
+        "commitId": "55df94856ce8592136e6ab3f7211ae23adf79819"
+      },
+      "hasMoreCommits": false,
+      "reason": "push",
+      "push": {
+        "pushId": 20
+      }
+    }
+  ],
+  "count": 2
+}

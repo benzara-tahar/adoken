@@ -1,0 +1,56 @@
+{
+  "changeEntries": [
+    {
+      "changeTrackingId": 1,
+      "changeId": 1,
+      "item": {
+        "objectId": "7a1c9e0b3f5d2e4c6a8b0d1f3e5c7a9b1d3f5e7c",
+        "originalObjectId": "0f2e4d6c8b0a1f3e5d7c9b1a3f5e7d9c1b3a5f7e",
+        "gitObjectType": "blob",
+        "commitId": "c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1",
+        "path": "/src/checkout/retry.rs",
+        "url": "https://dev.azure.com/contoso/9628fca0-2412-4d44-b078-a7cda9218300/_apis/git/repositories/0b1c2d3e-4f50-6172-8394-a5b6c7d8e9f0/items/src/checkout/retry.rs?versionType=Commit&version=c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1"
+      },
+      "changeType": "edit"
+    },
+    {
+      "changeTrackingId": 2,
+      "changeId": 2,
+      "item": {
+        "objectId": "1b3d5f7a9c1e3b5d7f9a1c3e5b7d9f1a3c5e7b9d",
+        "gitObjectType": "blob",
+        "commitId": "c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1",
+        "path": "/src/checkout/backoff.rs",
+        "url": "https://dev.azure.com/contoso/9628fca0-2412-4d44-b078-a7cda9218300/_apis/git/repositories/0b1c2d3e-4f50-6172-8394-a5b6c7d8e9f0/items/src/checkout/backoff.rs?versionType=Commit&version=c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1"
+      },
+      "changeType": "add"
+    },
+    {
+      "changeTrackingId": 3,
+      "changeId": 3,
+      "item": {
+        "objectId": "2c4e6a8c0e2a4c6e8a0c2e4a6c8e0a2c4e6a8c0e",
+        "originalObjectId": "3d5f7b9d1f3b5d7f9b1d3f5b7d9f1b3d5f7b9d1f",
+        "gitObjectType": "blob",
+        "commitId": "c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1",
+        "path": "/src/checkout/client.rs",
+        "url": "https://dev.azure.com/contoso/9628fca0-2412-4d44-b078-a7cda9218300/_apis/git/repositories/0b1c2d3e-4f50-6172-8394-a5b6c7d8e9f0/items/src/checkout/client.rs?versionType=Commit&version=c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1"
+      },
+      "changeType": "edit, rename",
+      "sourceServerItem": "/src/checkout/client.rs",
+      "originalPath": "/src/checkout/http.rs"
+    },
+    {
+      "changeTrackingId": 4,
+      "changeId": 4,
+      "item": {
+        "originalObjectId": "4e6a8c0e2a4c6e8a0c2e4a6c8e0a2c4e6a8c0e2a",
+        "path": null
+      },
+      "changeType": "delete",
+      "originalPath": "/src/checkout/legacy.rs"
+    }
+  ],
+  "nextSkip": 0,
+  "nextTop": 0
+}

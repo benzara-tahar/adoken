@@ -1,0 +1,130 @@
+---
+import { bento, proof } from '../copy';
+import Card from './Card.astro';
+import ReviewViz from './ReviewViz.astro';
+import InboxViz from './InboxViz.astro';
+import NudgeViz from './NudgeViz.astro';
+import PipelineViz from './PipelineViz.astro';
+import OfflineViz from './OfflineViz.astro';
+import KeychainViz from './KeychainViz.astro';
+import DirectViz from './DirectViz.astro';
+import KeysViz from './KeysViz.astro';
+---
+
+<div class="proof wrap">
+  {
+    proof.map((item, i) => (
+      <div class="proof-item rv" style={`--d:${i * 0.06}s`}>
+        <span class="proof-v num">{item.value}</span>
+        <span class="proof-l">{item.label}</span>
+      </div>
+    ))
+  }
+</div>
+
+<section class="section" id="review">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="eyebrow">{bento.eyebrow}</span>
+      <h2 class="h2">{bento.title}</h2>
+      <p class="lede">{bento.lede}</p>
+    </div>
+    <div class="bento">
+      <Card class="b-review" title={bento.review.title} body={bento.review.body} keys={bento.review.keys}>
+        <ReviewViz />
+      </Card>
+      <Card class="b-inbox" title={bento.inbox.title} body={bento.inbox.body} keys={bento.inbox.keys} delay={0.08}>
+        <InboxViz />
+      </Card>
+      <Card class="b-third" title={bento.nudge.title} body={bento.nudge.body} keys={bento.nudge.keys}>
+        <NudgeViz />
+      </Card>
+      <Card class="b-third" title={bento.pipeline.title} body={bento.pipeline.body} keys={bento.pipeline.keys} delay={0.06}>
+        <PipelineViz />
+      </Card>
+      <Card class="b-third" title={bento.offline.title} body={bento.offline.body} delay={0.12}>
+        <OfflineViz />
+      </Card>
+      <Card class="b-third" title={bento.keychain.title} body={bento.keychain.body}>
+        <KeychainViz />
+      </Card>
+      <Card class="b-third" title={bento.direct.title} body={bento.direct.body} delay={0.06}>
+        <DirectViz />
+      </Card>
+      <Card class="b-third" title={bento.keys.title} body={bento.keys.body} delay={0.12}>
+        <KeysViz />
+      </Card>
+    </div>
+  </div>
+</section>
+
+<style>
+  .proof {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-block: 1px solid var(--line);
+  }
+  .proof-item {
+    display: grid;
+    gap: 6px;
+    padding: 28px 24px;
+  }
+  .proof-item + .proof-item {
+    border-left: 1px solid var(--line);
+  }
+  .proof-v {
+    font: 600 clamp(1.8rem, 3vw, 2.4rem) / 1 var(--sans);
+    letter-spacing: -0.045em;
+  }
+  .proof-l {
+    font-size: 0.86rem;
+    color: var(--muted);
+  }
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+  .bento :global(.b-review) {
+    grid-column: span 4;
+  }
+  .bento :global(.b-inbox) {
+    grid-column: span 2;
+  }
+  .bento :global(.b-third) {
+    grid-column: span 2;
+  }
+  @media (max-width: 1080px) {
+    .bento {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .bento :global(.b-review) {
+      grid-column: 1 / -1;
+    }
+    .bento :global(.b-inbox),
+    .bento :global(.b-third) {
+      grid-column: span 1;
+    }
+  }
+  @media (max-width: 720px) {
+    .proof {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .proof-item:nth-child(3) {
+      border-left: 0;
+    }
+    .proof-item:nth-child(n + 3) {
+      border-top: 1px solid var(--line);
+    }
+    .proof-item {
+      padding: 22px 16px;
+    }
+    .bento {
+      grid-template-columns: 1fr;
+    }
+    .bento :global(.b-inbox),
+    .bento :global(.b-third) {
+      grid-column: auto;
+    }
+  }
+</style>

@@ -1,0 +1,314 @@
+---
+/** Move 02: the PR review window. Static = reviewed, approved and pinned; scripts/review.ts replays it. */
+import { demo } from '../copy';
+import Icon from './Icon.astro';
+import Diff from './Diff.astro';
+
+const r = demo.review;
+const active = r.files.find((f) => f.active)!;
+---
+
+<div class="app rev-demo is-approved is-pinned" data-review role="img" aria-label={`Mock of adoken reviewing pull request ${r.id} “${r.title}”: iteration compare, a syntax-highlighted diff, an inline thread with a reply, an approve vote landing a ${r.combo}-hit combo, and Complete pinned to the reviewed commit.`}>
+  <div class="app-bar" aria-hidden="true">
+    <span class="lights"><i></i><i></i><i></i></span>
+    <span class="app-title">{demo.org} / identity · {r.id}</span>
+  </div>
+  <div class="rev-top" aria-hidden="true">
+    <div class="rev-titles">
+      <p class="rev-id">{r.id}<span class="rev-iter"><Icon name="clock" />{r.iteration} · {r.since}</span></p>
+      <h4>{r.title}</h4>
+      <p class="pr-m"><b>{r.author}</b> · {r.branch} → {r.target}</p>
+    </div>
+    <div class="reviewers">
+      {r.reviewers.map((rv) => <span class="av rv" data-tone={rv.tone} data-vote={rv.vote}>{rv.who}</span>)}
+      <span class="av rv rv-me" data-tone="m">{r.replyWho}</span>
+    </div>
+  </div>
+  <div class="tabs" aria-hidden="true">
+    <span>Overview</span><span class="is-on">Files<b>{r.files.length}</b></span><span>Commits<b>4</b></span><span>Checks<b class="ok">✓</b></span>
+  </div>
+  <div class="rev-grid" aria-hidden="true">
+    <aside class="rev-files">
+      {
+        r.files.map((f) => (
+          <p class:list={['rev-file', { 'is-on': f.active }]}>
+            <span class="rev-state" data-state={f.state}>
+              {f.state}
+            </span>
+            <span class="rev-path">{f.path.split('/').at(-1)}</span>
+            <span class="rev-counts">{f.counts}</span>
+          </p>
+        ))
+      }
+      <p class="rev-viewed"><span></span>1 of 3 viewed</p>
+    </aside>
+    <div class="rev-code">
+      <p class="rev-filehead"><Icon name="file" />{active.path}<span>{active.counts}</span></p>
+      <Diff />
+    </div>
+  </div>
+  <div class="votebar" aria-hidden="true">
+    <span class="vbtn approve" data-approve><Icon name="check" />{r.votes[0]}<kbd>A</kbd></span>
+    <span class="vbtn vbtn-more">{r.votes[1]}</span>
+    <span class="vbtn vbtn-more">{r.votes[2]}</span>
+    <span class="voted"><Icon name="check" />Approved</span>
+    <span class="vbtn complete" data-complete><Icon name="pin" />{r.complete}<kbd>⌘⏎</kbd></span>
+    <span class="pin-tip"><Icon name="pin" />{r.pinned}</span>
+  </div>
+  <div class="combo" aria-hidden="true">
+    <span class="combo-move">{r.hit}<span>{r.hitKanji}</span></span>
+    <span class="combo-n"><small>×</small>{r.combo}</span>
+    <span class="combo-rank">{r.rank}<span>{r.rankKanji}</span></span>
+    <span class="sparks"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+  </div>
+  <p class="keycast" aria-hidden="true"><kbd data-keycast></kbd><span data-keycast-label></span></p>
+</div>
+
+<script>
+  import '../scripts/review';
+</script>
+
+<style>
+  .rev-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px 10px;
+  }
+  .rev-titles {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+  }
+  .rev-titles h4 {
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.25;
+  }
+  .rev-id {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font: 700 11px var(--f-mono);
+    color: var(--a-accent);
+  }
+  .rev-iter {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 8px;
+    font-weight: 600;
+    color: var(--a-accent-2);
+    background: color-mix(in srgb, var(--a-accent-2) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--a-accent-2) 35%, transparent);
+    border-radius: 999px;
+  }
+  .rev-iter :global(.ico) {
+    width: 11px;
+    height: 11px;
+  }
+  .reviewers {
+    margin-left: auto;
+    padding-top: 4px;
+  }
+  .rv-me::after {
+    background: var(--a-muted);
+    transition: background 200ms;
+  }
+  .rev-demo.is-approved .rv-me::after {
+    background: var(--a-add);
+  }
+  .tabs .ok {
+    color: var(--a-add);
+  }
+
+  .rev-grid {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    height: 520px;
+  }
+  @container (max-width: 640px) {
+    .rev-grid {
+      grid-template-columns: minmax(0, 1fr);
+      height: 470px;
+    }
+    .rev-grid .rev-files {
+      display: none;
+    }
+    .combo {
+      top: auto !important;
+      bottom: 96px;
+    }
+    .vbtn-more,
+    .pin-tip {
+      display: none !important;
+    }
+  }
+  .rev-files {
+    display: grid;
+    align-content: start;
+    gap: 2px;
+    padding: 10px 8px;
+    border-right: 1px solid var(--a-line);
+  }
+  .rev-file {
+    display: grid;
+    grid-template-columns: 16px minmax(0, 1fr);
+    gap: 2px 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+  }
+  .rev-file.is-on {
+    background: color-mix(in srgb, var(--a-accent) 14%, transparent);
+  }
+  .rev-state {
+    grid-row: span 2;
+    font: 800 10px/16px var(--f-mono);
+    color: var(--a-warn);
+  }
+  .rev-state[data-state='A'] {
+    color: var(--a-add);
+  }
+  .rev-path {
+    overflow: hidden;
+    font: 600 12px/1.3 var(--f-mono);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .rev-counts {
+    font: 10.5px var(--f-mono);
+    color: var(--a-muted);
+  }
+  .rev-viewed {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 0 8px;
+    font: 10.5px var(--f-mono);
+    color: var(--a-muted);
+  }
+  .rev-viewed span {
+    flex: 1;
+    height: 4px;
+    background: linear-gradient(90deg, var(--a-add) 33%, var(--a-line) 33%);
+    border-radius: 2px;
+  }
+  .rev-code {
+    min-width: 0;
+    overflow: hidden;
+  }
+  .rev-filehead {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    font: 600 12px var(--f-mono);
+    border-bottom: 1px solid var(--a-line);
+  }
+  .rev-filehead :global(.ico) {
+    width: 13px;
+    height: 13px;
+    color: var(--a-muted);
+  }
+  .rev-filehead span {
+    margin-left: auto;
+    color: var(--a-muted);
+  }
+  .votebar {
+    position: relative;
+  }
+  .voted {
+    opacity: 0;
+    scale: 0.6;
+    transition:
+      opacity 200ms,
+      scale 300ms var(--ease-spring);
+  }
+  .rev-demo.is-approved .voted {
+    opacity: 1;
+    scale: 1;
+  }
+  .pin-tip {
+    position: absolute;
+    right: 12px;
+    bottom: calc(100% + 8px);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    font: 600 11px var(--f-mono);
+    color: var(--a-text);
+    background: color-mix(in srgb, var(--a-panel) 92%, #000);
+    border: 1px solid color-mix(in srgb, var(--a-accent) 50%, transparent);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.5);
+    opacity: 0;
+    translate: 0 6px;
+    transition:
+      opacity 220ms,
+      translate 220ms var(--ease-out);
+  }
+  .pin-tip :global(.ico) {
+    width: 12px;
+    height: 12px;
+    color: var(--a-accent);
+  }
+  .rev-demo.is-pinned .pin-tip {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .rev-demo.is-pinned [data-complete] {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--a-accent) 60%, transparent), 0 0 20px -4px var(--a-accent);
+  }
+  .combo {
+    top: 196px;
+    right: 22px;
+    opacity: 0;
+    transition: opacity 200ms;
+  }
+  .rev-demo.is-approved .combo {
+    opacity: 1;
+  }
+  .combo .sparks {
+    right: 30px;
+    top: 44px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .rev-demo.is-approved .combo-n,
+    .rev-demo.is-approved .combo-move {
+      animation: pop 420ms var(--ease-spring) both;
+    }
+  }
+  .keycast {
+    position: absolute;
+    left: 14px;
+    bottom: 58px;
+    z-index: 7;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px 6px 6px;
+    font: 700 11px var(--f-mono);
+    color: var(--a-text);
+    background: rgb(8 4 16 / 0.85);
+    border: 1px solid rgb(255 255 255 / 0.12);
+    border-radius: 10px;
+    opacity: 0;
+  }
+  .keycast kbd {
+    min-width: 26px;
+    padding: 4px 7px;
+    font: 800 13px/1 var(--f-mono);
+    text-align: center;
+    color: #16021a;
+    background: var(--amber);
+    border-radius: 6px;
+    box-shadow: 0 2px 0 #9a6400;
+  }
+  .keycast.is-on {
+    opacity: 1;
+    animation: pop 240ms var(--ease-spring);
+  }
+</style>

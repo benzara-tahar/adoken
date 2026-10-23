@@ -1,0 +1,4 @@
+<h2>Context</h2><p>Merchants in <i>UTC+10</i> reconcile at <u>local</u> midnight; the old cutoff is <strike>00:00</strike> <s>00:05</s> UTC.</p><h3>Acceptance criteria</h3><ul><li>Totals use the merchant's calendar day<ul><li>DST changes keep the day <b>24 h</b> long</li><li>Backfill is <b><i>not</i></b> in scope</li></ul></li><li>Reports show the time zone</li></ul><blockquote><p>We settle in UTC because the bank does.</p><p>— Finance</p></blockquote><hr><pre><code>select merchant_id, sum(amount)
+from settlements
+where day = :local_day
+group by 1;</code></pre><ol start="3"><li>Third step</li><li>Fourth step</li></ol>

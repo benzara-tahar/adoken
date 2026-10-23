@@ -1,0 +1,36 @@
+/target/
+**/*.rs.bk
+.DS_Store
+*.db
+*.db-*
+*.sqlite*
+.env*
+!.env.example
+# site
+public/node_modules/
+public/dist/
+public/.astro/
+# Vite dep caches (marketing video editors etc.)
+**/.vite/
+**/node_modules/
+# snapshot diffs (baselines are committed)
+**/snapshots/**/*.diff.png
+**/snapshots/**/*.actual.png
+# licensed for local use only, not redistributable (see assets/README.md)
+assets/bg/anime/countryside-railside-dusk.jpg
+assets/bg/anime/room-desk-window-day.jpg
+assets/bg/anime/sakura-park-path-day.jpg
+assets/bg/anime/seaside-bus-stop-day.jpg
+assets/bg/anime/shrine-dusk.jpg
+assets/bg/anime/snowy-street-night.jpg
+assets/bg/anime/station-platform-night.jpg
+assets/bg/anime/rainy-neon-alley-night.jpg
+/output/
+# private: business docs, launch drafts and marketing media stay local
+/docs/pricing.md
+/docs/competitive/
+/marketing/strategy.md
+/marketing/calendar.md
+/marketing/posts/
+/marketing/site-versions/
+/marketing/videos/

@@ -1,0 +1,179 @@
+---
+/** Native-style notification banners sliding onto a tiny desktop, plus the Nudge study number. */
+import { bento } from '../copy';
+import Logo from './Logo.astro';
+
+const n = bento.nudge;
+---
+
+<div class="ndg" data-nudge aria-hidden="true">
+  <div class="ndg-desk">
+    <div class="ndg-menubar"><span></span><span class="num">Tue 09:41</span></div>
+    {
+      n.toasts.map((toast, i) => (
+        <div class="ndg-toast is-in" style={`--i:${i}`} data-toast>
+          <Logo size={26} />
+          <div class="ndg-body">
+            <div class="ndg-top">
+              <b>{toast.app}</b>
+              <span>{toast.time}</span>
+            </div>
+            <p class="ndg-title">{toast.title}</p>
+            <p class="ndg-text">{toast.text}</p>
+            <div class="ndg-actions">
+              {toast.actions.map((action) => (
+                <span>{action}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+  <div class="ndg-stat">
+    <span class="ndg-num num">−{n.stat}</span>
+    <span>{n.statLabel}</span>
+  </div>
+</div>
+
+<script>
+  import { loop } from '../scripts/motion';
+
+  const root = document.querySelector<HTMLElement>('[data-nudge]');
+  loop(root, async (scene) => {
+    const toasts = [...root!.querySelectorAll<HTMLElement>('[data-toast]')];
+    toasts.forEach((toast) => toast.classList.remove('is-in', 'is-out'));
+    await scene.sleep(700);
+    for (const toast of toasts) {
+      toast.classList.add('is-in');
+      await scene.sleep(1500);
+    }
+    await scene.sleep(2200);
+    toasts.forEach((toast) => toast.classList.add('is-out'));
+    await scene.sleep(600);
+  });
+</script>
+
+<style>
+  .ndg {
+    display: grid;
+    gap: 16px;
+    padding: 0 22px 22px;
+  }
+  .ndg-desk {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 8px;
+    height: 206px;
+    padding: 30px 12px 12px;
+    overflow: hidden;
+    border-radius: 14px;
+    background:
+      radial-gradient(80% 90% at 20% 110%, color-mix(in srgb, var(--accent) 55%, transparent), transparent 60%),
+      radial-gradient(70% 80% at 90% 0%, color-mix(in srgb, var(--cool) 30%, transparent), transparent 60%),
+      linear-gradient(160deg, var(--bg-2), var(--bg));
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  }
+  .ndg-menubar {
+    position: absolute;
+    inset: 0 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 12px;
+    font-size: 10.5px;
+    color: rgb(255 255 255 / 0.8);
+    background: rgb(0 0 0 / 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .ndg-toast {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+    width: min(100%, 300px);
+    padding: 10px 12px;
+    font-size: 11.5px;
+    color: #f4f4f6;
+    border-radius: 14px;
+    background: rgb(38 40 48 / 0.62);
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 0.12),
+      0 12px 30px -10px rgb(0 0 0 / 0.6);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    opacity: 0;
+    transform: translateX(110%);
+    transition:
+      opacity 0.3s,
+      transform 0.6s var(--spring);
+  }
+  .ndg-toast.is-in {
+    opacity: 1;
+    transform: none;
+  }
+  .ndg-toast.is-out {
+    opacity: 0;
+    transform: translateX(30px);
+    transition:
+      opacity 0.35s,
+      transform 0.4s var(--ease);
+  }
+  .ndg-body {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+  }
+  .ndg-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10.5px;
+    color: rgb(255 255 255 / 0.6);
+  }
+  .ndg-top b {
+    font-weight: 600;
+    color: rgb(255 255 255 / 0.85);
+  }
+  .ndg-title {
+    font-weight: 600;
+  }
+  .ndg-text {
+    overflow: hidden;
+    color: rgb(255 255 255 / 0.75);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .ndg-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 7px;
+  }
+  .ndg-actions span {
+    padding: 3px 10px;
+    font-size: 10.5px;
+    font-weight: 600;
+    border-radius: 6px;
+    background: rgb(255 255 255 / 0.12);
+  }
+  .ndg-actions span:first-child {
+    color: var(--accent-ink);
+    background: var(--accent);
+  }
+  .ndg-stat {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+  .ndg-num {
+    flex: none;
+    font: 650 2rem/1 var(--sans);
+    letter-spacing: -0.04em;
+    background: linear-gradient(180deg, #fff, var(--accent-hi));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+</style>

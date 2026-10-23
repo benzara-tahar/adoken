@@ -1,0 +1,82 @@
+---
+import { switcher } from '../copy';
+
+interface Props {
+  current: string;
+}
+const { current } = Astro.props;
+---
+
+<nav class="switcher" aria-label="Design variants">
+  <span class="switcher-label">{switcher.label}</span>
+  {
+    switcher.items.map((item) => (
+      <a href={item.href} aria-current={item.href === current ? 'page' : undefined}>
+        {item.label}
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  /* Desktop: sits in the sticky top bar, so it never covers the page. Phones: a fixed bottom pill. */
+  .switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+    margin-left: 1.25rem;
+    padding: 0.25rem;
+    font: 700 0.68rem/1 var(--f-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgb(12 9 24 / 0.82);
+    border: 1px solid color-mix(in srgb, var(--mag) 45%, transparent);
+    border-radius: 999px;
+    box-shadow:
+      0 0 0 1px rgb(0 0 0 / 0.6),
+      0 0 20px -8px var(--mag);
+  }
+  .switcher-label {
+    padding: 0 0.55rem 0 0.7rem;
+    color: var(--dim);
+  }
+  .switcher a {
+    padding: 0.42rem 0.62rem;
+    color: var(--muted);
+    text-decoration: none;
+    border-radius: 999px;
+  }
+  .switcher a:hover {
+    color: var(--text);
+    background: rgb(255 255 255 / 0.06);
+  }
+  .switcher a[aria-current='page'] {
+    color: #1a0418;
+    background: var(--mag);
+    box-shadow: 0 0 16px var(--mag);
+  }
+  .switcher a:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 2px;
+  }
+  @media (max-width: 860px) {
+    .switcher {
+      position: fixed;
+      z-index: 60;
+      left: 50%;
+      bottom: max(0.9rem, env(safe-area-inset-bottom));
+      translate: -50% 0;
+      margin: 0;
+      padding: 0.3rem;
+      font-size: 0.72rem;
+      box-shadow:
+        0 0 0 1px rgb(0 0 0 / 0.6),
+        0 0 24px -6px var(--mag),
+        0 10px 30px rgb(0 0 0 / 0.5);
+      backdrop-filter: blur(12px) saturate(1.4);
+    }
+    .switcher a {
+      padding: 0.5rem 0.75rem;
+    }
+  }
+</style>

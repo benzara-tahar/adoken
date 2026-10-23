@@ -1,0 +1,240 @@
+---
+/** Chapter seven: Ken, the opt-in arcade layer. A printed weekly fight card with the pixel fist. */
+import ChapterHead from './ChapterHead.astro';
+import Hanko from './Hanko.astro';
+import { fistRuns, FIST_H, FIST_W } from '../../art/fist';
+import { ken } from '../copy';
+
+// The shared pixel fist, re-inked for paper: vermilion glove, gold wrap, sumi outline.
+const fill: Record<string, string> = {
+  ink: '#1c1915',
+  punchHi: '#f08a6c',
+  punch: '#c3321a',
+  punchLo: '#8a2410',
+  volt: '#d9a92e',
+  voltHi: '#f3dc96',
+};
+---
+
+<section id="ch-ken" class="section ken" aria-labelledby="ch-ken-title">
+  <div class="wrap ken-grid">
+    <div class="ch-text">
+      <ChapterHead numeral={ken.numeral} kicker={ken.kicker} title={ken.title} id="ch-ken-title" />
+      <p class="body dropcap">{ken.body}</p>
+    </div>
+
+    <figure class="card-wrap">
+      <article class="card" aria-label={`${ken.card.title}, ${ken.card.week}`}>
+        <header class="card-head">
+          <span class="card-title">{ken.card.title}</span>
+          <span class="card-week">{ken.card.week}</span>
+        </header>
+        <div class="card-hero">
+          <svg class="fist" viewBox={`0 0 ${FIST_W} ${FIST_H}`} shape-rendering="crispEdges" aria-hidden="true">
+            {fistRuns.map((r) => <rect x={r.x} y={r.y} width={r.w} height="1" fill={fill[r.token]} />)}
+          </svg>
+          <p class="card-combo"><b>×9</b><span class="jp" lang="ja">疾風</span></p>
+        </div>
+        <dl class="card-stats">
+          {
+            ken.card.stats.map(([v, l]) => (
+              <div>
+                <dt>{l}</dt>
+                <dd>{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <ul class="card-moves">
+          {
+            ken.card.moves.map(([name, kanji, what, n]) => (
+              <li>
+                <span class="jp" lang="ja">{kanji}</span>
+                <b>{name}</b>
+                <span class="card-what">{what}</span>
+                <span class="card-n">×{n}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <footer class="card-foot">
+          <span>adoken · numbers only · private to your Mac</span>
+          <Hanko text="判子" class="card-seal" />
+        </footer>
+      </article>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .ken {
+    border-top: 1px solid var(--ink);
+  }
+
+  .ken-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: center;
+  }
+
+  .ch-text {
+    display: grid;
+    gap: 1.6rem;
+  }
+
+  .card-wrap {
+    margin: 0;
+    display: grid;
+    justify-items: center;
+  }
+
+  .card {
+    position: relative;
+    width: min(100%, 27rem);
+    padding: 1.5rem 1.5rem 1.2rem;
+    color: #f3ecdf;
+    background:
+      radial-gradient(120% 60% at 50% 0%, rgb(195 50 26 / 0.22), transparent 60%),
+      #191613;
+    border-radius: 14px;
+    rotate: 2deg;
+    box-shadow:
+      0 0 0 1px rgb(0 0 0 / 0.4),
+      0 40px 60px -28px rgb(60 38 16 / 0.6),
+      inset 0 0 0 6px #191613,
+      inset 0 0 0 7px rgb(243 236 223 / 0.18);
+    font-family: var(--sans);
+  }
+
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(243 236 223 / 0.7);
+  }
+
+  .card-title {
+    font: italic 500 1.4rem/1 var(--serif);
+    letter-spacing: -0.01em;
+    text-transform: none;
+    color: #f3ecdf;
+  }
+
+  .card-hero {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.2rem 0 1rem;
+  }
+
+  .fist {
+    width: 6.5rem;
+    height: auto;
+    padding: 0.7rem;
+    background: #f3ecdf;
+    border-radius: 50%;
+  }
+
+  .card-combo {
+    display: grid;
+    margin: 0;
+  }
+
+  .card-combo b {
+    font: 600 4.2rem/0.9 var(--serif);
+    letter-spacing: -0.05em;
+    color: #ff6a47;
+  }
+
+  .card-combo .jp {
+    font-size: 1.3rem;
+    letter-spacing: 0.3em;
+    color: rgb(243 236 223 / 0.8);
+  }
+
+  .card-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+    border-block: 1px solid rgb(243 236 223 / 0.2);
+  }
+
+  .card-stats div {
+    padding: 0.7rem 0.2rem;
+    text-align: center;
+  }
+
+  .card-stats div + div {
+    border-left: 1px solid rgb(243 236 223 / 0.14);
+  }
+
+  .card-stats dt {
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgb(243 236 223 / 0.72);
+  }
+
+  .card-stats dd {
+    margin: 0.2rem 0 0;
+    font: 600 1.5rem/1 var(--serif);
+  }
+
+  .card-moves {
+    display: grid;
+    gap: 0.1rem;
+    margin: 0.9rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.86rem;
+  }
+
+  .card-moves li {
+    display: grid;
+    grid-template-columns: 3.4rem 1fr auto auto;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px dashed rgb(243 236 223 / 0.14);
+  }
+
+  .card-moves .jp {
+    font-size: 1rem;
+    color: #ff6a47;
+  }
+
+  .card-what {
+    color: rgb(243 236 223 / 0.7);
+    font-size: 0.78rem;
+  }
+
+  .card-n {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+
+  .card-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    color: rgb(243 236 223 / 0.7);
+  }
+
+  .card-foot :global(.card-seal) {
+    width: 3.2rem;
+    rotate: -8deg;
+    margin: -0.5rem -0.2rem -0.3rem 0;
+  }
+
+  @media (max-width: 960px) {
+    .ken-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

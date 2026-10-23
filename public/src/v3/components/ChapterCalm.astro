@@ -1,0 +1,570 @@
+---
+/**
+ * Chapter three: notification calm. A pile of ADO emails lands on the desk, then folds into three
+ * grouped inbox rows; snooze, quiet hours and one native banner follow. Default markup: folded.
+ */
+import ChapterHead from './ChapterHead.astro';
+import Icon from './Icon.astro';
+import Hanko from './Hanko.astro';
+import { calm, demo } from '../copy';
+
+const slips = demo.emails.map((subject, i) => ({
+  subject,
+  x: ((i * 37) % 60) - 8,
+  y: ((i * 53) % 70) + 2,
+  r: ((i * 29) % 13) - 6,
+}));
+const icon = { pr: 'pr', run: 'run', bug: 'bug' } as const;
+---
+
+<section id="ch-calm" class="section calm-section" aria-labelledby="ch-calm-title">
+  <div class="wrap calm-grid">
+    <figure class="photo calm-photo">
+      <div
+        class="calm is-folded is-snooze is-quiet is-banner"
+        role="img"
+        aria-label="Forty-seven Azure DevOps emails fold into three grouped inbox rows in adoken, with a snooze menu, quiet hours holding eleven notifications, and a single native banner."
+      >
+        <p class="calm-count"><s>{calm.count[0]}</s><span>→</span><b>{calm.count[1]}</b></p>
+
+        <div class="win calm-win" data-ink="tokyo-night">
+          <div class="win-bar"><i></i><i></i><i></i><span class="win-title">Inbox · adoken</span></div>
+          <div class="ib">
+            <div class="ib-head">
+              <b>Inbox</b>
+              <span class="ib-chip on">All 3</span><span class="ib-chip">PRs</span><span class="ib-chip">Runs</span><span class="ib-chip">Mentions</span>
+            </div>
+            {
+              demo.inbox.map(([kind, title, sub, why], i) => (
+                <div class:list={['ib-row', { hot: i === 0 }]} style={`--i:${i}`}>
+                  <span class="ib-icon" data-kind={kind}>
+                    <Icon name={icon[kind as keyof typeof icon]} />
+                  </span>
+                  <span class="ib-main">
+                    <b>{title}</b>
+                    <span>{sub}</span>
+                  </span>
+                  <span class="ib-why">{why}</span>
+                </div>
+              ))
+            }
+            <div class="ib-muted"><Icon name="bell" />{demo.muted}</div>
+            <div class="ib-quiet">
+              <span class="moon"><Icon name="moon" /></span>
+              <span><b>{demo.quiet.label}</b> {demo.quiet.range}</span>
+              <span class="ib-held">{demo.quiet.held}</span>
+            </div>
+          </div>
+          <div class="snooze">
+            <p><Icon name="clock" />Snooze !4127</p>
+            {demo.snooze.map((s, i) => <span class:list={{ on: i === 2 }}>{s}</span>)}
+          </div>
+        </div>
+
+        <div class="banner">
+          <Hanko text="拳" class="banner-icon" />
+          <div>
+            <p class="banner-top"><b>{demo.banner.app}</b><span>now</span></p>
+            <p class="banner-title">{demo.banner.title}</p>
+            <p class="banner-body">{demo.banner.body}</p>
+          </div>
+          <div class="banner-actions">{demo.banner.actions.map((a) => <span>{a}</span>)}</div>
+        </div>
+
+        <div class="flood" aria-hidden="true">
+          {
+            slips.map((s, i) => (
+              <p class="slip" style={`--x:${s.x}%;--y:${s.y}%;--r:${s.r}deg;--i:${i}`}>
+                <Icon name="mail" />
+                <span>{s.subject}</span>
+              </p>
+            ))
+          }
+        </div>
+      </div>
+      <figcaption class="fig"><b>{calm.figure.split(' · ')[0]}</b> · {calm.figure.split(' · ').slice(1).join(' · ')}</figcaption>
+    </figure>
+
+    <div class="ch-text">
+      <ChapterHead numeral={calm.numeral} kicker={calm.kicker} title={calm.title} id="ch-calm-title" />
+      <p class="body dropcap">{calm.body}</p>
+      <ul class="points">
+        {
+          calm.points.map(([k, v]) => (
+            <li>
+              <b>{k}</b>
+              <span>{v}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { motionOK, play, scene } from '../scripts/stage';
+
+  const root = document.querySelector<HTMLElement>('.calm');
+  if (root && motionOK) {
+    play(root, async (s) => {
+      scene(root, 'flood');
+      root.classList.add('reset');
+      await s.wait(60);
+      root.classList.remove('reset');
+      scene(root, 'flood', 'raining');
+      await s.wait(2600);
+      scene(root, 'folded');
+      await s.wait(1600);
+      scene(root, 'folded', 'snooze');
+      await s.wait(1600);
+      scene(root, 'folded', 'quiet');
+      await s.wait(1300);
+      scene(root, 'folded', 'quiet', 'banner');
+      await s.wait(3200);
+    });
+  }
+</script>
+
+<style>
+  .calm-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(2.5rem, 5vw, 5.5rem);
+    align-items: center;
+  }
+
+  .ch-text {
+    display: grid;
+    gap: 1.6rem;
+  }
+
+  .calm-photo {
+    container-type: inline-size;
+  }
+
+  .calm {
+    position: relative;
+    height: clamp(25rem, 54cqw, 32rem);
+    font-size: clamp(8px, calc(100cqw / 62), 14px);
+  }
+
+  .calm-count {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0;
+    font: 500 1rem/1 var(--serif);
+  }
+
+  .calm-count s {
+    color: var(--dim);
+    text-decoration-color: var(--shu);
+    text-decoration-thickness: 2px;
+  }
+
+  .calm-count b {
+    color: var(--shu);
+    font-style: italic;
+  }
+
+  /* ---------- the adoken inbox ---------- */
+
+  .calm-win {
+    position: absolute;
+    left: 4%;
+    right: 8%;
+    top: 3.6em;
+    transform: rotate(-0.8deg);
+    font-size: 1em;
+    box-shadow:
+      0 0 0 1px rgb(28 25 21 / 0.2),
+      0 30px 60px -24px rgb(60 38 16 / 0.5);
+    transition:
+      opacity 0.5s,
+      transform 0.6s var(--ease);
+  }
+
+  .ib {
+    padding: 1.1em 1.3em 1.2em;
+    background: var(--surf);
+  }
+
+  .ib-head {
+    display: flex;
+    align-items: center;
+    gap: 0.45em;
+    margin-bottom: 0.8em;
+    font-size: 0.88em;
+  }
+
+  .ib-head b {
+    margin-right: auto;
+    font-size: 1.35em;
+  }
+
+  .ib-chip {
+    padding: 0.25em 0.7em;
+    color: var(--tx2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+
+  .ib-chip.on {
+    color: var(--bg);
+    background: var(--acc);
+    border-color: var(--acc);
+  }
+
+  .ib-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.8em;
+    padding: 0.75em 0.8em;
+    border-bottom: 1px solid var(--line);
+    transition:
+      opacity 0.4s var(--ease),
+      transform 0.5s var(--ease),
+      background-color 0.3s;
+    transition-delay: calc(var(--i) * 90ms + 0.35s);
+  }
+
+  .ib-row.hot {
+    background: var(--sel);
+    border-radius: 0.5em;
+  }
+
+  .ib-icon {
+    display: grid;
+    place-items: center;
+    width: 2.2em;
+    height: 2.2em;
+    border-radius: 0.5em;
+    color: var(--info);
+    background: color-mix(in srgb, var(--info) 15%, transparent);
+  }
+
+  .ib-icon[data-kind='run'] {
+    color: var(--bad);
+    background: color-mix(in srgb, var(--bad) 15%, transparent);
+  }
+
+  .ib-icon[data-kind='bug'] {
+    color: var(--warn);
+    background: color-mix(in srgb, var(--warn) 15%, transparent);
+  }
+
+  .ib-main {
+    display: grid;
+    min-width: 0;
+  }
+
+  .ib-main b {
+    font-size: 0.95em;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ib-main span {
+    font-size: 0.8em;
+    color: var(--tx2);
+  }
+
+  .ib-why {
+    font-size: 0.74em;
+    padding: 0.2em 0.6em;
+    color: var(--tx2);
+    border: 1px dashed var(--line-2);
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .ib-muted {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    padding: 0.8em;
+    font-size: 0.82em;
+    color: var(--tx2);
+  }
+
+  .ib-quiet {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+    margin-top: 0.3em;
+    padding: 0.75em 0.9em;
+    font-size: 0.86em;
+    background: color-mix(in srgb, var(--acc) 9%, var(--surf));
+    border: 1px solid color-mix(in srgb, var(--acc) 30%, transparent);
+    border-radius: 0.6em;
+    transition:
+      box-shadow 0.6s,
+      background-color 0.6s;
+  }
+
+  .moon {
+    display: grid;
+    place-items: center;
+    width: 2em;
+    height: 2em;
+    color: #ffe9a8;
+    background: #20233a;
+    border-radius: 50%;
+    transition: box-shadow 0.8s;
+  }
+
+  .ib-held {
+    margin-left: auto;
+    color: var(--tx2);
+    font-size: 0.92em;
+  }
+
+  .calm.is-quiet .moon {
+    box-shadow:
+      0 0 0 0.3em color-mix(in srgb, #ffe9a8 22%, transparent),
+      0 0 1.6em 0.3em color-mix(in srgb, #ffe9a8 45%, transparent);
+  }
+
+  .snooze {
+    position: absolute;
+    right: 3%;
+    top: 7.5em;
+    display: grid;
+    min-width: 13em;
+    padding: 0.4em;
+    font-size: 0.86em;
+    background: var(--raised);
+    border: 1px solid var(--line-2);
+    border-radius: 0.6em;
+    box-shadow: 0 1em 2.4em -0.8em rgb(0 0 0 / 0.6);
+    opacity: 0;
+    transform: translateY(-0.5em) scale(0.97);
+    transform-origin: top right;
+    transition:
+      opacity 0.25s,
+      transform 0.3s var(--ease);
+  }
+
+  .snooze p {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin: 0;
+    padding: 0.4em 0.6em 0.5em;
+    font-weight: 600;
+    color: var(--tx2);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .snooze span {
+    padding: 0.4em 0.6em;
+    border-radius: 0.4em;
+  }
+
+  .snooze span.on {
+    color: var(--bg);
+    background: var(--acc);
+  }
+
+  .calm.is-snooze .snooze {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ---------- the one native banner ---------- */
+
+  .banner {
+    position: absolute;
+    z-index: 4;
+    right: 0;
+    top: -0.2em;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.8em;
+    width: min(25em, 70%);
+    padding: 0.8em 0.9em;
+    font: 400 0.95em/1.3 var(--sans);
+    color: #1d1d1f;
+    background: rgb(246 244 240 / 0.86);
+    border: 1px solid rgb(0 0 0 / 0.1);
+    border-radius: 1.1em;
+    box-shadow: 0 1.2em 2.4em -1em rgb(40 25 10 / 0.45);
+    backdrop-filter: blur(16px) saturate(1.4);
+    opacity: 0;
+    transform: translateX(2em);
+    transition:
+      opacity 0.35s,
+      transform 0.5s var(--ease);
+  }
+
+  .banner p {
+    margin: 0;
+  }
+
+  .banner :global(.banner-icon) {
+    width: 2.6em;
+    height: 2.6em;
+  }
+
+  .banner-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78em;
+    color: #6e6a64;
+  }
+
+  .banner-top b {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+
+  .banner-title {
+    font-weight: 650;
+    font-size: 0.92em;
+  }
+
+  .banner-body {
+    font-size: 0.84em;
+    color: #55514b;
+  }
+
+  .banner-actions {
+    display: grid;
+    gap: 0.3em;
+    font-size: 0.78em;
+    font-weight: 600;
+  }
+
+  .banner-actions span {
+    padding: 0.3em 0.7em;
+    text-align: center;
+    background: rgb(0 0 0 / 0.06);
+    border-radius: 0.5em;
+  }
+
+  .calm.is-banner .banner {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ---------- the flood ---------- */
+
+  .flood {
+    position: absolute;
+    inset: 3em 0 0;
+    pointer-events: none;
+  }
+
+  .slip {
+    position: absolute;
+    left: calc(var(--x) + 8%);
+    top: var(--y);
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    width: min(26em, 64%);
+    margin: 0;
+    padding: 0.7em 0.9em;
+    font: 500 0.86em/1.25 var(--sans);
+    color: #2b2823;
+    background: #fffdf8;
+    border: 1px solid rgb(28 25 21 / 0.14);
+    border-left: 3px solid #3a7bd5;
+    border-radius: 0.35em;
+    box-shadow: 0 0.6em 1.4em -0.6em rgb(60 38 16 / 0.45);
+    rotate: var(--r);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0;
+    transform: translate(0, -1.5em);
+  }
+
+  .slip span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .slip:nth-child(3n) {
+    border-left-color: #c3321a;
+  }
+
+  .calm.is-flood .calm-win,
+  .calm.is-flood .calm-count {
+    opacity: 0;
+    transform: rotate(-0.8deg) scale(0.96);
+  }
+
+  .calm.is-raining .slip {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.2s,
+      transform 0.45s cubic-bezier(0.3, 1.4, 0.5, 1);
+    transition-delay: calc(var(--i) * 150ms);
+  }
+
+  .calm.is-folded .slip {
+    opacity: 0;
+    transform: translate(calc(-1 * var(--x) - 4%), calc(-1 * var(--y) + 6em)) scale(0.3);
+    transition:
+      opacity 0.5s ease-in,
+      transform 0.6s cubic-bezier(0.6, 0, 0.3, 1);
+    transition-delay: calc(var(--i) * 25ms);
+  }
+
+  .calm.is-flood .ib-row {
+    opacity: 0;
+    transform: translateY(0.8em);
+  }
+
+  .calm.reset *,
+  .calm.reset {
+    transition: none !important;
+  }
+
+  @media (max-width: 960px) {
+    .calm-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .calm-photo {
+      order: 2;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .calm {
+      height: 27rem;
+      font-size: 7.5px;
+    }
+
+    .calm-win {
+      left: 0;
+      right: 0;
+    }
+
+    .ib-why {
+      display: none;
+    }
+
+    .banner {
+      width: 88%;
+      top: -2.5em;
+    }
+
+    .snooze {
+      top: 9em;
+    }
+  }
+</style>

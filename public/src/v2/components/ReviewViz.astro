@@ -1,0 +1,496 @@
+---
+/** PR review: iteration compare, an inline thread that gets a reply and resolves, then Approve → Complete. */
+import { bento } from '../copy';
+import { avatarStyle, hl, icons } from '../lib';
+
+const r = bento.review;
+---
+
+<div class="mock rvw" data-review aria-hidden="true">
+  <div class="rvw-bar">
+    <span class="rvw-pr"><span class="rvw-ico" set:html={icons.pr} /><span class="rvw-id">{r.pr}</span><b>{r.prTitle}</b></span>
+    <span class="rvw-seg">
+      {r.iterations.map((label, i) => <span class:list={['rvw-it', { 'is-on': i === 1 }]}>{label}</span>)}
+    </span>
+  </div>
+  <div class="rvw-sub">
+    <span class="rvw-file">{r.file}</span>
+    <span class="rvw-compare is-on" data-compare><span set:html={icons.spark} />{r.compare}</span>
+  </div>
+  <div class="rvw-diff is-compare" data-diff>
+    {
+      r.lines.map(([oldN, newN, kind, code], i) => (
+        <>
+          <div class:list={['rl', kind === '+' ? 'rl-add' : kind === '-' ? 'rl-del' : 'rl-ctx']}>
+            <span class="rl-n">{oldN ?? ''}</span>
+            <span class="rl-n">{newN ?? ''}</span>
+            <span class="rl-k">{kind.trim()}</span>
+            <code set:html={hl(code)} />
+          </div>
+          {i === r.threadAfter && (
+            <div class="th is-open" data-thread>
+              <div class="th-in">
+                <div class="th-c">
+                  <span class="avatar" style={avatarStyle(r.thread.hue)}>
+                    {r.thread.who}
+                  </span>
+                  <div>
+                    <div class="th-h">
+                      <b>{r.thread.author}</b>
+                      <span>{r.thread.time}</span>
+                    </div>
+                    <p>{r.thread.text}</p>
+                  </div>
+                </div>
+                <div class="th-c th-reply is-on" data-reply>
+                  <span class="avatar" style={avatarStyle(135)}>
+                    YO
+                  </span>
+                  <div>
+                    <div class="th-h">
+                      <b>{r.thread.replyWho}</b>
+                      <span>now</span>
+                    </div>
+                    <p>{r.thread.reply}</p>
+                  </div>
+                </div>
+                <div class="th-composer" data-composer>
+                  <span data-typing />
+                  <i class="th-caret" />
+                </div>
+                <span class="th-resolved is-on" data-resolved>
+                  <span set:html={icons.check} />
+                  {r.thread.resolved}
+                </span>
+              </div>
+            </div>
+          )}
+        </>
+      ))
+    }
+  </div>
+  <div class="rvw-foot">
+    <span class="rvw-pin is-on" data-pin><span set:html={icons.lock} />{r.pinned}</span>
+    <span class="rvw-vote is-done" data-vote>
+      <span class="rvw-vote-ico" set:html={icons.check} />
+      <span data-vote-label>{r.voted}</span>
+      <span class="kbd"><kbd>A</kbd></span>
+    </span>
+    <span class="rvw-complete is-on" data-complete>{r.complete}</span>
+  </div>
+</div>
+
+<script>
+  import { bento } from '../copy';
+  import { loop } from '../scripts/motion';
+
+  const root = document.querySelector<HTMLElement>('[data-review]');
+  loop(root, async (scene) => {
+    const $ = (sel: string) => root!.querySelector<HTMLElement>(sel)!;
+    const tabs = root!.querySelectorAll('.rvw-it');
+    const [thread, reply, composer, typing, resolved, vote, voteLabel, pin, complete, compare, diff] = [
+      '[data-thread]',
+      '[data-reply]',
+      '[data-composer]',
+      '[data-typing]',
+      '[data-resolved]',
+      '[data-vote]',
+      '[data-vote-label]',
+      '[data-pin]',
+      '[data-complete]',
+      '[data-compare]',
+      '[data-diff]',
+    ].map($);
+    const { thread: copy, vote: approve, voted } = bento.review;
+
+    // reset to "just opened the PR"
+    tabs.forEach((tab, i) => tab.classList.toggle('is-on', i === 0));
+    for (const el of [reply, composer, resolved, pin, complete, compare, diff, thread]) {
+      el.classList.remove('is-on', 'is-open', 'is-compare');
+    }
+    vote.classList.remove('is-done', 'is-press');
+    voteLabel.textContent = approve;
+    typing.textContent = '';
+    await scene.sleep(900);
+
+    tabs.forEach((tab, i) => tab.classList.toggle('is-on', i === 1));
+    compare.classList.add('is-on');
+    diff.classList.add('is-compare');
+    await scene.sleep(1200);
+
+    thread.classList.add('is-open');
+    await scene.sleep(1100);
+
+    composer.classList.add('is-on');
+    for (const ch of copy.reply) {
+      typing.textContent += ch;
+      await scene.sleep(24);
+    }
+    await scene.sleep(350);
+    composer.classList.remove('is-on');
+    reply.classList.add('is-on');
+    await scene.sleep(700);
+    resolved.classList.add('is-on');
+    await scene.sleep(800);
+
+    vote.classList.add('is-press');
+    await scene.sleep(260);
+    vote.classList.remove('is-press');
+    vote.classList.add('is-done');
+    voteLabel.textContent = voted;
+    await scene.sleep(500);
+    pin.classList.add('is-on');
+    complete.classList.add('is-on');
+    await scene.sleep(3200);
+  });
+</script>
+
+<style>
+  .rvw {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 430px;
+  }
+  .rvw-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--app-line);
+    background: color-mix(in srgb, var(--app-panel) 80%, transparent);
+  }
+  .rvw-pr {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+  .rvw-pr b {
+    overflow: hidden;
+    font-weight: 600;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .rvw-ico {
+    color: var(--app-accent);
+  }
+  .rvw-ico :global(svg) {
+    width: 15px;
+  }
+  .rvw-id {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--app-muted);
+  }
+  .rvw-seg {
+    display: flex;
+    flex: none;
+    margin-left: auto;
+    padding: 2px;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--app-text) 6%, transparent);
+  }
+  .rvw-it {
+    padding: 4px 9px;
+    font-size: 11px;
+    color: var(--app-muted);
+    border-radius: 6px;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+  }
+  .rvw-it.is-on {
+    color: var(--app-text);
+    background: color-mix(in srgb, var(--app-accent) 26%, var(--app-raise));
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+  }
+  .rvw-sub {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 14px;
+    font-size: 11.5px;
+    color: var(--app-muted);
+    border-bottom: 1px solid var(--app-line);
+  }
+  .rvw-file {
+    font-family: var(--mono);
+  }
+  .rvw-compare {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+    color: var(--app-accent);
+    opacity: 0;
+    transform: translateX(6px);
+    transition:
+      opacity 0.4s,
+      transform 0.4s var(--ease);
+  }
+  .rvw-compare :global(svg) {
+    width: 12px;
+  }
+  .rvw-compare.is-on {
+    opacity: 1;
+    transform: none;
+  }
+  .rvw-diff {
+    flex: 1;
+    padding: 8px 0;
+    font: 12px/1.8 var(--mono);
+  }
+  .rl {
+    display: grid;
+    grid-template-columns: 34px 34px 18px 1fr;
+    white-space: pre;
+    transition:
+      opacity 0.5s,
+      box-shadow 0.5s;
+  }
+  .rl code {
+    font: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .rl-n {
+    padding-right: 8px;
+    text-align: right;
+    color: var(--app-muted);
+    opacity: 0.55;
+  }
+  .rl-k {
+    text-align: center;
+  }
+  .rl-add {
+    background: color-mix(in srgb, var(--app-add) 11%, transparent);
+  }
+  .rl-add .rl-k {
+    color: var(--app-add);
+  }
+  .rl-del {
+    background: color-mix(in srgb, var(--app-del) 11%, transparent);
+  }
+  .rl-del .rl-k {
+    color: var(--app-del);
+  }
+  .is-compare .rl-ctx {
+    opacity: 0.45;
+  }
+  .is-compare .rl-add {
+    box-shadow: inset 2px 0 0 var(--app-accent);
+  }
+
+  /* thread */
+  .th {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s var(--ease);
+  }
+  .th.is-open {
+    grid-template-rows: 1fr;
+  }
+  .th-in {
+    position: relative;
+    display: grid;
+    gap: 10px;
+    min-height: 0;
+    overflow: hidden;
+    margin: 0 14px 0 86px;
+    padding: 0 12px;
+    font: 12.5px/1.45 var(--text-font);
+    white-space: normal;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--app-raise) 92%, transparent);
+    box-shadow: inset 0 0 0 1px var(--app-line);
+    transition:
+      padding 0.5s var(--ease),
+      margin 0.5s var(--ease);
+  }
+  .th.is-open .th-in {
+    margin-block: 8px;
+    padding-block: 12px;
+  }
+  .th-c {
+    display: flex;
+    gap: 10px;
+  }
+  .th-h {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+  .th-h b {
+    font-weight: 600;
+  }
+  .th-h span {
+    font-size: 11px;
+    color: var(--app-muted);
+  }
+  .th-c p {
+    color: color-mix(in srgb, var(--app-text) 85%, transparent);
+  }
+  .th-reply {
+    display: none;
+  }
+  .th-reply.is-on {
+    display: flex;
+    animation: pop-in 0.4s var(--ease);
+  }
+  .th-composer {
+    display: none;
+    align-items: center;
+    min-height: 34px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    border: 1px solid color-mix(in srgb, var(--app-accent) 55%, transparent);
+    background: color-mix(in srgb, var(--app-bg) 70%, transparent);
+  }
+  .th-composer.is-on {
+    display: flex;
+  }
+  .th-caret {
+    width: 1.5px;
+    height: 15px;
+    margin-left: 1px;
+    background: var(--app-accent);
+  }
+  .th-resolved {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--app-add);
+    border-radius: 99px;
+    background: color-mix(in srgb, var(--app-add) 13%, transparent);
+    opacity: 0;
+    transform: scale(0.8);
+    transition:
+      opacity 0.3s,
+      transform 0.4s var(--spring);
+  }
+  .th-resolved :global(svg) {
+    width: 11px;
+  }
+  .th-resolved.is-on {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* footer: vote + complete */
+  .rvw-foot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-top: 1px solid var(--app-line);
+    background: color-mix(in srgb, var(--app-panel) 80%, transparent);
+  }
+  .rvw-pin {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    margin-right: auto;
+    font-size: 11.5px;
+    color: var(--app-muted);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .rvw-pin :global(svg) {
+    flex: none;
+    width: 12px;
+  }
+  .rvw-pin.is-on {
+    opacity: 1;
+  }
+  .rvw-vote {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex: none;
+    height: 30px;
+    padding: 0 8px 0 10px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid var(--app-line);
+    background: color-mix(in srgb, var(--app-text) 6%, transparent);
+    transition:
+      background-color 0.3s,
+      border-color 0.3s,
+      color 0.3s,
+      transform 0.2s var(--ease);
+  }
+  .rvw-vote-ico :global(svg) {
+    width: 13px;
+  }
+  .rvw-vote.is-press {
+    transform: scale(0.94);
+  }
+  .rvw-vote.is-done {
+    color: #06170f;
+    border-color: transparent;
+    background: var(--app-add);
+    box-shadow: 0 0 24px -4px color-mix(in srgb, var(--app-add) 70%, transparent);
+  }
+  .rvw-vote.is-done :global(kbd) {
+    color: #06170f;
+    border-color: rgb(0 0 0 / 0.2);
+    background: rgb(255 255 255 / 0.25);
+  }
+  .rvw-complete {
+    display: flex;
+    align-items: center;
+    flex: none;
+    height: 30px;
+    padding: 0 12px;
+    font-weight: 600;
+    color: var(--app-muted);
+    border-radius: 8px;
+    border: 1px dashed var(--app-line);
+    transition:
+      color 0.3s,
+      background-color 0.3s,
+      border-color 0.3s;
+  }
+  .rvw-complete.is-on {
+    color: var(--app-bg);
+    border: 1px solid transparent;
+    background: var(--app-accent);
+    box-shadow: 0 0 24px -4px color-mix(in srgb, var(--app-accent) 80%, transparent);
+  }
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+  }
+  @media (max-width: 640px) {
+    .rvw-seg .rvw-it:first-child,
+    .rvw-compare {
+      display: none;
+    }
+    .rl {
+      grid-template-columns: 0 24px 14px 1fr;
+      font-size: 11px;
+    }
+    .rl-n:first-child {
+      visibility: hidden;
+    }
+    .th-in {
+      margin-left: 14px;
+    }
+    .rvw-pin {
+      display: none;
+    }
+    .rvw-vote {
+      margin-left: auto;
+    }
+  }
+</style>

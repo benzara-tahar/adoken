@@ -1,0 +1,2207 @@
+# Provenance for every file under assets/. Schema and rules: assets/README.md.
+# `ship = true` only for assets the design docs plan to bundle (fonts, icons);
+# everything else is reference / dogfooding / demo / test-fixture material (spec 0007 §9).
+# Folder entries (fonts, icons): sha256 = `cd <folder> && LC_ALL=C shasum -a 256 * | shasum -a 256`.
+
+[[asset]]
+path = "bg/accents/ai/deep-indigo-sea-ripples.jpg"
+kind = "bg"
+ship = false
+title = "Dark indigo ocean with small ripples"
+author = "Photo by Arkan Izz Zaydan Maulana (@eikosiefta) on Unsplash"
+source_page = "https://unsplash.com/photos/dark-blue-ocean-water-with-small-ripples-on-the-surface-yoNfsUq9j6k"
+download_url = "https://unsplash.com/photos/yoNfsUq9j6k/download?force=true"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 5184×3456 → 3840×2560, JPEG q90"
+width = 3840
+height = 2560
+duration_ms = 0
+sha256 = "ef8083989bb3585fd1f42269acb18043c5b793529cbfeba5f75877ee4a3c0200"
+tags = ["ai", "dojo-night"]
+notes = "Unsplash License (free, not Unsplash+; photo page says \"Free to use under the Unsplash License\"). Original 5184x3456."
+
+[[asset]]
+path = "bg/accents/ai/indigo-sea-surface-light.jpg"
+kind = "bg"
+ship = false
+title = "Deep indigo sea surface with streaks of light"
+author = "Photo by boris misevic (@borisview) on Unsplash"
+source_page = "https://unsplash.com/photos/abstract-blue-and-white-textured-background-TS9g3YhTpKE"
+download_url = "https://unsplash.com/photos/TS9g3YhTpKE/download?force=true"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 6192×3480 → 3840×2158, JPEG q90"
+width = 3840
+height = 2158
+duration_ms = 0
+sha256 = "b118cd9bc8bdb40271b960371f8609b9f25a637920a86e73804e0db0e95d1506"
+tags = ["ai", "dojo-night"]
+notes = "Unsplash License (free, not Unsplash+; photo page says \"Free to use under the Unsplash License\"). Original 6192x3480."
+
+[[asset]]
+path = "bg/accents/kin/kinkakuji-golden-pavilion-reflection.jpg"
+kind = "bg"
+ship = false
+title = "Kinkaku-ji (Golden Pavilion) reflected in Kyōko-chi pond"
+author = "Photo by Tim D (@timdep) on Unsplash"
+source_page = "https://unsplash.com/photos/a-yellow-building-sitting-in-the-middle-of-a-lake-QLrOOMb-MjU"
+download_url = "https://unsplash.com/photos/QLrOOMb-MjU/download?force=true"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 5184×3456 → 3840×2560, JPEG q90"
+width = 3840
+height = 2560
+duration_ms = 0
+sha256 = "0c678a7a9bef9ae738415287c5ef66ce42694546f969103e273564d2070193c4"
+tags = ["kin", "matcha", "dojo-day"]
+notes = "Unsplash License (free, not Unsplash+; photo page says \"Free to use under the Unsplash License\"). Original 5184x3456. Location: Kinkakuji Temple, 1 Kinkakujichō, Kita Ward, Kyoto, Japan."
+
+[[asset]]
+path = "bg/accents/kin/willows-and-bridge-gold-screen.jpg"
+kind = "bg"
+ship = false
+title = "Willows and Bridge (six-panel folding screen, gold leaf)"
+author = "Unidentified artist, Japan, Momoyama period, early 17th century; The Metropolitan Museum of Art"
+source_page = "https://www.metmuseum.org/art/collection/search/53241"
+download_url = "https://images.metmuseum.org/CRDImages/as/original/DP362575.jpg"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "cropped 3951×1951 → 3760×1760 (removed screen border and grey backdrop), JPEG q90"
+width = 3760
+height = 1760
+duration_ms = 0
+sha256 = "443df737b96ccb9da9543cfa7b551d4e9ae75db10f53b5dc00fb31e6cbc208f4"
+tags = ["kin", "lantern", "ink"]
+notes = "The Met Open Access (isPublicDomain=true; object page shows \"Public Domain\" / Open Access). Accession 2015.300.105.1, .2; Mary Griggs Burke Collection, Gift of the Mary and Jackson Burke Foundation, 2015."
+
+[[asset]]
+path = "bg/accents/matcha/arashiyama-bamboo-stalks.jpg"
+kind = "bg"
+ship = false
+title = "Green bamboo stalks, Arashiyama bamboo grove"
+author = "Photo by Hendrik Morkel (@hendrikmorkel) on Unsplash"
+source_page = "https://unsplash.com/photos/a-group-of-tall-green-bamboo-trees-in-a-forest-UHPouUEkyCA"
+download_url = "https://unsplash.com/photos/UHPouUEkyCA/download?force=true"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 6000×4000 → 3840×2560, JPEG q90"
+width = 3840
+height = 2560
+duration_ms = 0
+sha256 = "375ff8087d9e3ba5cb747b490a53ae138fb17c517561ba659fcac96e160bf412"
+tags = ["matcha", "dojo-day"]
+notes = "Unsplash License (free, not Unsplash+; photo page says \"Free to use under the Unsplash License\"). Original 6000x4000. Location: Arashiyama Bamboo Grove, Sagaogurayama Tabuchiyamachō, Ukyo Ward, Kyoto, Japan."
+
+[[asset]]
+path = "bg/accents/matcha/wazuka-tea-field-rows.jpg"
+kind = "bg"
+ship = false
+title = "Rows of green tea bushes in Wazuka, Kyoto"
+author = "Photo by Bret Lama (@sepiatone) on Unsplash"
+source_page = "https://unsplash.com/photos/a-row-of-hedges-in-the-middle-of-a-field-WK3GNVTkdLo"
+download_url = "https://unsplash.com/photos/WK3GNVTkdLo/download?force=true"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 7229×4819 → 2880×1920, JPEG q85 (3840 q85 was 6.2 MB, 3200 q85 4.2 MB)"
+width = 2880
+height = 1920
+duration_ms = 0
+sha256 = "7b3eed9efbccb747af40e86cc3028ab1935fc309e41a23be3deb42f85a503e83"
+tags = ["matcha"]
+notes = "Unsplash License (free, not Unsplash+; photo page says \"Free to use under the Unsplash License\"). Original 7229x4819. Location: Wazuka, Kyoto, Japan."
+
+[[asset]]
+path = "bg/accents/sakura/hoitsu-blossoming-cherry-trees.jpg"
+kind = "bg"
+ship = false
+title = "Blossoming Cherry Trees (six-panel folding screen, gold and silver leaf)"
+author = "Sakai Hōitsu (1761–1828), ca. 1805; The Metropolitan Museum of Art"
+source_page = "https://www.metmuseum.org/art/collection/search/53423"
+download_url = "https://images.metmuseum.org/CRDImages/as/original/DP704936.jpg"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "cropped 4000×1959 → 3740×1712 (removed screen frame and grey backdrop), JPEG q90"
+width = 3740
+height = 1712
+duration_ms = 0
+sha256 = "b577f43e71b84829f30a47244f311f9114760e6a989d0a8664b1f3a8ec43fe36"
+tags = ["sakura", "kin"]
+notes = "The Met Open Access (isPublicDomain=true; object page shows \"Public Domain\" / Open Access). Accession 2015.300.93.1, .2; Mary Griggs Burke Collection, Gift of the Mary and Jackson Burke Foundation, 2015."
+
+[[asset]]
+path = "bg/accents/sakura/sakura-blossoms-blue-sky.jpg"
+kind = "bg"
+ship = false
+title = "Pink cherry blossoms against a pale blue sky (Tatebayashi)"
+author = "Photo by AJ (@ajny) on Unsplash"
+source_page = "https://unsplash.com/photos/pink-flowers-McsNra2VRQQ"
+download_url = "https://unsplash.com/photos/McsNra2VRQQ/download?force=true"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = ""
+width = 3696
+height = 2448
+duration_ms = 0
+sha256 = "01e0a0324bf86506a92cdd2edfb513babb8340ad82bfad53c9268edf93397546"
+tags = ["sakura", "sora", "dojo-day"]
+notes = "Unsplash License (free, not Unsplash+; photo page says \"Free to use under the Unsplash License\"). Original 3696x2448. Location: Tatebayashi, Japan."
+
+[[asset]]
+path = "bg/accents/shu/fushimi-inari-torii-forest.jpg"
+kind = "bg"
+ship = false
+title = "Vermilion torii gates in green forest, Fushimi Inari"
+author = "Photo by Ritz (@rithay) on Unsplash"
+source_page = "https://unsplash.com/photos/a-row-of-red-tori-tori-tori-tori-tori-tori-tori-tori-tori-tori-tori-tori-oXlKHoP3N9o"
+download_url = "https://unsplash.com/photos/oXlKHoP3N9o/download?force=true"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 7665×5304 → 3840×2657, JPEG q90"
+width = 3840
+height = 2657
+duration_ms = 0
+sha256 = "cf44bab63d31bd8b9b75ebe45f7964ca0949cdb8171edcd4df2e34bb2bfe06cd"
+tags = ["shu", "matcha"]
+notes = "Unsplash License (free, not Unsplash+; photo page says \"Free to use under the Unsplash License\"). Original 7665x5304. Location: Fushimi Inari Taisha, ６８ 深草藪之内町 伏見区 京都市 京都府 日本."
+
+[[asset]]
+path = "bg/accents/shu/fushimi-inari-torii-tunnel.jpg"
+kind = "bg"
+ship = false
+title = "Vermilion torii tunnel at Fushimi Inari-taisha"
+author = "Photo by Roméo A. (@gronemo) on Unsplash"
+source_page = "https://unsplash.com/photos/orange-wooden-arch-aWgpnQfvk8w"
+download_url = "https://unsplash.com/photos/aWgpnQfvk8w/download?force=true"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 6000×4000 → 3840×2560, JPEG q90"
+width = 3840
+height = 2560
+duration_ms = 0
+sha256 = "705fd804da08da2f8eea00bac2a79ed30ad0ee97f33be9273bfbd035775cf77d"
+tags = ["shu", "lantern"]
+notes = "Unsplash License (free, not Unsplash+; photo page says \"Free to use under the Unsplash License\"). Original 6000x4000. Location: Fushimi Inari, Kyoto, Japan."
+
+[[asset]]
+path = "bg/accents/sora/cumulus-clouds-blue-sky.jpg"
+kind = "bg"
+ship = false
+title = "White cumulus clouds in a clear blue sky"
+author = "Photo by engin akyurt (@enginakyurt) on Unsplash"
+source_page = "https://unsplash.com/photos/white-clouds-and-blue-sky-during-daytime-zlGobrmAuyE"
+download_url = "https://unsplash.com/photos/zlGobrmAuyE/download?force=true"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 7490×4996 → 3840×2561, JPEG q90"
+width = 3840
+height = 2561
+duration_ms = 0
+sha256 = "206239b8d781fe4b6ac7869499dd801ecd9b5ddf9353dfec2ec697b4a7ae8727"
+tags = ["sora", "dojo-day"]
+notes = "Unsplash License (free, not Unsplash+; photo page says \"Free to use under the Unsplash License\"). Original 7490x4996."
+
+[[asset]]
+path = "bg/accents/sora/hokusai-red-fuji-clear-sky.jpg"
+kind = "bg"
+ship = false
+title = "South Wind, Clear Sky (Red Fuji), from Thirty-six Views of Mount Fuji"
+author = "Katsushika Hokusai (1760–1849), ca. 1830–32; The Metropolitan Museum of Art"
+source_page = "https://www.metmuseum.org/art/collection/search/55736"
+download_url = "https://images.metmuseum.org/CRDImages/as/original/DP141053.jpg"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 3905×2674 → 3840×2629, JPEG q90"
+width = 3840
+height = 2629
+duration_ms = 0
+sha256 = "f2654bf44a530be831c61b1f3cb652d164af732d8730d47fb894971177cbd27a"
+tags = ["sora", "shu", "ai"]
+notes = "The Met Open Access (isPublicDomain=true; object page shows \"Public Domain\" / Open Access). Accession JP2960; Henry L. Phillips Collection, Bequest of Henry L. Phillips, 1939."
+
+[[asset]]
+path = "bg/anime/apartment-corridor-twilight.jpg"
+kind = "bg"
+ship = false
+title = "Urban Backgrounds: apartment exterior corridor at twilight"
+author = "wrothsloth (https://wrothsloth.itch.io/urbanbgs)"
+source_page = "https://wrothsloth.itch.io/urbanbgs"
+download_url = "https://wrothsloth.itch.io/urbanbgs"
+license = "CC-BY-4.0"
+license_url = "https://creativecommons.org/licenses/by/4.0/"
+attribution_required = true
+ai_generated = false
+modified = "converted aptgallery2.png 1952x1080 to JPEG q90 (no resize)"
+width = 1952
+height = 1080
+duration_ms = 0
+sha256 = "519277e44f065df096f1b88f9344d9b75c53d4f5b43a6b04914233b21c557fa0"
+tags = ["ink", "dusk", "ai"]
+notes = "Hand-drawn in a semi-realistic anime style; the page is tagged No AI. Page text: 'License: CCBY4.0' / 'Feel free to use for commercial/non-commercial, SFW/NSFW, games, videos, or other projects' / 'For attribution, just link to this page'. The artist also asks, as a non-binding request, that the assets not be resold or used for AI training or AI edits. Downloaded mvna_freebgs_by_wrothsloth.7z (upload 16482568); file aptgallery2.png (twilight variant). The largest size offered is about 1080p (contract exception for anime-style art). Mean luma ~73/255."
+
+[[asset]]
+path = "bg/anime/starry-sky-night.jpg"
+kind = "bg"
+ship = false
+title = "Sky Backgrounds: night sky"
+author = "Unicorn Creates (https://unicorncreates.itch.io/)"
+source_page = "https://unicorncreates.itch.io/sky-backgrounds"
+download_url = "https://unicorncreates.itch.io/sky-backgrounds"
+license = "CC-BY-4.0"
+license_url = "https://creativecommons.org/licenses/by/4.0/"
+attribution_required = true
+ai_generated = false
+modified = "converted sky_night.webp 1920x1080 to JPEG q90 (no resize)"
+width = 1920
+height = 1080
+duration_ms = 0
+sha256 = "49e5996826f931dfbcfdd7fcd6273c93b6bbebd48bb914e6b7f35f6119818cff"
+tags = ["dojo-night", "ai", "sora"]
+notes = "Digitally painted by the artist; the page is tagged No AI. Attribution line requested on the page: '\"Sky Backgrounds\" by Unicorn Creates (https://unicorncreates.itch.io/) licensed under CC BY 4.0 (http://creativecommons.org/licenses/by/4.0/)'. Downloaded via itch.io 'Download Now' → 'No thanks' → SkyBGs_v1.1.zip (upload 18622644); file SkyBGs_v1.1/sky_night.webp. The pack's largest size is 1920x1080 (contract exception for anime-style art). Mean luma ~59/255."
+
+[[asset]]
+path = "bg/anime/sunset-clouds-dusk.jpg"
+kind = "bg"
+ship = false
+title = "Sky Backgrounds: sunset clouds"
+author = "Unicorn Creates (https://unicorncreates.itch.io/)"
+source_page = "https://unicorncreates.itch.io/sky-backgrounds"
+download_url = "https://unicorncreates.itch.io/sky-backgrounds"
+license = "CC-BY-4.0"
+license_url = "https://creativecommons.org/licenses/by/4.0/"
+attribution_required = true
+ai_generated = false
+modified = "converted sky_sunset.webp 1920x1080 to JPEG q90 (no resize)"
+width = 1920
+height = 1080
+duration_ms = 0
+sha256 = "aa7a41fd48171e6ce912354d9e0c65f6d035bb90a120ca45466a357dd03f0d5f"
+tags = ["dusk", "sakura", "kin", "dojo-day"]
+notes = "Digitally painted by the artist; the page is tagged No AI. Attribution line requested on the page: '\"Sky Backgrounds\" by Unicorn Creates (https://unicorncreates.itch.io/) licensed under CC BY 4.0 (http://creativecommons.org/licenses/by/4.0/)'. From SkyBGs_v1.1.zip (upload 18622644); file SkyBGs_v1.1/sky_sunset.webp. The pack's largest size is 1920x1080 (contract exception for anime-style art). Bright pastel image, mean luma ~203/255."
+
+[[asset]]
+path = "bg/anime/treetops-canopy-day.jpg"
+kind = "bg"
+ship = false
+title = "Treetops Background (view up through the canopy)"
+author = "Unicorn Creates (https://unicorncreates.itch.io/)"
+source_page = "https://unicorncreates.itch.io/treetops-background"
+download_url = "https://unicorncreates.itch.io/treetops-background"
+license = "CC-BY-4.0"
+license_url = "https://creativecommons.org/licenses/by/4.0/"
+attribution_required = true
+ai_generated = false
+modified = "converted treetops_3840x2160.webp to JPEG q90 (no resize)"
+width = 3840
+height = 2160
+duration_ms = 0
+sha256 = "1bb3501c0f1369186e1ca4cf06f520a096fc1d1893335048d6a410aa3b69cb02"
+tags = ["dojo-day", "matcha", "sora"]
+notes = "Digitally painted by the artist; the page is tagged No AI. Attribution line requested on the page: '\"Treetops Background\" by Unicorn Creates (https://unicorncreates.itch.io/) licensed under CC BY 4.0 (http://creativecommons.org/licenses/by/4.0/)'. Downloaded via itch.io 'Download Now' → 'No thanks' → treetops_3840x2160.webp (upload 18743994). This is the only 4K file in the slice. Mean luma ~131/255."
+
+[[asset]]
+path = "bg/dojo-day/fuji-morning-mist-mountain-layers.jpg"
+kind = "bg"
+ship = false
+title = "Morning mist over mountain layers seen from Mt. Fuji"
+author = "Photo by YANGHONG YU (@shellingfordyu) on Unsplash"
+source_page = "https://unsplash.com/photos/a-view-of-a-mountain-range-covered-in-clouds-9j9b84fAL7I"
+download_url = "https://unsplash.com/photos/9j9b84fAL7I/download?force=true"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 5184×3888 → 3840×2880, JPEG q90"
+width = 3840
+height = 2880
+duration_ms = 0
+sha256 = "1854de0c94039e4d53d054c8b5c1cd5ccbcd9e75e448d09246a61d0cf99dccec"
+tags = ["dojo-day", "ink", "sora"]
+notes = "Unsplash License (free, not Unsplash+; photo page says \"Free to use under the Unsplash License\"). Original 5184x3888. Mid-tone misty scene; brightest of the misty-mountain candidates."
+
+[[asset]]
+path = "bg/dojo-day/otaru-calm-sea-pastel-sky.jpg"
+kind = "bg"
+ship = false
+title = "Calm sea with breakwaters under a pastel sky (Otaru)"
+author = "Photo by realfish (@realfish) on Unsplash"
+source_page = "https://unsplash.com/photos/calm-sea-with-breakwaters-under-a-pastel-sky-Q9OgeWdKxjE"
+download_url = "https://unsplash.com/photos/Q9OgeWdKxjE/download?force=true"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 3904×2603 → 3840×2560, JPEG q90"
+width = 3840
+height = 2560
+duration_ms = 0
+sha256 = "e882227e07981581eb220051d9a9906ee63cc099572f319accdbc0d8fa95e39b"
+tags = ["dojo-day", "sora", "sakura"]
+notes = "Unsplash License (free, not Unsplash+; photo page says \"Free to use under the Unsplash License\"). Original 3904x2603. Location: Japan, Hokkaido, Otaru, Asari, 1 Chome−5 朝里駅. Shot on film (Kodak Portra 400)."
+
+[[asset]]
+path = "bg/dojo-day/washi-paper-red-fibers.jpg"
+kind = "bg"
+ship = false
+title = "White washi-style paper with scattered red fibers"
+author = "Photo by Alexander Nedviga (@sanches812) on Unsplash"
+source_page = "https://unsplash.com/photos/white-textured-background-with-scattered-red-fibers-coMYoeCslUI"
+download_url = "https://unsplash.com/photos/coMYoeCslUI/download?force=true"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 6666×3940 → 3840×2269, JPEG q90"
+width = 3840
+height = 2269
+duration_ms = 0
+sha256 = "7dceffe16787c60a546f4e600678aa52105303931ca5378bbc0240e5dad199d3"
+tags = ["dojo-day", "shu"]
+notes = "Unsplash License (free, not Unsplash+; photo page says \"Free to use under the Unsplash License\"). Original 6666x3940. Texture scan; no EXIF; host does not label it AI-generated."
+
+[[asset]]
+path = "bg/dojo-day/zen-garden-moss-raked-gravel.jpg"
+kind = "bg"
+ship = false
+title = "Zen garden with moss islands and raked gravel"
+author = "Photo by Qihang Fan (@fqhang) on Unsplash"
+source_page = "https://unsplash.com/photos/a-garden-with-rocks-and-grass-in-the-middle-zaQqlBZZxpE"
+download_url = "https://unsplash.com/photos/zaQqlBZZxpE/download?force=true"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 6000×4000 → 3584×2389, JPEG q85 (3840 q85 was 4.7 MB)"
+width = 3584
+height = 2389
+duration_ms = 0
+sha256 = "e12d580182f9f90e26ba3dcd2ae08ff58446017757d7a0e7016f04f8b2898ac3"
+tags = ["dojo-day", "matcha"]
+notes = "Unsplash License (free, not Unsplash+; photo page says \"Free to use under the Unsplash License\"). Original 6000x4000."
+
+[[asset]]
+path = "bg/dojo-night/kiyochika-rain-sanmaibashi-hakone.jpg"
+kind = "bg"
+ship = false
+title = "Rain at Sanmaibashi, Hakone (Hakone Sanmaibashi ame)"
+author = "Kobayashi Kiyochika (1847–1915); Rijksmuseum, Amsterdam, RP-P-1988-285"
+source_page = "https://www.rijksmuseum.nl/en/collection/object/Regen-te-Sanmaibashi-in-Hakone--66d855958b849eb1dafa76575d687411"
+download_url = "https://upload.wikimedia.org/wikipedia/commons/3/3c/Regen_te_Sanmaibashi_in_Hakone_Hakone_Sanmaibashi_ame_%28titel_op_object%29%2C_RP-P-1988-285.jpg"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 6666×4476 → 3840×2578, JPEG q85 (q90 exceeded 4 MB)"
+width = 3840
+height = 2578
+duration_ms = 0
+sha256 = "40d6e1c4cebe3eea25d0b17ba3117352e0dd21f2723bb41b184b04860abf6822"
+tags = ["dojo-night", "woodblock", "kiyochika", "rain", "night-rain", "museum-scan"]
+notes = "Color woodblock print, 1880–82. Rijksmuseum object page: Copyright = 'Public domain' (PDM 1.0 link). Commons file https://commons.wikimedia.org/wiki/File:Regen_te_Sanmaibashi_in_Hakone_Hakone_Sanmaibashi_ame_(titel_op_object),_RP-P-1988-285.jpg tagged {{Cc-zero}}. Storm-dark sky with driving rain over a bridge; small travellers with umbrellas are incidental."
+
+[[asset]]
+path = "bg/dojo-night/kiyochika-taro-inari-shrine-asakusa-night.jpg"
+kind = "bg"
+ship = false
+title = "Taro Inari Shrine in the Asakusa Rice Fields (Asakusa tanbo Taro Inari)"
+author = "Kobayashi Kiyochika (1847–1915); Rijksmuseum, Amsterdam, RP-P-1988-279"
+source_page = "https://www.rijksmuseum.nl/en/collection/object/Het-Taro-Inari-heiligdom-in-de-rijstvelden-te-Asakusa--12d7f5cc9c1055616798e029faae8b52"
+download_url = "https://upload.wikimedia.org/wikipedia/commons/9/91/Het_Taro_Inari_heiligdom_in_de_rijstvelden_te_Asakusa_Asakusa_tanbo_Taro_Inari_%28titel_op_object%29%2C_RP-P-1988-279.jpg"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 6492×4382 → 3840×2592, JPEG q80 (q90/q85 exceeded 4 MB because of paper grain)"
+width = 3840
+height = 2592
+duration_ms = 0
+sha256 = "f0ce43772d0f1e908964bc78ef81e81d8ace9c3e65d08da4da1a8faf5889c4dd"
+tags = ["dojo-night", "woodblock", "kiyochika", "moon", "night", "museum-scan"]
+notes = "Color woodblock print, 1877–82. Rijksmuseum object page: Copyright = 'Public domain' (links creativecommons.org/publicdomain/mark/1.0). Downloaded Rijksmuseum full-res scan via Commons file page https://commons.wikimedia.org/wiki/File:Het_Taro_Inari_heiligdom_in_de_rijstvelden_te_Asakusa_Asakusa_tanbo_Taro_Inari_(titel_op_object),_RP-P-1988-279.jpg tagged {{Cc-zero}}. Full sheet incl. paper margin and title cartouche; moonlit shrine torii, dark grey-blue sky."
+
+[[asset]]
+path = "bg/dojo-night/lantern-lit-alley-night-rain.jpg"
+kind = "bg"
+ship = false
+title = "A narrow, lantern-lit alleyway at night"
+author = "Julien (@domsson) on Unsplash"
+source_page = "https://unsplash.com/photos/a-narrow-lantern-lit-alleyway-at-night-wsT7-GPgXYE"
+download_url = "https://images.unsplash.com/photo-1750346141354-6c6476607992?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=julien-wsT7-GPgXYE-unsplash.jpg"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = ""
+width = 3840
+height = 2399
+duration_ms = 0
+sha256 = "b30cceaa3c082a4fd7d09fcae0c876a824e216f8b09ca9c3a47817cfcb6de18c"
+tags = ["dojo-night", "photo", "night-rain", "alley", "lantern"]
+notes = "Photo page states 'Free to use under the Unsplash License' (not Unsplash+). Original download is 3840×2399; placed unmodified. Wet alley at night with red lanterns; no people."
+
+[[asset]]
+path = "bg/dojo-night/snowy-street-single-lamp-night.jpg"
+kind = "bg"
+ship = false
+title = "Snowy street illuminated by a single lamp at night"
+author = "Julien (@domsson) on Unsplash"
+source_page = "https://unsplash.com/photos/snowy-street-illuminated-by-a-single-lamp-at-night-_ii4M6_OjxE"
+download_url = "https://images.unsplash.com/photo-1770295639727-d9000c7ad848?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=julien-_ii4M6_OjxE-unsplash.jpg"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = ""
+width = 3840
+height = 2400
+duration_ms = 0
+sha256 = "b8b67aafa063f596b32369aad6e28ac767cb5704e56d16a361054f75799e551a"
+tags = ["dojo-night", "photo", "snow", "night", "street"]
+notes = "Photo page states 'Free to use under the Unsplash License' (not Unsplash+). Original download is 3840×2400; placed unmodified. Very dark overall, one warm street lamp, no people."
+
+[[asset]]
+path = "bg/dusk/hiroshige-twilight-moon-ryogoku-bridge.jpg"
+kind = "bg"
+ship = false
+title = "Twilight Moon at the Ryogoku Bridge (Ryogoku no yoizuki), from the series \"Famous Views of the Eastern Capital (Toto meisho)\""
+author = "Utagawa Hiroshige (1797–1858); The Art Institute of Chicago, Frederick W. Gookin Collection, 1939.1387"
+source_page = "https://www.artic.edu/artworks/33979/twilight-moon-at-the-ryogoku-bridge-ryogoku-no-yoizuki-from-the-series-famous-views-of-the-eastern-capital-toto-meisho"
+download_url = "https://www.artic.edu/iiif/2/8fc339af-2b4f-23fc-7754-ba38b401e7d7/full/3552,/0/default.jpg"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = ""
+width = 3552
+height = 2232
+duration_ms = 0
+sha256 = "0122202a7117b77e424e4ebcdaf72afcc528441782df17428cec74b9d04247dd"
+tags = ["dusk", "woodblock", "hiroshige", "twilight", "moon", "museum-scan"]
+notes = "Color woodblock print, c. 1831. AIC artwork page shows 'CC0 Public Domain Designation'; API is_public_domain = true. Largest size the IIIF server offers (native 3552×2232); placed unmodified. Salmon-pink sunset bands and indigo clouds seen under the bridge; boatmen are tiny."
+
+[[asset]]
+path = "bg/dusk/mount-fuji-pink-dusk-sky.jpg"
+kind = "bg"
+ship = false
+title = "A mountain covered in clouds and a pink sky (Mount Fuji at dusk)"
+author = "Wren Chai (@weichaist) on Unsplash"
+source_page = "https://unsplash.com/photos/a-mountain-covered-in-clouds-and-a-pink-sky-YKQKSpKpVZI"
+download_url = "https://images.unsplash.com/photo-1623065180415-a97143d4ecac?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=wren-chai-YKQKSpKpVZI-unsplash.jpg"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 6227×2928 → 3840×1805, JPEG q90"
+width = 3840
+height = 1805
+duration_ms = 0
+sha256 = "ca64f51d859c110d2d061f51bb9f92a9b06a0336166b66b1d3c76e20a9e7678d"
+tags = ["dusk", "photo", "mount-fuji", "sunset", "magenta"]
+notes = "Photo page states 'Free to use under the Unsplash License' (not Unsplash+). Aspect 2.13:1 (within 21:9). Magenta-to-orange sky over a sea of clouds with Fuji silhouette; no people."
+
+[[asset]]
+path = "bg/dusk/tokyo-skyline-orange-sunset.jpg"
+kind = "bg"
+ship = false
+title = "Silhouette of city with high-rise buildings under orange skies"
+author = "Steve Monaghan (@steve_monaghan) on Unsplash"
+source_page = "https://unsplash.com/photos/silhouette-of-city-with-high-rise-buildings-under-orange-skies-A6CfyqxHDeg"
+download_url = "https://images.unsplash.com/photo-1567600160783-5079212fe8b4?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=steve-monaghan-A6CfyqxHDeg-unsplash.jpg"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 6000×3368 → 3840×2155, JPEG q90"
+width = 3840
+height = 2155
+duration_ms = 0
+sha256 = "8d2691b8ba025e4667bf477ca1f75c7e917333816ee67eff855804549ac61b69"
+tags = ["dusk", "photo", "tokyo", "sunset", "skyline"]
+notes = "Photo page states 'Free to use under the Unsplash License' (not Unsplash+). Red-orange sunset with dark Tokyo skyline silhouette (Skytree as a distant landmark, no logos); no people."
+
+[[asset]]
+path = "bg/fixtures/mitsuoki-autumn-maples-poem-slips.jpg"
+kind = "bg"
+ship = false
+title = "Autumn Maples with Poem Slips (six-panel folding screen)"
+author = "Tosa Mitsuoki (1617–1691); The Art Institute of Chicago, Kate S. Buckingham Endowment, 1977.157"
+source_page = "https://www.artic.edu/artworks/127644/autumn-maples-with-poem-slips"
+download_url = "https://www.artic.edu/iiif/2/86e919b9-d366-b3ca-d26f-4c16880474a3/full/10760,/0/default.jpg"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "re-encoded at full resolution (no downscale) JPEG q75 to fit the 12 MB fixture cap (original 14.6 MB)"
+width = 10760
+height = 5337
+duration_ms = 0
+sha256 = "95a9bebeaa3190c4bc194109a1a9622fce6f4d96c5d391b69184f9f6c169ebca"
+tags = ["fixture:ac-5", "fixture", "museum-scan", "high-detail"]
+notes = "c. 1675, ink, color and gold on silk. AIC artwork page shows 'CC0 Public Domain Designation'; API is_public_domain = true. Full native IIIF resolution 10760×5337 (57 MP; aspect 2.02). Busy maple foliage, calligraphy slips, gold-leaf texture — good decode/scale stress test."
+
+[[asset]]
+path = "bg/fixtures/tokyo-city-night-aerial.jpg"
+kind = "bg"
+ship = false
+title = "A view of a city at night from the top of a building"
+author = "あま あわれ (@ueruko) on Unsplash"
+source_page = "https://unsplash.com/photos/a-view-of-a-city-at-night-from-the-top-of-a-building-hnsClc66KmQ"
+download_url = "https://images.unsplash.com/photo-1672060215163-0c59ea9e8176?ixlib=rb-4.1.0&q=80&fm=jpg&cs=srgb"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "full resolution kept (8256×6192); fetched from Unsplash CDN with q=80 re-encode (11.6 MB) because the default q=85 download was 12.8 MB"
+width = 8256
+height = 6192
+duration_ms = 0
+sha256 = "46fe78a52c4463f50aa43422af714758e46b8ea62b093cd0290becd3b5987dd8"
+tags = ["fixture:ac-5", "fixture", "photo", "high-detail", "tokyo", "night"]
+notes = "Photo page states 'Free to use under the Unsplash License' (not Unsplash+). 51 MP, aspect exactly 4:3. Dense night cityscape with thousands of point lights under a sunset band — high-frequency detail stress test."
+
+[[asset]]
+path = "bg/ink/hokusai-great-wave-off-kanagawa.jpg"
+kind = "bg"
+ship = false
+title = "Under the Wave off Kanagawa (The Great Wave), from Thirty-six Views of Mount Fuji"
+author = "Katsushika Hokusai (1760–1849), ca. 1830–32; The Metropolitan Museum of Art"
+source_page = "https://www.metmuseum.org/art/collection/search/45434"
+download_url = "https://images.metmuseum.org/CRDImages/as/original/DP130155.jpg"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 3859×2594 → 3584×2409, JPEG q90 (3840 was 4.34 MB at q90 / 4.11 MB at q85)"
+width = 3584
+height = 2409
+duration_ms = 0
+sha256 = "8cb7d4d5d0c966f79208cc3c1622bbb361172303e29c82f54659c6a50dcfe1f3"
+tags = ["ink", "ai", "sora", "motif:merge-wave"]
+notes = "The Met Open Access (isPublicDomain=true; object page shows \"Public Domain\" / Open Access). Accession JP1847; H. O. Havemeyer Collection, Bequest of Mrs. H. O. Havemeyer, 1929."
+
+[[asset]]
+path = "bg/ink/sesson-landscape-rocky-precipice.jpg"
+kind = "bg"
+ship = false
+title = "Landscape with Rocky Precipice"
+author = "Sesson Shūkei (ca. 1504–ca. 1589); The Metropolitan Museum of Art"
+source_page = "https://www.metmuseum.org/art/collection/search/53230"
+download_url = "https://images.metmuseum.org/CRDImages/as/original/DP-12232-041.jpg"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "cropped 4000×3002 → 3660×2355 (removed silk scroll mounting), JPEG q90"
+width = 3660
+height = 2355
+duration_ms = 0
+sha256 = "0fef561cf362345c02cfe66022adb84094f047a1f030fd0aa981d669fc6857f4"
+tags = ["ink", "dojo-day"]
+notes = "The Met Open Access (isPublicDomain=true; object page shows \"Public Domain\" / Open Access). Accession 2015.300.54; Mary Griggs Burke Collection, Gift of the Mary and Jackson Burke Foundation, 2015."
+
+[[asset]]
+path = "bg/ink/shubun-mountain-landscape-screen.jpg"
+kind = "bg"
+ship = false
+title = "Mountain Landscape (six-panel folding screen)"
+author = "Traditionally attributed to Tenshō Shūbun (active 1414–before 1463); The Metropolitan Museum of Art"
+source_page = "https://www.metmuseum.org/art/collection/search/53223"
+download_url = "https://images.metmuseum.org/CRDImages/as/original/DP704892.jpg"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "cropped 4000×2279 → 3640×1920 (removed brocade screen border and grey backdrop), JPEG q90"
+width = 3640
+height = 1920
+duration_ms = 0
+sha256 = "942aa1d5e572e05e73abb74bf59cbfd2be357a131b4d21221dee601f0b6359e0"
+tags = ["ink", "dojo-day"]
+notes = "The Met Open Access (isPublicDomain=true; object page shows \"Public Domain\" / Open Access). Accession 2015.300.51.1, .2; Mary Griggs Burke Collection, Gift of the Mary and Jackson Burke Foundation, 2015."
+
+[[asset]]
+path = "bg/lantern/kiyochika-fireflies-komoro-river-tennoji.jpg"
+kind = "bg"
+ship = false
+title = "The Komoro River at Tennoji (fireflies at night)"
+author = "Kobayashi Kiyochika (1847–1915); Rijksmuseum, Amsterdam, RP-P-1988-282"
+source_page = "https://www.rijksmuseum.nl/en/collection/object/De-Komoro-rivier-bij-Tennoji--2d728c2269e3978897ce134493ae3a16"
+download_url = "https://upload.wikimedia.org/wikipedia/commons/0/07/De_Komoro_rivier_bij_Tennoji%2C_RP-P-1988-282.jpg"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 6546×4488 → 3840×2632, JPEG q90"
+width = 3840
+height = 2632
+duration_ms = 0
+sha256 = "b1fb9d9f9930252db06e920c06cbd01eb4a90a46f116620315e177b5f72e763d"
+tags = ["lantern", "woodblock", "kiyochika", "fireflies", "night", "museum-scan"]
+notes = "Color woodblock print, 1880. Rijksmuseum object page: Copyright = 'Public domain' (PDM 1.0 link); description 'Nachtelijk…'. Commons file https://commons.wikimedia.org/wiki/File:De_Komoro_rivier_bij_Tennoji,_RP-P-1988-282.jpg tagged CC0. Dark river scene with a warm lit window glow and scattered fireflies; no people."
+
+[[asset]]
+path = "bg/lantern/kiyochika-fireworks-ikenohata.jpg"
+kind = "bg"
+ship = false
+title = "Fireworks at Ikenohata (Ikenohata hanabi)"
+author = "Kobayashi Kiyochika (1847–1915); Rijksmuseum, Amsterdam, RP-P-1988-278"
+source_page = "https://www.rijksmuseum.nl/en/collection/object/Vuurwerk-te-Ikenohata--f2fc6a5253c9e6a7a4c30385d696dcee"
+download_url = "https://upload.wikimedia.org/wikipedia/commons/b/bf/Vuurwerk_te_Ikenohata_Vuurwerk_aan_de_rand_van_de_vijver_Ikenohata_hanabi_%28titel_op_object%29%2C_RP-P-1988-278.jpg"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 8210×5758 → 3840×2693, JPEG q85 (q90 exceeded 4 MB)"
+width = 3840
+height = 2693
+duration_ms = 0
+sha256 = "fe89d90f9fd54df0652e003485d3cd3e5240fc0cddfa73d34f6d09811e7d310b"
+tags = ["lantern", "woodblock", "kiyochika", "fireworks", "night", "museum-scan"]
+notes = "Color woodblock print, 1881. Rijksmuseum object page: Copyright = 'Public domain' (PDM 1.0 link). Commons file https://commons.wikimedia.org/wiki/File:Vuurwerk_te_Ikenohata_Vuurwerk_aan_de_rand_van_de_vijver_Ikenohata_hanabi_(titel_op_object),_RP-P-1988-278.jpg tagged {{Cc-zero}}. Near-black night sky, a garland of red paper lanterns and golden fireworks; spectators are tiny black silhouettes."
+
+[[asset]]
+path = "bg/lantern/paper-lantern-alley-glow.jpg"
+kind = "bg"
+ship = false
+title = "A glowing paper lantern hangs in a narrow alley"
+author = "Nhi Ly (@nnhilys) on Unsplash"
+source_page = "https://unsplash.com/photos/a-glowing-paper-lantern-hangs-in-a-narrow-alley-SJIEiO8XXOI"
+download_url = "https://images.unsplash.com/photo-1765547033526-272cb6399dc0?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=nhi-ly-SJIEiO8XXOI-unsplash.jpg"
+license = "LicenseRef-Unsplash"
+license_url = "https://unsplash.com/license"
+attribution_required = false
+ai_generated = false
+modified = "downscaled 5469×3646 → 3840×2560, JPEG q85 (q90 exceeded 4 MB)"
+width = 3840
+height = 2560
+duration_ms = 0
+sha256 = "8c6f57cdd1e6eb73c10f68603f23303fc00e8c1ca1cf665ee6e1dfe2213926ba"
+tags = ["lantern", "photo", "paper-lantern", "alley", "night"]
+notes = "Photo page states 'Free to use under the Unsplash License' (not Unsplash+). Warm orange/gold chochin glow in a dark brick alley with maple leaves; no people."
+
+[[asset]]
+path = "video/city-lights-bokeh-night.mp4"
+kind = "video"
+ship = false
+title = "Colorful Bokeh Lights in Urban Nightscape"
+author = "Israyosoy S. (Pexels)"
+source_page = "https://www.pexels.com/video/colorful-bokeh-lights-in-urban-nightscape-36490874/"
+download_url = "https://videos.pexels.com/video-files/36490874/15473365_1920_1080_30fps.mp4"
+license = "LicenseRef-Pexels"
+license_url = "https://www.pexels.com/license/"
+attribution_required = false
+ai_generated = false
+modified = "Source 3840x2160 29.97 fps (used Pexels' 1920x1080 rendition), 10.0 s. Made a ping-pong loop (forward + reversed) -> 20.0 s, perfectly seamless; re-encoded H.264 yuv420p CRF 23 preset slow, +faststart, audio stripped."
+width = 1920
+height = 1080
+duration_ms = 19987
+sha256 = "c3bb169a6774c4fc71341acf363dec6254eac3112e1325a66e5f5b118265ff71"
+tags = ["dojo-night", "lantern", "bokeh", "video-loop"]
+notes = "Static, fully defocused street lights (warm gold, blue, red) over black; passing cars are only soft light blobs, so reversal is not noticeable. No people. 3.4 MB."
+
+[[asset]]
+path = "video/rain-window-night.mp4"
+kind = "video"
+ship = false
+title = "Raindrops Flowing on Glass (night, city lights bokeh)"
+author = "Phil Desforges (Pexels)"
+source_page = "https://www.pexels.com/video/raindrops-flowing-on-glass-15161525/"
+download_url = "https://videos.pexels.com/video-files/15161525/15161525-hd_1920_1080_24fps.mp4"
+license = "LicenseRef-Pexels"
+license_url = "https://www.pexels.com/license/"
+attribution_required = false
+ai_generated = false
+modified = "Source 3840x2160 23.98 fps (used Pexels' 1920x1080 rendition). Loop-crossfaded (last 1.0 s dissolves into the first second) for a seamless loop: 16.0 s -> 14.9 s; re-encoded H.264 yuv420p CRF 23 preset slow, +faststart, audio stripped."
+width = 1920
+height = 1080
+duration_ms = 14890
+sha256 = "ff680ba2c75bb63ee04aeff22dfcd2661b284aaf4f5ca1e1ea5fabdd6bcafb96"
+tags = ["dojo-night", "rain", "video-loop"]
+notes = "Static camera; rain trickling down a window, blurred street lights behind. No people. 10.5 MB."
+
+[[asset]]
+path = "video/sakura-petals-falling-garden.mp4"
+kind = "video"
+ship = false
+title = "Cherry Blossom Petals Falling in Traditional Garden"
+author = "teyi 徐 (Pexels)"
+source_page = "https://www.pexels.com/video/cherry-blossom-petals-falling-in-traditional-garden-32001843/"
+download_url = "https://videos.pexels.com/video-files/32001843/13638380_1920_1080_30fps.mp4"
+license = "LicenseRef-Pexels"
+license_url = "https://www.pexels.com/license/"
+attribution_required = false
+ai_generated = false
+modified = "Source 1920x1080 30 fps, 54.5 s. Took the 4.0-18.0 s segment and loop-crossfaded it (1.0 s) -> 13.0 s; re-encoded H.264 yuv420p CRF 28 preset slow (CRF 23 gave 46.8 MB for 24.5 s; dense falling petals), +faststart, audio stripped."
+width = 1920
+height = 1080
+duration_ms = 13000
+sha256 = "3c6c0a8330925da70e0d1c85f5d7dc7386a7b7d0059569c1d5606b7d5ddd455e"
+tags = ["sakura", "dojo-day", "video-loop"]
+notes = "Heavy white petal fall in front of a red-lacquered traditional hall; very slow camera drift. No people. The blossoms read as white (pear/crabapple-like) though the author titles it cherry blossom. 13.6 MB."
+
+[[asset]]
+path = "video/sky-clouds-drifting.mp4"
+kind = "video"
+ship = false
+title = "Time-Lapse Video of the Clouds in the Sky"
+author = "Ilya Klimenko (Pexels)"
+source_page = "https://www.pexels.com/video/time-lapse-video-of-the-clouds-in-the-sky-4364654/"
+download_url = "https://videos.pexels.com/video-files/4364654/4364654-hd_1920_1080_30fps.mp4"
+license = "LicenseRef-Pexels"
+license_url = "https://www.pexels.com/license/"
+attribution_required = false
+ai_generated = false
+modified = "Source 3840x2160 29.97 fps (used Pexels' 1920x1080 rendition). Loop-crossfaded (1.0 s) 16.2 s -> 15.1 s; re-encoded H.264 yuv420p CRF 23 preset slow, +faststart, audio stripped."
+width = 1920
+height = 1080
+duration_ms = 15082
+sha256 = "210e57d35d5e8b480f96ce4d2ce84adc8968e0af86f693bda1880d47956bf7da"
+tags = ["sora", "sky", "dojo-day", "video-loop"]
+notes = "Cumulus clouds racing over blue sky, thin tree line at the bottom edge. No people. Time-lapse, so the loop seam is a 1 s dissolve rather than truly invisible. 10.1 MB."
+
+[[asset]]
+path = "sounds/ken/clean-sweep-1.flac"
+kind = "sound"
+ship = false
+title = "broom sweep.wav"
+author = "semccab (freesound.org)"
+source_page = "https://freesound.org/people/semccab/sounds/154376/"
+download_url = "https://cdn.freesound.org/previews/154/154376_2592496-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-64 dB), trailing silence trimmed (-74 dB), 5 ms fade-in; peak-normalized to −3 dBFS (+16.3 dB)"
+width = 0
+height = 0
+duration_ms = 1228
+sha256 = "498d567da4e140648d1d7cd6b74d7335e7e918b331227aea3d73317f724e4f65"
+tags = ["event:ken.clean_sweep", "pack:dojo"]
+notes = "Freesound sound #154376; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/ken/clean-sweep-2.flac"
+kind = "sound"
+ship = false
+title = "bell ding 1.wav"
+author = "5ro4 (freesound.org)"
+source_page = "https://freesound.org/people/5ro4/sounds/611113/"
+download_url = "https://cdn.freesound.org/previews/611/611113_1629501-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (-2.6 dB)"
+width = 0
+height = 0
+duration_ms = 1340
+sha256 = "4ec49a970f59d58b65bb4e5b134fa108855a58802f653d11e317fb1717701b49"
+tags = ["event:ken.clean_sweep", "pack:dojo"]
+notes = "Freesound sound #611113; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/ken/combo-finish-1.flac"
+kind = "sound"
+ship = false
+title = "Mystical Wind Chimes Transition FX"
+author = "djlprojects (freesound.org)"
+source_page = "https://freesound.org/people/djlprojects/sounds/419594/"
+download_url = "https://cdn.freesound.org/previews/419/419594_7062176-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; tail trimmed 4.18 s → 3.0 s with 80 ms fade-out; peak-normalized to −3 dBFS (+0.6 dB)"
+width = 0
+height = 0
+duration_ms = 3000
+sha256 = "dace633c0e266138f512f37f4d0a1f9a380741ca70ca37e0dde355854b7074ca"
+tags = ["event:ken.combo_finish", "pack:dojo"]
+notes = "Freesound sound #419594; license shown on item page: Creative Commons 0. Orchestral chimes slowed down by the uploader."
+
+[[asset]]
+path = "sounds/ken/combo-finish-2.flac"
+kind = "sound"
+ship = false
+title = "Digital Audio: zapThreeToneUp.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/digital-audio"
+download_url = "https://kenney.nl/media/pages/assets/digital-audio/216eac4753-1677590265/kenney_digital-audio.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Digital Audio pack file Audio/zapThreeToneUp.ogg → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-2.9 dB)"
+width = 0
+height = 0
+duration_ms = 1086
+sha256 = "315737b49094c6e0a5efd9fd1ba9ecaae66d832f5b93459626d61a27f838685c"
+tags = ["event:ken.combo_finish", "pack:arcade"]
+notes = "Kenney Digital Audio pack, file Audio/zapThreeToneUp.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "sounds/ken/combo-step-1.flac"
+kind = "sound"
+ship = false
+title = "wooden rods single strike.ogg"
+author = "adharca (freesound.org)"
+source_page = "https://freesound.org/people/adharca/sounds/275679/"
+download_url = "https://cdn.freesound.org/previews/275/275679_4366671-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-3.8 dB)"
+width = 0
+height = 0
+duration_ms = 248
+sha256 = "14f3b0247713e510cfef7daaf333c42e31d7c4bcf9b06a9c18aaa1115d7a79e6"
+tags = ["event:ken.combo_step", "pack:dojo"]
+notes = "Freesound sound #275679; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/ken/combo-step-2.flac"
+kind = "sound"
+ship = false
+title = "LLFclave.aif"
+author = "LozKaye (freesound.org)"
+source_page = "https://freesound.org/people/LozKaye/sounds/94027/"
+download_url = "https://cdn.freesound.org/previews/94/94027_469745-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (-2.8 dB)"
+width = 0
+height = 0
+duration_ms = 147
+sha256 = "4ddc2ac178f3a7803d166b6b7a27fb9aedb3a1feea240b9bceec5816141d0406"
+tags = ["event:ken.combo_step", "pack:dojo"]
+notes = "Freesound sound #94027; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/ken/combo-step-3.flac"
+kind = "sound"
+ship = false
+title = "8-Bit Text Blip - Medium Pitch"
+author = "SomeGuy22 (freesound.org)"
+source_page = "https://freesound.org/people/SomeGuy22/sounds/431326/"
+download_url = "https://cdn.freesound.org/previews/431/431326_2711716-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (-2.9 dB)"
+width = 0
+height = 0
+duration_ms = 64
+sha256 = "f36b4d3f45915bc42747c37e47f912db8b162719f283de1b6b8ab9e1bd30107f"
+tags = ["event:ken.combo_step", "pack:arcade"]
+notes = "Freesound sound #431326; license shown on item page: Creative Commons 0. Original 8-bit blip made by the uploader for their own game (not ripped from a commercial game); no voice."
+
+[[asset]]
+path = "sounds/ken/first-strike-1.flac"
+kind = "sound"
+ship = false
+title = "Bamboo Whip Sound Effect"
+author = "UnderlinedDesigns (freesound.org)"
+source_page = "https://freesound.org/people/UnderlinedDesigns/sounds/191766/"
+download_url = "https://cdn.freesound.org/previews/191/191766_2213158-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (+0.3 dB)"
+width = 0
+height = 0
+duration_ms = 1008
+sha256 = "fac7abde9e7676fd306d651b200eafdc800671966eb6a6501263db475f245e6a"
+tags = ["event:ken.first_strike", "pack:dojo"]
+notes = "Freesound sound #191766; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/ken/first-strike-2.flac"
+kind = "sound"
+ship = false
+title = "Woosh (stick swung in the air)"
+author = "Dalesome (freesound.org)"
+source_page = "https://freesound.org/people/Dalesome/sounds/352719/"
+download_url = "https://cdn.freesound.org/previews/352/352719_6513636-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; dual-mono preview downmixed to mono; leading silence trimmed (-51 dB), trailing silence trimmed (-61 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (+0.5 dB)"
+width = 0
+height = 0
+duration_ms = 434
+sha256 = "dd30e0376b9e0175b6b1bbbc3f0a31cecc20bb51437d3862b22d752818f121ed"
+tags = ["event:ken.first_strike", "pack:dojo"]
+notes = "Freesound sound #352719; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/ken/ko-1.flac"
+kind = "sound"
+ship = false
+title = "BULGARIAN GONG.wav"
+author = "zgump (freesound.org)"
+source_page = "https://freesound.org/people/zgump/sounds/82523/"
+download_url = "https://cdn.freesound.org/previews/82/82523_377011-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-2.8 dB)"
+width = 0
+height = 0
+duration_ms = 1611
+sha256 = "9d928824708608bce8875788fc67018de1d3d62a32beb0a6e86cfb5aab61421d"
+tags = ["event:ken.ko", "pack:dojo"]
+notes = "Freesound sound #82523; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/ken/ko-2.flac"
+kind = "sound"
+ship = false
+title = "Small Gong_Soft Hit_RAW"
+author = "cabled_mess (freesound.org)"
+source_page = "https://freesound.org/people/cabled_mess/sounds/369428/"
+download_url = "https://cdn.freesound.org/previews/369/369428_5450487-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; tail trimmed 5.38 s → 3.0 s with 80 ms fade-out; peak-normalized to −3 dBFS (-1.8 dB)"
+width = 0
+height = 0
+duration_ms = 3000
+sha256 = "8d9461531769833a185ebf17b668e2f6db6af50ef1ba76394f6fabc17c4b9be6"
+tags = ["event:ken.ko", "pack:dojo"]
+notes = "Freesound sound #369428; license shown on item page: Creative Commons 0. Unprocessed small gong recording; used for ken.ko (dojo gong hit)."
+
+[[asset]]
+path = "sounds/ken/streak-1.flac"
+kind = "sound"
+ship = false
+title = "Fire Crackling"
+author = "AntumDeluge (freesound.org)"
+source_page = "https://freesound.org/people/AntumDeluge/sounds/188038/"
+download_url = "https://cdn.freesound.org/previews/188/188038_3403708-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-53 dB), trailing silence trimmed (-63 dB), 5 ms fade-in; tail trimmed 2.87 s → 2.0 s with 80 ms fade-out; peak-normalized to −3 dBFS (+5.3 dB)"
+width = 0
+height = 0
+duration_ms = 2000
+sha256 = "f4c59f4e1187e8476b8dbcfb875b443e2c2c9453e87a0600bd3f1ca86d82dc61"
+tags = ["event:ken.streak", "pack:dojo"]
+notes = "Freesound sound #188038; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/ken/streak-2.flac"
+kind = "sound"
+ship = false
+title = "Digital Audio: powerUp3.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/digital-audio"
+download_url = "https://kenney.nl/media/pages/assets/digital-audio/216eac4753-1677590265/kenney_digital-audio.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Digital Audio pack file Audio/powerUp3.ogg → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-0.9 dB)"
+width = 0
+height = 0
+duration_ms = 859
+sha256 = "1c234bc1e79688c0accde6e16f830b03f81b00fd1358931c3756086c909e6a54"
+tags = ["event:ken.streak", "pack:arcade"]
+notes = "Kenney Digital Audio pack, file Audio/powerUp3.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "sounds/notify/digest-1.flac"
+kind = "sound"
+ship = false
+title = "Signal-Ring 1"
+author = "Vendarro (freesound.org)"
+source_page = "https://freesound.org/people/Vendarro/sounds/399315/"
+download_url = "https://cdn.freesound.org/previews/399/399315_4519159-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; dual-mono preview downmixed to mono; leading silence trimmed (-51 dB), trailing silence trimmed (-61 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-0.2 dB)"
+width = 0
+height = 0
+duration_ms = 1396
+sha256 = "79cb7170fbfde4fb00be708c853f34908af6bac539ebf65cf3c3df1a5af4f75f"
+tags = ["event:notify.digest", "pack:dojo"]
+notes = "Freesound sound #399315; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/digest-2.flac"
+kind = "sound"
+ship = false
+title = "Chime sound"
+author = "jgreer (freesound.org)"
+source_page = "https://freesound.org/people/jgreer/sounds/333629/"
+download_url = "https://cdn.freesound.org/previews/333/333629_3421003-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (+2.6 dB)"
+width = 0
+height = 0
+duration_ms = 1403
+sha256 = "be811d0990e06bb64a39387847915ca25a8acd532ae702e15e971e312383721c"
+tags = ["event:notify.digest", "pack:dojo"]
+notes = "Freesound sound #333629; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/mention-1.flac"
+kind = "sound"
+ship = false
+title = "Small Bell #2"
+author = "steffcaffrey (freesound.org)"
+source_page = "https://freesound.org/people/steffcaffrey/sounds/452379/"
+download_url = "https://cdn.freesound.org/previews/452/452379_1844073-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; dual-mono preview downmixed to mono; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (-1.9 dB)"
+width = 0
+height = 0
+duration_ms = 948
+sha256 = "7e9e3b030d03173d172da7fc21ee643414f95546cc10576483c3c5648f8dc6ae"
+tags = ["event:notify.mention", "pack:dojo"]
+notes = "Freesound sound #452379; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/mention-2.flac"
+kind = "sound"
+ship = false
+title = "ding.wav"
+author = "Dr. Macak (freesound.org)"
+source_page = "https://freesound.org/people/Dr.%20Macak/sounds/434627/"
+download_url = "https://cdn.freesound.org/previews/434/434627_1848520-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; dual-mono preview downmixed to mono; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-4.9 dB)"
+width = 0
+height = 0
+duration_ms = 1248
+sha256 = "962baaaa06cf37ee449ca21dca58fdc49092dbb6f88497766dbf99c8fdf7e306"
+tags = ["event:notify.mention", "pack:dojo"]
+notes = "Freesound sound #434627; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/mention-3.flac"
+kind = "sound"
+ship = false
+title = "Digital Audio: highUp.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/digital-audio"
+download_url = "https://kenney.nl/media/pages/assets/digital-audio/216eac4753-1677590265/kenney_digital-audio.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Digital Audio pack file Audio/highUp.ogg → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-2.9 dB)"
+width = 0
+height = 0
+duration_ms = 376
+sha256 = "3619299895cbed19e8814cac473cdc49c946988870bfb4af36d456f14c68ac4e"
+tags = ["event:notify.mention", "pack:arcade"]
+notes = "Kenney Digital Audio pack, file Audio/highUp.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "sounds/notify/nudge-1.flac"
+kind = "sound"
+ship = false
+title = "Music box note"
+author = "thomasjaunism (freesound.org)"
+source_page = "https://freesound.org/people/thomasjaunism/sounds/218459/"
+download_url = "https://cdn.freesound.org/previews/218/218459_3344538-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-52 dB), trailing silence trimmed (-62 dB), 5 ms fade-in; tail trimmed 2.20 s → 2.0 s with 80 ms fade-out; peak-normalized to −3 dBFS (+4.2 dB)"
+width = 0
+height = 0
+duration_ms = 2000
+sha256 = "d57e0911d6771c9d8df4850642e12455d28e7d530789e5c9162bd59b2cd8799c"
+tags = ["event:notify.nudge", "pack:dojo"]
+notes = "Freesound sound #218459; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/nudge-2.flac"
+kind = "sound"
+ship = false
+title = "simple ding.mp3"
+author = "achinverma (freesound.org)"
+source_page = "https://freesound.org/people/achinverma/sounds/332518/"
+download_url = "https://cdn.freesound.org/previews/332/332518_4405301-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; tail trimmed 2.54 s → 2.0 s with 80 ms fade-out; peak-normalized to −3 dBFS (+0.1 dB)"
+width = 0
+height = 0
+duration_ms = 2000
+sha256 = "f59171bfb05caa5ed422f928e4c22e183aa788dc7c39e9d24007028743f7ea50"
+tags = ["event:notify.nudge", "pack:dojo"]
+notes = "Freesound sound #332518; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/pipeline-failed-1.flac"
+kind = "sound"
+ship = false
+title = "Mokugyo.wav"
+author = "jonopodmore (freesound.org)"
+source_page = "https://freesound.org/people/jonopodmore/sounds/607215/"
+download_url = "https://cdn.freesound.org/previews/607/607215_541139-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; dual-mono preview downmixed to mono; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (+0.4 dB)"
+width = 0
+height = 0
+duration_ms = 224
+sha256 = "93a668dcdf1ca7a5f5d7d8b1d5228885ae2da0c80461c6c6327e01b4c7df476a"
+tags = ["event:notify.pipeline_failed", "pack:dojo"]
+notes = "Freesound sound #607215; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/pipeline-failed-2.flac"
+kind = "sound"
+ship = false
+title = "clavelow.wav"
+author = "MarleneAyni (freesound.org)"
+source_page = "https://freesound.org/people/MarleneAyni/sounds/90016/"
+download_url = "https://cdn.freesound.org/previews/90/90016_929621-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; dual-mono preview downmixed to mono; leading silence trimmed (-60 dB), trailing silence trimmed (-70 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (+20.7 dB)"
+width = 0
+height = 0
+duration_ms = 165
+sha256 = "92d1673ded8d9f3b74f78c270c841ffb958e76d8b0fad3587e3f64b6ac0ddc94"
+tags = ["event:notify.pipeline_failed", "pack:dojo"]
+notes = "Freesound sound #90016; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/pipeline-failed-3.flac"
+kind = "sound"
+ship = false
+title = "Digital Audio: zapThreeToneDown.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/digital-audio"
+download_url = "https://kenney.nl/media/pages/assets/digital-audio/216eac4753-1677590265/kenney_digital-audio.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Digital Audio pack file Audio/zapThreeToneDown.ogg → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-2.6 dB)"
+width = 0
+height = 0
+duration_ms = 1228
+sha256 = "ebb6554345a66766f37bca1ac60b6e636b5d7316762101a7a678141497b7130d"
+tags = ["event:notify.pipeline_failed", "pack:arcade"]
+notes = "Kenney Digital Audio pack, file Audio/zapThreeToneDown.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "sounds/notify/pipeline-succeeded-1.flac"
+kind = "sound"
+ship = false
+title = "d#2.WAV"
+author = "stomachache (freesound.org)"
+source_page = "https://freesound.org/people/stomachache/sounds/130531/"
+download_url = "https://cdn.freesound.org/previews/130/130531_177850-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (-2.7 dB)"
+width = 0
+height = 0
+duration_ms = 406
+sha256 = "ce137addc3bff472334704cbf7f8ee3f6c6ec7f47d9e850642f2018648852b6d"
+tags = ["event:notify.pipeline_succeeded", "pack:dojo"]
+notes = "Freesound sound #130531; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/pipeline-succeeded-2.flac"
+kind = "sound"
+ship = false
+title = "Kalimba G5.wav"
+author = "nemaavla (freesound.org)"
+source_page = "https://freesound.org/people/nemaavla/sounds/441143/"
+download_url = "https://cdn.freesound.org/previews/441/441143_2007100-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; tail trimmed 3.10 s → 2.0 s with 80 ms fade-out; peak-normalized to −3 dBFS (-2.3 dB)"
+width = 0
+height = 0
+duration_ms = 2000
+sha256 = "7cb26525715ffaf23abab94b2f3ffd21aa72eb1f92efe529fa87dc921815a4bb"
+tags = ["event:notify.pipeline_succeeded", "pack:dojo"]
+notes = "Freesound sound #441143; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/pr-approved-1.flac"
+kind = "sound"
+ship = false
+title = "GASP_Marimba_Correct_2.wav"
+author = "Rob_Marion (freesound.org)"
+source_page = "https://freesound.org/people/Rob_Marion/sounds/542009/"
+download_url = "https://cdn.freesound.org/previews/542/542009_6856600-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-1.6 dB)"
+width = 0
+height = 0
+duration_ms = 613
+sha256 = "bd9286395b994cc4a47bedda6adc0a3e9237fc810df63202e1abf995b965b201"
+tags = ["event:notify.pr_approved", "pack:dojo"]
+notes = "Freesound sound #542009; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/pr-approved-2.flac"
+kind = "sound"
+ship = false
+title = "High-Pitched Two-Note Notification"
+author = "eqylizer (freesound.org)"
+source_page = "https://freesound.org/people/eqylizer/sounds/624598/"
+download_url = "https://cdn.freesound.org/previews/624/624598_13772754-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-52 dB), trailing silence trimmed (-62 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (+4.4 dB)"
+width = 0
+height = 0
+duration_ms = 870
+sha256 = "3772edae4a303fae71105ac25e373fe991db58019e9dc59fb5ef8b4dc978f7b6"
+tags = ["event:notify.pr_approved", "pack:dojo"]
+notes = "Freesound sound #624598; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/pr-changes-1.flac"
+kind = "sound"
+ship = false
+title = "Ding Dong"
+author = "MatthewWong (freesound.org)"
+source_page = "https://freesound.org/people/MatthewWong/sounds/361564/"
+download_url = "https://cdn.freesound.org/previews/361/361564_6638557-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; tail trimmed 2.57 s → 2.0 s with 80 ms fade-out; peak-normalized to −3 dBFS (-2.7 dB)"
+width = 0
+height = 0
+duration_ms = 2000
+sha256 = "38b6244ee0d34d276255620f6f0966dcf00b3285458e4689861573b8ccbdd4cf"
+tags = ["event:notify.pr_changes", "pack:dojo"]
+notes = "Freesound sound #361564; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/pr-changes-2.flac"
+kind = "sound"
+ship = false
+title = "Interface Sounds: question_002.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/interface-sounds"
+download_url = "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Interface Sounds pack file Audio/question_002.ogg → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-2.1 dB)"
+width = 0
+height = 0
+duration_ms = 327
+sha256 = "db07694b9f1457046324e2bf414bc4beca221fa71100945555c24978874e938a"
+tags = ["event:notify.pr_changes", "pack:dojo"]
+notes = "Kenney Interface Sounds pack, file Audio/question_002.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "sounds/notify/pr-comment-1.flac"
+kind = "sound"
+ship = false
+title = "Marimba note struck"
+author = "LloydEvans09 (freesound.org)"
+source_page = "https://freesound.org/people/LloydEvans09/sounds/185833/"
+download_url = "https://cdn.freesound.org/previews/185/185833_2567799-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (-1.7 dB)"
+width = 0
+height = 0
+duration_ms = 684
+sha256 = "d47d02ac67906a0e342608e0af46af477ba981ae2f57b894ee8d264ab0707ab3"
+tags = ["event:notify.pr_comment", "pack:dojo"]
+notes = "Freesound sound #185833; license shown on item page: Creative Commons 0. Uploader notes modest signal-to-noise ratio (room recording)."
+
+[[asset]]
+path = "sounds/notify/pr-comment-2.flac"
+kind = "sound"
+ship = false
+title = "kalimba.wav"
+author = "Metrolynn (freesound.org)"
+source_page = "https://freesound.org/people/Metrolynn/sounds/361020/"
+download_url = "https://cdn.freesound.org/previews/361/361020_6493174-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-0.2 dB)"
+width = 0
+height = 0
+duration_ms = 650
+sha256 = "487327c2adf5d46195907e84aa16516f8b13f67e522d22ee1a46c7f1029c56e1"
+tags = ["event:notify.pr_comment", "pack:dojo"]
+notes = "Freesound sound #361020; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/review-requested-1.flac"
+kind = "sound"
+ship = false
+title = "1ring"
+author = "iluppai (freesound.org)"
+source_page = "https://freesound.org/people/iluppai/sounds/148849/"
+download_url = "https://cdn.freesound.org/previews/148/148849_1558892-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-69 dB), trailing silence trimmed (-79 dB), 5 ms fade-in; tail trimmed 2.53 s → 2.0 s with 80 ms fade-out; peak-normalized to −3 dBFS (+20.7 dB)"
+width = 0
+height = 0
+duration_ms = 2000
+sha256 = "dd4904a5b25ad815ce54f2be6856444c40b1feaa0db3a2d2f389f707e23034b1"
+tags = ["event:notify.review_requested", "pack:dojo"]
+notes = "Freesound sound #148849; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/review-requested-2.flac"
+kind = "sound"
+ship = false
+title = "Sing bowl ring"
+author = "Tpkmusic (freesound.org)"
+source_page = "https://freesound.org/people/Tpkmusic/sounds/841989/"
+download_url = "https://cdn.freesound.org/previews/841/841989_17925993-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-68 dB), trailing silence trimmed (-78 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (+20.4 dB)"
+width = 0
+height = 0
+duration_ms = 1426
+sha256 = "66e63e5e70624016cd4e1fd8b4347bfd88c697f69bffc36634ab33104c3134bc"
+tags = ["event:notify.review_requested", "pack:dojo"]
+notes = "Freesound sound #841989; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/token-expiring-1.flac"
+kind = "sound"
+ship = false
+title = "Ship Bell Two Chimes"
+author = "Sojan (freesound.org)"
+source_page = "https://freesound.org/people/Sojan/sounds/353232/"
+download_url = "https://cdn.freesound.org/previews/353/353232_5477651-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-54 dB), trailing silence trimmed (-64 dB), 5 ms fade-in; tail trimmed 2.30 s → 2.0 s with 80 ms fade-out; peak-normalized to −3 dBFS (+5.6 dB)"
+width = 0
+height = 0
+duration_ms = 2000
+sha256 = "736924bfbfce3df4a5444f5351afcd8e04b3a8767c83be2685d60a436ce1eae9"
+tags = ["event:notify.token_expiring", "pack:dojo"]
+notes = "Freesound sound #353232; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/token-expiring-2.flac"
+kind = "sound"
+ship = false
+title = "Single Chime 2"
+author = "steffcaffrey (freesound.org)"
+source_page = "https://freesound.org/people/steffcaffrey/sounds/449947/"
+download_url = "https://cdn.freesound.org/previews/449/449947_1844073-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; dual-mono preview downmixed to mono; leading silence trimmed (-53 dB), trailing silence trimmed (-63 dB), 5 ms fade-in; tail trimmed 2.85 s → 2.0 s with 80 ms fade-out; peak-normalized to −3 dBFS (+2.2 dB)"
+width = 0
+height = 0
+duration_ms = 2000
+sha256 = "307dcb73801eb95e571bd9fff3bc5767953e049e7d3e75d9266d1fc4ddc65764"
+tags = ["event:notify.token_expiring", "pack:dojo"]
+notes = "Freesound sound #449947; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/work-assigned-1.flac"
+kind = "sound"
+ship = false
+title = "PaperSlide.wav"
+author = "eyesonlegs (freesound.org)"
+source_page = "https://freesound.org/people/eyesonlegs/sounds/464302/"
+download_url = "https://cdn.freesound.org/previews/464/464302_775844-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-52 dB), trailing silence trimmed (-62 dB), 5 ms fade-in; peak-normalized to −3 dBFS (+4.7 dB)"
+width = 0
+height = 0
+duration_ms = 1567
+sha256 = "2805372f72d820875b1407cadcde5066cf66fd411d0408cab631a09e5ed1d60b"
+tags = ["event:notify.work_assigned", "pack:dojo"]
+notes = "Freesound sound #464302; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/notify/work-assigned-2.flac"
+kind = "sound"
+ship = false
+title = "Sliding Envelope.wav"
+author = "MTJohnson (freesound.org)"
+source_page = "https://freesound.org/people/MTJohnson/sounds/444431/"
+download_url = "https://cdn.freesound.org/previews/444/444431_8522109-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; dual-mono preview downmixed to mono; leading silence trimmed (-72 dB), trailing silence trimmed (-82 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (+20.9 dB)"
+width = 0
+height = 0
+duration_ms = 682
+sha256 = "fb26e2223a042e9e0135c073bccb98c97756cd528be81f16f4b4d1b5f9f169e8"
+tags = ["event:notify.work_assigned", "pack:dojo"]
+notes = "Freesound sound #444431; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/onboarding/complete-1.flac"
+kind = "sound"
+ship = false
+title = "temple bowl"
+author = "midge-f (freesound.org)"
+source_page = "https://freesound.org/people/midge-f/sounds/810426/"
+download_url = "https://cdn.freesound.org/previews/810/810426_17435312-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-60 dB), trailing silence trimmed (-70 dB), 5 ms fade-in; tail trimmed 5.75 s → 4.0 s with 80 ms fade-out; peak-normalized to −3 dBFS (+11.6 dB)"
+width = 0
+height = 0
+duration_ms = 4000
+sha256 = "b8297c13f633a2f5151c431c16cb6b3f7367d3c5cd1bdaeda9b366107f0d9da4"
+tags = ["event:onboarding.complete", "pack:dojo"]
+notes = "Freesound sound #810426; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/onboarding/complete-2.flac"
+kind = "sound"
+ship = false
+title = "BurmaBell.aif"
+author = "LozKaye (freesound.org)"
+source_page = "https://freesound.org/people/LozKaye/sounds/94024/"
+download_url = "https://cdn.freesound.org/previews/94/94024_469745-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-58 dB), trailing silence trimmed (-68 dB), 5 ms fade-in; tail trimmed 5.87 s → 4.0 s with 80 ms fade-out; peak-normalized to −3 dBFS (+10.6 dB)"
+width = 0
+height = 0
+duration_ms = 4000
+sha256 = "2b5a0d32ee26b4ad199cee3a352889927ed31f5f1824f13de5bd357d0a96e7b8"
+tags = ["event:onboarding.complete", "pack:dojo"]
+notes = "Freesound sound #94024; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/onboarding/complete-3.flac"
+kind = "sound"
+ship = false
+title = "Music Jingles: jingles_NES00.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/music-jingles"
+download_url = "https://kenney.nl/media/pages/assets/music-jingles/f37e530b9e-1677590399/kenney_music-jingles.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Music Jingles pack file Audio/8-Bit jingles/jingles_NES00.ogg → FLAC 48 kHz 24-bit; dual-mono preview downmixed to mono; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-0.9 dB)"
+width = 0
+height = 0
+duration_ms = 1705
+sha256 = "d6075270ae1f554fe7688519ab1e0d3be5d78ec542d0b75f14954f4a1768bb48"
+tags = ["event:onboarding.complete", "pack:arcade"]
+notes = "Kenney Music Jingles pack, file Audio/8-Bit jingles/jingles_NES00.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "sounds/ui/action-done-1.flac"
+kind = "sound"
+ship = false
+title = "Wood block hit"
+author = "thomasjaunism (freesound.org)"
+source_page = "https://freesound.org/people/thomasjaunism/sounds/218460/"
+download_url = "https://cdn.freesound.org/previews/218/218460_3344538-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-0.9 dB)"
+width = 0
+height = 0
+duration_ms = 284
+sha256 = "5adbe03bb63a7d70e0b84792c1e3f6b7c8dc1c8c810a2695abbd20fd2a607072"
+tags = ["event:ui.action_done", "pack:dojo"]
+notes = "Freesound sound #218460; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/ui/action-done-2.flac"
+kind = "sound"
+ship = false
+title = "wood block.wav"
+author = "calaudio (freesound.org)"
+source_page = "https://freesound.org/people/calaudio/sounds/53403/"
+download_url = "https://cdn.freesound.org/previews/53/53403_400592-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; dual-mono preview downmixed to mono; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (+3.0 dB)"
+width = 0
+height = 0
+duration_ms = 210
+sha256 = "4478d2c16eabd1d7aa56279c9d9db6fe629db6450bd8741270b354657413a413"
+tags = ["event:ui.action_done", "pack:dojo"]
+notes = "Freesound sound #53403; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/ui/action-done-3.flac"
+kind = "sound"
+ship = false
+title = "Digital Audio: pepSound1.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/digital-audio"
+download_url = "https://kenney.nl/media/pages/assets/digital-audio/216eac4753-1677590265/kenney_digital-audio.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Digital Audio pack file Audio/pepSound1.ogg → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-2.0 dB)"
+width = 0
+height = 0
+duration_ms = 325
+sha256 = "3542620d6bf24a91d00093faed560d56bddebe694a7004a97286b3699361c98a"
+tags = ["event:ui.action_done", "pack:arcade"]
+notes = "Kenney Digital Audio pack, file Audio/pepSound1.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "sounds/ui/copy-1.flac"
+kind = "sound"
+ship = false
+title = "Casino Audio: card-place-1.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/casino-audio"
+download_url = "https://kenney.nl/media/pages/assets/casino-audio/2472606a04-1721639069/kenney_casino-audio.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Casino Audio pack file Audio/card-place-1.ogg → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (-1.8 dB)"
+width = 0
+height = 0
+duration_ms = 603
+sha256 = "f903ec0007003468dac9c174bc75ee30da6a43fad8e4cb5e601482ba736ae619"
+tags = ["event:ui.copy", "pack:dojo"]
+notes = "Kenney Casino Audio pack, file Audio/card-place-1.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "sounds/ui/copy-2.flac"
+kind = "sound"
+ship = false
+title = "Toy Electronic Typewriter Paper Knob Single Click"
+author = "sprinkleCipher (freesound.org)"
+source_page = "https://freesound.org/people/sprinkleCipher/sounds/752752/"
+download_url = "https://cdn.freesound.org/previews/752/752752_14222278-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; dual-mono preview downmixed to mono; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-4.4 dB)"
+width = 0
+height = 0
+duration_ms = 227
+sha256 = "dd9e734c7ddff8ee8af72375ed89c57e9d87497173b5335e5992a749e99d730a"
+tags = ["event:ui.copy", "pack:dojo"]
+notes = "Freesound sound #752752; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/ui/error-1.flac"
+kind = "sound"
+ship = false
+title = "Impact Sounds: impactPlank_medium_000.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/impact-sounds"
+download_url = "https://kenney.nl/media/pages/assets/impact-sounds/87b4ddecda-1677589768/kenney_impact-sounds.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Impact Sounds pack file Audio/impactPlank_medium_000.ogg → FLAC 48 kHz 24-bit; dual-mono preview downmixed to mono; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (-4.8 dB)"
+width = 0
+height = 0
+duration_ms = 423
+sha256 = "cc853667b41036cef41585312990c73c1957e6dd9b835bb884b71aaef720998d"
+tags = ["event:ui.error", "pack:dojo"]
+notes = "Kenney Impact Sounds pack, file Audio/impactPlank_medium_000.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "sounds/ui/error-2.flac"
+kind = "sound"
+ship = false
+title = "Interface Sounds: error_004.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/interface-sounds"
+download_url = "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Interface Sounds pack file Audio/error_004.ogg → FLAC 48 kHz 24-bit; dual-mono preview downmixed to mono; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (-3.2 dB)"
+width = 0
+height = 0
+duration_ms = 105
+sha256 = "0cd8dd061422e1d3edb70fbf63234985ed962634bb20e4a7775730a466782788"
+tags = ["event:ui.error", "pack:dojo"]
+notes = "Kenney Interface Sounds pack, file Audio/error_004.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "sounds/ui/error-3.flac"
+kind = "sound"
+ship = false
+title = "Digital Audio: lowDown.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/digital-audio"
+download_url = "https://kenney.nl/media/pages/assets/digital-audio/216eac4753-1677590265/kenney_digital-audio.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Digital Audio pack file Audio/lowDown.ogg → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (-2.4 dB)"
+width = 0
+height = 0
+duration_ms = 646
+sha256 = "f189c4a406e63c5057741858dbf5502daaf6ff7355c97679121035008f8f2b93"
+tags = ["event:ui.error", "pack:arcade"]
+notes = "Kenney Digital Audio pack, file Audio/lowDown.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "sounds/ui/palette-open-1.flac"
+kind = "sound"
+ship = false
+title = "Whoosh"
+author = "qubodup (freesound.org)"
+source_page = "https://freesound.org/people/qubodup/sounds/60013/"
+download_url = "https://cdn.freesound.org/previews/60/60013_71257-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (+0.6 dB)"
+width = 0
+height = 0
+duration_ms = 426
+sha256 = "322c3c30104335c828ee0921dc28ef228fbe78e38d37ee8f86b21230b168a458"
+tags = ["event:ui.palette_open", "pack:dojo"]
+notes = "Freesound sound #60013; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/ui/palette-open-2.flac"
+kind = "sound"
+ship = false
+title = "SWOSH-01 44.1kHz"
+author = "qubodup (freesound.org)"
+source_page = "https://freesound.org/people/qubodup/sounds/59988/"
+download_url = "https://cdn.freesound.org/previews/59/59988_71257-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-2.6 dB)"
+width = 0
+height = 0
+duration_ms = 277
+sha256 = "6ee06b84fbb59597cc7527835e4c021d3ff298a56f4914fd0fe716b47277e6d7"
+tags = ["event:ui.palette_open", "pack:dojo"]
+notes = "Freesound sound #59988; license shown on item page: Creative Commons 0. Description says 'See profile for CC BY attribution requirements' (generic uploader boilerplate); the item's own license block is CC0."
+
+[[asset]]
+path = "sounds/ui/snooze-1.flac"
+kind = "sound"
+ship = false
+title = "55_Coger_Foto.wav (Sliding Paper)"
+author = "Atrius1 (freesound.org)"
+source_page = "https://freesound.org/people/Atrius1/sounds/470189/"
+download_url = "https://cdn.freesound.org/previews/470/470189_9982371-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-69 dB), trailing silence trimmed (-79 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (+21.4 dB)"
+width = 0
+height = 0
+duration_ms = 366
+sha256 = "82b46923a0c259612b112b61cd6defb56ee969ad97086e81acbb1d4db048ba7f"
+tags = ["event:ui.snooze", "pack:dojo"]
+notes = "Freesound sound #470189; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/ui/snooze-2.flac"
+kind = "sound"
+ship = false
+title = "turn the page"
+author = "contramundum (freesound.org)"
+source_page = "https://freesound.org/people/contramundum/sounds/267127/"
+download_url = "https://cdn.freesound.org/previews/267/267127_5028876-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-55 dB), trailing silence trimmed (-65 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (+7.0 dB)"
+width = 0
+height = 0
+duration_ms = 473
+sha256 = "7211dff1b18f761ade4d28a160498cb9cd341b25cc5806d8db3995186a506c18"
+tags = ["event:ui.snooze", "pack:dojo"]
+notes = "Freesound sound #267127; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/ui/sync-done-1.flac"
+kind = "sound"
+ship = false
+title = "tiny ping.wav"
+author = "UlfHubert (freesound.org)"
+source_page = "https://freesound.org/people/UlfHubert/sounds/266947/"
+download_url = "https://cdn.freesound.org/previews/266/266947_5012562-hq.mp3"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Freesound HQ MP3 preview (original download requires login) → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; 30 ms de-click fade-out (source ends while still sounding); peak-normalized to −3 dBFS (-2.7 dB)"
+width = 0
+height = 0
+duration_ms = 1130
+sha256 = "ab3ceb05fd73e8a34065b7d26cb97b7c3b7d2b419177c8c268358cc995484b2c"
+tags = ["event:ui.sync_done", "pack:dojo"]
+notes = "Freesound sound #266947; license shown on item page: Creative Commons 0."
+
+[[asset]]
+path = "sounds/ui/sync-done-2.flac"
+kind = "sound"
+ship = false
+title = "Interface Sounds: glass_001.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/interface-sounds"
+download_url = "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Interface Sounds pack file Audio/glass_001.ogg → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (+3.2 dB)"
+width = 0
+height = 0
+duration_ms = 276
+sha256 = "00676a50bd988bcf5b5544cff2742e7e5e7c7bcb8dfb8ba6c87b3c836fb2b808"
+tags = ["event:ui.sync_done", "pack:dojo"]
+notes = "Kenney Interface Sounds pack, file Audio/glass_001.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "sounds/ui/toggle-off-1.flac"
+kind = "sound"
+ship = false
+title = "Interface Sounds: toggle_001.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/interface-sounds"
+download_url = "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Interface Sounds pack file Audio/toggle_001.ogg → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (-2.1 dB)"
+width = 0
+height = 0
+duration_ms = 99
+sha256 = "7a0e48854a4d7f0a0c10de77ab68ce012a4ebc78bdc911f73d4c21208704f30d"
+tags = ["event:ui.toggle_off", "pack:dojo"]
+notes = "Kenney Interface Sounds pack, file Audio/toggle_001.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "sounds/ui/toggle-off-2.flac"
+kind = "sound"
+ship = false
+title = "Interface Sounds: select_002.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/interface-sounds"
+download_url = "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Interface Sounds pack file Audio/select_002.ogg → FLAC 48 kHz 24-bit; dual-mono preview downmixed to mono; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (-0.1 dB)"
+width = 0
+height = 0
+duration_ms = 40
+sha256 = "d9e838bf240e4b6055db31a4aa5588595bf5cf0bdbfd404ea0a999c1ab7d5d2f"
+tags = ["event:ui.toggle_off", "pack:dojo"]
+notes = "Kenney Interface Sounds pack, file Audio/select_002.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "sounds/ui/toggle-on-1.flac"
+kind = "sound"
+ship = false
+title = "Interface Sounds: toggle_002.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/interface-sounds"
+download_url = "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Interface Sounds pack file Audio/toggle_002.ogg → FLAC 48 kHz 24-bit; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (-2.0 dB)"
+width = 0
+height = 0
+duration_ms = 97
+sha256 = "5b8344d6d8146c16a636030033d5df1fff9a33dff6347ebf77260948a0820fdf"
+tags = ["event:ui.toggle_on", "pack:dojo"]
+notes = "Kenney Interface Sounds pack, file Audio/toggle_002.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "sounds/ui/toggle-on-2.flac"
+kind = "sound"
+ship = false
+title = "Interface Sounds: select_001.ogg"
+author = "Kenney (kenney.nl)"
+source_page = "https://kenney.nl/assets/interface-sounds"
+download_url = "https://kenney.nl/media/pages/assets/interface-sounds/fa43c1dd4d-1677589452/kenney_interface-sounds.zip"
+license = "CC0-1.0"
+license_url = "https://creativecommons.org/publicdomain/zero/1.0/"
+attribution_required = false
+ai_generated = false
+modified = "Kenney Interface Sounds pack file Audio/select_001.ogg → FLAC 48 kHz 24-bit; dual-mono preview downmixed to mono; leading silence trimmed (-50 dB), trailing silence trimmed (-60 dB), 5 ms fade-in; peak-normalized to −3 dBFS (+0.7 dB)"
+width = 0
+height = 0
+duration_ms = 40
+sha256 = "ed2442d3144f1e8be7461f068f5b4d5989d0c376741b619bcaa9a37cdfe86dda"
+tags = ["event:ui.toggle_on", "pack:dojo"]
+notes = "Kenney Interface Sounds pack, file Audio/select_001.ogg; pack License.txt: CC0."
+
+[[asset]]
+path = "fonts/inter"
+kind = "font"
+ship = true
+title = "Inter (variable, roman + italic)"
+author = "The Inter Project Authors (Rasmus Andersson)"
+source_page = "https://github.com/rsms/inter/releases/tag/v4.1"
+download_url = "https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip"
+license = "OFL-1.1"
+license_url = "https://github.com/rsms/inter/blob/v4.1/LICENSE.txt"
+attribution_required = true
+ai_generated = false
+modified = "Extracted InterVariable.ttf and InterVariable-Italic.ttf from the release zip and renamed to inter-variable.ttf / inter-variable-italic.ttf; LICENSE.txt shipped as OFL.txt. Font binaries unmodified."
+width = 0
+height = 0
+duration_ms = 0
+sha256 = "d6d841c70c585c3a8adcbaaa98544e18d6a7f9e3d85896e640860df57e863054"
+tags = ["font", "ui-font-fallback"]
+notes = "Release tag v4.1 (latest as of 2026-09-25). Files: inter-variable.ttf (sha256 4989b125924991b90d05b2d16e0e388c48f7d5bb8b30539bbf9c755278d0ccaf), inter-variable-italic.ttf (d6f1f6a172d9e588438db9f986fd5cfad7b30f644374080a8a9d4d91e344586f), OFL.txt (262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a). Variable axes: wght 100-900, opsz 14-32. OFL-1.1: copyright notice + license must be bundled with the font; font may not be sold by itself. Reserved Font Name: none declared in LICENSE.txt, but keep the family name unchanged. Bundled fallback for ui_font (docs/design/tokens.md section 4)."
+
+[[asset]]
+path = "fonts/jetbrains-mono"
+kind = "font"
+ship = true
+title = "JetBrains Mono (static Regular, Italic, Bold)"
+author = "The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)"
+source_page = "https://github.com/JetBrains/JetBrainsMono/releases/tag/v2.304"
+download_url = "https://github.com/JetBrains/JetBrainsMono/releases/download/v2.304/JetBrainsMono-2.304.zip"
+license = "OFL-1.1"
+license_url = "https://github.com/JetBrains/JetBrainsMono/blob/v2.304/OFL.txt"
+attribution_required = true
+ai_generated = false
+modified = "Extracted fonts/ttf/JetBrainsMono-Regular.ttf, JetBrainsMono-Italic.ttf and JetBrainsMono-Bold.ttf and renamed to jetbrains-mono-regular.ttf / jetbrains-mono-italic.ttf / jetbrains-mono-bold.ttf; OFL.txt and AUTHORS.txt copied as-is. Font binaries unmodified. Replaced the earlier variable files (user decision 2026-09-30: static faces, no variable+static duplicates)."
+width = 0
+height = 0
+duration_ms = 0
+sha256 = "74294dd76e0de1c1c9d4792d2cba9247ee2c63504ba8c4c9f9a94104f259ed4b"
+tags = ["font", "mono-font"]
+notes = "Release tag v2.304 (latest as of 2026-09-30). Files: jetbrains-mono-regular.ttf (sha256 a0bf60ef0f83c5ed4d7a75d45838548b1f6873372dfac88f71804491898d138f), jetbrains-mono-italic.ttf (9d0a1f7a708e6af183f1193b7e81d40da294f5c67682c085d8401c60aac8ded4), jetbrains-mono-bold.ttf (5590990c82e097397517f275f430af4546e1c45cff408bde4255dad142479dcb), OFL.txt (30f0c136e3c88e422d0791acd97238870f9054a9729bc34cf2ff0d4ed8cac4ad), AUTHORS.txt (33f99c94ef0a0909d7584a5d4bde1fb9b1630daa620f5a788c28c43327e79412). Embedded in the binary by crates/ui/src/fonts.rs and registered with gpui's text system at launch; default code font (spec 0009 §3.3a, docs/design/tokens.md section 4). OFL-1.1: OFL.txt ships in the app bundle's licenses (scripts/bundle.sh)."
+
+[[asset]]
+path = "icons/lucide"
+kind = "icon"
+ship = true
+title = "Lucide icons (full SVG set)"
+author = "Lucide Icons and Contributors; Feather-derived icons (c) 2013-present Cole Bemis"
+source_page = "https://github.com/lucide-icons/lucide/releases/tag/1.48.0"
+download_url = "https://github.com/lucide-icons/lucide/releases/download/1.48.0/lucide-icons-1.48.0.zip"
+license = "ISC"
+license_url = "https://github.com/lucide-icons/lucide/blob/1.48.0/LICENSE"
+attribution_required = true
+ai_generated = false
+modified = "Flattened icons/*.svg from the release zip into icons/lucide/ (per-icon .json metadata dropped); LICENSE fetched from the repo at tag 1.48.0. SVGs unmodified."
+width = 0
+height = 0
+duration_ms = 0
+sha256 = "c900e8e1da3cb2cc6ebca8bd6ef30e38b4b200674531d79f7973271c764c1917"
+tags = ["icon", "ui"]
+notes = "Release 1.48.0 (latest as of 2026-09-25); 1854 SVGs (24x24, stroke=currentColor) + LICENSE. The LICENSE is ISC for Lucide plus MIT (Cole Bemis) for the icons derived from Feather, listed in the LICENSE file; effective SPDX expression 'ISC AND MIT' (both allowlisted). Keep LICENSE with the set and carry both notices into THIRD_PARTY_NOTICES."
+
+# Original illustrations (owner-generated, 2026-10-01): Today moods (spec 0017 FR-30)
+# and the onboarding welcome (spec 0001 FR-19). Embedded by crates/ui/src/images.rs.
+
+[[asset]]
+path = "images/today/fresh-start.webp"
+kind = "illustration"
+ship = true
+title = "A fresh start"
+author = "adoken (owner), generated with a built-in image model"
+source_page = ""
+download_url = ""
+license = "LicenseRef-adoken"
+license_url = ""
+attribution_required = false
+ai_generated = true
+modified = "downscaled 1536×1024 PNG → 528×352 (2× display box), lossy WebP q90 with lossless-quality alpha"
+width = 528
+height = 352
+duration_ms = 0
+sha256 = "f629f5cfc07c58f0574a0cd82346f067104833c25afa8127ccf7cacaa0b583ff"
+tags = ["today-mood", "fresh-start"]
+notes = "Original art, no text except the adoken wordmark on the welcome image. Source: output/today-redesign-2026-10-01/images/01-fresh-start.png (sha256 99acf97cdc562ad0ab4ed3a23df7785eef2c3b4dac150e43773315a3ba4ac9d0); prompts in image-generation-prompts.txt there."
+
+[[asset]]
+path = "images/today/finding-flow.webp"
+kind = "illustration"
+ship = true
+title = "Finding your flow"
+author = "adoken (owner), generated with a built-in image model"
+source_page = ""
+download_url = ""
+license = "LicenseRef-adoken"
+license_url = ""
+attribution_required = false
+ai_generated = true
+modified = "downscaled 1536×1024 PNG → 528×352 (2× display box), lossy WebP q90 with lossless-quality alpha"
+width = 528
+height = 352
+duration_ms = 0
+sha256 = "57e92acffb94adaa4dec4dda9ea75c65b62d6450439d31dc33ca3e12bdab19be"
+tags = ["today-mood", "finding-flow"]
+notes = "Original art, no text except the adoken wordmark on the welcome image. Source: output/today-redesign-2026-10-01/images/02-finding-flow.png (sha256 cbee21ffec990bcadf4263653ae79df01a98bb2a63198d651b4e965f9e0c5c69); prompts in image-generation-prompts.txt there."
+
+[[asset]]
+path = "images/today/helping-grow.webp"
+kind = "illustration"
+ship = true
+title = "Helping things grow"
+author = "adoken (owner), generated with a built-in image model"
+source_page = ""
+download_url = ""
+license = "LicenseRef-adoken"
+license_url = ""
+attribution_required = false
+ai_generated = true
+modified = "downscaled 1536×1024 PNG → 528×352 (2× display box), lossy WebP q90 with lossless-quality alpha"
+width = 528
+height = 352
+duration_ms = 0
+sha256 = "2636af29a1da6d3e16d0c9fe396c5f1d2de111d7d5478bccdb342fdac24341eb"
+tags = ["today-mood", "helping-grow"]
+notes = "Original art, no text except the adoken wordmark on the welcome image. Source: output/today-redesign-2026-10-01/images/03-helping-grow.png (sha256 fd864da3dd70eb4f94629a41fb364f5e4efbe4204df5a31b4bb3d9bd908ab74f); prompts in image-generation-prompts.txt there."
+
+[[asset]]
+path = "images/today/waiting.webp"
+kind = "illustration"
+ship = true
+title = "Waiting to bloom"
+author = "adoken (owner), generated with a built-in image model"
+source_page = ""
+download_url = ""
+license = "LicenseRef-adoken"
+license_url = ""
+attribution_required = false
+ai_generated = true
+modified = "downscaled 1536×1024 PNG → 528×352 (2× display box), lossy WebP q90 with lossless-quality alpha"
+width = 528
+height = 352
+duration_ms = 0
+sha256 = "d492ebb0db9535d1a792ffef80dc803478faefe02bae30ac2ab18f212a372103"
+tags = ["today-mood", "waiting"]
+notes = "Original art, no text except the adoken wordmark on the welcome image. Source: output/today-redesign-2026-10-01/images/04-waiting.png (sha256 10d393f88493f07708a4d67c5451d91bc316c84ad4358702df2ec21663cd62aa); prompts in image-generation-prompts.txt there."
+
+[[asset]]
+path = "images/today/blocked.webp"
+kind = "illustration"
+ship = true
+title = "Blocked"
+author = "adoken (owner), generated with a built-in image model"
+source_page = ""
+download_url = ""
+license = "LicenseRef-adoken"
+license_url = ""
+attribution_required = false
+ai_generated = true
+modified = "downscaled 1536×1024 PNG → 528×352 (2× display box), lossy WebP q90 with lossless-quality alpha"
+width = 528
+height = 352
+duration_ms = 0
+sha256 = "275a59b798f32e61a7e8bcb7c5a5a516a00e7fbcd7b1ac511f96499a445b0f15"
+tags = ["today-mood", "blocked"]
+notes = "Original art, no text except the adoken wordmark on the welcome image. Source: output/today-redesign-2026-10-01/images/05-blocked.png (sha256 c000ce0ac15af724cc48634f29d8debeae8acff667d4ebabf229105b7d67ab2a); prompts in image-generation-prompts.txt there."
+
+[[asset]]
+path = "images/today/shipped.webp"
+kind = "illustration"
+ship = true
+title = "Something shipped"
+author = "adoken (owner), generated with a built-in image model"
+source_page = ""
+download_url = ""
+license = "LicenseRef-adoken"
+license_url = ""
+attribution_required = false
+ai_generated = true
+modified = "downscaled 1536×1024 PNG → 528×352 (2× display box), lossy WebP q90 with lossless-quality alpha"
+width = 528
+height = 352
+duration_ms = 0
+sha256 = "57353c564168902d155c941b9c70e1fe509f0918a0e2e2f734be067742550d0d"
+tags = ["today-mood", "shipped"]
+notes = "Original art, no text except the adoken wordmark on the welcome image. Source: output/today-redesign-2026-10-01/images/06-shipped.png (sha256 43debde1989b16362fd79ea6559e507f598ecb57c62f4677e4a30ace48484127); prompts in image-generation-prompts.txt there."
+
+[[asset]]
+path = "images/today/clear.webp"
+kind = "illustration"
+ship = true
+title = "Clear for now"
+author = "adoken (owner), generated with a built-in image model"
+source_page = ""
+download_url = ""
+license = "LicenseRef-adoken"
+license_url = ""
+attribution_required = false
+ai_generated = true
+modified = "downscaled 1536×1024 PNG → 528×352 (2× display box), lossy WebP q90 with lossless-quality alpha"
+width = 528
+height = 352
+duration_ms = 0
+sha256 = "b9ef70d24826ad03e663dd2f25b60625ca38a10944788fcd3cc354f240be2b2f"
+tags = ["today-mood", "clear"]
+notes = "Original art, no text except the adoken wordmark on the welcome image. Source: output/today-redesign-2026-10-01/images/07-clear.png (sha256 f2da0792d764ed623f11e81108c00bf604c0375a91ac4b5475f4f1010dd2edcf); prompts in image-generation-prompts.txt there."
+
+[[asset]]
+path = "images/today/stalled.webp"
+kind = "illustration"
+ship = true
+title = "Nothing moved today"
+author = "adoken (owner), generated with a built-in image model"
+source_page = ""
+download_url = ""
+license = "LicenseRef-adoken"
+license_url = ""
+attribution_required = false
+ai_generated = true
+modified = "downscaled 1536×1024 PNG → 528×352 (2× display box), lossy WebP q90 with lossless-quality alpha"
+width = 528
+height = 352
+duration_ms = 0
+sha256 = "5982c1ccab3818be7d63bde02a33e8b35ebcc34bd82011171420711ce40208b7"
+tags = ["today-mood", "stalled"]
+notes = "Original art, no text except the adoken wordmark on the welcome image. Source: output/today-redesign-2026-10-01/images/08-stalled.png (sha256 e7be754fe58bad55f526ee3f89fcaacbaeb208f448322b5907f73bd56b06592f); prompts in image-generation-prompts.txt there."
+
+[[asset]]
+path = "images/onboarding/welcome.webp"
+kind = "illustration"
+ship = true
+title = "Welcome to adoken"
+author = "adoken (owner), generated with a built-in image model"
+source_page = ""
+download_url = ""
+license = "LicenseRef-adoken"
+license_url = ""
+attribution_required = false
+ai_generated = true
+modified = "downscaled 1536×1024 PNG → 720×480 (2× display box), lossy WebP q90 with lossless-quality alpha"
+width = 720
+height = 480
+duration_ms = 0
+sha256 = "8399d551c4d016c3522d79d1f10e3daa72695078f55775f5e6984264202c4398"
+tags = ["onboarding", "onboarding-welcome"]
+notes = "Original art, no text except the adoken wordmark on the welcome image. Source: output/today-redesign-2026-10-01/images/09-onboarding-welcome.png (sha256 76a5d1815ebc688786d1905a33ad7a674b26fa2f94cf3000bd2513ec303bde10); prompts in image-generation-prompts.txt there."
+
+[[asset]]
+path = "ken/seal-done.svg"
+kind = "illustration"
+ship = true
+title = "済 seal stamp (celebration, arcade style)"
+author = "adoken (drawn in-house)"
+source_page = ""
+download_url = ""
+license = "LicenseRef-adoken"
+license_url = ""
+attribution_required = false
+ai_generated = false
+modified = "generated from crates/ken/src/seal.rs (seal::svg); a test keeps them in sync"
+width = 105
+height = 105
+duration_ms = 0
+sha256 = "f3867e983d8440011da415ad4585cb88a81625020ec1cd19769c42f9e14217f2"
+tags = ["ken", "celebration"]
+notes = "Original geometry (docs/design/ken.md §9, §12.3): brush-stroke 済 in a broken-edged seal border, layers fill/outline colored at runtime. Pending the ken §8 + native-speaker review (spec 0022 AC-21)."

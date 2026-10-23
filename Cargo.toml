@@ -1,0 +1,127 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/app",
+    "crates/theme",
+    "crates/ui",
+    "crates/gallery",
+    "crates/store",
+    "crates/ado",
+    "crates/sync",
+    "crates/search",
+    "crates/notify",
+    "crates/perf",
+    "crates/model",
+    "crates/demo",
+    "crates/nudge",
+    "crates/sound",
+    "crates/diff",
+    "crates/settings",
+    "crates/ken",
+    "crates/richtext",
+]
+
+[workspace.package]
+version = "0.0.1"
+edition = "2024"
+rust-version = "1.95"
+license = "MIT"
+publish = false
+
+[workspace.dependencies]
+adoken-theme = { path = "crates/theme" }
+adoken-ui = { path = "crates/ui" }
+adoken-store = { path = "crates/store" }
+adoken-ado = { path = "crates/ado" }
+adoken-sync = { path = "crates/sync" }
+adoken-search = { path = "crates/search" }
+adoken-perf = { path = "crates/perf" }
+adoken-notify = { path = "crates/notify" }
+adoken-model = { path = "crates/model" }
+adoken-demo = { path = "crates/demo" }
+adoken-nudge = { path = "crates/nudge" }
+adoken-sound = { path = "crates/sound" }
+adoken-diff = { path = "crates/diff" }
+adoken-settings = { path = "crates/settings" }
+adoken-ken = { path = "crates/ken" }
+adoken-richtext = { path = "crates/richtext" }
+# The app lib (`adoken_app`), for gallery stories of real views.
+adoken-app = { path = "crates/app", package = "adoken" }
+
+# gpui: the same zeronsh/zui fork and rev zeron (https://github.com/zeronsh/zeron) pins (Cargo.toml @ d1010657).
+# zui = Zed's GPUI (upstream f14fea9) extracted into a standalone repo plus the
+# comet patch line: BackdropBlur, EdgeFade, macOS 26 window vibrancy fix,
+# GPU memory bounding, ImageSource::evict, transparent-window alpha fix.
+# Why the fork and not upstream Zed: frosted windows/popovers (custom
+# backgrounds) and a small standalone checkout. See docs/zeron-reuse.md.
+# `runtime_shaders`: compile Metal shaders at startup, so builds only need the
+# Command Line Tools (no full Xcode `metal` compiler), same as zeron.
+gpui = { git = "https://github.com/zeronsh/zui", rev = "18a89af04cfe079d55275b111ac349d5640d9cda" }
+gpui_platform = { git = "https://github.com/zeronsh/zui", rev = "18a89af04cfe079d55275b111ac349d5640d9cda", features = [
+    "wayland",
+    "x11",
+    "font-kit",
+    "runtime_shaders",
+] }
+
+anyhow = "1"
+base64 = "0.22"
+futures = "0.3"
+image = { version = "0.25", default-features = false, features = ["png"] }
+serde = { version = "1", features = ["derive"] }
+thiserror = "2"
+toml = "0.9"
+# settings.toml writes keep comments and other modules' tables (crates/settings).
+toml_edit = "0.25"
+# Fight-card PNG (ken.md §5): same version and features gpui already builds.
+resvg = { version = "0.46.0", default-features = false, features = ["text", "system-fonts", "memmap-fonts", "raster-images"] }
+url = "2"
+
+# Cmd+P matcher (ADR 0001): pre-1.0, pinned exactly; the swap seam is `adoken_search::Index::query`.
+frizbee = "=0.13.0"
+criterion = "0.8.2"
+
+# Async runtime + HTTP (spec 0001): the same stack as zeron (`Cargo.toml` @ d1010657):
+# a Tokio runtime bridged into GPUI with `gpui_tokio`, reqwest over rustls.
+gpui_tokio = { git = "https://github.com/zeronsh/zui", rev = "18a89af04cfe079d55275b111ac349d5640d9cda" }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "process", "time", "sync", "io-util", "fs"] }
+tokio-util = "0.7"
+# Native roots too: corporate tenants often intercept TLS with a private CA in the system store.
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "rustls-tls-native-roots", "json", "system-proxy"] }
+serde_json = "1"
+time = { version = "0.3", features = ["serde", "formatting", "parsing", "macros"] }
+zeroize = "1"
+sha2 = "0.10"
+# Git blob ids (spec 0004 FR-2): fetched contents are verified against their object id.
+sha1_smol = "1"
+gethostname = "1"
+dirs = "6"
+log = "0.4"
+httpdate = "1"
+libc = "0.2"
+# macOS Keychain (spec 0001 FR-7) without shelling out to `security`, which would put the PAT in argv.
+security-framework = "3"
+wiremock = "0.6"
+tempfile = "3"
+# Local store (ADR 0001 §3).
+rusqlite = { version = "0.40.2", features = ["bundled"] }
+rusqlite_migration = "2.6.0"
+# Sound playback (spec 0007 FR-7): output stream opened lazily on the first play.
+rodio = { version = "0.22", default-features = false, features = ["playback"] }
+parking_lot = "0.12"
+
+[profile.dev]
+opt-level = 0
+# Disk: full debuginfo + incremental made target/debug ~15 GB. Line tables keep
+# backtraces; incremental off keeps parallel agent builds from ballooning.
+debug = "line-tables-only"
+incremental = false
+
+# gpui is slow unoptimized; optimize dependencies in dev like zed/zeron do.
+[profile.dev.package."*"]
+opt-level = 2
+debug = false
+
+[profile.release]
+lto = "thin"
+strip = "symbols"

@@ -1,0 +1,8 @@
+---
+import Notice from '../layouts/Notice.astro';
+import { notFound } from '../copy';
+---
+
+<Notice title={notFound.title} body={notFound.body} knockedOut>
+  <a class="btn" href="/">{notFound.cta}</a>
+</Notice>

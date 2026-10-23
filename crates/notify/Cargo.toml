@@ -1,0 +1,28 @@
+[package]
+name = "adoken-notify"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Notification center rules, triage state, quiet hours, delivery windows (spec 0005)."
+
+[dependencies]
+adoken-model.workspace = true
+adoken-settings.workspace = true
+adoken-store.workspace = true
+log.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+toml.workspace = true
+
+[target.'cfg(unix)'.dependencies]
+libc.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+tempfile.workspace = true
+
+[[bench]]
+name = "rules"
+harness = false

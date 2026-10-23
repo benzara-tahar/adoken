@@ -1,0 +1,41 @@
+{
+  "count": 1,
+  "value": [
+    {
+      "pullRequestId": 2,
+      "status": "completed",
+      "creationDate": "2024-03-29T01:30:19.4222456Z",
+      "title": "Example title",
+      "description": "Example description",
+      "isDraft": false,
+      "sourceRefName": "refs/heads/fix/description",
+      "targetRefName": "refs/heads/main",
+      "mergeStatus": "succeeded",
+      "createdBy": {
+        "displayName": "Dana Example",
+        "url": "https://spsprodcus5.vssps.visualstudio.com/A0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f2/_apis/Identities/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+        "_links": {
+          "avatar": {
+            "href": "https://dev.azure.com/contoso/_apis/GraphProfile/MemberAvatars/aad.ZXhhbXBsZQ"
+          }
+        },
+        "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+        "uniqueName": "dana@example.com",
+        "imageUrl": "https://dev.azure.com/contoso/_api/_common/identityImage?id=6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+        "descriptor": "aad.ZXhhbXBsZQ"
+      },
+      "reviewers": [],
+      "repository": {
+        "id": "0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f1",
+        "name": "example-repo",
+        "project": {
+          "id": "0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0",
+          "name": "Example",
+          "state": "unchanged",
+          "visibility": "unchanged",
+          "lastUpdateTime": "0001-01-01T00:00:00"
+        }
+      }
+    }
+  ]
+}

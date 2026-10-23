@@ -1,0 +1,9 @@
+---
+import { ticker } from '../copy';
+---
+
+<div class="ticker hud" role="marquee" aria-label={ticker.join(' · ')}>
+  <div class="ticker-track" aria-hidden="true">
+    {[...ticker, ...ticker].map((item) => <span>{item}</span>)}
+  </div>
+</div>

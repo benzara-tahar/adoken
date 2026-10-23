@@ -1,0 +1,490 @@
+---
+/** Move 03: notification center. Static = grouped rows, quiet hours on, a native banner; scripts/inbox.ts replays. */
+import { demo } from '../copy';
+import Icon from './Icon.astro';
+import PixelFist from './PixelFist.astro';
+
+const ib = demo.inbox;
+const ICON_BY_KIND = { pr: 'pr', run: 'pipe', mention: 'at', draft: 'pr' } as const;
+---
+
+<div class="ib-demo is-quiet is-banner" data-inbox role="img" aria-label="Mock of the adoken inbox: 47 would-be emails folded into 5 grouped rows with priorities and reasons, a pull request snoozed until tomorrow 09:00, quiet hours holding 14 notifications for a morning summary, and a native macOS banner with Open and Snooze buttons.">
+  <div class="banner" aria-hidden="true">
+    <span class="banner-icon"><PixelFist /></span>
+    <div class="banner-text">
+      <p class="banner-h"><b>{ib.banner.app}</b><span>{ib.banner.when}</span></p>
+      <p class="banner-t">{ib.banner.title}</p>
+      <p class="banner-b">{ib.banner.body}</p>
+    </div>
+    <div class="banner-actions">{ib.banner.actions.map((a) => <span>{a}</span>)}</div>
+  </div>
+
+  <div class="app ib-app" aria-hidden="true">
+    <div class="app-bar">
+      <span class="lights"><i></i><i></i><i></i></span>
+      <span class="app-title">{demo.org} · {ib.title}</span>
+      <span class="app-bar-right"><span class="quiet-chip"><Icon name="moon" />{ib.quietWindow}</span></span>
+    </div>
+    <div class="ib-head">
+      <h4>{ib.title}</h4>
+      <div class="ib-filters">{ib.filters.map((f, i) => <span class:list={{ 'is-on': i === 0 }}>{f}</span>)}</div>
+    </div>
+    <p class="ib-meter">
+      <span>{ib.emails}</span><s data-emails>{ib.emailsCount}</s><span class="arrow">→</span><b>{ib.rowsCount}</b>
+    </p>
+    <ul class="ib-rows">
+      {
+        ib.rows.map((row, i) => (
+          <li class="ib-row" data-kind={row.kind} data-prio={row.prio || undefined} data-row={i}>
+            <span class="ib-ico">
+              <Icon name={ICON_BY_KIND[row.kind]} />
+            </span>
+            <span class="ib-main">
+              <span class="ib-t">{row.title}</span>
+              <span class="ib-d">{row.detail}</span>
+            </span>
+            <span class="ib-side">
+              <span class="ib-time">{row.time}</span>
+              <span class="ib-tags">
+                <span class="ib-why">{row.why}</span>
+                {row.count && (
+                  <span class="ib-count" data-count={i === 0 ? '' : undefined}>
+                    {row.count}
+                  </span>
+                )}
+              </span>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="snooze" data-menu>
+      <p class="snooze-h"><Icon name="snooze" />Snooze<kbd>S</kbd></p>
+      {ib.snooze.map((s) => <p class="snooze-i">{s}</p>)}
+    </div>
+    <p class="ib-quiet"><Icon name="moon" /><b>{ib.quiet} {ib.quietWindow}</b><span><em data-held>{ib.heldCount}</em> {ib.held}</span></p>
+    <p class="toast" data-toast><Icon name="snooze" />{ib.snoozed}</p>
+  </div>
+</div>
+
+<script>
+  import '../scripts/inbox';
+</script>
+
+<style>
+  .ib-demo {
+    position: relative;
+    padding-top: 44px;
+  }
+  .ib-app {
+    min-height: 470px;
+    padding-bottom: 70px;
+  }
+  @media (max-width: 520px) {
+    .ib-app {
+      padding-bottom: 96px;
+    }
+  }
+
+  /* Native macOS-style banner */
+  .banner {
+    position: absolute;
+    top: 0;
+    right: -12px;
+    z-index: 9;
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    width: min(360px, 92%);
+    padding: 10px 12px;
+    color: #f4f2fa;
+    font: 12.5px/1.35 var(--f-sans);
+    background: rgb(46 40 64 / 0.78);
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: 16px;
+    box-shadow: 0 18px 40px rgb(0 0 0 / 0.55);
+    backdrop-filter: blur(20px) saturate(1.6);
+    opacity: 0;
+    translate: 0 -12px;
+    transition:
+      opacity 260ms var(--ease-out),
+      translate 360ms var(--ease-spring);
+  }
+  .ib-demo.is-banner .banner {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .banner-icon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(145deg, #2a1640, #120a20);
+    border-radius: 9px;
+  }
+  .banner-icon :global(svg) {
+    width: 22px;
+    height: auto;
+  }
+  .banner-h {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #c9c3dc;
+  }
+  .banner-h b {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+  }
+  .banner-t {
+    font-weight: 700;
+  }
+  .banner-b {
+    overflow: hidden;
+    color: #d9d4ea;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .banner-actions {
+    display: grid;
+    gap: 4px;
+  }
+  .banner-actions span {
+    padding: 3px 10px;
+    font-size: 11.5px;
+    font-weight: 600;
+    text-align: center;
+    background: rgb(255 255 255 / 0.12);
+    border-radius: 7px;
+  }
+
+  .quiet-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    color: var(--a-muted);
+    border: 1px solid var(--a-line);
+    border-radius: 999px;
+    transition:
+      color 200ms,
+      background 200ms,
+      border-color 200ms;
+  }
+  .quiet-chip :global(.ico) {
+    width: 11px;
+    height: 11px;
+  }
+  .ib-demo.is-quiet .quiet-chip {
+    color: #140a2c;
+    background: #b9a6ff;
+    border-color: #b9a6ff;
+  }
+
+  .ib-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+    padding: 12px 16px 8px;
+  }
+  .ib-head h4 {
+    font-size: 16px;
+  }
+  .ib-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .ib-filters span {
+    padding: 2px 9px;
+    font-size: 11.5px;
+    color: var(--a-muted);
+    border: 1px solid var(--a-line);
+    border-radius: 999px;
+  }
+  .ib-filters .is-on {
+    color: var(--a-text);
+    background: color-mix(in srgb, var(--a-accent) 18%, transparent);
+    border-color: color-mix(in srgb, var(--a-accent) 50%, transparent);
+  }
+  .ib-meter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+    margin: 0 16px 8px;
+    padding: 8px 12px;
+    font: 11.5px var(--f-mono);
+    color: var(--a-muted);
+    background: color-mix(in srgb, var(--a-warn) 7%, transparent);
+    border: 1px dashed color-mix(in srgb, var(--a-warn) 35%, transparent);
+    border-radius: 8px;
+  }
+  .ib-meter s {
+    color: var(--a-del);
+    font-weight: 700;
+    text-decoration-thickness: 2px;
+  }
+  .ib-meter b {
+    color: var(--a-add);
+  }
+  .ib-meter .arrow {
+    color: var(--a-warn);
+  }
+  .ib-rows {
+    display: grid;
+    margin: 0;
+    padding: 0 8px;
+    list-style: none;
+  }
+  .ib-row {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    max-height: 64px;
+    padding: 9px 8px;
+    overflow: hidden;
+    border-radius: 9px;
+    transition:
+      max-height 320ms var(--ease-out),
+      padding 320ms var(--ease-out),
+      opacity 220ms,
+      background 150ms;
+  }
+  .ib-row + .ib-row {
+    box-shadow: 0 -1px 0 color-mix(in srgb, var(--a-line) 60%, transparent);
+  }
+  .ib-row.is-cursor {
+    background: color-mix(in srgb, var(--a-accent) 14%, transparent);
+    box-shadow: inset 2px 0 0 var(--a-accent);
+  }
+  .ib-row.is-gone {
+    max-height: 0;
+    padding-block: 0;
+    opacity: 0;
+  }
+  .ib-ico {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    color: var(--a-accent-2);
+    background: color-mix(in srgb, currentColor 12%, transparent);
+    border-radius: 8px;
+  }
+  .ib-ico :global(.ico) {
+    width: 15px;
+    height: 15px;
+  }
+  .ib-row[data-kind='pr'] .ib-ico {
+    color: var(--a-accent);
+  }
+  .ib-row[data-kind='run'] .ib-ico {
+    color: var(--a-del);
+  }
+  .ib-row[data-kind='mention'] .ib-ico {
+    color: var(--a-warn);
+  }
+  .ib-row[data-kind='draft'] {
+    opacity: 0.5;
+  }
+  .ib-row[data-kind='draft'] .ib-ico {
+    color: var(--a-muted);
+  }
+  .ib-row[data-prio='high'] .ib-t::before {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 7px;
+    vertical-align: 1px;
+    border-radius: 50%;
+    background: var(--a-del);
+    box-shadow: 0 0 8px var(--a-del);
+  }
+  .ib-main {
+    display: grid;
+    min-width: 0;
+  }
+  .ib-t {
+    overflow: hidden;
+    font-weight: 650;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .ib-d {
+    overflow: hidden;
+    font-size: 11.5px;
+    color: var(--a-muted);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .ib-side {
+    display: grid;
+    justify-items: end;
+    gap: 3px;
+  }
+  .ib-time {
+    font: 10.5px var(--f-mono);
+    color: var(--a-muted);
+  }
+  .ib-tags {
+    display: flex;
+    gap: 5px;
+  }
+  .ib-why {
+    padding: 1px 6px;
+    font: 600 10px/1.5 var(--f-mono);
+    color: var(--a-muted);
+    border: 1px solid var(--a-line);
+    border-radius: 4px;
+  }
+  .ib-count {
+    min-width: 20px;
+    padding: 1px 6px;
+    font: 800 10px/1.5 var(--f-mono);
+    text-align: center;
+    color: #16021a;
+    background: var(--a-accent);
+    border-radius: 999px;
+  }
+  .ib-count.is-tick {
+    animation: pop 220ms var(--ease-spring);
+  }
+  @container (max-width: 480px) {
+    .ib-why {
+      display: none;
+    }
+  }
+
+  .snooze {
+    position: absolute;
+    z-index: 6;
+    right: 22px;
+    top: 330px;
+    display: grid;
+    width: 200px;
+    padding: 6px;
+    background: color-mix(in srgb, var(--a-panel) 96%, #000);
+    border: 1px solid var(--a-line);
+    border-radius: 10px;
+    box-shadow: 0 20px 40px rgb(0 0 0 / 0.6);
+    opacity: 0;
+    scale: 0.96;
+    transform-origin: top right;
+    visibility: hidden;
+    transition:
+      opacity 160ms,
+      scale 200ms var(--ease-out),
+      visibility 160ms;
+  }
+  .ib-demo.is-menu .snooze {
+    opacity: 1;
+    scale: 1;
+    visibility: visible;
+  }
+  .snooze-h {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--a-muted);
+  }
+  .snooze-h :global(.ico) {
+    width: 12px;
+    height: 12px;
+  }
+  .snooze-h kbd {
+    margin-left: auto;
+    padding: 0 5px;
+    font: 700 10px/1.5 var(--f-mono);
+    border: 1px solid var(--a-line);
+    border-radius: 4px;
+  }
+  .snooze-i {
+    padding: 5px 8px;
+    font-size: 12.5px;
+    border-radius: 6px;
+  }
+  .snooze-i.is-sel {
+    color: #16021a;
+    background: var(--a-accent);
+  }
+
+  .ib-quiet {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    padding: 10px 12px;
+    font-size: 12px;
+    color: #d8ceff;
+    background: linear-gradient(90deg, rgb(120 90 255 / 0.2), rgb(120 90 255 / 0.06));
+    border: 1px solid rgb(185 166 255 / 0.35);
+    border-radius: 10px;
+    opacity: 0;
+    translate: 0 8px;
+    transition:
+      opacity 260ms,
+      translate 300ms var(--ease-out);
+  }
+  .ib-quiet :global(.ico) {
+    width: 14px;
+    height: 14px;
+    color: #b9a6ff;
+  }
+  .ib-quiet span {
+    color: var(--a-muted);
+  }
+  .ib-quiet em {
+    font: 800 12px var(--f-mono);
+    font-style: normal;
+    color: #fff;
+  }
+  .ib-demo.is-quiet .ib-quiet {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .toast {
+    position: absolute;
+    left: 50%;
+    bottom: 70px;
+    z-index: 7;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--a-text);
+    background: color-mix(in srgb, var(--a-panel) 90%, #000);
+    border: 1px solid color-mix(in srgb, var(--a-accent-2) 45%, transparent);
+    border-radius: 999px;
+    box-shadow: 0 12px 30px rgb(0 0 0 / 0.5);
+    opacity: 0;
+    translate: -50% 10px;
+    transition:
+      opacity 200ms,
+      translate 260ms var(--ease-out);
+  }
+  .toast :global(.ico) {
+    width: 13px;
+    height: 13px;
+    color: var(--a-accent-2);
+  }
+  .ib-demo.is-toast .toast {
+    opacity: 1;
+    translate: -50% 0;
+  }
+</style>

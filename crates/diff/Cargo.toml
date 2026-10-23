@@ -1,0 +1,19 @@
+[package]
+name = "adoken-diff"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Pure line diff, row layout, intraline words, lexical token coloring and thread anchoring for PR review (spec 0004). No IO, no gpui."
+
+[dependencies]
+# Apache-2.0. Line diff over interned line ids; deadline-bounded so a pathological file can't stall a background executor.
+similar = { version = "3", default-features = false, features = ["std"] }
+
+[dev-dependencies]
+criterion.workspace = true
+
+[[bench]]
+name = "diff"
+harness = false

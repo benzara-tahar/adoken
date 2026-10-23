@@ -1,0 +1,176 @@
+---
+/**
+ * Chapter two: PR review. A wide Sakura-inked window: keyboard through files, open the thread,
+ * reply, press A. Default markup is the finished review.
+ */
+import ChapterHead from './ChapterHead.astro';
+import AppSide from './AppSide.astro';
+import PrView from './mock/PrView.astro';
+import { review } from '../copy';
+
+const keys = [['I'], ['J', 'K', 'N', 'P'], ['R'], ['A']];
+---
+
+<section id="ch-review" class="section ch-review" aria-labelledby="ch-review-title">
+  <div class="wrap rv-top">
+    <ChapterHead numeral={review.numeral} kicker={review.kicker} title={review.title} id="ch-review-title" />
+    <p class="body dropcap">{review.body}</p>
+  </div>
+
+  <div class="wrap rv-shot">
+    <figure class="photo rv" style="--tilt:-0.6deg">
+      <span class="tape tape-tl tape-shu"></span>
+      <span class="tape tape-br"></span>
+      <div class="photo-frame">
+        <div
+          class="win mock rvm is-pr is-thread is-reply is-approved is-toast"
+          data-ink="sakura"
+          role="img"
+          aria-label="Pull request review in the Sakura theme: a file tree with viewed checkboxes, a syntax-highlighted diff of iteration 3 against iteration 2, an inline thread with a reply, and the Approve vote stamped."
+        >
+          <div class="win-bar"><i></i><i></i><i></i><span class="win-title">!4127 · adoken</span><span class="win-sync">Synced</span></div>
+          <div class="app">
+            <AppSide active={2} />
+            <div class="main"><PrView /></div>
+          </div>
+          <div class="keycast"></div>
+        </div>
+      </div>
+      <figcaption class="fig"><b>{review.figure.split(' · ')[0]}</b> · {review.figure.split(' · ').slice(1).join(' · ')}</figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <ol class="rv-notes">
+      {
+        review.points.map(([k, v], i) => (
+          <li>
+            <span class="rv-keys" aria-hidden="true">
+              {keys[i].map((key) => (
+                <kbd>{key}</kbd>
+              ))}
+            </span>
+            <b>{k}</b>
+            <span>{v}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<script>
+  import { motionOK, play, scene } from '../scripts/stage';
+
+  const root = document.querySelector<HTMLElement>('.rvm');
+  if (root && motionOK) {
+    const files = [...root.querySelectorAll('.tree li')];
+    const seen = [...root.querySelectorAll('.tree .seen')];
+    const reply = root.querySelector('.msg-me .typed')!;
+    const replyText = reply.textContent ?? '';
+    const keycast = root.querySelector('.keycast')!;
+    const press = (html: string) => {
+      keycast.innerHTML = html;
+      keycast.classList.add('show');
+    };
+    const select = (n: number) => files.forEach((f, i) => f.classList.toggle('on', i === n));
+
+    play(root, async (s) => {
+      scene(root, 'pr');
+      select(0);
+      seen.forEach((b, i) => b.classList.toggle('y', i === 2));
+      keycast.classList.remove('show');
+      reply.textContent = '';
+      await s.wait(1200);
+      press('<kbd>J</kbd><span>next file</span>');
+      seen[0].classList.add('y');
+      select(1);
+      await s.wait(900);
+      seen[1].classList.add('y');
+      press('<kbd>K</kbd><span>previous file</span>');
+      select(0);
+      await s.wait(900);
+      press('<kbd>N</kbd><span>next thread</span>');
+      scene(root, 'pr', 'thread');
+      await s.wait(1100);
+      press('<kbd>R</kbd><span>reply</span>');
+      scene(root, 'pr', 'thread', 'reply');
+      await s.type(reply, replyText, 32);
+      await s.wait(500);
+      press('<kbd>A</kbd><span>approve</span>');
+      await s.wait(250);
+      scene(root, 'pr', 'thread', 'reply', 'approved');
+      await s.wait(700);
+      scene(root, 'pr', 'thread', 'reply', 'approved', 'toast');
+      keycast.classList.remove('show');
+      await s.wait(3200);
+    });
+  }
+</script>
+
+<style>
+  .rv-top {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 2rem clamp(2rem, 5vw, 5rem);
+    align-items: end;
+  }
+
+  .rv-shot {
+    margin-top: clamp(3rem, 6vw, 5rem);
+  }
+
+  .rv-shot .win {
+    --app-h: 40em;
+  }
+
+  .rv-notes {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0 2rem;
+    margin: clamp(3rem, 5vw, 4.5rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .rv-notes li {
+    display: grid;
+    align-content: start;
+    gap: 0.45rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--ink);
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .rv-keys {
+    display: flex;
+    gap: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .rv-notes b {
+    font: 650 0.92rem/1.3 var(--sans);
+  }
+
+  .rv-notes span:last-child {
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 960px) {
+    .rv-top {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .rv-notes {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .rv-notes {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

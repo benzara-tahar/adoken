@@ -1,0 +1,164 @@
+---
+/** A glass lock that clicks shut, and where the token is (and is not) stored. */
+import { bento } from '../copy';
+import { icons } from '../lib';
+
+const k = bento.keychain;
+---
+
+<div class="kc" aria-hidden="true">
+  <div class="kc-lock">
+    <span class="kc-ring"></span>
+    <svg viewBox="0 0 64 64" class="kc-svg">
+      <path class="kc-shackle" d="M20 30v-8a12 12 0 0 1 24 0v8" fill="none" stroke-width="5" stroke-linecap="round"
+      ></path>
+      <rect x="12" y="28" width="40" height="28" rx="8" class="kc-body"></rect>
+      <circle cx="32" cy="40" r="3.5" class="kc-hole"></circle>
+      <path d="M32 42v6" class="kc-hole-line" stroke-width="3" stroke-linecap="round"></path>
+    </svg>
+  </div>
+  <ul class="kc-rows">
+    {
+      k.rows.map((row, i) => (
+        <li class:list={{ 'is-key': i === k.rows.length - 1 }}>
+          <span class="kc-l">{row.label}</span>
+          <span class="kc-v">
+            <span set:html={i === k.rows.length - 1 ? icons.lock : icons.check} />
+            {row.value}
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .kc {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 4px 22px 26px;
+  }
+  @media (max-width: 520px) {
+    .kc {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+    .kc-rows {
+      width: 100%;
+    }
+  }
+  .kc-lock {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 96px;
+    height: 96px;
+    border-radius: 26px;
+    background:
+      radial-gradient(90% 80% at 30% 0%, color-mix(in srgb, var(--accent-hi) 28%, transparent), transparent 60%),
+      linear-gradient(160deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.02));
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 0.12),
+      inset 0 1px 0 rgb(255 255 255 / 0.2),
+      0 20px 40px -20px color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+  .kc-ring {
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 50%, transparent);
+  }
+  .kc-svg {
+    width: 54px;
+    height: 54px;
+    overflow: visible;
+  }
+  .kc-shackle {
+    stroke: var(--accent-pale);
+  }
+  .kc-body {
+    fill: var(--accent-hi);
+  }
+  .kc-hole {
+    fill: var(--accent-ink);
+  }
+  .kc-hole-line {
+    stroke: var(--accent-ink);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .kc-shackle {
+      animation: shackle 4.2s var(--ease) infinite;
+    }
+    .kc-ring {
+      animation: ring 4.2s var(--ease) infinite;
+    }
+  }
+  @keyframes shackle {
+    0%,
+    12% {
+      transform: translateY(-7px);
+    }
+    22%,
+    100% {
+      transform: none;
+    }
+  }
+  @keyframes ring {
+    0%,
+    20% {
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
+    }
+    55%,
+    100% {
+      box-shadow: 0 0 0 18px color-mix(in srgb, var(--accent) 0%, transparent);
+    }
+  }
+  .kc-rows {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .kc-rows li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 7px 10px;
+    font-size: 0.8rem;
+    border-radius: 9px;
+    background: rgb(255 255 255 / 0.035);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+  .kc-l {
+    color: var(--soft);
+  }
+  .kc-v {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow: hidden;
+    font: 0.74rem var(--mono);
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .kc-v :global(svg) {
+    flex: none;
+    width: 12px;
+    color: var(--ok);
+  }
+  .kc-rows li.is-key {
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  .is-key .kc-v {
+    color: var(--accent-hi);
+  }
+  .is-key .kc-v :global(svg) {
+    color: var(--accent-hi);
+  }
+</style>

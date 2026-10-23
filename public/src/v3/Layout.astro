@@ -1,0 +1,61 @@
+---
+/**
+ * /v3/ "Ink & Iron": a light, editorial edition of the landing page (a design variant, so noindex).
+ * Owns its own stylesheets; shares only copy facts, integrations and the analytics script.
+ */
+import './styles/page.css';
+import './styles/app.css';
+import { meta } from './copy';
+import { inkCss } from './themes';
+import Switcher from './components/Switcher.astro';
+
+const ogImage = new URL('/og.png', 'https://adoken.dev').href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <meta name="robots" content="noindex" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#f3ecdf" />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="adoken" />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <style is:inline set:html={inkCss}></style>
+    <script src="../scripts/analytics.ts"></script>
+  </head>
+  <body>
+    <svg class="sr-only" aria-hidden="true" focusable="false">
+      <defs>
+        <!-- Seal texture: speckled ink loss + a slightly worn edge. -->
+        <filter id="v3-seal" x="-6%" y="-6%" width="112%" height="112%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="3" result="n" />
+          <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -7 5.5" result="holes" />
+          <feComposite in="SourceGraphic" in2="holes" operator="in" result="speckled" />
+          <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves="2" seed="8" result="w" />
+          <feDisplacementMap in="speckled" in2="w" scale="3" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+        <!-- Hand-drawn line: a gentle wobble for diagram strokes. -->
+        <filter id="v3-hand" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="2" result="w" />
+          <feDisplacementMap in="SourceGraphic" in2="w" scale="4" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </defs>
+    </svg>
+    <slot />
+    <Switcher />
+  </body>
+</html>

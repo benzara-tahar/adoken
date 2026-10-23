@@ -1,0 +1,151 @@
+---
+/**
+ * Launch-list signup (Buttondown, double opt-in): a plain HTML form that works with JS off.
+ * Same fields and tracking as src/v2/components/LaunchForm.astro, styled for the arcade.
+ */
+import { buttondown } from '../../integrations';
+import { launch } from '../copy';
+
+interface Props {
+  placement: 'v1-hero' | 'v1-footer';
+}
+const { placement } = Astro.props;
+const id = `launch-${placement}`;
+---
+
+<form class="launch" action={buttondown.subscribeUrl} method="post" data-track="launch_list_submitted" data-placement={placement}>
+  <label class="launch-label" for={`${id}-email`}>{launch.emailLabel}</label>
+  <div class="launch-row">
+    <input id={`${id}-email`} type="email" name="email" required autocomplete="email" placeholder={launch.placeholder} />
+    <button class="btn" type="submit">{launch.submit}<span aria-hidden="true">▸</span></button>
+  </div>
+  <fieldset class="launch-os">
+    <legend class="hud">{launch.osLegend}</legend>
+    {
+      launch.os.map((os) => (
+        <label>
+          <input type="radio" name="metadata__os" value={os} />
+          <span>{os}</span>
+        </label>
+      ))
+    }
+  </fieldset>
+  <input type="hidden" name="metadata__placement" value={placement} />
+  <input type="hidden" name="metadata__source" value="direct" data-launch-source />
+  <p class="launch-fine">{launch.fine} <a href="/privacy/">{launch.privacy}</a></p>
+</form>
+
+<script>
+  // Attribute signups: our own `?ref=` tags first, then utm_source, then the referring site.
+  const params = new URLSearchParams(location.search);
+  const referrer = document.referrer ? new URL(document.referrer).hostname : '';
+  const source =
+    params.get('ref') ?? params.get('utm_source') ?? (referrer && referrer !== location.hostname ? referrer : '');
+  if (source) {
+    for (const input of document.querySelectorAll<HTMLInputElement>('[data-launch-source]')) {
+      input.value = source.slice(0, 64);
+    }
+  }
+</script>
+
+<style>
+  .launch {
+    display: grid;
+    gap: 0.8rem;
+    width: min(100%, 34rem);
+  }
+  .launch-label {
+    font: 800 1.05rem/1.3 var(--f-display);
+  }
+  .launch-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .launch-row input {
+    flex: 1 1 14rem;
+    min-width: 0;
+    padding: 0.9rem 1rem;
+    font: 500 1rem/1.2 var(--f-mono);
+    color: var(--text);
+    background: rgb(5 4 12 / 0.8);
+    border: 1.5px solid #3a3160;
+    border-radius: 0.8rem;
+    box-shadow: inset 0 0 18px rgb(0 0 0 / 0.6);
+    transition:
+      border-color 150ms,
+      box-shadow 150ms;
+  }
+  .launch-row input::placeholder {
+    color: var(--dim);
+  }
+  .launch-row input:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow:
+      inset 0 0 18px rgb(0 0 0 / 0.6),
+      0 0 0 3px rgb(34 229 255 / 0.2),
+      0 0 24px -4px var(--cyan);
+  }
+  .launch-row .btn {
+    flex: 0 0 auto;
+  }
+  .launch-os {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .launch-os legend {
+    float: left;
+    margin-right: 0.4rem;
+    color: var(--dim);
+    font-size: 0.7rem;
+  }
+  .launch-os label {
+    position: relative;
+  }
+  .launch-os input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .launch-os span {
+    display: inline-block;
+    padding: 0.3rem 0.75rem;
+    font: 600 0.78rem/1.2 var(--f-mono);
+    color: var(--muted);
+    border: 1px solid #3a3160;
+    border-radius: 999px;
+    transition:
+      color 150ms,
+      background 150ms,
+      border-color 150ms;
+  }
+  .launch-os label:hover span {
+    color: var(--text);
+    border-color: var(--dim);
+  }
+  .launch-os input:checked + span {
+    color: #031418;
+    background: var(--cyan);
+    border-color: var(--cyan);
+    box-shadow: 0 0 14px -2px var(--cyan);
+  }
+  .launch-os input:focus-visible + span {
+    outline: 2px solid var(--amber);
+    outline-offset: 2px;
+  }
+  .launch-fine {
+    font: 0.78rem/1.5 var(--f-mono);
+    color: var(--dim);
+  }
+  .launch-fine a {
+    color: var(--muted);
+  }
+</style>

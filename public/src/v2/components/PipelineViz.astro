@@ -1,0 +1,261 @@
+---
+/** A pipeline run walking through its stages until Integration fails, failing test up front. */
+import { bento } from '../copy';
+import { icons } from '../lib';
+
+const p = bento.pipeline;
+---
+
+<div class="mock pipe" data-pipe aria-hidden="true">
+  <div class="pipe-head">
+    <span class="pipe-ico" set:html={icons.pipe} />
+    <span class="pipe-run">{p.run}</span>
+    <span class="pipe-branch">{p.branch}</span>
+    <span class="pipe-status is-fail" data-status>Failed</span>
+  </div>
+  <ol class="pipe-stages">
+    {
+      p.stages.map((stage) => (
+        <li data-state={stage.fail ? 'fail' : stage.time === 'skipped' ? 'skip' : 'ok'} data-stage>
+          <span class="pipe-dot">
+            <span class="pipe-i-ok" set:html={icons.check} />
+            <span class="pipe-i-fail" set:html={icons.x} />
+            <span class="pipe-i-skip" set:html={icons.skip} />
+          </span>
+          <span class="pipe-name">{stage.name}</span>
+          <span class="pipe-time num">{stage.time}</span>
+          <span class="pipe-bar">
+            <i />
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+  <div class="pipe-fail is-on" data-fail>
+    <b>{p.failure}</b>
+    <code>{p.log}</code>
+  </div>
+</div>
+
+<script>
+  import { loop } from '../scripts/motion';
+
+  const root = document.querySelector<HTMLElement>('[data-pipe]');
+  loop(root, async (scene) => {
+    const stages = [...root!.querySelectorAll<HTMLElement>('[data-stage]')];
+    const status = root!.querySelector<HTMLElement>('[data-status]')!;
+    const fail = root!.querySelector<HTMLElement>('[data-fail]')!;
+    const finals = stages.map((stage) => stage.dataset.state!);
+
+    stages.forEach((stage) => (stage.dataset.state = 'wait'));
+    status.className = 'pipe-status is-run';
+    status.textContent = 'Running';
+    fail.classList.remove('is-on');
+    await scene.sleep(600);
+
+    for (const [i, stage] of stages.entries()) {
+      if (finals[i] === 'skip') {
+        stage.dataset.state = 'skip';
+        break;
+      }
+      stage.dataset.state = 'run';
+      await scene.sleep(finals[i] === 'fail' ? 1500 : 950);
+      stage.dataset.state = finals[i];
+      if (finals[i] === 'fail') await scene.sleep(250);
+    }
+    status.className = 'pipe-status is-fail';
+    status.textContent = 'Failed';
+    await scene.sleep(300);
+    fail.classList.add('is-on');
+    await scene.sleep(3400);
+  });
+</script>
+
+<style>
+  .pipe {
+    padding-bottom: 14px;
+  }
+  .pipe-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--app-line);
+  }
+  .pipe-ico {
+    color: var(--app-muted);
+  }
+  .pipe-ico :global(svg) {
+    width: 14px;
+  }
+  .pipe-run {
+    overflow: hidden;
+    font-weight: 600;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .pipe-branch {
+    padding: 1px 6px;
+    font: 10.5px var(--mono);
+    color: var(--app-muted);
+    border-radius: 5px;
+    background: color-mix(in srgb, var(--app-text) 6%, transparent);
+  }
+  .pipe-status {
+    margin-left: auto;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 99px;
+  }
+  .pipe-status.is-run {
+    color: var(--syn-f);
+    background: color-mix(in srgb, var(--syn-f) 14%, transparent);
+  }
+  .pipe-status.is-fail {
+    color: var(--app-del);
+    background: color-mix(in srgb, var(--app-del) 15%, transparent);
+  }
+  .pipe-stages {
+    display: grid;
+    gap: 2px;
+    margin: 0;
+    padding: 10px 10px 0;
+    list-style: none;
+  }
+  .pipe-stages li {
+    display: grid;
+    grid-template-columns: 22px 1fr auto;
+    align-items: center;
+    gap: 4px 10px;
+    padding: 6px 6px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+  }
+  .pipe-dot {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid var(--app-line);
+    transition:
+      background-color 0.3s,
+      border-color 0.3s;
+  }
+  .pipe-dot > span {
+    position: absolute;
+    display: none;
+    color: #0b0b12;
+  }
+  .pipe-dot :global(svg) {
+    width: 11px;
+    stroke-width: 2;
+  }
+  .pipe-name {
+    font-weight: 500;
+  }
+  .pipe-time {
+    font-size: 11px;
+    color: var(--app-muted);
+  }
+  .pipe-bar {
+    grid-column: 2 / -1;
+    height: 3px;
+    overflow: hidden;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--app-text) 6%, transparent);
+  }
+  .pipe-bar i {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+  }
+  [data-state='wait'] .pipe-time {
+    visibility: hidden;
+  }
+  [data-state='wait'] .pipe-name {
+    color: var(--app-muted);
+  }
+  [data-state='run'] .pipe-dot {
+    border-color: var(--syn-f);
+    border-top-color: transparent;
+  }
+  [data-state='run'] .pipe-time {
+    visibility: hidden;
+  }
+  [data-state='run'] .pipe-bar i {
+    width: 100%;
+    background: var(--syn-f);
+    transition: width 1.2s linear;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [data-state='run'] .pipe-dot {
+      animation: spin 0.8s linear infinite;
+    }
+  }
+  [data-state='ok'] .pipe-dot {
+    border-color: var(--app-add);
+    background: var(--app-add);
+  }
+  [data-state='ok'] .pipe-i-ok,
+  [data-state='fail'] .pipe-i-fail,
+  [data-state='skip'] .pipe-i-skip {
+    display: block;
+  }
+  [data-state='ok'] .pipe-bar i {
+    width: 100%;
+    background: var(--app-add);
+  }
+  [data-state='fail'] {
+    background: color-mix(in srgb, var(--app-del) 9%, transparent);
+  }
+  [data-state='fail'] .pipe-dot {
+    border-color: var(--app-del);
+    background: var(--app-del);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--app-del) 20%, transparent);
+  }
+  [data-state='fail'] .pipe-bar i {
+    width: 72%;
+    background: var(--app-del);
+  }
+  [data-state='skip'] {
+    opacity: 0.55;
+  }
+  [data-state='skip'] .pipe-i-skip {
+    color: var(--app-muted);
+  }
+  .pipe-fail {
+    display: grid;
+    gap: 3px;
+    margin: 8px 12px 0;
+    padding: 9px 11px;
+    font-size: 11.5px;
+    border-radius: 8px;
+    border-left: 2px solid var(--app-del);
+    background: color-mix(in srgb, var(--app-del) 8%, transparent);
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity 0.35s,
+      transform 0.4s var(--ease);
+  }
+  .pipe-fail.is-on {
+    opacity: 1;
+    transform: none;
+  }
+  .pipe-fail code {
+    overflow: hidden;
+    font: 11px var(--mono);
+    color: var(--app-muted);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>

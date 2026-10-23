@@ -1,0 +1,65 @@
+{
+  "count": 1,
+  "value": [
+    {
+      "comments": [
+        {
+          "author": {
+            "descriptor": "aad.ZXhhbXBsZQ",
+            "displayName": "Dana Example",
+            "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+            "imageUrl": "https://dev.azure.com/contoso/_apis/GraphProfile/MemberAvatars/aad.ZXhhbXBsZQ",
+            "uniqueName": "dana@example.com",
+            "url": "https://spsprodcus5.vssps.visualstudio.com/A00000000-0000-0000-0000-000000000000/_apis/Identities/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d"
+          },
+          "commentType": "system",
+          "content": "Dana Example updated the pull request status to Completed",
+          "id": 1,
+          "lastContentUpdatedDate": "2024-03-29T05:42:09.427Z",
+          "lastUpdatedDate": "2024-03-29T05:42:09.427Z",
+          "parentCommentId": 0,
+          "publishedDate": "2024-03-29T05:42:09.427Z",
+          "usersLiked": []
+        }
+      ],
+      "id": 2,
+      "identities": {
+        "1": {
+          "descriptor": "aad.ZXhhbXBsZQ",
+          "displayName": "Dana Example",
+          "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+          "imageUrl": "https://dev.azure.com/contoso/_apis/GraphProfile/MemberAvatars/aad.ZXhhbXBsZQ",
+          "uniqueName": "dana@example.com",
+          "url": "https://spsprodcus5.vssps.visualstudio.com/A00000000-0000-0000-0000-000000000000/_apis/Identities/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d"
+        }
+      },
+      "isDeleted": false,
+      "lastUpdatedDate": "2024-03-29T05:42:09.427Z",
+      "properties": {
+        "BypassPolicy": {
+          "$type": "System.String",
+          "$value": "False"
+        },
+        "CodeReviewStatus": {
+          "$type": "System.String",
+          "$value": "Completed"
+        },
+        "CodeReviewStatusUpdateAssociatedCommit": {
+          "$type": "System.String",
+          "$value": "c7a1d9f5d385cf65b1f9960eda6a10bffa18278a"
+        },
+        "CodeReviewStatusUpdatedByIdentity": {
+          "$type": "System.String",
+          "$value": "1"
+        },
+        "CodeReviewThreadType": {
+          "$type": "System.String",
+          "$value": "StatusUpdate"
+        }
+      },
+      "publishedDate": "2024-03-29T05:42:09.427Z",
+      "pullRequestThreadContext": null,
+      "threadContext": null
+    }
+  ]
+}

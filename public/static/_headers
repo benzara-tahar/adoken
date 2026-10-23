@@ -1,0 +1,13 @@
+# Cloudflare response headers (Workers static assets and Pages both read this file).
+# CSP hosts come from src/integrations.ts: e.adoken.dev = PostHog proxy (events only; the SDK is bundled and
+# loads no scripts), buttondown.com = launch-list form POST. 'self' in form-action covers Buttondown's
+# redirect back to /subscribed/, which Chrome checks against form-action too.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  X-Frame-Options: DENY
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' https://e.adoken.dev; base-uri 'self'; form-action 'self' https://buttondown.com; frame-ancestors 'none'
+
+/og.png
+  Cache-Control: public, max-age=86400

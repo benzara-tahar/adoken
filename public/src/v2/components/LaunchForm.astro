@@ -1,0 +1,208 @@
+---
+/**
+ * Launch-list signup (Buttondown, double opt-in). Plain HTML post, works with JS off.
+ * The canonical launch form: v1 and v3 copy its fields and tracking. Dressed as a glass pill.
+ */
+import { buttondown } from '../../integrations';
+import { launchList } from '../copy';
+
+interface Props {
+  placement: 'v2-hero' | 'v2-footer';
+}
+const { placement } = Astro.props;
+const id = `launch-${placement}`;
+---
+
+<form
+  class="lf"
+  action={buttondown.subscribeUrl}
+  method="post"
+  data-track="launch_list_submitted"
+  data-placement={placement}
+>
+  <label class="sr-only" for={`${id}-email`}>{launchList.emailLabel}</label>
+  <div class="lf-pill">
+    <svg class="lf-icon" viewBox="0 0 20 20" aria-hidden="true">
+      <path d="M3 5.5h14v9H3z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"></path>
+      <path d="m3.5 6 6.5 5 6.5-5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"></path>
+    </svg>
+    <input
+      id={`${id}-email`}
+      type="email"
+      name="email"
+      required
+      autocomplete="email"
+      placeholder={launchList.placeholder}
+    />
+    <button class="btn btn-primary" type="submit">
+      {launchList.submit}
+      <span class="lf-enter" aria-hidden="true">↵</span>
+    </button>
+  </div>
+  <fieldset class="lf-os">
+    <legend>{launchList.osLegend}</legend>
+    {
+      launchList.os.map((os) => (
+        <label>
+          <input type="radio" name="metadata__os" value={os} />
+          <span>{os}</span>
+        </label>
+      ))
+    }
+  </fieldset>
+  <input type="hidden" name="metadata__placement" value={placement} />
+  <input type="hidden" name="metadata__source" value="direct" data-launch-source />
+  <p class="lf-fine">{launchList.fine} <a href="/privacy/">{launchList.privacy}</a></p>
+</form>
+
+<script>
+  // Attribute signups: our own `?ref=` tags first, then utm_source, then the referring site.
+  const params = new URLSearchParams(location.search);
+  const referrer = document.referrer ? new URL(document.referrer).hostname : '';
+  const source =
+    params.get('ref') ?? params.get('utm_source') ?? (referrer && referrer !== location.hostname ? referrer : '');
+  if (source) {
+    for (const input of document.querySelectorAll<HTMLInputElement>('[data-launch-source]')) {
+      input.value = source.slice(0, 64);
+    }
+  }
+</script>
+
+<style>
+  .lf {
+    display: grid;
+    gap: 14px;
+    width: min(100%, 520px);
+  }
+  .lf-pill {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 6px 6px 16px;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.02)), rgb(12 12 20 / 0.6);
+    border: 1px solid var(--line-2);
+    border-radius: 16px;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.06),
+      0 20px 60px -30px rgb(0 0 0 / 0.9);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+  }
+  .lf-pill:focus-within {
+    border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.06),
+      0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent),
+      0 20px 60px -30px rgb(0 0 0 / 0.9);
+  }
+  .lf-icon {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    color: var(--muted);
+  }
+  .lf input[type='email'] {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 44px;
+    padding: 0;
+    font: 400 1rem/1 var(--text-font);
+    color: var(--text);
+    background: none;
+    border: 0;
+    outline: none;
+  }
+  .lf input[type='email']::placeholder {
+    color: var(--faint);
+  }
+  .lf .btn {
+    flex: none;
+  }
+  .lf-enter {
+    display: inline-grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    font-size: 0.72rem;
+    border-radius: 5px;
+    background: color-mix(in srgb, var(--accent-ink) 14%, transparent);
+  }
+  .lf-os {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .lf-os legend {
+    float: left;
+    margin-right: 6px;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .lf-os label {
+    position: relative;
+  }
+  .lf-os input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .lf-os span {
+    display: inline-block;
+    padding: 4px 11px;
+    font-size: 0.78rem;
+    color: var(--soft);
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.03);
+    transition:
+      background-color 0.2s,
+      color 0.2s,
+      border-color 0.2s;
+  }
+  .lf-os label:hover span {
+    border-color: rgb(255 255 255 / 0.22);
+  }
+  .lf-os input:checked + span {
+    color: var(--accent-ink);
+    background: var(--accent-hi);
+    border-color: var(--accent-hi);
+  }
+  .lf-os input:focus-visible + span {
+    outline: 2px solid var(--accent-hi);
+    outline-offset: 2px;
+  }
+  .lf-fine {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .lf-fine a {
+    color: var(--soft);
+    text-underline-offset: 3px;
+  }
+  @media (max-width: 480px) {
+    .lf-pill {
+      flex-wrap: wrap;
+      padding: 6px;
+    }
+    .lf-icon {
+      display: none;
+    }
+    .lf input[type='email'] {
+      flex-basis: 100%;
+      padding-inline: 12px;
+    }
+    .lf .btn {
+      width: 100%;
+    }
+  }
+</style>

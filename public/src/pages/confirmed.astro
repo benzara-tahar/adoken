@@ -1,0 +1,10 @@
+---
+import Notice from '../layouts/Notice.astro';
+import FollowButton from '../components/FollowButton.astro';
+import { confirmed } from '../copy';
+---
+
+<Notice eyebrow={confirmed.eyebrow} title={confirmed.title} body={confirmed.body}>
+  <FollowButton label={confirmed.cta} placement="confirmed" />
+  <a class="text-link" href="/">{confirmed.back}</a>
+</Notice>

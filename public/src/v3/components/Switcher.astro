@@ -1,0 +1,62 @@
+---
+/** Fixed pill linking the three editions of the landing page; the current one wears the seal. */
+import { meta } from '../copy';
+
+const current = '/v3/';
+---
+
+<nav class="switch" aria-label="Design editions">
+  <span class="switch-label">{meta.switcher.label}</span>
+  {
+    meta.switcher.items.map(([href, label]) => (
+      <a href={href} aria-current={href === current ? 'page' : undefined}>
+        {label}
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  .switch {
+    position: fixed;
+    z-index: 50;
+    left: 50%;
+    bottom: max(0.9rem, env(safe-area-inset-bottom));
+    translate: -50% 0;
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+    padding: 0.3rem 0.35rem 0.3rem 0.9rem;
+    font: 600 0.78rem/1 var(--sans);
+    color: var(--ink);
+    background: rgb(243 236 223 / 0.88);
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    box-shadow: 0 10px 30px -12px rgb(60 38 16 / 0.45);
+    backdrop-filter: blur(10px) saturate(1.2);
+  }
+
+  .switch-label {
+    margin-right: 0.35rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.66rem;
+    color: var(--dim);
+  }
+
+  a {
+    padding: 0.42rem 0.62rem;
+    text-decoration: none;
+    border-radius: 999px;
+  }
+
+  a:hover {
+    color: var(--shu);
+  }
+
+  a[aria-current='page'] {
+    color: var(--paper);
+    background: var(--shu);
+  }
+</style>

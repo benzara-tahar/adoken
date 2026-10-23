@@ -1,0 +1,92 @@
+---
+/**
+ * The big brush 拳. Each stroke is a filled brush shape revealed through a mask that follows its
+ * centerline, in stroke order, on page load (CSS only). The mask paths carry no dash at rest: the
+ * dash exists only inside the draw-in keyframes (real user-unit lengths from art/brush.ts, no
+ * `pathLength`), and the animation only fills backwards. Once it ends, is skipped (reduced motion)
+ * or is removed (`.inked`, see Hero.astro), the whole glyph shows.
+ */
+import { drawVars, kenStrokes, splatter } from '../art/brush';
+
+interface Props {
+  class?: string;
+}
+const { class: cls } = Astro.props;
+const strokes = kenStrokes(0.35);
+const end = strokes.at(-1)!.delay + strokes.at(-1)!.duration;
+---
+
+<svg class:list={['brush', cls]} viewBox="-40 -30 1080 1060" aria-hidden="true" style={`--end:${end}s`}>
+  <defs>
+    <filter id="v3-sumi" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="11" result="warp" />
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="18" xChannelSelector="R" yChannelSelector="G" result="edge" />
+      <feTurbulence type="fractalNoise" baseFrequency="0.02 0.11" numOctaves="3" seed="5" result="hair" />
+      <feColorMatrix
+        in="hair"
+        type="matrix"
+        values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -7 5.4"
+        result="dry"
+      />
+      <feComposite in="edge" in2="dry" operator="in" />
+    </filter>
+    {
+      strokes.map((s, i) => (
+        <mask id={`v3-m${i}`} maskUnits="userSpaceOnUse" x="-40" y="-30" width="1080" height="1060">
+          <path
+            class="brush-mask"
+            d={s.path}
+            fill="none"
+            stroke="#fff"
+            stroke-width={s.maskWidth}
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style={drawVars(s)}
+          />
+        </mask>
+      ))
+    }
+  </defs>
+  <g class="brush-ink" filter="url(#v3-sumi)">
+    {strokes.map((s, i) => <path d={s.fill} mask={`url(#v3-m${i})`} />)}
+    <g class="brush-drops">{splatter.map(([cx, cy, r]) => <circle cx={cx} cy={cy} r={r} />)}</g>
+  </g>
+</svg>
+
+<style>
+  .brush {
+    overflow: visible;
+  }
+
+  .brush-ink {
+    fill: var(--ink);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .brush-mask {
+      animation: v3-draw var(--t) cubic-bezier(0.55, 0.06, 0.35, 1) var(--d) backwards;
+    }
+
+    .brush-drops {
+      animation: v3-drops 0.3s ease-out calc(var(--end) - 0.05s) backwards;
+    }
+  }
+
+  @keyframes v3-draw {
+    from {
+      stroke-dasharray: var(--len) var(--gap);
+      stroke-dashoffset: var(--off);
+    }
+    to {
+      stroke-dasharray: var(--len) var(--gap);
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes v3-drops {
+    from {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+  }
+</style>

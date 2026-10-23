@@ -1,0 +1,374 @@
+---
+/**
+ * Chapter six: local-first. An ink diagram of the desk: the Mac, SQLite, the keychain, one direct
+ * line to dev.azure.com, and the vendor cloud that isn't there. Lines draw in on scroll (CSS).
+ */
+import ChapterHead from './ChapterHead.astro';
+import Hanko from './Hanko.astro';
+import { desk } from '../copy';
+
+const line = 'M468 246 C 600 118, 800 146, 926 172';
+---
+
+<section id="desk" class="section desk" aria-labelledby="desk-title">
+  <div class="wrap desk-head">
+    <ChapterHead numeral={desk.numeral} kicker={desk.kicker} title={desk.title} id="desk-title" />
+    <p class="body dropcap">{desk.body}</p>
+  </div>
+
+  <div class="wrap">
+    <figure class="plate">
+      <svg class="dia" viewBox="0 0 1200 620" role="img" aria-labelledby="desk-dia-title">
+        <title id="desk-dia-title">
+          Your Mac on a desk keeps SQLite and the keychain local and talks over one direct line to dev.azure.com. The vendor cloud is crossed out: there isn't one.
+        </title>
+        <g class="ink" filter="url(#v3-hand)">
+          <!-- the desk -->
+          <path class="draw thick" d="M40 520 C 300 511, 800 529, 1160 516" />
+          <path class="draw" d="M128 522 L116 606" />
+          <path class="draw" d="M1074 520 L1088 606" />
+          <!-- the Mac -->
+          <rect class="draw" x="200" y="250" width="300" height="200" rx="12" />
+          <path class="draw" d="M172 462 L528 462 L556 504 L144 504 Z" />
+          <rect class="solid" x="222" y="272" width="256" height="156" rx="5" />
+          <rect class="solid-2" x="222" y="272" width="62" height="156" rx="5" />
+          <rect class="seal" x="234" y="284" width="14" height="14" rx="2" />
+          <path class="paper-line" d="M236 314 H270 M236 330 H266 M236 346 H272 M300 290 H440 M300 314 H460 M300 330 H410 M300 346 H448 M300 362 H400 M300 378 H452 M300 394 H430" />
+          <!-- SQLite -->
+          <ellipse class="draw" cx="640" cy="420" rx="56" ry="16" />
+          <path class="draw" d="M584 420 L584 488 A56 16 0 0 0 696 488 L696 420" />
+          <path class="draw" d="M584 454 A56 16 0 0 0 696 454" />
+          <path class="dotted" d="M530 482 C 552 478, 566 476, 582 474" />
+          <!-- keychain -->
+          <circle class="draw" cx="790" cy="458" r="24" />
+          <circle class="draw" cx="790" cy="458" r="8" />
+          <path class="draw" d="M814 458 L884 458 M862 458 L862 480 M878 458 L878 474" />
+          <path class="dotted" d="M700 490 C 730 494, 752 486, 768 474" />
+          <!-- dev.azure.com -->
+          <path
+            class="draw"
+            d="M930 196 C 896 196, 892 152, 928 148 C 932 112, 984 104, 1002 132 C 1018 100, 1080 104, 1078 148 C 1114 148, 1114 196, 1078 196 Z"
+          />
+          <!-- the one line -->
+          <path id="v3-line" class="draw thick line" d={line} />
+          <path class="draw" d="M902 154 L928 173 L898 186" />
+          <!-- the vendor cloud that isn't -->
+          <rect class="dashed" x="566" y="34" width="196" height="84" rx="14" />
+        </g>
+        <g class="labels">
+          <text x="350" y="552">{desk.labels.laptop}</text>
+          <text x="640" y="552">{desk.labels.db}</text>
+          <text x="830" y="552">{desk.labels.key}</text>
+          <text x="1004" y="236">{desk.labels.ado}</text>
+          <text class="struck" x="664" y="84">{desk.labels.none}</text>
+          <text class="num" x="640" y="380">①</text>
+          <text class="num" x="790" y="414">②</text>
+          <text class="num" x="700" y="186">③</text>
+          <text class="num" x="540" y="62">④</text>
+        </g>
+        <path class="cross" d="M578 44 L750 110 M750 44 L578 110" />
+        <g class="packets" aria-hidden="true">
+          {
+            [0, 1.2, 2.4].map((begin) => (
+              <circle r="7">
+                <animateMotion dur="3.6s" begin={`${begin}s`} repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="linear">
+                  <mpath href="#v3-line" />
+                </animateMotion>
+              </circle>
+            ))
+          }
+        </g>
+      </svg>
+      <Hanko text="無" class="desk-seal" label="none" />
+      <figcaption class="fig"><b>{desk.figure.split(' · ')[0]}</b> · {desk.figure.split(' · ').slice(1).join(' · ')}</figcaption>
+    </figure>
+
+    <ol class="legend">
+      {
+        desk.callouts.map(([n, t, d]) => (
+          <li>
+            <span class="legend-n jp">{n}</span>
+            <b>{t}</b>
+            <span>{d}</span>
+          </li>
+        ))
+      }
+    </ol>
+
+    <ul class="desk-facts">
+      {
+        desk.facts.map(([v, l]) => (
+          <li>
+            <b>{v}</b>
+            <span>{l}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<script>
+  // Give each diagram line its real length so the scroll draw-in dashes are in user units.
+  // Only then is `.can-draw` set; without it (no JS) the lines simply show.
+  const dia = document.querySelector<SVGSVGElement>('.dia');
+  if (dia) {
+    for (const el of dia.querySelectorAll<SVGGeometryElement>('.draw')) {
+      el.style.setProperty('--len', `${Math.ceil(el.getTotalLength())}px`);
+    }
+    dia.classList.add('can-draw');
+  }
+</script>
+
+<style>
+  .desk-head {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 2rem clamp(2rem, 5vw, 5rem);
+    align-items: end;
+  }
+
+  .plate {
+    position: relative;
+    margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+    padding: clamp(1rem, 3vw, 2.5rem);
+    border: 1px solid var(--ink);
+    background: rgb(255 252 244 / 0.4);
+  }
+
+  .plate::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--rule);
+    pointer-events: none;
+  }
+
+  .dia {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .ink {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .thick {
+    stroke-width: 6;
+  }
+
+  .line {
+    stroke-width: 7;
+  }
+
+  .dotted {
+    stroke-dasharray: 0 11;
+    stroke-width: 4;
+  }
+
+  .dashed {
+    stroke-dasharray: 9 7;
+    stroke-width: 2.5;
+  }
+
+  .solid {
+    fill: var(--ink);
+    stroke: none;
+  }
+
+  .solid-2 {
+    fill: #36302a;
+    stroke: none;
+  }
+
+  .seal {
+    fill: var(--shu);
+    stroke: none;
+  }
+
+  .paper-line {
+    stroke: rgb(243 236 223 / 0.55);
+    stroke-width: 5;
+  }
+
+  .labels text {
+    font: italic 400 24px var(--serif);
+    fill: var(--ink);
+    text-anchor: middle;
+  }
+
+  .labels .num {
+    font: 600 30px var(--mincho);
+    font-style: normal;
+    fill: var(--shu);
+  }
+
+  .labels .struck {
+    fill: var(--dim);
+  }
+
+  .cross {
+    fill: none;
+    stroke: var(--shu);
+    stroke-width: 7;
+    stroke-linecap: round;
+    filter: url(#v3-hand);
+  }
+
+  .packets circle {
+    fill: var(--shu);
+  }
+
+  .plate :global(.desk-seal) {
+    position: absolute;
+    top: 1.4rem;
+    left: 58%;
+    width: clamp(2.6rem, 4.6vw, 4.2rem);
+    rotate: 8deg;
+  }
+
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem 2rem;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .legend li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.2rem 0.7rem;
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .legend-n {
+    grid-row: span 2;
+    font-size: 1.6rem;
+    line-height: 1.1;
+    color: var(--shu);
+  }
+
+  .legend b {
+    font: 650 0.9rem/1.4 var(--sans);
+  }
+
+  .legend span:last-child {
+    color: var(--ink-2);
+  }
+
+  .desk-facts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+    padding: 0;
+    list-style: none;
+    border-block: 1px solid var(--ink);
+  }
+
+  .desk-facts li {
+    display: grid;
+    gap: 0.3rem;
+    padding: 1.2rem 1.2rem 1.1rem;
+  }
+
+  .desk-facts li + li {
+    border-left: 1px solid var(--rule);
+  }
+
+  .desk-facts b {
+    font: 500 clamp(2rem, 3.4vw, 3rem) / 1 var(--serif);
+    letter-spacing: -0.035em;
+  }
+
+  .desk-facts span {
+    font: 500 0.8rem/1.3 var(--sans);
+    color: var(--ink-2);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .packets {
+      display: none;
+    }
+  }
+
+  /*
+   * Draw-in on scroll. The dash exists only inside the keyframes, in real user units (`--len` is
+   * each element's getTotalLength(), set by the script below together with `.can-draw`), and the
+   * animation fills backwards only: without JS, with reduced motion, or once the range is passed,
+   * every line is whole.
+   */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .can-draw .draw {
+        animation: v3-line linear backwards;
+        animation-timeline: view();
+        animation-range: entry 15% cover 50%;
+      }
+
+      .can-draw .cross {
+        animation: v3-cross linear backwards;
+        animation-timeline: view();
+        animation-range: cover 35% cover 50%;
+      }
+    }
+  }
+
+  @keyframes v3-line {
+    from {
+      stroke-dasharray: var(--len) calc(var(--len) + 20px);
+      stroke-dashoffset: calc(var(--len) + 10px);
+    }
+    to {
+      stroke-dasharray: var(--len) calc(var(--len) + 20px);
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes v3-cross {
+    from {
+      stroke-dasharray: 370px 400px;
+      stroke-dashoffset: 380px;
+    }
+    to {
+      stroke-dasharray: 370px 400px;
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .desk-head {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .legend,
+    .desk-facts {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .desk-facts li:nth-child(3) {
+      border-left: 0;
+    }
+
+    .desk-facts li:nth-child(n + 3) {
+      border-top: 1px solid var(--rule);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .legend {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .labels text {
+      font-size: 34px;
+    }
+  }
+</style>

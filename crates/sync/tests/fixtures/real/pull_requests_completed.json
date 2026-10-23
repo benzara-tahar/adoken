@@ -1,0 +1,144 @@
+{
+  "count": 2,
+  "value": [
+    {
+      "closedDate": "2024-03-29T05:42:09.298585Z",
+      "codeReviewId": 2,
+      "completionOptions": {
+        "autoCompleteIgnoreConfigIds": [],
+        "deleteSourceBranch": true,
+        "mergeCommitMessage": "Merged PR: Update index.js",
+        "mergeStrategy": "noFastForward",
+        "transitionWorkItems": true
+      },
+      "completionQueueTime": "2024-03-29T05:42:08.7166117Z",
+      "createdBy": {
+        "descriptor": "aad.ZXhhbXBsZQ",
+        "displayName": "Dana Example",
+        "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+        "imageUrl": "https://dev.azure.com/contoso/_apis/GraphProfile/MemberAvatars/aad.ZXhhbXBsZQ",
+        "uniqueName": "dana@example.com",
+        "url": "https://spsprodcus5.vssps.visualstudio.com/A00000000-0000-0000-0000-000000000000/_apis/Identities/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d"
+      },
+      "creationDate": "2024-03-29T01:30:19.4222456Z",
+      "description": "Adds more details 👍",
+      "isDraft": false,
+      "lastMergeCommit": {
+        "commitId": "c7a1d9f5d385cf65b1f9960eda6a10bffa18278a",
+        "url": "https://dev.azure.com/contoso/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0/_apis/git/repositories/1a2b3c4d-5e6f-4a1b-8c2d-3e4f5a6b7c8d/commits/c7a1d9f5d385cf65b1f9960eda6a10bffa18278a"
+      },
+      "lastMergeSourceCommit": {
+        "commitId": "8b48b827b09c2144e24f233eb31f9c78dd88b9ce",
+        "url": "https://dev.azure.com/contoso/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0/_apis/git/repositories/1a2b3c4d-5e6f-4a1b-8c2d-3e4f5a6b7c8d/commits/8b48b827b09c2144e24f233eb31f9c78dd88b9ce"
+      },
+      "lastMergeTargetCommit": {
+        "commitId": "9f7b45e60399e47e38d006ec71b0a6c6a2ff2b6e",
+        "url": "https://dev.azure.com/contoso/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0/_apis/git/repositories/1a2b3c4d-5e6f-4a1b-8c2d-3e4f5a6b7c8d/commits/9f7b45e60399e47e38d006ec71b0a6c6a2ff2b6e"
+      },
+      "mergeId": "d0d0d9ac-af3d-49bb-a562-813d34a492b7",
+      "mergeStatus": "succeeded",
+      "pullRequestId": 2,
+      "repository": {
+        "id": "1a2b3c4d-5e6f-4a1b-8c2d-3e4f5a6b7c8d",
+        "name": "web",
+        "project": {
+          "id": "0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0",
+          "lastUpdateTime": "0001-01-01T00:00:00",
+          "name": "Fabrikam",
+          "state": "unchanged",
+          "visibility": "unchanged"
+        },
+        "url": "https://dev.azure.com/contoso/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0/_apis/git/repositories/1a2b3c4d-5e6f-4a1b-8c2d-3e4f5a6b7c8d",
+        "remoteUrl": "https://dev.azure.com/contoso/Fabrikam/_git/web",
+        "sshUrl": "https://dev.azure.com/contoso/Fabrikam/_git/web",
+        "webUrl": "https://dev.azure.com/contoso/Fabrikam/_git/web"
+      },
+      "reviewers": [],
+      "sourceRefName": "refs/heads/fix/description",
+      "status": "completed",
+      "supportsIterations": true,
+      "targetRefName": "refs/heads/main",
+      "title": "Update index.js",
+      "url": "https://dev.azure.com/contoso/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0/_apis/git/repositories/1a2b3c4d-5e6f-4a1b-8c2d-3e4f5a6b7c8d/pullRequests/2"
+    },
+    {
+      "closedDate": "2024-03-27T06:19:40.4274624Z",
+      "codeReviewId": 1,
+      "completionOptions": {
+        "autoCompleteIgnoreConfigIds": [],
+        "deleteSourceBranch": true,
+        "mergeCommitMessage": "Merged PR: Add index.js",
+        "mergeStrategy": "noFastForward",
+        "transitionWorkItems": true
+      },
+      "completionQueueTime": "2024-03-27T06:19:39.5752658Z",
+      "createdBy": {
+        "descriptor": "aad.ZXhhbXBsZQ",
+        "displayName": "Dana Example",
+        "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+        "imageUrl": "https://dev.azure.com/contoso/_apis/GraphProfile/MemberAvatars/aad.ZXhhbXBsZQ",
+        "uniqueName": "dana@example.com",
+        "url": "https://spsprodcus5.vssps.visualstudio.com/A00000000-0000-0000-0000-000000000000/_apis/Identities/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d"
+      },
+      "creationDate": "2024-03-25T08:32:42.1613636Z",
+      "description": "Adds more details 👍",
+      "isDraft": false,
+      "labels": [
+        {
+          "active": true,
+          "id": "7661a9da-7342-4044-ac99-10ce8ed1af6e",
+          "name": "bug"
+        }
+      ],
+      "lastMergeCommit": {
+        "commitId": "05fbf5bc8275443d9599130a70207f76707b21d8",
+        "url": "https://dev.azure.com/contoso/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0/_apis/git/repositories/1a2b3c4d-5e6f-4a1b-8c2d-3e4f5a6b7c8d/commits/05fbf5bc8275443d9599130a70207f76707b21d8"
+      },
+      "lastMergeSourceCommit": {
+        "commitId": "7df6c57cee3de78893887d429ae3f533e92b66f0",
+        "url": "https://dev.azure.com/contoso/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0/_apis/git/repositories/1a2b3c4d-5e6f-4a1b-8c2d-3e4f5a6b7c8d/commits/7df6c57cee3de78893887d429ae3f533e92b66f0"
+      },
+      "lastMergeTargetCommit": {
+        "commitId": "a81d1a72bd19c1cba421512f202db80d3873e913",
+        "url": "https://dev.azure.com/contoso/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0/_apis/git/repositories/1a2b3c4d-5e6f-4a1b-8c2d-3e4f5a6b7c8d/commits/a81d1a72bd19c1cba421512f202db80d3873e913"
+      },
+      "mergeId": "3377171c-63ca-4a51-8e3d-7f56a800a441",
+      "mergeStatus": "succeeded",
+      "pullRequestId": 1,
+      "repository": {
+        "id": "1a2b3c4d-5e6f-4a1b-8c2d-3e4f5a6b7c8d",
+        "name": "web",
+        "project": {
+          "id": "0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0",
+          "lastUpdateTime": "0001-01-01T00:00:00",
+          "name": "Fabrikam",
+          "state": "unchanged",
+          "visibility": "unchanged"
+        },
+        "url": "https://dev.azure.com/contoso/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0/_apis/git/repositories/1a2b3c4d-5e6f-4a1b-8c2d-3e4f5a6b7c8d",
+        "remoteUrl": "https://dev.azure.com/contoso/Fabrikam/_git/web",
+        "sshUrl": "https://dev.azure.com/contoso/Fabrikam/_git/web",
+        "webUrl": "https://dev.azure.com/contoso/Fabrikam/_git/web"
+      },
+      "reviewers": [
+        {
+          "displayName": "Dana Example",
+          "hasDeclined": false,
+          "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+          "imageUrl": "https://dev.azure.com/contoso/_apis/GraphProfile/MemberAvatars/aad.ZXhhbXBsZQ",
+          "isFlagged": false,
+          "reviewerUrl": "https://dev.azure.com/contoso/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0/_apis/git/repositories/1a2b3c4d-5e6f-4a1b-8c2d-3e4f5a6b7c8d/pullRequests/1/reviewers/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+          "uniqueName": "dana@example.com",
+          "url": "https://spsprodcus5.vssps.visualstudio.com/A00000000-0000-0000-0000-000000000000/_apis/Identities/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+          "vote": 0
+        }
+      ],
+      "sourceRefName": "refs/heads/fix/bug-1",
+      "status": "completed",
+      "supportsIterations": true,
+      "targetRefName": "refs/heads/main",
+      "title": "Add index.js",
+      "url": "https://dev.azure.com/contoso/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0/_apis/git/repositories/1a2b3c4d-5e6f-4a1b-8c2d-3e4f5a6b7c8d/pullRequests/1"
+    }
+  ]
+}

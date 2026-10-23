@@ -1,0 +1,62 @@
+---
+import { switcher } from '../copy';
+---
+
+<nav class="sw" aria-label="Design variants">
+  <span class="sw-label">{switcher.label}</span>
+  {
+    switcher.items.map((item) => (
+      <a href={item.href} aria-current={item.href === '/' ? 'page' : undefined}>
+        {item.label}
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  .sw {
+    position: fixed;
+    left: 50%;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 4px;
+    translate: -50% 0;
+    background: rgb(16 16 26 / 0.72);
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.07),
+      0 16px 40px -12px rgb(0 0 0 / 0.8);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+  }
+  .sw-label {
+    padding: 0 10px 0 12px;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .sw a {
+    padding: 6px 12px;
+    font: 500 0.8rem/1 var(--text-font);
+    color: var(--soft);
+    text-decoration: none;
+    border-radius: 999px;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+  .sw a:hover {
+    color: var(--text);
+    background: rgb(255 255 255 / 0.07);
+  }
+  .sw a[aria-current='page'] {
+    color: var(--accent-ink);
+    background: var(--accent-hi);
+    box-shadow: 0 0 20px -2px color-mix(in srgb, var(--accent) 70%, transparent);
+  }
+</style>

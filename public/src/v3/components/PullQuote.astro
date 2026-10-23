@@ -1,0 +1,15 @@
+---
+/** A pull quote from a real, public Azure DevOps complaint, credited with a link to the source. */
+interface Props {
+  quote: { text: string; source: string; href: string; credit?: string };
+}
+const { quote } = Astro.props;
+---
+
+<figure class="pull wrap rv">
+  <blockquote cite={quote.href}>{quote.text}</blockquote>
+  <figcaption>
+    <a href={quote.href} rel="noopener">{quote.source}</a>
+    {quote.credit && <span class="credit">{quote.credit}</span>}
+  </figcaption>
+</figure>

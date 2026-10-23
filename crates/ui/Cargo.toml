@@ -1,0 +1,47 @@
+[package]
+name = "adoken-ui"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "gpui bridge for adoken-theme plus base components."
+
+[dependencies]
+adoken-diff.workspace = true
+# People picker filter: the Cmd+P matcher (spec 0015 FR-13, design §4.5).
+adoken-search.workspace = true
+# Rich text document model the `rich_text` renderer draws (spec 0015 FR-3).
+adoken-richtext.workspace = true
+adoken-theme.workspace = true
+gpui.workspace = true
+unicode-segmentation = "1"
+zeroize.workspace = true
+
+[dev-dependencies]
+anyhow.workspace = true
+# Frame recorder for the rich text smoke (spec 0015 §7).
+adoken-perf = { workspace = true, features = ["gpui"] }
+criterion.workspace = true
+gpui = { workspace = true, features = ["test-support"] }
+gpui_platform = { workspace = true, features = ["test-support"] }
+
+[[bench]]
+name = "pickers"
+harness = false
+
+[[test]]
+name = "pickers_smoke"
+harness = false
+
+# RichText through a headless window: link / #123 / image clicks reach their
+# callbacks; a 20 KB description draws within the frame budget (spec 0015 §7).
+[[test]]
+name = "rich_text_smoke"
+harness = false
+
+# Nested scroll containers through real wheel dispatch: `contain_scroll` keeps
+# the host page still (Settings › Appearance double scroll).
+[[test]]
+name = "scroll_smoke"
+harness = false

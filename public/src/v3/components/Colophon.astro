@@ -1,0 +1,169 @@
+---
+/** 奥付: the closing call to action, set like a book's colophon page. */
+import Hanko from './Hanko.astro';
+import Follow from './Follow.astro';
+import LaunchForm from './LaunchForm.astro';
+import { colophon } from '../copy';
+---
+
+<footer id="colophon" class="colophon" aria-labelledby="colophon-title">
+  <div class="wrap">
+    <hr class="rule-double" />
+    <div class="co-grid">
+      <div class="co-main">
+        <p class="eyebrow">{colophon.eyebrow}</p>
+        <h2 id="colophon-title" class="display co-title">
+          <span>{colophon.title[0]}</span>
+          <em>{colophon.title[1]}</em>
+        </h2>
+        <p class="dek co-body">{colophon.body}</p>
+        <div class="co-actions">
+          <LaunchForm placement="v3-footer" />
+          <Follow label={colophon.follow} placement="v3-footer" class="co-follow" />
+        </div>
+      </div>
+      <aside class="co-plate">
+        <Hanko text="拳" class="co-seal" label="adoken seal" />
+        <dl class="co-details">
+          {
+            colophon.details.map(([k, v]) => (
+              <div>
+                <dt>{k}</dt>
+                <dd>{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </aside>
+    </div>
+    <div class="co-legal">
+      <p>{colophon.legal}</p>
+      <a href="/privacy/">{colophon.privacy}</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .colophon {
+    padding: clamp(4rem, 9vw, 8rem) 0 6rem;
+  }
+
+  .co-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    padding-top: clamp(3rem, 6vw, 5rem);
+  }
+
+  .co-main {
+    display: grid;
+    gap: 1.8rem;
+  }
+
+  .co-title {
+    font-size: clamp(3rem, 7.4vw, 7.2rem);
+  }
+
+  .co-title span,
+  .co-title em {
+    display: block;
+  }
+
+  .co-title em {
+    color: var(--shu);
+  }
+
+  .co-body {
+    max-width: 32em;
+  }
+
+  .co-actions {
+    display: grid;
+    gap: 1.4rem;
+    justify-items: start;
+  }
+
+  .co-actions :global(.co-follow) {
+    background: var(--shu);
+    border-color: var(--shu);
+  }
+
+  .co-actions :global(.co-follow:hover) {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .co-plate {
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    gap: 2rem;
+    padding: 2rem 1.5rem;
+    border: 1px solid var(--ink);
+    outline: 1px solid var(--rule);
+    outline-offset: 5px;
+  }
+
+  .co-plate :global(.co-seal) {
+    width: clamp(6rem, 12vw, 9rem);
+    rotate: -5deg;
+  }
+
+  .co-details {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    width: 100%;
+  }
+
+  .co-details div {
+    display: grid;
+    gap: 0.15rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .co-details dt {
+    font: 600 0.7rem/1.2 var(--sans);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  .co-details dd {
+    margin: 0;
+    font: 400 0.98rem/1.45 var(--serif);
+  }
+
+  .co-legal {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 2rem;
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--ink);
+    font: 400 0.78rem/1.5 var(--sans);
+    color: var(--dim);
+  }
+
+  .co-legal p {
+    margin: 0;
+    max-width: 60em;
+  }
+
+  .co-legal a {
+    color: var(--ink);
+  }
+
+  @media (max-width: 960px) {
+    .co-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .co-legal {
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+  }
+</style>

@@ -1,0 +1,8 @@
+---
+import Notice from '../layouts/Notice.astro';
+import { subscribed } from '../copy';
+---
+
+<Notice eyebrow={subscribed.eyebrow} title={subscribed.title} body={subscribed.body}>
+  <a class="btn" href="/">{subscribed.cta}</a>
+</Notice>

@@ -1,0 +1,90 @@
+---
+/**
+ * Fig. 1: the hero "photograph". A dark adoken window that loops through the morning review:
+ * Today → ⌘P → typo-tolerant search → diff → inline reply → A to approve (Hanko Slam).
+ */
+import AppSide from './AppSide.astro';
+import TodayView from './mock/TodayView.astro';
+import PrView from './mock/PrView.astro';
+import Palette from './mock/Palette.astro';
+import { hero } from '../copy';
+---
+
+<figure class="photo hero-photo">
+  <span class="tape tape-tl"></span>
+  <span class="tape tape-tr tape-shu"></span>
+  <div class="photo-frame">
+    <div
+      class="win mock hm is-pr is-thread is-reply is-approved is-toast"
+      data-ink="dojo-night"
+      role="img"
+      aria-label="The adoken window on a fictional Contoso org: the Today view, then the Cmd+P palette finding a pull request from the typo “lgoin”, then its diff with an inline thread, a reply, and an approval stamped in vermilion."
+    >
+      <div class="win-bar"><i></i><i></i><i></i><span class="win-title">adoken · Contoso</span><span class="win-sync">Synced</span></div>
+      <div class="app">
+        <AppSide active={0} />
+        <div class="main">
+          <TodayView />
+          <PrView />
+          <Palette />
+        </div>
+      </div>
+      <div class="keycast"></div>
+    </div>
+  </div>
+  <figcaption class="fig"><b>{hero.figure.split(' · ')[0]}</b> · {hero.figure.split(' · ').slice(1).join(' · ')}</figcaption>
+</figure>
+
+<script>
+  import { motionOK, play, scene } from '../scripts/stage';
+
+  const root = document.querySelector<HTMLElement>('.hm');
+  if (root && motionOK) {
+    const q = root.querySelector('.pal-q')!;
+    const reply = root.querySelector('.msg-me .typed')!;
+    const keycast = root.querySelector('.keycast')!;
+    // The finished texts are in the markup (the static picture); the scene retypes them.
+    const query = q.textContent ?? '';
+    const replyText = reply.textContent ?? '';
+    const keys = (html: string) => {
+      keycast.innerHTML = html;
+      keycast.classList.add('show');
+    };
+
+    play(root, async (s) => {
+      keycast.classList.remove('show');
+      q.textContent = '';
+      reply.textContent = '';
+      scene(root, 'today');
+      await s.wait(1300);
+      keys('<kbd>⌘</kbd><kbd>P</kbd>');
+      await s.wait(300);
+      scene(root, 'today', 'palette', 'typing');
+      await s.wait(350);
+      for (const [i, ch] of [...query].entries()) {
+        q.textContent += ch;
+        if (i === 1) scene(root, 'today', 'palette', 'typing', 'results');
+        await s.wait(95 + Math.random() * 60);
+      }
+      scene(root, 'today', 'palette', 'typing', 'results', 'fixed');
+      keycast.classList.remove('show');
+      await s.wait(1100);
+      keys('<kbd>↵</kbd><span>open</span>');
+      await s.wait(250);
+      scene(root, 'pr');
+      await s.wait(900);
+      scene(root, 'pr', 'thread');
+      await s.wait(900);
+      keys('<kbd>R</kbd><span>reply</span>');
+      scene(root, 'pr', 'thread', 'reply');
+      await s.type(reply, replyText, 30);
+      await s.wait(400);
+      keys('<kbd>A</kbd><span>approve</span>');
+      await s.wait(220);
+      scene(root, 'pr', 'thread', 'reply', 'approved');
+      await s.wait(650);
+      scene(root, 'pr', 'thread', 'reply', 'approved', 'toast');
+      await s.wait(2300);
+    });
+  }
+</script>

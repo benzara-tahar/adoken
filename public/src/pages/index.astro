@@ -1,0 +1,21 @@
+---
+/** The homepage ("Instant", formerly the /v2/ variant). Copy lives in src/v2/copy.ts. */
+import Layout from '../v2/Layout.astro';
+import Hero from '../v2/components/Hero.astro';
+import Bento from '../v2/components/Bento.astro';
+import Speed from '../v2/components/Speed.astro';
+import Themes from '../v2/components/Themes.astro';
+import Horizon from '../v2/components/Horizon.astro';
+import Closing from '../v2/components/Closing.astro';
+---
+
+<Layout>
+  <Hero />
+  <main>
+    <Bento />
+    <Speed />
+    <Themes />
+    <Horizon />
+  </main>
+  <Closing />
+</Layout>

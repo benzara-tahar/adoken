@@ -1,0 +1,800 @@
+---
+/**
+ * The hero: the adoken window inside an arcade cabinet. Static markup = the "typo forgiven" palette
+ * (the reduced-motion / no-JS state); scripts/hero.ts plays the boot → ⌘P → review → K.O. loop.
+ */
+import { cabinet, demo } from '../copy';
+import { renderHits, search } from '../lib/search';
+import Icon from './Icon.astro';
+import PixelFist from './PixelFist.astro';
+import Diff from './Diff.astro';
+
+const r = demo.review;
+const deck = [
+  { key: 'cmd', label: '⌘', tone: 'm' },
+  { key: 'p', label: 'P', tone: 'c' },
+  { key: 'enter', label: '⏎', tone: 'g' },
+  { key: 'a', label: 'A', tone: 'a' },
+];
+---
+
+<div class="cab is-results is-forgiven" data-stage="palette" data-cabinet role="img" aria-label={cabinet.label}>
+  <div class="cab-marquee" aria-hidden="true">
+    <PixelFist class="cab-fist" />
+    <span class="cab-name">{cabinet.marquee}</span>
+    <span class="cab-sub">{cabinet.marqueeSub}</span>
+    <span class="cab-bulbs"><i></i><i></i><i></i><i></i><i></i></span>
+  </div>
+
+  <div class="cab-bezel" aria-hidden="true">
+    <div class="app cab-app">
+      <div class="app-bar">
+        <span class="lights"><i></i><i></i><i></i></span>
+        <span class="app-title">{demo.org} / {demo.project}</span>
+        <span class="app-bar-right"><span class="chip-combo">×{cabinet.combo} {cabinet.rankKanji}</span></span>
+      </div>
+      <div class="cab-body app-body">
+        <aside class="side">
+          <p class="side-org"><i>F</i>{demo.org}</p>
+          {
+            demo.sidebar.map((item, i) => (
+              <p class:list={['side-item', { 'is-on': i === 2 }]}>
+                <Icon name={item.icon} />
+                {item.label}
+                {'badge' in item && <em>{item.badge}</em>}
+              </p>
+            ))
+          }
+          <p class="side-foot">synced <b>● 4s ago</b></p>
+        </aside>
+
+        <div class="app-main">
+          <div class="view view-list">
+            <div class="view-head"><h3>Pull requests</h3></div>
+            <div class="tabs"><span class="is-on">To review<b>4</b></span><span>Mine<b>2</b></span><span>Drafts<b>1</b></span></div>
+            <div class="prs">
+              {
+                demo.prs.map((pr) => (
+                  <div class="pr">
+                    <span class="av" data-tone={pr.tone}>
+                      {pr.who}
+                    </span>
+                    <div>
+                      <p class="pr-t">{pr.title}</p>
+                      <p class="pr-m">
+                        <b>{pr.id}</b> · {pr.repo} · {pr.name}
+                      </p>
+                    </div>
+                    <span class="pr-r">
+                      <span class:list={['dot', pr.status]} />
+                      {pr.age}
+                    </span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="view view-review">
+            <div class="rev-head">
+              <p class="rev-id">{r.id} <span class="rev-iter">{r.iteration} · {r.since}</span></p>
+              <h3>{r.title}</h3>
+              <p class="pr-m"><b>{r.author}</b> · {r.branch} → {r.target}</p>
+            </div>
+            <div class="rev-diff"><Diff from={5} to={13} comments={1} /></div>
+            <div class="votebar">
+              <span class="vbtn approve" data-approve><Icon name="check" />{r.votes[0]}<kbd>A</kbd></span>
+              <span class="voted"><Icon name="check" />{cabinet.approved}</span>
+              <span class="vbtn complete"><Icon name="pin" />{r.complete}</span>
+            </div>
+            <div class="combo">
+              <span class="combo-move">{cabinet.hit}<span>{cabinet.hitKanji}</span></span>
+              <span class="combo-n"><small>×</small>{cabinet.combo}</span>
+              <span class="combo-rank">{cabinet.rank}<span>{cabinet.rankKanji}</span></span>
+              <span class="sparks"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer pal-layer">
+        <div class="pal">
+          <div class="pal-in">
+            <Icon name="search" />
+            <span class="pal-q pal-caret" data-query>{cabinet.query}</span>
+            <span class="pal-badge">{cabinet.forgiven}<small>{cabinet.forgivenDetail}</small></span>
+          </div>
+          <ul class="pal-list" set:html={renderHits(search(demo.index, cabinet.query, 4), demo.kindLabels)} />
+          <p class="pal-foot"><span>↑↓ move</span><span>⏎ open</span><b>{cabinet.searchMeta}</b></p>
+        </div>
+      </div>
+
+      <div class="layer boot">
+        <p class="boot-hud"><span>1P 000000</span><span>HI-SCORE &lt;50MS</span><span data-credit>{cabinet.credit}</span></p>
+        <div class="boot-coin">
+          <p class="boot-blink">{cabinet.coin}</p>
+        </div>
+        <div class="boot-logo">
+          <PixelFist class="boot-fist" />
+          <p class="boot-title">{cabinet.bootTitle}</p>
+          <div class="boot-bar"><i></i></div>
+          <div class="boot-lines">{cabinet.bootLines.map((line) => <p>{line}</p>)}</div>
+          <p class="boot-start boot-blink">{cabinet.start}</p>
+        </div>
+      </div>
+
+      <div class="layer ko">
+        <p class="ko-word"><span>K</span><span>.</span><span>O</span><span>.</span></p>
+        <p class="ko-cap"><b>{cabinet.koCaption}</b><small>{cabinet.koSub}</small></p>
+        <span class="sparks ko-sparks"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cab-deck" aria-hidden="true">
+    <div class="deck-btns">
+      {
+        deck.map((b) => (
+          <span class="deck-btn" data-key={b.key} data-tone={b.tone}>
+            <i>{b.label}</i>
+          </span>
+        ))
+      }
+    </div>
+    <span class="deck-start">1P Start</span>
+    <span class="deck-slot"><i class="deck-coin">拳</i></span>
+  </div>
+</div>
+
+<script>
+  import './../scripts/hero';
+</script>
+
+<style>
+  .cab {
+    --rim: linear-gradient(160deg, var(--mag), #6b1fff 45%, var(--cyan));
+    position: relative;
+    padding: 0.6rem;
+    background:
+      linear-gradient(#15102a, #0b0916) padding-box,
+      var(--rim) border-box;
+    border: 2px solid transparent;
+    border-radius: 1.6rem;
+    box-shadow:
+      0 0 0 1px #000,
+      0 0 60px -10px rgb(255 43 214 / 0.55),
+      0 0 120px -30px rgb(34 229 255 / 0.5),
+      0 40px 80px -30px #000;
+  }
+
+  /* Marquee */
+  .cab-marquee {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.6rem;
+    padding: 0.55rem 1rem;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 180% at 50% 0%, rgb(255 43 214 / 0.35), transparent 60%),
+      linear-gradient(90deg, #1d0a2e, #0c1830);
+    border-radius: 1rem 1rem 0.5rem 0.5rem;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  }
+  .cab-marquee :global(.cab-fist) {
+    width: 2rem;
+    height: auto;
+    filter: drop-shadow(0 0 8px rgb(255 90 54 / 0.7));
+  }
+  .cab-name {
+    font: italic 900 1.5rem/1 var(--f-display);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow:
+      0 0 6px #fff,
+      0 0 16px var(--mag),
+      0 0 36px var(--mag);
+  }
+  .cab-sub {
+    font: 700 0.7rem/1 var(--f-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cyan-hi);
+    text-shadow: 0 0 8px var(--cyan);
+  }
+  .cab-bulbs {
+    display: flex;
+    gap: 0.45rem;
+    margin-left: auto;
+  }
+  .cab-bulbs i {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--amber);
+    box-shadow: 0 0 10px var(--amber);
+  }
+  .cab-bulbs i:nth-child(even) {
+    background: var(--mag);
+    box-shadow: 0 0 10px var(--mag);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .cab-bulbs i {
+      animation: bulbs 1.2s steps(1) infinite;
+      animation-delay: calc(var(--n, 0) * 120ms);
+    }
+    .cab-bulbs i:nth-child(2) {
+      --n: 1;
+    }
+    .cab-bulbs i:nth-child(3) {
+      --n: 2;
+    }
+    .cab-bulbs i:nth-child(4) {
+      --n: 3;
+    }
+    .cab-bulbs i:nth-child(5) {
+      --n: 4;
+    }
+  }
+  @keyframes bulbs {
+    50% {
+      opacity: 0.25;
+      box-shadow: none;
+    }
+  }
+
+  /* Screen */
+  .cab-bezel {
+    padding: 0.55rem;
+    background: #05040a;
+    border-radius: 0.9rem;
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 0.06),
+      inset 0 0 30px #000;
+  }
+  .cab-app {
+    border-radius: 0.6rem;
+  }
+  .cab-app::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(to bottom, rgb(255 255 255 / 0.03) 0 1px, transparent 1px 3px),
+      radial-gradient(ellipse at 50% 40%, transparent 55%, rgb(0 0 0 / 0.45));
+    border-radius: inherit;
+  }
+  .cab-body {
+    height: 26rem;
+  }
+  @container (max-width: 560px) {
+    .cab-body {
+      height: 24rem;
+    }
+  }
+  .chip-combo {
+    padding: 2px 7px;
+    color: var(--a-warn);
+    background: color-mix(in srgb, var(--a-warn) 14%, transparent);
+    border-radius: 999px;
+    opacity: 0;
+  }
+  .cab.is-approved .chip-combo {
+    opacity: 1;
+  }
+
+  /* Views */
+  .view {
+    position: absolute;
+    inset: 0;
+    transition:
+      opacity 280ms var(--ease-out),
+      translate 380ms var(--ease-out);
+  }
+  .view-review {
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    translate: 24px 0;
+    visibility: hidden;
+  }
+  .cab:is([data-stage='review'], [data-stage='ko']) .view-review {
+    opacity: 1;
+    translate: 0 0;
+    visibility: visible;
+  }
+  .cab:is([data-stage='review'], [data-stage='ko']) .view-list {
+    opacity: 0;
+    translate: -24px 0;
+  }
+  .rev-head {
+    display: grid;
+    gap: 3px;
+    padding: 12px 16px 10px;
+    border-bottom: 1px solid var(--a-line);
+  }
+  .rev-head h3 {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+  .rev-id {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font: 700 11px var(--f-mono);
+    color: var(--a-accent);
+  }
+  .rev-iter {
+    padding: 2px 7px;
+    font-weight: 600;
+    color: var(--a-accent-2);
+    background: color-mix(in srgb, var(--a-accent-2) 12%, transparent);
+    border-radius: 999px;
+  }
+  .rev-diff {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    padding-top: 6px;
+  }
+  .view-review .votebar {
+    flex: none;
+  }
+  .voted {
+    opacity: 0;
+    scale: 0.6;
+    transition:
+      opacity 200ms,
+      scale 300ms var(--ease-spring);
+  }
+  .cab.is-approved .voted {
+    opacity: 1;
+    scale: 1;
+  }
+  .combo {
+    top: 58px;
+    opacity: 0;
+  }
+  .cab.is-approved .combo {
+    opacity: 1;
+  }
+  .combo .sparks {
+    right: 30px;
+    top: 40px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .cab.is-approved .combo-n,
+    .cab.is-approved .combo-move {
+      animation: pop 420ms var(--ease-spring) both;
+    }
+  }
+
+  /* Layers */
+  .layer {
+    position: absolute;
+    inset: 36px 0 0;
+    z-index: 5;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 220ms var(--ease-out),
+      visibility 220ms;
+  }
+  .pal-layer {
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    padding: 34px 20px 0;
+    background: rgb(4 2 10 / 0.45);
+  }
+  .cab[data-stage='palette'] .pal-layer {
+    opacity: 1;
+    visibility: visible;
+  }
+  .pal {
+    width: min(100%, 470px);
+    transition: scale 260ms var(--ease-spring);
+  }
+  .cab[data-stage='palette'] .pal {
+    scale: 1;
+  }
+  .pal-list {
+    min-height: 196px;
+  }
+  .pal-list :global(.pal-row) {
+    opacity: 0;
+  }
+  .cab.is-results :global(.pal-row) {
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .cab.is-results :global(.pal-row) {
+      animation: rise 260ms var(--ease-out) both;
+      animation-delay: calc(var(--i) * 45ms);
+    }
+    .cab.is-forgiven .pal-badge {
+      animation: slam 420ms var(--ease-spring) both;
+    }
+  }
+  .pal-badge {
+    opacity: 0;
+  }
+  .cab.is-forgiven .pal-badge {
+    opacity: 1;
+  }
+  .pal-foot b {
+    opacity: 0;
+  }
+  .cab.is-results .pal-foot b {
+    opacity: 1;
+  }
+  .cab.is-hit :global(.pal-row.is-sel) {
+    background: color-mix(in srgb, var(--a-accent) 45%, transparent);
+  }
+
+  /* Boot / attract screen */
+  .boot {
+    z-index: 8;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    background:
+      radial-gradient(60% 60% at 50% 45%, rgb(255 43 214 / 0.18), transparent 70%),
+      #05030b;
+    text-align: center;
+  }
+  .cab:is([data-stage='coin'], [data-stage='boot'], [data-stage='start']) .boot {
+    opacity: 1;
+    visibility: visible;
+  }
+  .boot-hud {
+    position: absolute;
+    inset: 14px 18px auto;
+    display: flex;
+    justify-content: space-between;
+    font: 700 11px/1 var(--f-mono);
+    letter-spacing: 0.12em;
+    color: var(--amber);
+    text-shadow: 0 0 8px var(--amber);
+  }
+  .boot-hud span:nth-child(2) {
+    color: var(--cyan-hi);
+    text-shadow: 0 0 8px var(--cyan);
+  }
+  .boot-coin,
+  .boot-logo {
+    grid-area: 1 / 1;
+    display: grid;
+    justify-items: center;
+    gap: 14px;
+  }
+  .boot-logo {
+    opacity: 0;
+  }
+  .cab:is([data-stage='boot'], [data-stage='start']) .boot-logo {
+    opacity: 1;
+  }
+  .cab:is([data-stage='boot'], [data-stage='start']) .boot-coin {
+    opacity: 0;
+  }
+  .boot-blink {
+    font: 800 15px/1 var(--f-mono);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--amber);
+    text-shadow: 0 0 12px var(--amber);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .boot-blink {
+      animation: blink 0.9s steps(1) infinite;
+    }
+    .cab:is([data-stage='boot'], [data-stage='start']) :global(.boot-fist) {
+      animation: punch-in 520ms var(--ease-spring) both;
+    }
+  }
+  @keyframes punch-in {
+    0% {
+      scale: 0.2;
+      rotate: -20deg;
+      opacity: 0;
+    }
+    100% {
+      scale: 1;
+      rotate: 0deg;
+      opacity: 1;
+    }
+  }
+  .boot-logo :global(.boot-fist) {
+    width: 84px;
+    height: auto;
+    filter: drop-shadow(0 0 18px rgb(255 90 54 / 0.8));
+  }
+  .boot-title {
+    font: italic 900 46px/0.9 var(--f-display);
+    letter-spacing: -0.01em;
+    color: #fff;
+    text-shadow:
+      0 0 8px #fff,
+      0 0 22px var(--mag),
+      0 0 48px var(--mag);
+  }
+  .boot-bar {
+    width: 220px;
+    height: 8px;
+    padding: 1px;
+    border: 1px solid rgb(255 255 255 / 0.3);
+    border-radius: 2px;
+  }
+  .boot-bar i {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(90deg, var(--cyan) 0 8px, transparent 8px 10px);
+    box-shadow: 0 0 10px var(--cyan);
+  }
+  .cab.is-loading .boot-bar i {
+    animation: load 900ms steps(22) both;
+  }
+  @keyframes load {
+    from {
+      width: 0;
+    }
+  }
+  .boot-lines {
+    display: grid;
+    gap: 3px;
+    min-height: 54px;
+    font: 600 11px/1.4 var(--f-mono);
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .boot-lines p:last-child {
+    color: var(--lime);
+    text-shadow: 0 0 8px rgb(141 255 106 / 0.6);
+  }
+  .cab.is-loading .boot-lines p {
+    opacity: 0;
+    animation: rise 200ms var(--ease-out) forwards;
+  }
+  .cab.is-loading .boot-lines p:nth-child(2) {
+    animation-delay: 300ms;
+  }
+  .cab.is-loading .boot-lines p:nth-child(3) {
+    animation-delay: 700ms;
+  }
+  .boot-start {
+    opacity: 0;
+  }
+  .cab[data-stage='start'] .boot-start {
+    opacity: 1;
+  }
+
+  /* K.O. */
+  .ko {
+    z-index: 7;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 14px;
+    background: radial-gradient(ellipse at center, rgb(20 4 30 / 0.2), rgb(8 2 14 / 0.75));
+  }
+  .cab[data-stage='ko'] .ko {
+    opacity: 1;
+    visibility: visible;
+  }
+  .ko-word {
+    display: flex;
+    font: italic 900 120px/0.85 var(--f-display);
+    letter-spacing: -0.02em;
+    color: var(--amber);
+    -webkit-text-stroke: 6px #1a0600;
+    paint-order: stroke fill;
+    text-shadow:
+      0 6px 0 #b3321c,
+      0 0 40px rgb(255 182 39 / 0.8);
+  }
+  @container (max-width: 560px) {
+    .ko-word {
+      font-size: 84px;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .cab[data-stage='ko'] .ko-word span {
+      animation: slam 460ms var(--ease-spring) both;
+    }
+    .cab[data-stage='ko'] .ko-word span:nth-child(2) {
+      animation-delay: 90ms;
+    }
+    .cab[data-stage='ko'] .ko-word span:nth-child(3) {
+      animation-delay: 180ms;
+    }
+    .cab[data-stage='ko'] .ko-word span:nth-child(4) {
+      animation-delay: 270ms;
+    }
+    .cab[data-stage='ko'] .ko-cap {
+      animation: rise 300ms 380ms var(--ease-out) both;
+    }
+    .cab[data-stage='ko'] .cab-app {
+      animation: shake 300ms 180ms both;
+    }
+  }
+  @keyframes shake {
+    20% {
+      translate: -6px 2px;
+    }
+    40% {
+      translate: 5px -2px;
+    }
+    60% {
+      translate: -3px 1px;
+    }
+    80% {
+      translate: 2px 0;
+    }
+  }
+  .ko-cap {
+    display: grid;
+    gap: 2px;
+    padding: 8px 16px;
+    text-align: center;
+    background: rgb(10 4 18 / 0.8);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: 12px;
+  }
+  .ko-cap b {
+    font-size: 14px;
+  }
+  .ko-cap small {
+    font: 11px var(--f-mono);
+    color: var(--a-muted);
+  }
+  .ko-sparks {
+    left: 50%;
+    top: 42%;
+    scale: 2.2;
+  }
+
+  /* Deck */
+  .cab-deck {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.6rem;
+    padding: 0.7rem 1rem;
+    background: linear-gradient(#1a1430, #100c1f);
+    border-radius: 0.5rem 0.5rem 1rem 1rem;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08);
+  }
+  .deck-btns {
+    display: flex;
+    gap: 0.7rem;
+  }
+  .deck-btn {
+    --c: var(--mag);
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff8, transparent 40%), var(--c);
+    box-shadow:
+      0 4px 0 color-mix(in srgb, var(--c) 45%, #000),
+      0 0 0 3px #07050e,
+      0 0 18px -2px var(--c);
+    transition:
+      translate 90ms,
+      box-shadow 90ms,
+      filter 90ms;
+  }
+  .deck-btn[data-tone='c'] {
+    --c: var(--cyan);
+  }
+  .deck-btn[data-tone='g'] {
+    --c: var(--lime);
+  }
+  .deck-btn[data-tone='a'] {
+    --c: var(--amber);
+  }
+  .deck-btn i {
+    font: 900 0.95rem/1 var(--f-display);
+    font-style: normal;
+    color: rgb(0 0 0 / 0.7);
+  }
+  .deck-btn.is-pressed {
+    translate: 0 3px;
+    filter: brightness(1.35);
+    box-shadow:
+      0 1px 0 color-mix(in srgb, var(--c) 45%, #000),
+      0 0 0 3px #07050e,
+      0 0 34px 4px var(--c);
+  }
+  .deck-start {
+    padding: 0.35rem 0.6rem;
+    font: 800 0.65rem/1 var(--f-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber-hi);
+    border: 1px solid rgb(255 182 39 / 0.5);
+    border-radius: 0.3rem;
+    text-shadow: 0 0 8px var(--amber);
+  }
+  .deck-slot {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.6rem;
+    margin-left: auto;
+    overflow: hidden;
+    background: #07050e;
+    border: 1px solid #3a2e5c;
+    border-radius: 0.35rem;
+    box-shadow: 0 0 16px -4px var(--red);
+  }
+  .deck-slot::before {
+    content: '';
+    width: 0.25rem;
+    height: 1.5rem;
+    background: var(--red);
+    border-radius: 2px;
+    box-shadow: 0 0 10px var(--red);
+  }
+  .deck-coin {
+    position: absolute;
+    top: -1.6rem;
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    font: 900 0.7rem/1 var(--f-kanji);
+    font-style: normal;
+    color: #3a2400;
+    background: radial-gradient(circle at 35% 30%, #fff3c4, var(--amber) 60%, #b37400);
+    border-radius: 50%;
+    opacity: 0;
+  }
+  .cab.is-coin .deck-coin {
+    animation: coin 620ms var(--ease-out) both;
+  }
+  @keyframes coin {
+    0% {
+      opacity: 1;
+      translate: 0 0;
+    }
+    70% {
+      opacity: 1;
+      translate: 0 2.4rem;
+      scale: 1 0.3;
+    }
+    100% {
+      opacity: 0;
+      translate: 0 2.6rem;
+      scale: 1 0.1;
+    }
+  }
+  @media (max-width: 520px) {
+    .cab {
+      padding: 0.4rem;
+      border-radius: 1.2rem;
+    }
+    .cab-bezel {
+      padding: 0.35rem;
+    }
+    .cab-sub {
+      display: none;
+    }
+    .deck-btn {
+      width: 2rem;
+      height: 2rem;
+    }
+    .deck-start {
+      display: none;
+    }
+  }
+</style>

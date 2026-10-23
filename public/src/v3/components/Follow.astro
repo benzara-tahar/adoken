@@ -1,0 +1,20 @@
+---
+/** Follow @BenzyPrime on X. Tracked as `follow_x_clicked` with the spot on the page. */
+import { x } from '../copy';
+
+interface Props {
+  label: string;
+  placement: string;
+  class?: string;
+}
+const { label, placement, class: cls } = Astro.props;
+---
+
+<a class:list={['btn', cls]} href={x.url} rel="me" data-track="follow_x_clicked" data-placement={placement}>
+  <svg class="xmark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path
+      d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+    ></path>
+  </svg>
+  <span>{label}</span>
+</a>

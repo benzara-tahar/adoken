@@ -1,0 +1,213 @@
+---
+import { scores } from '../copy';
+---
+
+<section class="section scores" id="scores" aria-labelledby="scores-title">
+  <div class="wrap">
+    <header class="section-head center" data-reveal>
+      <p class="eyebrow hud">{scores.eyebrow}</p>
+      <h2 class="display" id="scores-title">{scores.title}</h2>
+    </header>
+
+    <div class="board" data-reveal>
+      <p class="board-top hud" aria-hidden="true">
+        <span>1P ADK</span><span class="board-title">Best scores today</span><span class="board-new">{scores.newRecord}</span>
+      </p>
+      <table>
+        <thead>
+          <tr>{scores.head.map((h) => <th scope="col" class="hud">{h}</th>)}</tr>
+        </thead>
+        <tbody>
+          {
+            scores.rows.map((row, i) => (
+              <tr style={`--i:${i}`}>
+                <td class="rank">{row.rank}</td>
+                <td class="score">
+                  {row.prefix}
+                  <b data-count-to={String(row.value)}>{row.value}</b>
+                  <small>{row.unit}</small>
+                </td>
+                <th scope="row" class="stage">
+                  {row.label}
+                </th>
+                <td class="budget">
+                  <span>{row.budget}</span>
+                  <i aria-hidden="true">✓</i>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+      <p class="board-note">{scores.note}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .board {
+    position: relative;
+    max-width: 60rem;
+    margin-inline: auto;
+    padding: clamp(1.25rem, 3vw, 2.25rem);
+    background:
+      repeating-linear-gradient(to bottom, rgb(255 255 255 / 0.025) 0 1px, transparent 1px 4px),
+      radial-gradient(120% 90% at 50% 0%, rgb(34 229 255 / 0.1), transparent 70%),
+      #06050c;
+    border: 2px solid #231d3a;
+    border-radius: 1.6rem;
+    box-shadow:
+      inset 0 0 60px rgb(0 0 0 / 0.9),
+      0 0 0 8px #0e0b1b,
+      0 0 0 9px #2b2446,
+      0 0 80px -20px rgb(34 229 255 / 0.45);
+  }
+  .board-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    color: var(--amber);
+    text-shadow: 0 0 10px rgb(255 182 39 / 0.6);
+  }
+  .board-title {
+    color: var(--cyan-hi);
+    text-shadow: 0 0 10px var(--cyan);
+  }
+  .board-new {
+    color: var(--mag-hi);
+    text-shadow: 0 0 10px var(--mag);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .board-new {
+      animation: blink 1s steps(1) infinite;
+    }
+  }
+  @media (max-width: 620px) {
+    .board-title {
+      display: none;
+    }
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--f-mono);
+  }
+  thead th {
+    padding: 0 0.5rem 0.8rem;
+    font-size: 0.66rem;
+    text-align: left;
+    color: var(--dim);
+    border-bottom: 1px dashed rgb(255 255 255 / 0.12);
+  }
+  thead th:last-child {
+    text-align: right;
+  }
+  td,
+  tbody th {
+    padding: 0.95rem 0.5rem;
+    border-bottom: 1px dashed rgb(255 255 255 / 0.07);
+    vertical-align: baseline;
+  }
+  tbody tr {
+    --c: var(--text);
+  }
+  tbody tr:nth-child(1) {
+    --c: var(--amber);
+  }
+  tbody tr:nth-child(2) {
+    --c: var(--cyan);
+  }
+  tbody tr:nth-child(3) {
+    --c: var(--mag);
+  }
+  tbody tr:nth-child(4) {
+    --c: var(--lime);
+  }
+  .rank {
+    width: 4.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--c);
+    text-shadow: 0 0 10px color-mix(in srgb, var(--c) 60%, transparent);
+  }
+  .score {
+    width: 13rem;
+    font: 900 clamp(1.8rem, 4vw, 2.8rem) / 1 var(--f-display);
+    font-style: italic;
+    white-space: nowrap;
+    color: var(--c);
+    text-shadow: 0 0 22px color-mix(in srgb, var(--c) 55%, transparent);
+    font-variant-numeric: tabular-nums;
+  }
+  .score small {
+    margin-left: 0.2rem;
+    font: 700 0.9rem var(--f-mono);
+    font-style: normal;
+    opacity: 0.8;
+  }
+  .stage {
+    font: 600 1rem/1.35 var(--f-sans);
+    text-align: left;
+    color: var(--text);
+  }
+  .budget {
+    font-size: 0.8rem;
+    text-align: right;
+    white-space: nowrap;
+    color: var(--dim);
+  }
+  .budget i {
+    margin-left: 0.5rem;
+    font-style: normal;
+    color: var(--lime);
+    text-shadow: 0 0 8px var(--lime);
+  }
+  @media (max-width: 620px) {
+    thead {
+      display: none;
+    }
+    tr {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-areas: 'rank score' 'stage stage' 'budget budget';
+      padding: 0.9rem 0;
+      border-bottom: 1px dashed rgb(255 255 255 / 0.1);
+    }
+    td,
+    tbody th {
+      padding: 0.15rem 0.4rem;
+      border: 0;
+    }
+    .rank {
+      grid-area: rank;
+      width: auto;
+    }
+    .score {
+      grid-area: score;
+      width: auto;
+    }
+    .stage {
+      grid-area: stage;
+    }
+    .budget {
+      grid-area: budget;
+      text-align: left;
+    }
+  }
+  .board-note {
+    margin-top: 1.2rem;
+    font: 0.8rem/1.5 var(--f-mono);
+    color: var(--dim);
+    text-align: center;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .board tbody tr {
+      opacity: 0;
+    }
+    :global(.js) .board.is-in tbody tr {
+      animation: rise 400ms var(--ease-out) both;
+      animation-delay: calc(200ms + var(--i) * 120ms);
+    }
+  }
+</style>

@@ -1,0 +1,177 @@
+---
+import { stages } from '../copy';
+---
+
+<section class="section stages" id="stages" aria-labelledby="stages-title">
+  <div class="wrap">
+    <header class="section-head center" data-reveal>
+      <p class="eyebrow hud">{stages.eyebrow}</p>
+      <h2 class="display" id="stages-title">{stages.title}</h2>
+    </header>
+    <ol class="map" data-reveal>
+      {
+        stages.items.map((s, i) => (
+          <li class="node" data-state={s.state} style={`--i:${i}`}>
+            {s.state === 'now' && <span class="here hud">{stages.here}</span>}
+            <span class="node-v">{s.version}</span>
+            <span class="node-state hud">{stages.stateLabels[s.state]}</span>
+            <h3>{s.name}</h3>
+            <p>{s.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="stages-note">{stages.note}</p>
+  </div>
+</section>
+
+<style>
+  .map {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 0;
+    padding: 3rem 0 0;
+    list-style: none;
+  }
+  .map::before {
+    content: '';
+    position: absolute;
+    top: calc(3rem + 2.1rem);
+    left: 6%;
+    right: 6%;
+    height: 3px;
+    background: repeating-linear-gradient(90deg, var(--cyan) 0 10px, transparent 10px 18px);
+    filter: drop-shadow(0 0 6px var(--cyan));
+    opacity: 0.6;
+  }
+  @media (max-width: 900px) {
+    .map {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      padding: 1rem 0 0 1.5rem;
+    }
+    .map::before {
+      top: 0;
+      bottom: 0;
+      left: 0.35rem;
+      right: auto;
+      width: 3px;
+      height: auto;
+      background: repeating-linear-gradient(180deg, var(--cyan) 0 10px, transparent 10px 18px);
+    }
+  }
+  .node {
+    --c: var(--dim);
+    position: relative;
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+    justify-items: start;
+  }
+  .node[data-state='clear'] {
+    --c: var(--lime);
+  }
+  .node[data-state='now'] {
+    --c: var(--mag);
+  }
+  .node[data-state='bonus'] {
+    --c: var(--amber);
+  }
+  .node-v {
+    display: grid;
+    place-items: center;
+    min-width: 4.2rem;
+    height: 4.2rem;
+    padding: 0 0.6rem;
+    font: italic 900 1.3rem/1 var(--f-display);
+    color: var(--c);
+    background: var(--bg);
+    border: 2.5px solid var(--c);
+    border-radius: 1rem;
+    box-shadow:
+      0 0 0 6px var(--bg),
+      0 0 24px -4px var(--c);
+    text-shadow: 0 0 12px color-mix(in srgb, var(--c) 60%, transparent);
+  }
+  .node[data-state='now'] .node-v {
+    color: #1a0418;
+    background: var(--mag);
+    text-shadow: none;
+    box-shadow:
+      0 0 0 6px var(--bg),
+      0 0 36px 2px var(--mag);
+  }
+  .node[data-state='next'] .node-v {
+    border-style: dashed;
+  }
+  .node-state {
+    font-size: 0.64rem;
+    color: var(--c);
+  }
+  .node h3 {
+    font: 800 1.35rem/1.2 var(--f-display);
+  }
+  .node p {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .here {
+    position: absolute;
+    top: -2.4rem;
+    left: 0;
+    padding: 0.35rem 0.55rem;
+    font-size: 0.62rem;
+    white-space: nowrap;
+    color: #1a0418;
+    background: var(--amber);
+    border-radius: 0.3rem;
+    box-shadow: 0 0 16px -2px var(--amber);
+  }
+  .here::after {
+    content: '';
+    position: absolute;
+    left: 1.2rem;
+    bottom: -5px;
+    border: 5px solid transparent;
+    border-bottom: 0;
+    border-top-color: var(--amber);
+  }
+  @media (max-width: 900px) {
+    .node {
+      padding-left: 0.5rem;
+    }
+    .here {
+      position: static;
+      order: -1;
+    }
+    .here::after {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .here {
+      animation: bob 1.4s ease-in-out infinite;
+    }
+    :global(.js) .map .node {
+      opacity: 0;
+    }
+    :global(.js) .map.is-in .node {
+      animation: rise 420ms var(--ease-out) both;
+      animation-delay: calc(var(--i) * 110ms);
+    }
+  }
+  @keyframes bob {
+    50% {
+      translate: 0 -4px;
+    }
+  }
+  .stages-note {
+    max-width: 40rem;
+    margin: 3rem auto 0;
+    font: 0.85rem/1.5 var(--f-mono);
+    color: var(--dim);
+    text-align: center;
+  }
+</style>

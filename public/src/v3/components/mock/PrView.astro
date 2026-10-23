@@ -1,0 +1,118 @@
+---
+/**
+ * Pull request review mock: header with vote, tabs with iteration compare, file tree, a
+ * syntax-highlighted diff with an inline thread and your reply. Default markup is the finished
+ * state (reply sent, approved); scripts rewind and replay it.
+ */
+import Icon from '../Icon.astro';
+import Hanko from '../Hanko.astro';
+import { demo } from '../../copy';
+import { diff } from '../../code';
+
+interface Props {
+  /** Line index after which the inline thread sits. */
+  threadAfter?: number;
+  /** Show the seal + toast (the approved end state). */
+  slam?: boolean;
+}
+const { threadAfter = 5, slam = true } = Astro.props;
+const { pr } = demo;
+const lines = diff(demo.code, 41, 41);
+const lines2 = diff(demo.code2, 0, 1);
+---
+
+<section class="view v-pr">
+  <header class="pr-head">
+    <div>
+      <span class="pill"><Icon name="pr" />Active</span>
+      <p class="pr-title"><span>{pr.id}</span> {pr.title}</p>
+      <p class="pr-meta">
+        identity · <code>{pr.branch}</code> · {pr.author} · {pr.files.length} files · {pr.stats}
+      </p>
+    </div>
+    <div class="vote">
+      <span class="vote-idle">Approve <kbd>A</kbd></span>
+      <span class="vote-done"><Icon name="check" />{pr.approved}</span>
+    </div>
+  </header>
+  <nav class="pr-tabs">
+    <span class="on">Files 3</span><span>Threads 2</span><span>Iterations 3</span>
+    <span class="since">{pr.iteration}</span>
+  </nav>
+  <div class="pr-body">
+    <ul class="tree">
+      {
+        pr.files.map((f, i) => (
+          <li class:list={{ on: i === 0 }}>
+            <span class:list={['seen', { y: i === 2 }]} />
+            <Icon name="file" />
+            {f.split('/').at(-1)}
+            <span class="d">
+              <span class="a">+{[9, 7, 2][i]}</span> <span class="r">−{[3, 1, 0][i]}</span>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="diffs">
+      <div class="diff">
+        <div class="diff-file"><span>{pr.file}</span><span>iteration 2 → 3</span></div>
+        {
+          lines.map((l, i) => (
+            <>
+              <div class:list={['dl', { add: l.op === '+', del: l.op === '-' }]}>
+                <span>{l.old ?? ''}</span>
+                <span>{l.new ?? ''}</span>
+                <span class="op">{l.op === ' ' ? '' : l.op === '-' ? '−' : '+'}</span>
+                <code set:html={l.html} />
+              </div>
+              {i === threadAfter && (
+                <div class="thread">
+                  <div class="msg">
+                    <span class="av">{pr.comment.initials}</span>
+                    <b>
+                      {pr.comment.who}
+                      <small>2h</small>
+                    </b>
+                    <p>{pr.comment.text}</p>
+                  </div>
+                  <div class="msg msg-me">
+                    <span class="av me">A</span>
+                    <b>
+                      You<small>just now</small>
+                    </b>
+                    <p class="typed">{pr.reply}</p>
+                  </div>
+                </div>
+              )}
+            </>
+          ))
+        }
+      </div>
+      <div class="diff">
+        <div class="diff-file"><span>src/auth/retry.ts</span><span>new file</span></div>
+        {
+          lines2.map((l) => (
+            <div class="dl add">
+              <span />
+              <span>{l.new}</span>
+              <span class="op">+</span>
+              <code set:html={l.html} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+  {
+    slam && (
+      <>
+        <Hanko text="承認" class="slam" />
+        <div class="pr-toast">
+          <Icon name="lock" />
+          {pr.pinned}
+        </div>
+      </>
+    )
+  }
+</section>

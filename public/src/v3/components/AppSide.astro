@@ -1,0 +1,26 @@
+---
+/** The mock app's sidebar: org, sections, Cmd+P, sync status. */
+import Icon from './Icon.astro';
+import { demo } from '../copy';
+
+interface Props {
+  active?: number;
+}
+const { active = 0 } = Astro.props;
+const icons = ['today', 'inbox', 'pr', 'items', 'pipes'] as const;
+---
+
+<aside class="side">
+  <div class="side-org"><span class="mark">拳</span>{demo.org}<small>▾</small></div>
+  {
+    demo.nav.map(([label, count], i) => (
+      <div class:list={['side-item', { on: i === active }]} data-nav={i}>
+        <Icon name={icons[i]} />
+        {label}
+        {count && <span class="count">{count}</span>}
+      </div>
+    ))
+  }
+  <div class="side-search"><Icon name="search" />Search<span class="k">⌘P</span></div>
+  <div class="side-foot"><b>● Synced</b> 12 s ago<br />104,382 items on disk</div>
+</aside>

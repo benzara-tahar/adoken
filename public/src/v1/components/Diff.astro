@@ -1,0 +1,61 @@
+---
+/** Syntax-highlighted unified diff of the demo PR with its inline thread (demo.review). */
+import { demo } from '../copy';
+import { highlight } from '../lib/highlight';
+
+interface Props {
+  /** First and last (exclusive) diff rows to show. */
+  from?: number;
+  to?: number;
+  /** Show only the last N comments of the thread. */
+  comments?: number;
+}
+const r = demo.review;
+const { from = 0, to = r.diff.length, comments = r.thread.length } = Astro.props;
+const rows = r.diff.slice(from, to).map((row, i) => ({ ...row, index: from + i }));
+---
+
+<div class="diff">
+  {
+    rows.map((row) => (
+      <Fragment>
+        <div class:list={['drow', { add: row.t === '+', del: row.t === '-' }]} data-row={row.index}>
+          <span>{row.a || ''}</span>
+          <span>{row.b || ''}</span>
+          <span>{row.t.trim()}</span>
+          <code set:html={highlight(row.code) || ' '} />
+        </div>
+        {row.index === r.threadAfter && (
+          <div class="thread" data-thread>
+            {r.thread.slice(-comments).map((c) => (
+              <div class="cmt">
+                <span class="av" data-tone={c.tone}>
+                  {c.who}
+                </span>
+                <div>
+                  <p class="cmt-h">
+                    <b>{c.name}</b> · {c.when}
+                  </p>
+                  <p>{c.text}</p>
+                </div>
+              </div>
+            ))}
+            <div class="cmt cmt-mine">
+              <span class="av" data-tone="m">
+                {r.replyWho}
+              </span>
+              <div>
+                <p class="cmt-h">
+                  <b>{demo.me}</b> · now
+                </p>
+                <p class="composer-box" data-reply data-placeholder="Reply…">
+                  {r.reply}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+      </Fragment>
+    ))
+  }
+</div>

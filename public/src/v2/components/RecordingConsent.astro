@@ -1,0 +1,106 @@
+---
+import { recordingConsent as copy } from '../../copy';
+---
+
+<section class="recording-consent" data-recording-consent hidden role="region" aria-labelledby="recording-title">
+  <h2 id="recording-title">{copy.title}</h2>
+  <p>{copy.body} <a href="/privacy/">{copy.privacy}</a></p>
+  <p data-recording-status role="status"></p>
+  <div class="recording-actions">
+    <button type="button" data-recording-choice="declined">{copy.decline}</button>
+    <button type="button" data-recording-choice="allowed">{copy.allow}</button>
+  </div>
+</section>
+
+<script>
+  import { privacyOptOut } from '../../scripts/engagement';
+  import { recordingConsent as copy } from '../../copy';
+  import {
+    recordingChoice, rememberRecordingChoice, clearReplayStorage,
+    RECORDING_CHOICE_EVENT, RECORDING_CHOICE_KEY,
+  } from '../../scripts/recording';
+
+  const panel = document.querySelector<HTMLElement>('[data-recording-consent]');
+  const settings = document.querySelector<HTMLButtonElement>('[data-recording-settings]');
+  const status = document.querySelector<HTMLElement>('[data-recording-status]');
+  const allow = document.querySelector<HTMLButtonElement>('[data-recording-choice="allowed"]');
+  let returnFocus: HTMLElement | null = null;
+  let choice = (() => { try { return recordingChoice(localStorage); } catch { return 'pending' as const; } })();
+
+  const open = () => {
+    if (!panel) return;
+    returnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    panel.hidden = false;
+    if (status) status.textContent = privacyOptOut(navigator) ? copy.optOut : choice === 'allowed' ? copy.enabled : choice === 'declined' ? copy.disabled : '';
+    if (allow) allow.disabled = privacyOptOut(navigator);
+  };
+  if (settings) {
+    settings.hidden = false;
+    settings.addEventListener('click', () => { open(); panel?.querySelector('button')?.focus(); });
+  }
+  if (choice === 'pending' && !privacyOptOut(navigator)) open();
+
+  document.querySelectorAll<HTMLButtonElement>('[data-recording-choice]').forEach(button => {
+    button.addEventListener('click', () => {
+      const next = button.dataset.recordingChoice === 'allowed' ? 'allowed' : 'declined';
+      if (next === 'allowed' && privacyOptOut(navigator)) return;
+      let saved = false;
+      try { saved = rememberRecordingChoice(localStorage, next); } catch { /* Fail closed. */ }
+      if (!saved && next === 'allowed') {
+        if (status) status.textContent = copy.storageUnavailable;
+        return;
+      }
+      const wasAllowed = choice === 'allowed';
+      choice = next;
+      dispatchEvent(new CustomEvent(RECORDING_CHOICE_EVENT, { detail: next }));
+      if (next === 'declined') { try { clearReplayStorage(sessionStorage); clearReplayStorage(localStorage); } catch { /* Optional storage. */ } }
+      if (panel) panel.hidden = true;
+      returnFocus?.focus();
+      // Reload switches SDK bundles and identities cleanly, without mixing cookieless and replay events.
+      if (wasAllowed !== (next === 'allowed')) location.reload();
+    });
+  });
+  addEventListener('storage', event => {
+    if (event.key === RECORDING_CHOICE_KEY) {
+      // Also stop a recording in an already-open tab after consent changes elsewhere.
+      dispatchEvent(new CustomEvent(RECORDING_CHOICE_EVENT, { detail: 'declined' }));
+      location.reload();
+    }
+  });
+</script>
+
+<style>
+  .recording-consent[hidden] { display: none; }
+  .recording-consent {
+    position: fixed;
+    z-index: 100;
+    inset: auto 24px 24px auto;
+    width: min(420px, calc(100% - 48px));
+    padding: 20px;
+    border: 1px solid var(--line-2);
+    border-radius: var(--radius);
+    background: var(--bg-2);
+    color: var(--soft);
+    font-size: 0.86rem;
+  }
+  h2 { margin-bottom: 8px; color: var(--text); font-size: 1rem; }
+  p { margin-bottom: 12px; }
+  [role='status']:empty { display: none; }
+  a { text-underline-offset: 3px; }
+  .recording-actions { display: flex; gap: 10px; }
+  button {
+    flex: 1;
+    min-height: 44px;
+    padding: 10px;
+    border: 1px solid var(--line-2);
+    border-radius: 10px;
+    background: var(--glass-2);
+    color: var(--text);
+    cursor: pointer;
+  }
+  button:hover { border-color: var(--accent-hi); }
+  button:disabled { color: var(--muted); cursor: default; }
+  @media (max-width: 520px) {
+    .recording-consent { inset: auto 12px 12px; width: auto; padding: 16px; }
+  }
+</style>

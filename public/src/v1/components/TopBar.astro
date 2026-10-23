@@ -1,0 +1,27 @@
+---
+import { nav, x } from '../copy';
+import PixelFist from './PixelFist.astro';
+import Switcher from './Switcher.astro';
+---
+
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#top" aria-label={nav.home}>
+      <PixelFist />
+      <span>ado<b>ken</b></span>
+    </a>
+    <Switcher current="/v1/" />
+    <nav class="topnav" aria-label="Sections">
+      {nav.items.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+    <a class="btn" href={x.url} rel="me" data-track="follow_x_clicked" data-placement="v1-header">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"
+        ><path
+          d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+        ></path></svg
+      >
+      {nav.cta}
+    </a>
+  </div>
+</header>

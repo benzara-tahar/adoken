@@ -1,0 +1,73 @@
+---
+/**
+ * A vermilion seal (hanko). One or two characters; two stack vertically, as on a real seal.
+ * The worn edge and ink speckle come from the page-wide `#v3-seal` filter (Layout.astro).
+ */
+interface Props {
+  text: string;
+  /** Accessible name. Omit to hide the seal from assistive tech (decorative). */
+  label?: string;
+  class?: string;
+  /** 'solid': paper-colored glyph on vermilion; 'line': vermilion glyph in a vermilion ring. */
+  variant?: 'solid' | 'line';
+}
+const { text, label, class: cls, variant = 'solid' } = Astro.props;
+const chars = [...text];
+const solid = variant === 'solid';
+const glyph = solid ? 'var(--paper, #f3ecdf)' : 'var(--shu, #c3321a)';
+---
+
+<svg
+  class:list={['hanko', cls]}
+  viewBox="0 0 100 100"
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+>
+  <g filter="url(#v3-seal)">
+    {
+      solid ? (
+        <>
+          <rect x="4" y="4" width="92" height="92" rx="9" fill="var(--shu, #c3321a)" />
+          <rect x="11" y="11" width="78" height="78" rx="4" fill="none" stroke={glyph} stroke-width="2.6" />
+        </>
+      ) : (
+        <>
+          <rect x="5" y="5" width="90" height="90" rx="9" fill="none" stroke="var(--shu, #c3321a)" stroke-width="6" />
+          <rect x="13" y="13" width="74" height="74" rx="3" fill="none" stroke="var(--shu, #c3321a)" stroke-width="1.6" />
+        </>
+      )
+    }
+    {
+      chars.length === 1 ? (
+        <text
+          x="50"
+          y="53"
+          fill={glyph}
+          font-size="60"
+          font-weight="700"
+          text-anchor="middle"
+          dominant-baseline="central"
+          font-family="'Hiragino Mincho ProN','Yu Mincho',YuMincho,'Noto Serif JP',serif"
+        >
+          {chars[0]}
+        </text>
+      ) : (
+        chars.map((ch, i) => (
+          <text
+            x="50"
+            y={chars.length === 2 ? 33 + i * 35 : 26 + i * 25}
+            fill={glyph}
+            font-size={chars.length === 2 ? 36 : 25}
+            font-weight="700"
+            text-anchor="middle"
+            dominant-baseline="central"
+            font-family="'Hiragino Mincho ProN','Yu Mincho',YuMincho,'Noto Serif JP',serif"
+          >
+            {ch}
+          </text>
+        ))
+      )
+    }
+  </g>
+</svg>

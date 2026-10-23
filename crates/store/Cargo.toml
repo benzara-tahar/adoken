@@ -1,0 +1,24 @@
+[package]
+name = "adoken-store"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Local SQLite store (ADR 0001): one writer + read-only pool, forward-only migrations, search corpus."
+
+[dependencies]
+adoken-model.workspace = true
+adoken-search.workspace = true
+log.workspace = true
+rusqlite.workspace = true
+rusqlite_migration.workspace = true
+thiserror.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+tempfile.workspace = true
+
+[[bench]]
+name = "write"
+harness = false

@@ -1,0 +1,43 @@
+{
+  "authenticatedUser": {
+    "customDisplayName": "Dana Example",
+    "descriptor": "Microsoft.IdentityModel.Claims.ClaimsIdentity;example\\dana@example.com",
+    "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+    "isActive": true,
+    "metaTypeId": 0,
+    "properties": {
+      "Account": {
+        "$type": "System.String",
+        "$value": "dana@example.com"
+      }
+    },
+    "providerDisplayName": "Dana Example",
+    "resourceVersion": 2,
+    "subjectDescriptor": "aad.ZXhhbXBsZQ"
+  },
+  "authorizedUser": {
+    "customDisplayName": "Dana Example",
+    "descriptor": "Microsoft.IdentityModel.Claims.ClaimsIdentity;example\\dana@example.com",
+    "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+    "isActive": true,
+    "metaTypeId": 0,
+    "properties": {
+      "Account": {
+        "$type": "System.String",
+        "$value": "dana@example.com"
+      }
+    },
+    "providerDisplayName": "Dana Example",
+    "resourceVersion": 2,
+    "subjectDescriptor": "aad.ZXhhbXBsZQ"
+  },
+  "deploymentId": "00000000-0000-0000-0000-00000000d3a1",
+  "deploymentType": "hosted",
+  "instanceId": "00000000-0000-0000-0000-0000c0ffee00",
+  "locationServiceData": {
+    "defaultAccessMappingMoniker": "PublicAccessMapping",
+    "lastChangeId": 201527324,
+    "lastChangeId64": 201527324,
+    "serviceOwner": "00025394-6065-48ca-87d9-7f5672854ef7"
+  }
+}

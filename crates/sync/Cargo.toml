@@ -1,0 +1,38 @@
+[package]
+name = "adoken-sync"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Background sync from Azure DevOps into adoken-store (spec 0002): tiers, cursors, rate governor, SyncEvents."
+
+[dependencies]
+adoken-ado.workspace = true
+adoken-model.workspace = true
+adoken-store.workspace = true
+futures.workspace = true
+log.workspace = true
+reqwest.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha1_smol.workspace = true
+thiserror.workspace = true
+time.workspace = true
+tokio.workspace = true
+url.workspace = true
+
+[dev-dependencies]
+adoken-demo.workspace = true
+adoken-richtext.workspace = true
+criterion.workspace = true
+adoken-ken.workspace = true
+adoken-notify.workspace = true
+parking_lot.workspace = true
+tempfile.workspace = true
+tokio = { workspace = true, features = ["test-util"] }
+wiremock.workspace = true
+
+[[bench]]
+name = "activity"
+harness = false

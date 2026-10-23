@@ -1,0 +1,23 @@
+name: Feature request
+description: An idea that makes adoken snappier or quieter.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The pain
+      description: What's slow or noisy today in the Azure DevOps web UI, email, or adoken? No solution yet.
+    validations:
+      required: true
+  - type: textarea
+    id: job
+    attributes:
+      label: Job to be done
+      placeholder: When ___, I want to ___, so I can ___.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Proposed solution
+      description: Optional. Features need an accepted spec in docs/specs/ before code (see CONTRIBUTING.md).

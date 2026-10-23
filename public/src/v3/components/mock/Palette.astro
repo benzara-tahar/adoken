@@ -1,0 +1,41 @@
+---
+/**
+ * Cmd+P palette mock. Scripts type into `.pal-q` and toggle `.pal-row` visibility; the markup
+ * default (query typed, results shown, first row selected) is the static fallback.
+ */
+import Icon from '../Icon.astro';
+import { demo } from '../../copy';
+
+interface Props {
+  /** Show only the first N results. */
+  limit?: number;
+}
+const { limit = demo.results.length } = Astro.props;
+const icon = { pr: 'pr', bug: 'bug', run: 'run', cmd: 'cmd' } as const;
+const mark = (s: string) =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/(login)/gi, '<b>$1</b>');
+---
+
+<div class="pal" role="presentation">
+  <div class="pal-in">
+    <Icon name="search" /><span class="pal-q">{demo.query}</span><span class="caret"></span>
+    <span class="pal-scope">All · PRs · Work items · Runs · People</span>
+  </div>
+  <p class="pal-fix">No exact match for “<span class="pal-typo">{demo.query}</span>”. Showing <b>login</b>.</p>
+  <ul class="pal-list">
+    {
+      demo.results.slice(0, limit).map(([kind, id, title, sub], i) => (
+        <li class:list={['pal-row', { on: i === 0 }]} data-kind={kind} style={`--i:${i}`}>
+          <Icon name={icon[kind]} />
+          <span class="ttl">
+            <span class="id">{id}</span>
+            <Fragment set:html={mark(title)} />
+            <span class="sub">{sub}</span>
+          </span>
+          <span class="enter">↵</span>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="pal-foot"><span>↑↓ move · ↵ open · ⌘↵ open in browser</span><span><b>{demo.resultsMeta}</b></span></div>
+</div>

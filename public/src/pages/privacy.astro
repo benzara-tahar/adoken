@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import Fist from '../components/Fist.astro';
+import { privacy } from '../copy';
+---
+
+<Base title={`${privacy.title} · adoken`} description={privacy.intro}>
+  <main class="privacy">
+    <a class="brand" href="/" aria-label="adoken home"><Fist class="brand-mark" /></a>
+    <h1>{privacy.title}</h1>
+    <p class="updated">{privacy.updated}</p>
+    <p class="intro">{privacy.intro}</p>
+    {
+      privacy.sections.map((section) => (
+        <section>
+          <h2>{section.title}</h2>
+          {section.body.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+          {'link' in section && (
+            <p>
+              <a href={section.link.href}>{section.link.label}</a>
+            </p>
+          )}
+        </section>
+      ))
+    }
+    <a class="btn back" href="/">{privacy.back}</a>
+  </main>
+</Base>
+
+<style>
+  .privacy {
+    width: min(42rem, 100% - 2.5rem);
+    margin-inline: auto;
+    padding-block: 2rem 4rem;
+  }
+  .brand :global(.brand-mark) {
+    width: 2.5rem;
+    height: auto;
+  }
+  h1 {
+    margin-top: 1.5rem;
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+  }
+  .updated {
+    margin-top: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .intro {
+    margin-top: 1.4rem;
+    font-size: 1.15rem;
+  }
+  section {
+    margin-top: 2.2rem;
+  }
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 800;
+  }
+  section p {
+    margin-top: 0.7rem;
+    color: var(--muted);
+  }
+  section a {
+    color: var(--text);
+  }
+  .back {
+    margin-top: 3rem;
+  }
+</style>

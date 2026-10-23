@@ -1,0 +1,15 @@
+[package]
+name = "adoken-demo"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Deterministic fake 'Contoso' org for demo mode, gallery stories, and sync tests. Fake data only."
+
+[dependencies]
+adoken-model.workspace = true
+adoken-store.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true

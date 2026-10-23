@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "createdBy": {
+        "descriptor": "<redacted>",
+        "displayName": "<redacted>",
+        "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+        "imageUrl": "<redacted>",
+        "uniqueName": "<redacted>",
+        "url": "https://vssps.example/Aorg/_apis/Identities/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d"
+      },
+      "createdDate": "2024-04-15T21:01:11.44Z",
+      "format": "html",
+      "id": 12017868,
+      "mentions": [],
+      "modifiedBy": {
+        "descriptor": "<redacted>",
+        "displayName": "<redacted>",
+        "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+        "imageUrl": "<redacted>",
+        "uniqueName": "<redacted>",
+        "url": "https://vssps.example/Aorg/_apis/Identities/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d"
+      },
+      "modifiedDate": "2024-04-15T21:01:11.44Z",
+      "renderedText": "",
+      "text": "<div>xxxxxxx</div>",
+      "url": "https://dev.azure.com/{redacted}/11111111-2222-4333-8444-555555555555/_apis/wit/workItems/14/comments/12017868",
+      "version": 1,
+      "workItemId": 14
+    },
+    {
+      "createdBy": {
+        "descriptor": "<redacted>",
+        "displayName": "<redacted>",
+        "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+        "imageUrl": "<redacted>",
+        "uniqueName": "<redacted>",
+        "url": "https://vssps.example/Aorg/_apis/Identities/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d"
+      },
+      "createdDate": "2024-04-15T20:56:23.33Z",
+      "format": "html",
+      "id": 12017865,
+      "mentions": [],
+      "modifiedBy": {
+        "descriptor": "<redacted>",
+        "displayName": "<redacted>",
+        "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+        "imageUrl": "<redacted>",
+        "uniqueName": "<redacted>",
+        "url": "https://vssps.example/Aorg/_apis/Identities/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d"
+      },
+      "modifiedDate": "2024-04-15T20:56:23.33Z",
+      "renderedText": "",
+      "text": "<div>xxxxxxx xxxxxxx</div><div><br></div>",
+      "url": "https://dev.azure.com/{redacted}/11111111-2222-4333-8444-555555555555/_apis/wit/workItems/14/comments/12017865",
+      "version": 1,
+      "workItemId": 14
+    },
+    {
+      "createdBy": {
+        "descriptor": "<redacted>",
+        "displayName": "<redacted>",
+        "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+        "imageUrl": "<redacted>",
+        "uniqueName": "<redacted>",
+        "url": "https://vssps.example/Aorg/_apis/Identities/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d"
+      },
+      "createdDate": "2024-04-15T20:52:49.44Z",
+      "format": "html",
+      "id": 12017864,
+      "mentions": [],
+      "modifiedBy": {
+        "descriptor": "<redacted>",
+        "displayName": "<redacted>",
+        "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+        "imageUrl": "<redacted>",
+        "uniqueName": "<redacted>",
+        "url": "https://vssps.example/Aorg/_apis/Identities/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d"
+      },
+      "modifiedDate": "2024-04-15T21:09:10.177Z",
+      "renderedText": "",
+      "text": "xxxxxxxxx xxxxxxxxx xxxx xxxx xxxxx :<br><a href=\"https://dev.azure.com/{redacted}/{redacted}/_workitems/edit/12\">[xxx xx]: xxxxxxxxx xxxxxxxxxxx xx xxxxx xxxxx xxxxxx</a><br><a href=\"https://dev.azure.com/{redacted}/{redacted}/_workitems/edit/11\">[xxx xx]: xxxxxxxxx xxxxxxxxxxx xx xxxxx xxxxx xxxxxx</a><br><a href=\"https://dev.azure.com/{redacted}/{redacted}/_workitems/edit/13\">[xxx xx]:xxxx xxxxx xxx xxxxxxxxxx xxxxxxxx</a><br>xx xxxxxxxxx xx xxxxxxx xxxx xxxxx xxx xxxxx<br> <small style=\"color:grey;\">xxxxxxx xx  xxxx-xx-xxxxx:xx:xx.xxxx </small><br> <small style=\"color:grey;\">xxxxxxx xx  xxxx-xx-xxxxx:xx:xx.xxxx </small><br>&#xxxxxx; <strong>xxxx xxxxxxx xx xxxx-xxxxxxxxx xxxxx xxxxxxxxxxxxx xxxx xx, xxxx xx xxxxxxx xxxx xxxxxxxxxxxxxx xx xxxxxxxxxx xxxx xxxxxxxx <a target=_blank href=\"https://example.com/doc\">xxxx</a></strong>",
+      "url": "https://dev.azure.com/{redacted}/11111111-2222-4333-8444-555555555555/_apis/wit/workItems/14/comments/12017864",
+      "version": 2,
+      "workItemId": 14
+    }
+  ],
+  "count": 3,
+  "totalCount": 3
+}

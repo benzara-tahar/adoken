@@ -1,0 +1,1111 @@
+/*
+ * The app "photographs": hand-built adoken windows. Every size is in em, and the window's font
+ * size follows its container, so a mock scales like an image while staying crisp text.
+ * Colors come from [data-ink] (themes.ts); everything else is derived here.
+ */
+
+.win {
+  --line: color-mix(in srgb, var(--tx) 12%, transparent);
+  --line-2: color-mix(in srgb, var(--tx) 20%, transparent);
+  --wash: color-mix(in srgb, var(--tx) 5%, transparent);
+  --raised: color-mix(in srgb, var(--tx) 4%, var(--surf));
+  --sel: color-mix(in srgb, var(--acc) 18%, transparent);
+  --add-bg: color-mix(in srgb, var(--ok) 13%, var(--surf));
+  --del-bg: color-mix(in srgb, var(--bad) 13%, var(--surf));
+  position: relative;
+  font: 400 clamp(6px, calc(100cqw / 80), 14px) / 1.4 var(--sans);
+  color: var(--tx);
+  background: var(--bg);
+  border-radius: 0.9em;
+  overflow: hidden;
+  isolation: isolate;
+  text-align: left;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.win,
+.win * {
+  transition:
+    background-color 0.7s var(--ease),
+    color 0.7s var(--ease),
+    border-color 0.7s var(--ease),
+    fill 0.7s var(--ease);
+}
+
+.win-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  height: 2.55em;
+  padding: 0 0.95em;
+  background: var(--side);
+  border-bottom: 1px solid var(--line);
+}
+
+.win-bar > i {
+  width: 0.86em;
+  height: 0.86em;
+  border-radius: 50%;
+  background: #ff5f57;
+}
+
+.win-bar > i:nth-child(2) {
+  background: #febc2e;
+}
+
+.win-bar > i:nth-child(3) {
+  background: #28c840;
+}
+
+.win-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.86em;
+  font-weight: 600;
+  color: var(--tx2);
+  white-space: nowrap;
+}
+
+.win-sync {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-size: 0.78em;
+  color: var(--tx2);
+}
+
+.win-sync::before {
+  content: '';
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 0.25em color-mix(in srgb, var(--ok) 22%, transparent);
+}
+
+.i {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Shell: sidebar + main ---------- */
+
+.app {
+  display: grid;
+  grid-template-columns: 13.2em minmax(0, 1fr);
+  height: var(--app-h, 44em);
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+  padding: 0.9em 0.7em;
+  background: var(--side);
+  border-right: 1px solid var(--line);
+}
+
+.side-org {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.35em 0.5em 0.9em;
+  font-weight: 700;
+  font-size: 0.95em;
+}
+
+.side-org .mark {
+  display: grid;
+  place-items: center;
+  width: 1.75em;
+  height: 1.75em;
+  font: 700 1em/1 var(--mincho);
+  color: var(--bg);
+  background: var(--acc);
+  border-radius: 0.35em;
+}
+
+.side-org small {
+  margin-left: auto;
+  font-weight: 500;
+  color: var(--tx2);
+}
+
+.side-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65em;
+  padding: 0.48em 0.6em;
+  font-size: 0.92em;
+  color: var(--tx2);
+  border-radius: 0.5em;
+}
+
+.side-item.on {
+  color: var(--tx);
+  background: var(--sel);
+}
+
+.side-item.on .i {
+  color: var(--acc);
+}
+
+.side-item .count {
+  margin-left: auto;
+  font-size: 0.85em;
+  font-variant-numeric: tabular-nums;
+  color: var(--tx2);
+}
+
+.side-search {
+  margin: 0.8em 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.5em 0.6em;
+  font-size: 0.88em;
+  color: var(--tx2);
+  border: 1px solid var(--line);
+  border-radius: 0.5em;
+}
+
+.side-search .k {
+  margin-left: auto;
+  font-size: 0.85em;
+  padding: 0.05em 0.4em;
+  border: 1px solid var(--line-2);
+  border-radius: 0.3em;
+}
+
+.side-foot {
+  margin-top: auto;
+  padding: 0.6em;
+  font-size: 0.78em;
+  color: var(--tx2);
+  line-height: 1.5;
+}
+
+.side-foot b {
+  color: var(--ok);
+  font-weight: 600;
+}
+
+.main {
+  position: relative;
+  overflow: hidden;
+  background: var(--surf);
+}
+
+.view {
+  position: absolute;
+  inset: 0;
+  padding: 1.6em 2em;
+  transition:
+    opacity 0.45s var(--ease),
+    transform 0.55s var(--ease),
+    background-color 0.7s var(--ease);
+}
+
+/* ---------- Today ---------- */
+
+.t-date {
+  margin: 0;
+  font-size: 0.82em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tx2);
+}
+
+.t-hello {
+  margin: 0.25em 0 1em;
+  font: 600 1.9em/1.15 var(--sans);
+  letter-spacing: -0.02em;
+}
+
+.t-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8em;
+}
+
+.t-card {
+  padding: 0.9em 1em;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-radius: 0.7em;
+}
+
+.t-card b {
+  display: block;
+  font-size: 1.9em;
+  line-height: 1.05;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.t-card:first-child b {
+  color: var(--acc);
+}
+
+.t-card span {
+  font-size: 0.85em;
+  color: var(--tx2);
+}
+
+.nudge {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  margin: 1em 0 0;
+  padding: 0.75em 1em;
+  font-size: 0.9em;
+  background: color-mix(in srgb, var(--warn) 11%, var(--surf));
+  border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
+  border-radius: 0.7em;
+}
+
+.nudge .i {
+  color: var(--warn);
+}
+
+.nudge .go,
+.btn-app {
+  margin-left: auto;
+  flex: none;
+  padding: 0.35em 0.8em;
+  font-size: 0.92em;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--acc);
+  border-radius: 0.45em;
+}
+
+.t-sub {
+  margin: 1.4em 0 0.5em;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--tx2);
+}
+
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75em;
+  padding: 0.62em 0.7em;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92em;
+}
+
+.row .i {
+  color: var(--info);
+}
+
+.row .id {
+  font-weight: 600;
+  color: var(--tx2);
+  font-variant-numeric: tabular-nums;
+}
+
+.row .ttl {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.row .ttl small {
+  margin-left: 0.6em;
+  color: var(--tx2);
+}
+
+.row .age {
+  font-size: 0.88em;
+  color: var(--tx2);
+}
+
+.row.hot {
+  background: var(--sel);
+  border-radius: 0.5em;
+}
+
+/* ---------- Palette ---------- */
+
+.pal {
+  position: absolute;
+  z-index: 5;
+  top: 2.4em;
+  left: 50%;
+  width: min(44em, 88%);
+  translate: -50% 0;
+  background: color-mix(in srgb, var(--tx) 3%, var(--surf));
+  border: 1px solid var(--line-2);
+  border-radius: 0.9em;
+  box-shadow:
+    0 1.5em 4em -0.5em rgb(0 0 0 / 0.55),
+    0 0 0 100vmax color-mix(in srgb, var(--bg) 45%, transparent);
+  overflow: hidden;
+  transition:
+    opacity 0.25s var(--ease),
+    transform 0.3s var(--ease);
+}
+
+.pal-in {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: 0.95em 1.1em;
+  font-size: 1.15em;
+  border-bottom: 1px solid var(--line);
+}
+
+.pal-in .i {
+  color: var(--tx2);
+}
+
+.pal-q {
+  white-space: pre;
+}
+
+.caret {
+  display: inline-block;
+  width: 0.09em;
+  height: 1.15em;
+  margin-left: 0.04em;
+  background: var(--acc);
+  vertical-align: -0.18em;
+  animation: v3-blink 1s steps(1) infinite;
+}
+
+.pal-scope {
+  margin-left: auto;
+  font-size: 0.72em;
+  color: var(--tx2);
+}
+
+.pal-fix {
+  padding: 0.55em 1.3em 0.2em;
+  font-size: 0.82em;
+  color: var(--tx2);
+}
+
+.pal-fix b {
+  color: var(--acc);
+  font-weight: 600;
+}
+
+.pal-list {
+  margin: 0;
+  padding: 0.35em 0.5em 0.5em;
+  list-style: none;
+}
+
+.pal-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.8em;
+  padding: 0.55em 0.8em;
+  border-radius: 0.55em;
+  transition:
+    opacity 0.25s,
+    transform 0.3s var(--ease),
+    background-color 0.2s;
+}
+
+.pal-row.on {
+  background: var(--sel);
+}
+
+.pal-row .i {
+  color: var(--tx2);
+}
+
+.pal-row[data-kind='pr'] .i {
+  color: var(--info);
+}
+
+.pal-row[data-kind='bug'] .i {
+  color: var(--bad);
+}
+
+.pal-row[data-kind='run'] .i {
+  color: var(--warn);
+}
+
+.pal-row .ttl {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pal-row .ttl b {
+  font-weight: 700;
+  color: var(--acc);
+}
+
+.pal-row .ttl .id {
+  margin-right: 0.5em;
+  color: var(--tx2);
+  font-weight: 600;
+}
+
+.pal-row .sub {
+  display: block;
+  font-size: 0.8em;
+  color: var(--tx2);
+}
+
+.pal-row .enter {
+  font-size: 0.8em;
+  color: var(--tx2);
+  opacity: 0;
+}
+
+.pal-row.on .enter {
+  opacity: 1;
+}
+
+.pal-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  padding: 0.6em 1.2em;
+  font-size: 0.78em;
+  color: var(--tx2);
+  border-top: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+
+.pal-foot b {
+  color: var(--ok);
+  font-weight: 600;
+}
+
+/* ---------- PR review ---------- */
+
+.pr-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 1em;
+}
+
+.pr-title {
+  margin: 0.2em 0 0.25em;
+  font: 650 1.45em/1.2 var(--sans);
+  letter-spacing: -0.015em;
+}
+
+.pr-title span {
+  color: var(--tx2);
+  font-weight: 500;
+}
+
+.pr-meta {
+  margin: 0;
+  font-size: 0.84em;
+  color: var(--tx2);
+}
+
+.pr-meta code {
+  font: 500 0.95em/1 var(--mono);
+  padding: 0.1em 0.35em;
+  background: var(--wash);
+  border-radius: 0.3em;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.18em 0.6em;
+  font-size: 0.74em;
+  font-weight: 700;
+  color: var(--info);
+  background: color-mix(in srgb, var(--info) 14%, transparent);
+  border-radius: 999px;
+}
+
+.vote {
+  position: relative;
+  margin-left: auto;
+  flex: none;
+  display: grid;
+  font-size: 0.92em;
+  font-weight: 650;
+}
+
+.vote > span {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 0.55em 1em;
+  border-radius: 0.55em;
+  transition:
+    opacity 0.3s,
+    transform 0.35s var(--ease);
+}
+
+.vote-idle {
+  color: var(--tx);
+  border: 1px solid var(--line-2);
+}
+
+.vote-idle kbd {
+  font: 600 0.8em/1 var(--sans);
+  padding: 0.2em 0.45em;
+  color: var(--tx2);
+  background: var(--wash);
+  border: 1px solid var(--line-2);
+  border-radius: 0.3em;
+  min-width: 0;
+}
+
+.vote-done {
+  color: var(--bg);
+  background: var(--ok);
+}
+
+.pr-tabs {
+  display: flex;
+  align-items: center;
+  gap: 1.4em;
+  margin: 1em 0 0;
+  font-size: 0.86em;
+  color: var(--tx2);
+  border-bottom: 1px solid var(--line);
+}
+
+.pr-tabs > span {
+  padding: 0.55em 0;
+}
+
+.pr-tabs .on {
+  color: var(--tx);
+  font-weight: 600;
+  box-shadow: inset 0 -2px var(--acc);
+}
+
+.pr-tabs .since {
+  margin-left: auto;
+  padding: 0.25em 0.7em;
+  font-size: 0.92em;
+  font-weight: 600;
+  color: var(--acc);
+  background: var(--sel);
+  border-radius: 999px;
+}
+
+.pr-body {
+  display: grid;
+  grid-template-columns: 13em minmax(0, 1fr);
+  gap: 1em;
+  margin-top: 0.9em;
+}
+
+.tree {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.84em;
+}
+
+.tree li {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.42em 0.55em;
+  color: var(--tx2);
+  border-radius: 0.4em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.tree li.on {
+  color: var(--tx);
+  background: var(--sel);
+}
+
+.tree .d {
+  margin-left: auto;
+  font-size: 0.9em;
+}
+
+.tree .d .a {
+  color: var(--ok);
+}
+
+.tree .d .r {
+  color: var(--bad);
+}
+
+.tree .seen {
+  width: 0.95em;
+  height: 0.95em;
+  flex: none;
+  border: 1.5px solid var(--line-2);
+  border-radius: 0.25em;
+}
+
+.tree .seen.y {
+  background: var(--acc);
+  border-color: var(--acc);
+}
+
+.diff {
+  font: 400 0.84em/1.62 var(--mono);
+  background: color-mix(in srgb, var(--bg) 55%, var(--surf));
+  border: 1px solid var(--line);
+  border-radius: 0.6em;
+  overflow: hidden;
+}
+
+.diff-file {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em 0.9em;
+  font-weight: 600;
+  color: var(--tx2);
+  border-bottom: 1px solid var(--line);
+  background: var(--raised);
+}
+
+.dl {
+  display: grid;
+  grid-template-columns: 2.6em 2.6em 1.3em minmax(0, 1fr);
+  white-space: pre;
+}
+
+.dl > span:nth-child(-n + 2) {
+  padding-right: 0.6em;
+  text-align: right;
+  color: var(--tx2);
+}
+
+.dl .op {
+  text-align: center;
+  color: var(--tx2);
+}
+
+.dl.add {
+  background: var(--add-bg);
+}
+
+.dl.add .op {
+  color: var(--ok);
+}
+
+.dl.del {
+  background: var(--del-bg);
+}
+
+.dl.del .op {
+  color: var(--bad);
+}
+
+.dl code {
+  all: unset;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dl .k {
+  color: var(--kw);
+}
+
+.dl .s {
+  color: var(--str);
+}
+
+.dl .n {
+  color: var(--num);
+}
+
+.dl .c {
+  color: var(--com);
+  font-style: italic;
+}
+
+.dl .f {
+  color: var(--fn);
+}
+
+.dl .t {
+  color: var(--ty);
+}
+
+.thread {
+  margin: 0.4em 0.9em 0.5em 5.2em;
+  padding: 0.7em 0.9em;
+  font-family: var(--sans);
+  font-size: 1.07em;
+  line-height: 1.45;
+  background: var(--surf);
+  border: 1px solid var(--line-2);
+  border-left: 3px solid var(--warn);
+  border-radius: 0.5em;
+  white-space: normal;
+  transition:
+    opacity 0.4s,
+    transform 0.45s var(--ease),
+    background-color 0.7s var(--ease);
+}
+
+.msg {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.2em 0.65em;
+  align-items: start;
+}
+
+.msg + .msg {
+  margin-top: 0.65em;
+  padding-top: 0.65em;
+  border-top: 1px solid var(--line);
+}
+
+.av {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 2em;
+  height: 2em;
+  font-size: 0.82em;
+  font-weight: 700;
+  color: var(--bg);
+  background: var(--info);
+  border-radius: 50%;
+}
+
+.av.me {
+  background: var(--acc);
+}
+
+.msg b {
+  font-size: 0.9em;
+}
+
+.msg b small {
+  margin-left: 0.5em;
+  font-weight: 400;
+  color: var(--tx2);
+}
+
+.msg p {
+  margin: 0;
+  font-size: 0.95em;
+}
+
+.msg .typed {
+  white-space: pre-wrap;
+}
+
+.pr-toast {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 1.4em;
+  translate: -50% 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.65em 1.1em;
+  font-size: 0.86em;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--tx);
+  background: var(--raised);
+  border: 1px solid var(--line-2);
+  border-radius: 0.6em;
+  box-shadow: 0 1em 2.5em -0.8em rgb(0 0 0 / 0.5);
+  transition:
+    opacity 0.35s,
+    transform 0.4s var(--ease);
+}
+
+.pr-toast .i {
+  color: var(--ok);
+}
+
+/* The in-app Hanko Slam: a vermilion seal pressed onto the approved PR. */
+.slam {
+  position: absolute;
+  z-index: 4;
+  right: 3.2em;
+  top: 9.5em;
+  width: 7.5em;
+  rotate: -9deg;
+  pointer-events: none;
+  transition:
+    opacity 0.15s,
+    transform 0.28s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+/* ---------- Keycast (screencast-style key overlay) ---------- */
+
+.keycast {
+  position: absolute;
+  z-index: 8;
+  right: 1.4em;
+  bottom: 1.4em;
+  display: flex;
+  gap: 0.35em;
+  align-items: center;
+  padding: 0.5em 0.65em;
+  font: 600 1.05em/1 var(--sans);
+  color: #f3ecdf;
+  background: rgb(20 18 15 / 0.82);
+  border-radius: 0.7em;
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateY(0.6em);
+  transition:
+    opacity 0.2s,
+    transform 0.25s var(--ease);
+}
+
+.keycast.show {
+  opacity: 1;
+  transform: none;
+}
+
+.keycast kbd {
+  min-width: 1.9em;
+  padding: 0.3em 0.5em;
+  font: inherit;
+  color: #1c1915;
+  background: #f3ecdf;
+  border: 0;
+  border-bottom: 0.18em solid #b9ab92;
+  border-radius: 0.35em;
+}
+
+.keycast span {
+  margin-left: 0.3em;
+  font-weight: 500;
+  font-size: 0.85em;
+  opacity: 0.85;
+}
+
+@keyframes v3-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes v3-spin {
+  to {
+    rotate: 1turn;
+  }
+}
+
+/* ---------- Small windows (phones): drop the sidebar, read bigger ---------- */
+
+@container (max-width: 640px) {
+  .win {
+    font-size: calc(100cqw / 46);
+  }
+
+  .app {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .side {
+    display: none;
+  }
+
+  .pr-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tree {
+    display: none;
+  }
+
+  .view {
+    padding: 1.2em 1.1em;
+  }
+
+  .pr-tabs .since {
+    display: none;
+  }
+}
+
+/* ---------- Scene flags ----------
+ * A `.mock` shows what its `is-*` classes say. The server renders the finished state (the
+ * reduced-motion / no-JS picture); scripts/stage.ts rewinds and replays it.
+ */
+
+.mock .view {
+  opacity: 0;
+  transform: translateX(1.2em);
+}
+
+.mock.is-today .v-today,
+.mock.is-pr .v-pr {
+  opacity: 1;
+  transform: none;
+}
+
+.mock .pal {
+  opacity: 0;
+  transform: translateY(-0.8em) scale(0.985);
+}
+
+.mock.is-palette .pal {
+  opacity: 1;
+  transform: none;
+}
+
+.mock .pal-row,
+.mock .pal-fix {
+  opacity: 0;
+  transform: translateY(0.4em);
+}
+
+.mock.is-results .pal-row {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(var(--i, 0) * 45ms);
+}
+
+.mock.is-fixed .pal-fix {
+  opacity: 1;
+  transform: none;
+}
+
+.mock .caret {
+  display: none;
+}
+
+.mock.is-typing .caret {
+  display: inline-block;
+}
+
+.mock .thread {
+  max-height: 0;
+  margin-block: 0;
+  padding-block: 0;
+  border-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-0.5em);
+  transition:
+    max-height 0.45s var(--ease),
+    margin 0.45s var(--ease),
+    padding 0.45s var(--ease),
+    border-width 0.45s,
+    opacity 0.35s 0.1s,
+    transform 0.45s var(--ease),
+    background-color 0.7s var(--ease);
+}
+
+.mock.is-thread .thread {
+  max-height: 14em;
+  margin-block: 0.4em 0.5em;
+  padding-block: 0.7em;
+  border-width: 1px 1px 1px 3px;
+  opacity: 1;
+  transform: none;
+}
+
+.mock .msg-me {
+  display: none;
+}
+
+.mock.is-reply .msg-me {
+  display: grid;
+}
+
+.mock .vote-done {
+  opacity: 0;
+  transform: scale(0.85);
+}
+
+.mock.is-approved .vote-done {
+  opacity: 1;
+  transform: none;
+}
+
+.mock.is-approved .vote-idle {
+  opacity: 0;
+}
+
+.mock .slam {
+  opacity: 0;
+  transform: scale(2.4);
+}
+
+.mock.is-approved .slam {
+  opacity: 0.94;
+  transform: none;
+}
+
+.mock .pr-toast {
+  opacity: 0;
+  transform: translateY(1em);
+}
+
+.mock.is-toast .pr-toast {
+  opacity: 1;
+  transform: none;
+}
+
+.diffs {
+  display: grid;
+  align-content: start;
+  gap: 0.9em;
+  min-width: 0;
+}
+
+/* Views hand over instead of cross-fading: the incoming one waits for the outgoing one. */
+.mock .view {
+  transition:
+    opacity 0.25s var(--ease),
+    transform 0.45s var(--ease),
+    background-color 0.7s var(--ease);
+}
+
+.mock.is-today .v-today,
+.mock.is-pr .v-pr {
+  transition-delay: 0.22s;
+}
+
+/* Opening a PR moves the sidebar highlight from Today to Pull requests. */
+.mock.is-pr .side-item.on:not([data-nav='2']) {
+  color: var(--tx2);
+  background: none;
+}
+
+.mock.is-pr .side-item.on:not([data-nav='2']) .i {
+  color: inherit;
+}
+
+.mock.is-pr .side-item[data-nav='2'] {
+  color: var(--tx);
+  background: var(--sel);
+}
+
+.mock.is-pr .side-item[data-nav='2'] .i {
+  color: var(--acc);
+}

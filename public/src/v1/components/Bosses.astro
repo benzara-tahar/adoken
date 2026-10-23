@@ -1,0 +1,238 @@
+---
+import { bosses } from '../copy';
+
+/** Neon-sign line art per boss (64×64, stroked with currentColor). Original drawings. */
+const ART: Record<string, string> = {
+  flood:
+    '<rect x="16" y="6" width="34" height="22" rx="3" opacity=".45"/><path d="M16 8l17 12 17-12" opacity=".45"/><rect x="8" y="16" width="38" height="26" rx="3"/><path d="M8 18l19 14 19-14"/><circle cx="50" cy="14" r="9" class="fill"/><text x="50" y="18" text-anchor="middle" class="num">20</text><path d="M2 52q5-5 10 0t10 0 10 0 10 0 10 0 10 0M6 60q5-5 10 0t10 0 10 0 10 0 10 0"/>',
+  spinner:
+    '<g class="spin"><path d="M32 6v10"/><path d="M50.4 13.6l-7 7" opacity=".85"/><path d="M58 32H48" opacity=".7"/><path d="M50.4 50.4l-7-7" opacity=".55"/><path d="M32 58V48" opacity=".4"/><path d="M13.6 50.4l7-7" opacity=".3"/><path d="M6 32h10" opacity=".2"/><path d="M13.6 13.6l7 7" opacity=".12"/></g><circle cx="32" cy="32" r="4" class="fill"/>',
+  stale:
+    '<circle cx="30" cy="30" r="20"/><path d="M30 18v12l8 5"/><path d="M46 4h14v14M60 4L48 16M52 4q0 8 8 8M56 4q0 4 4 4"/><text x="30" y="62" text-anchor="middle" class="lbl">9 days</text>',
+  tabs:
+    '<path d="M4 34l6-14h14l6 14" opacity=".5"/><path d="M34 34l6-14h14l6 14" opacity=".5"/><path d="M14 44l6-18h24l6 18"/><circle cx="26" cy="36" r="2" class="fill"/><circle cx="38" cy="36" r="2" class="fill"/><path d="M2 44h60v14H2z"/><path d="M28 51h8"/>',
+  ambush:
+    '<circle cx="16" cy="12" r="5"/><circle cx="16" cy="52" r="5"/><circle cx="46" cy="32" r="5"/><path d="M16 17v30M16 22q0 10 25 10"/><path d="M44 4l14 24H30z" class="warn"/><path d="M44 13v7M44 24v1" class="warn"/>',
+  mention:
+    '<circle cx="30" cy="34" r="8"/><path d="M38 26v10a5 5 0 0 0 10 0v-2a18 18 0 1 0-7 14"/><path d="M50 6l4 6-4 6 4 6M58 10l3 4-3 4"/>',
+};
+const TONES = ['mag', 'cyan', 'amber', 'lime', 'mag', 'cyan'];
+---
+
+<section class="section bosses" id="bosses" aria-labelledby="bosses-title">
+  <div class="wrap">
+    <header class="section-head center" data-reveal>
+      <p class="eyebrow hud">{bosses.eyebrow}</p>
+      <h2 class="display" id="bosses-title">{bosses.title}</h2>
+      <p>{bosses.intro}</p>
+    </header>
+    <div class="boss-grid">
+      {
+        bosses.items.map((boss, i) => (
+          <article class="boss" data-tone={TONES[i]} data-reveal style={`--delay:${(i % 3) * 110}ms`}>
+            <p class="boss-top hud">
+              <span>Stage {boss.stage}</span>
+              <span class="boss-ko" aria-label="Knocked out">
+                {bosses.ko}
+              </span>
+            </p>
+            <svg
+              class="boss-art"
+              viewBox="0 0 64 64"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              set:html={ART[boss.art]}
+            />
+            <h3 class="display">{boss.name}</h3>
+            <dl>
+              <div>
+                <dt class="hud">{bosses.attackLabel}</dt>
+                <dd>{boss.attack}</dd>
+              </div>
+              <div class="counter">
+                <dt class="hud">{bosses.counterLabel}</dt>
+                <dd>{boss.counter}</dd>
+              </div>
+            </dl>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .bosses {
+    background:
+      radial-gradient(50rem 30rem at 50% 0%, rgb(255 61 104 / 0.08), transparent 70%),
+      linear-gradient(to bottom, transparent, rgb(255 255 255 / 0.015) 30%, transparent);
+  }
+  .boss-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+  @media (max-width: 980px) {
+    .boss-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 620px) {
+    .boss-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .boss {
+    --c: var(--mag);
+    position: relative;
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    padding: 1.4rem 1.4rem 1.5rem;
+    overflow: hidden;
+    background:
+      radial-gradient(90% 60% at 50% 0%, color-mix(in srgb, var(--c) 12%, transparent), transparent 70%),
+      var(--panel);
+    border: 1px solid color-mix(in srgb, var(--c) 28%, var(--line));
+    border-radius: 1.1rem;
+    transition:
+      border-color 200ms,
+      translate 200ms var(--ease-out);
+  }
+  .boss:hover {
+    border-color: color-mix(in srgb, var(--c) 70%, transparent);
+    translate: 0 -3px;
+  }
+  .boss[data-tone='cyan'] {
+    --c: var(--cyan);
+  }
+  .boss[data-tone='amber'] {
+    --c: var(--amber);
+  }
+  .boss[data-tone='lime'] {
+    --c: var(--lime);
+  }
+  .boss-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--dim);
+  }
+  .boss-ko {
+    padding: 0.35rem 0.55rem;
+    font: italic 900 1.15rem/1 var(--f-display);
+    letter-spacing: 0.02em;
+    color: var(--red);
+    border: 2.5px solid var(--red);
+    border-radius: 0.4rem;
+    text-shadow: 0 0 10px rgb(255 61 104 / 0.6);
+    box-shadow:
+      0 0 14px -2px rgb(255 61 104 / 0.6),
+      inset 0 0 10px rgb(255 61 104 / 0.3);
+    rotate: -8deg;
+  }
+  .boss-art {
+    width: 6.5rem;
+    height: 6.5rem;
+    margin: 0.4rem 0 0.2rem;
+    color: var(--c);
+    filter: drop-shadow(0 0 6px var(--c)) drop-shadow(0 0 18px color-mix(in srgb, var(--c) 60%, transparent));
+  }
+  .boss-art :global(.fill) {
+    fill: currentColor;
+    stroke: none;
+  }
+  .boss-art :global(.num) {
+    font: 900 9px var(--f-mono);
+    fill: #07060d;
+    stroke: none;
+  }
+  .boss-art :global(.lbl) {
+    font: 800 8px var(--f-mono);
+    fill: currentColor;
+    stroke: none;
+  }
+  .boss-art :global(.warn) {
+    stroke: var(--red);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .boss-art :global(.spin) {
+      transform-origin: 32px 32px;
+      animation: spin 1s steps(8) infinite;
+    }
+    :global(.js) .boss-ko {
+      opacity: 0;
+    }
+    :global(.js) .boss.is-in .boss-ko {
+      animation: stamp 420ms var(--ease-spring) both;
+      animation-delay: calc(var(--delay, 0ms) + 650ms);
+    }
+    :global(.js) .boss.is-in .boss-art {
+      animation: defeated 600ms ease-out both;
+      animation-delay: calc(var(--delay, 0ms) + 650ms);
+    }
+  }
+  @keyframes spin {
+    to {
+      rotate: 360deg;
+    }
+  }
+  @keyframes stamp {
+    0% {
+      opacity: 0;
+      scale: 2.4;
+      rotate: 8deg;
+    }
+    70% {
+      opacity: 1;
+      scale: 0.9;
+    }
+    100% {
+      opacity: 1;
+      scale: 1;
+      rotate: -8deg;
+    }
+  }
+  @keyframes defeated {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    20% {
+      translate: -6px 0;
+      filter: brightness(2) drop-shadow(0 0 12px #fff);
+    }
+    40% {
+      translate: 5px 0;
+    }
+    60% {
+      translate: -3px 0;
+    }
+  }
+  .boss h3 {
+    font-size: 1.6rem;
+  }
+  .boss dl {
+    display: grid;
+    gap: 0.8rem;
+    margin: 0;
+  }
+  .boss dt {
+    font-size: 0.64rem;
+    color: var(--red);
+  }
+  .boss .counter dt {
+    color: var(--lime);
+  }
+  .boss dd {
+    margin: 0.3rem 0 0;
+    color: var(--muted);
+  }
+  .boss .counter dd {
+    color: var(--text);
+  }
+</style>

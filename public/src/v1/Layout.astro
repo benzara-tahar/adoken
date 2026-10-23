@@ -1,0 +1,47 @@
+---
+import './styles/v1.css';
+import './styles/mock.css';
+import { meta, x } from './copy';
+import { meta as siteMeta } from '../copy';
+import PixelFist from './components/PixelFist.astro';
+
+const canonical = new URL(Astro.url.pathname, siteMeta.url).href;
+const ogImage = new URL(siteMeta.ogImage, siteMeta.url).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <meta name="robots" content="noindex" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content={meta.themeColor} />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="adoken" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={x.handle} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script src="../scripts/analytics.ts"></script>
+  </head>
+  <body class="v1">
+    <PixelFist sprite />
+    <slot />
+    <script>
+      import './scripts/fx';
+    </script>
+    <div class="crt" aria-hidden="true"></div>
+  </body>
+</html>

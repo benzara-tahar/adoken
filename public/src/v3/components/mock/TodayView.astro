@@ -1,0 +1,38 @@
+---
+import Icon from '../Icon.astro';
+import { demo } from '../../copy';
+---
+
+<section class="view v-today">
+  <p class="t-date">{demo.date}</p>
+  <p class="t-hello">Good morning, {demo.user}.</p>
+  <div class="t-cards">
+    {
+      demo.cards.map(([n, label]) => (
+        <div class="t-card">
+          <b>{n}</b>
+          <span>{label}</span>
+        </div>
+      ))
+    }
+  </div>
+  <div class="nudge"><Icon name="hourglass" /><span>{demo.nudge}</span><span class="go">Review now</span></div>
+  <p class="t-sub">Waiting on you</p>
+  <ul class="rows">
+    {
+      demo.reviews.map(([id, title, repo, who, age], i) => (
+        <li class:list={['row', { hot: i === 0 }]}>
+          <Icon name="pr" />
+          <span class="id">{id}</span>
+          <span class="ttl">
+            {title}
+            <small>
+              {repo} · {who}
+            </small>
+          </span>
+          <span class="age">{age}</span>
+        </li>
+      ))
+    }
+  </ul>
+</section>

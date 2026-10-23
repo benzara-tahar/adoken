@@ -1,0 +1,128 @@
+---
+/**
+ * Move 01: a live ⌘P palette over the fictional org. Autoplays scripted queries while on screen; the
+ * moment someone focuses the input it stops and searches whatever they type (scripts/palette.ts).
+ */
+import { demo, moves } from '../copy';
+import { renderHits, search } from '../lib/search';
+import Icon from './Icon.astro';
+
+const p = demo.palette;
+const first = p.script[0];
+const result = search(demo.index, first, 5);
+const hint = moves.items[0].hint;
+---
+
+<div class="app pal-demo" data-palette data-index={JSON.stringify(demo.index)} data-labels={JSON.stringify(demo.kindLabels)} data-script={JSON.stringify(p.script)}>
+  <div class="pal">
+    <label class="pal-in">
+      <Icon name="search" />
+      <input
+        class="pal-q"
+        data-input
+        type="text"
+        value={first}
+        placeholder={p.placeholder}
+        aria-label="Try the demo palette: type to search the fictional fabrikam org"
+        autocomplete="off"
+        spellcheck="false"
+        aria-controls="pal-demo-list"
+      />
+      <span class="pal-badge" data-badge data-kind="typo" data-typo={p.forgiven} data-link={p.link}
+        >{p.forgiven}<small data-badge-detail>{first} → {result.forgiven}</small></span
+      >
+    </label>
+    <div class="pal-scopes">
+      {
+        p.scopes.map(([scope, label]) => (
+          <button type="button" data-scope={scope}>
+            <b>{scope}</b>
+            {label}
+          </button>
+        ))
+      }
+    </div>
+    <ul class="pal-list" id="pal-demo-list" data-list aria-live="polite" set:html={renderHits(result, demo.kindLabels)} />
+    <p class="pal-foot">
+      {p.footer.map((item) => <span>{item}</span>)}
+      <b data-meta>{result.hits.length} hits · 2.9 ms · {p.indexed}</b>
+    </p>
+  </div>
+  <p class="pal-hint"><span class="pal-live">Live</span>{hint}</p>
+</div>
+
+<script>
+  import '../scripts/palette';
+</script>
+
+<style>
+  .pal-demo {
+    display: grid;
+    gap: 1rem;
+    overflow: visible;
+    background: none;
+    border: 0;
+    box-shadow: none;
+  }
+  .pal-demo .pal {
+    border-radius: 16px;
+  }
+  .pal-demo .pal-q {
+    font-size: 17px;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .pal-demo .pal-badge {
+      animation: slam 420ms var(--ease-spring) both;
+    }
+  }
+  .pal-demo .pal-list {
+    min-height: 250px;
+    align-content: start;
+  }
+  .pal-scopes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--a-line);
+  }
+  .pal-scopes button {
+    display: inline-flex;
+    gap: 5px;
+    padding: 3px 9px;
+    font: 600 11px/1.5 var(--f-mono);
+    color: var(--a-muted);
+    background: transparent;
+    border: 1px solid var(--a-line);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .pal-scopes button:hover,
+  .pal-scopes button:focus-visible {
+    color: var(--a-text);
+    border-color: var(--a-accent);
+    outline: none;
+  }
+  .pal-scopes b {
+    color: var(--a-accent);
+  }
+  .pal-hint {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0 0.25rem;
+    font: 0.78rem/1.5 var(--f-mono);
+    color: var(--muted);
+  }
+  .pal-live {
+    flex: none;
+    padding: 0.2rem 0.45rem;
+    font: 800 0.66rem/1.2 var(--f-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #0a1a05;
+    background: var(--lime);
+    border-radius: 0.25rem;
+    box-shadow: 0 0 12px -2px var(--lime);
+  }
+</style>

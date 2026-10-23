@@ -1,0 +1,64 @@
+{
+  "continuationToken": "49;14;12;Discussion",
+  "isLastBatch": true,
+  "nextLink": "https://dev.azure.com/contoso/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0/_apis/wit/reporting/workItemRevisions?continuationToken=49;14;12;Discussion&fields=System.Id%2CSystem.Title%2CSystem.WorkItemType%2CSystem.State%2CSystem.AssignedTo%2CSystem.CreatedBy%2CSystem.ChangedBy%2CSystem.ChangedDate%2CSystem.CreatedDate%2CSystem.TeamProject%2CSystem.CommentCount&includeDeleted=true&includeLatestOnly=true&api-version=7.1",
+  "values": [
+    {
+      "commentVersionRef": {
+        "commentId": 12012961,
+        "url": "https://dev.azure.com/contoso/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0/_apis/wit/workItems/3/comments/12012961/versions/1",
+        "version": 1
+      },
+      "fields": {
+        "System.ChangedBy": "Dana Example <dana@example.com>",
+        "System.ChangedDate": "2024-03-26T08:27:46.09Z",
+        "System.CommentCount": 1,
+        "System.CreatedBy": "Dana Example <dana@example.com>",
+        "System.CreatedDate": "2024-03-26T08:26:45.813Z",
+        "System.Id": 3,
+        "System.State": "To Do",
+        "System.TeamProject": "Fabrikam",
+        "System.Title": "Fix login redirect",
+        "System.WorkItemType": "Issue",
+        "System.AssignedTo": "Dana Example <dana@example.com>"
+      },
+      "id": 3,
+      "multilineFieldsFormat": {},
+      "rev": 2
+    },
+    {
+      "fields": {
+        "System.ChangedBy": "Dana Example <dana@example.com>",
+        "System.ChangedDate": "2024-03-27T06:19:40.6Z",
+        "System.CommentCount": 1,
+        "System.CreatedBy": "Dana Example <dana@example.com>",
+        "System.CreatedDate": "2024-03-25T08:28:48.1Z",
+        "System.Id": 1,
+        "System.State": "Done",
+        "System.TeamProject": "Fabrikam",
+        "System.Title": "Ship the first release 🚀",
+        "System.WorkItemType": "Issue"
+      },
+      "id": 1,
+      "multilineFieldsFormat": {},
+      "rev": 7
+    },
+    {
+      "fields": {
+        "System.ChangedBy": "Dana Example <dana@example.com>",
+        "System.ChangedDate": "2024-03-29T05:42:39.843Z",
+        "System.CommentCount": 0,
+        "System.CreatedBy": "Dana Example <dana@example.com>",
+        "System.CreatedDate": "2024-03-29T05:42:39.843Z",
+        "System.Id": 7,
+        "System.State": "To Do",
+        "System.TeamProject": "Fabrikam",
+        "System.Title": "Draft onboarding copy",
+        "System.WorkItemType": "Issue"
+      },
+      "id": 7,
+      "multilineFieldsFormat": {},
+      "rev": 1
+    }
+  ]
+}

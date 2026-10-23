@@ -1,0 +1,183 @@
+---
+/**
+ * Chapter one: Cmd+P. A light (Dojo Day) window whose palette cycles through three searches:
+ * a typo, filters, and a pasted ADO link. Default markup shows the first search, finished.
+ */
+import ChapterHead from './ChapterHead.astro';
+import Icon from './Icon.astro';
+import TodayView from './mock/TodayView.astro';
+import AppSide from './AppSide.astro';
+import { demo, search } from '../copy';
+
+const icon = { pr: 'pr', bug: 'bug', run: 'run', cmd: 'cmd' } as const;
+const mark = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/(login)/gi, '<b>$1</b>');
+---
+
+<section id="ch-search" class="section ch" aria-labelledby="ch-search-title">
+  <div class="wrap ch-grid">
+    <div class="ch-text">
+      <ChapterHead numeral={search.numeral} kicker={search.kicker} title={search.title} id="ch-search-title" />
+      <p class="body dropcap">{search.body}</p>
+      <ul class="points">
+        {
+          search.points.map(([k, v]) => (
+            <li>
+              <b>
+                <code>{k}</code>
+              </b>
+              <span>{v}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="ch-stat"><b>{search.stat.value}</b><span>{search.stat.label}</span></p>
+    </div>
+
+    <figure class="photo ch-photo rv" style="--tilt:1.1deg">
+      <span class="tape tape-tl"></span>
+      <div class="photo-frame">
+        <div
+          class="win mock sm is-today is-palette is-results is-fixed is-set-0"
+          data-ink="dojo-day"
+          role="img"
+          aria-label="The Cmd+P palette in a light theme: the typo “lgoin” finds login results, then author:@me type:bug filters bugs, then a pasted dev.azure.com link opens the pull request directly."
+        >
+          <div class="win-bar"><i></i><i></i><i></i><span class="win-title">adoken · Contoso</span></div>
+          <div class="app">
+            <AppSide active={0} />
+            <div class="main">
+              <TodayView />
+              <div class="pal">
+                <div class="pal-in">
+                  <Icon name="search" /><span class="pal-q sm-q">{demo.searches[0].query}</span><span class="caret"></span>
+                </div>
+                {
+                  demo.searches.map((set, n) => (
+                    <div class="sm-set" data-set={n} data-query={set.query}>
+                      <p class="pal-fix">{set.note}</p>
+                      <ul class="pal-list">
+                        {set.rows.map(([kind, id, title, sub], i) => (
+                          <li class:list={['pal-row', { on: i === 0 }]} data-kind={kind} style={`--i:${i}`}>
+                            <Icon name={icon[kind as keyof typeof icon]} />
+                            <span class="ttl">
+                              <span class="id">{id}</span>
+                              <Fragment set:html={mark(title)} />
+                              <span class="sub">{sub}</span>
+                            </span>
+                            <span class="enter">↵</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <div class="pal-foot">
+                        <span>↑↓ move · ↵ open · ⌘↵ open in browser</span>
+                        <span>
+                          <b>{set.meta}</b>
+                        </span>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+          <div class="keycast"></div>
+        </div>
+      </div>
+      <figcaption class="fig"><b>{search.figure.split(' · ')[0]}</b> · {search.figure.split(' · ').slice(1).join(' · ')}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<script>
+  import { motionOK, play, scene } from '../scripts/stage';
+
+  const root = document.querySelector<HTMLElement>('.sm');
+  if (root && motionOK) {
+    const q = root.querySelector('.sm-q')!;
+    const keycast = root.querySelector('.keycast')!;
+    const sets = [...root.querySelectorAll<HTMLElement>('.sm-set')];
+
+    play(root, async (s) => {
+      for (const [n, set] of sets.entries()) {
+        const query = set.dataset.query ?? '';
+        const paste = query.startsWith('https://');
+        scene(root, 'today', 'palette', 'typing', `set-${n}`);
+        q.textContent = '';
+        await s.wait(700);
+        if (paste) {
+          keycast.innerHTML = '<kbd>⌘</kbd><kbd>V</kbd><span>paste a link</span>';
+          keycast.classList.add('show');
+          await s.wait(350);
+          q.textContent = query;
+        } else {
+          await s.type(q, query, 85);
+        }
+        await s.wait(150);
+        scene(root, 'today', 'palette', 'typing', 'results', `set-${n}`);
+        await s.wait(300);
+        scene(root, 'today', 'palette', 'typing', 'results', 'fixed', `set-${n}`);
+        await s.wait(paste ? 2400 : 2800);
+        keycast.classList.remove('show');
+      }
+    });
+  }
+</script>
+
+<style>
+  .ch-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2.5rem, 5vw, 5.5rem);
+    align-items: center;
+  }
+
+  .ch-text {
+    display: grid;
+    gap: 1.6rem;
+  }
+
+  .ch-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin: 0.4rem 0 0;
+  }
+
+  .ch-stat b {
+    font: 500 clamp(2.6rem, 4.5vw, 3.8rem) / 1 var(--serif);
+    letter-spacing: -0.04em;
+    color: var(--shu);
+  }
+
+  .ch-stat span {
+    font: 500 0.85rem/1.35 var(--sans);
+    color: var(--ink-2);
+    max-width: 12em;
+  }
+
+  .ch-photo .win {
+    --app-h: 36em;
+  }
+
+  .sm-set {
+    display: none;
+  }
+
+  .sm.is-set-0 .sm-set[data-set='0'],
+  .sm.is-set-1 .sm-set[data-set='1'],
+  .sm.is-set-2 .sm-set[data-set='2'] {
+    display: block;
+  }
+
+  .sm-q {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  @media (max-width: 960px) {
+    .ch-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

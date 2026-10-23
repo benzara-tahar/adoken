@@ -1,0 +1,58 @@
+{
+  "count": 5,
+  "value": [
+    {
+      "commentVersionRef": {
+        "commentId": 12017864,
+        "url": "https://dev.azure.com/contoso/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0/_apis/wit/workItems/14/comments/12017864/versions/2",
+        "version": 2
+      },
+      "fields": {
+        "Microsoft.VSTS.Common.ActivatedBy": {
+          "descriptor": "aad.ZXhhbXBsZQ",
+          "displayName": "Dana Example",
+          "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+          "imageUrl": "https://dev.azure.com/contoso/_apis/GraphProfile/MemberAvatars/aad.ZXhhbXBsZQ",
+          "uniqueName": "dana@example.com",
+          "url": "https://spsprodcus5.vssps.visualstudio.com/A00000000-0000-0000-0000-000000000000/_apis/Identities/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d"
+        },
+        "Microsoft.VSTS.Common.ActivatedDate": "2024-04-15T21:05:38.913Z",
+        "Microsoft.VSTS.Common.Priority": 2,
+        "Microsoft.VSTS.Common.StateChangeDate": "2024-04-15T21:05:38.913Z",
+        "System.AreaPath": "Fabrikam",
+        "System.ChangedBy": {
+          "descriptor": "aad.ZXhhbXBsZQ",
+          "displayName": "Dana Example",
+          "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+          "imageUrl": "https://dev.azure.com/contoso/_apis/GraphProfile/MemberAvatars/aad.ZXhhbXBsZQ",
+          "uniqueName": "dana@example.com",
+          "url": "https://spsprodcus5.vssps.visualstudio.com/A00000000-0000-0000-0000-000000000000/_apis/Identities/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d"
+        },
+        "System.ChangedDate": "2024-04-15T21:09:10.177Z",
+        "System.CommentCount": 3,
+        "System.CreatedBy": {
+          "descriptor": "aad.ZXhhbXBsZQ",
+          "displayName": "Dana Example",
+          "id": "6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d",
+          "imageUrl": "https://dev.azure.com/contoso/_apis/GraphProfile/MemberAvatars/aad.ZXhhbXBsZQ",
+          "uniqueName": "dana@example.com",
+          "url": "https://spsprodcus5.vssps.visualstudio.com/A00000000-0000-0000-0000-000000000000/_apis/Identities/6b3f0c2e-1d4a-4f5b-9c8d-7e6f5a4b3c2d"
+        },
+        "System.CreatedDate": "2024-04-15T20:52:32.67Z",
+        "System.Description": "<div>Receipts upload from the <b>mobile</b> app.</div>",
+        "System.IterationPath": "Fabrikam",
+        "System.Reason": "Started",
+        "System.State": "Doing",
+        "System.TeamProject": "Fabrikam",
+        "System.Title": "Attach receipts to expenses",
+        "System.WorkItemType": "Issue"
+      },
+      "id": 14,
+      "multilineFieldsFormat": {
+        "System.Description": "html"
+      },
+      "rev": 12,
+      "url": "https://dev.azure.com/contoso/0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0/_apis/wit/workItems/14"
+    }
+  ]
+}

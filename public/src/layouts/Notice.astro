@@ -1,0 +1,70 @@
+---
+/** One-message pages (404, launch-list redirects): fist, title, one line, actions in the slot. Never indexed. */
+import Base from './Base.astro';
+import Fist from '../components/Fist.astro';
+
+interface Props {
+  title: string;
+  body: string;
+  eyebrow?: string;
+  /** Upside-down fist: the K.O. (404) pose. */
+  knockedOut?: boolean;
+}
+const { title, body, eyebrow, knockedOut = false } = Astro.props;
+---
+
+<Base title={`${title} · adoken`} description={body} noindex>
+  <main class="notice">
+    <Fist class={knockedOut ? 'notice-fist ko' : 'notice-fist'} />
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1 class:list={{ ko: knockedOut }}>{title}</h1>
+    <p class="body">{body}</p>
+    <div class="actions"><slot /></div>
+  </main>
+</Base>
+
+<style>
+  .notice {
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 1rem;
+    min-height: 100dvh;
+    padding: 2rem;
+    text-align: center;
+  }
+  .notice :global(.notice-fist) {
+    width: 6rem;
+    height: auto;
+  }
+  .notice :global(.notice-fist.ko) {
+    transform: rotate(180deg);
+  }
+  h1 {
+    font-size: clamp(2.8rem, 9vw, 5rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--punch);
+    text-shadow: 0.05em 0.05em 0 var(--ink);
+  }
+  h1.ko {
+    font-size: clamp(4rem, 15vw, 8rem);
+  }
+  .body {
+    max-width: 32rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem 1.5rem;
+  }
+  .actions :global(.text-link) {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+</style>

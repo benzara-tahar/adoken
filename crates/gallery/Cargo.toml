@@ -1,0 +1,156 @@
+[package]
+name = "adoken-gallery"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+description = "Component stories rendered per theme, plus per-theme snapshot tests."
+
+[[bin]]
+name = "adoken-gallery"
+path = "src/main.rs"
+
+[dependencies]
+adoken-app.workspace = true
+adoken-demo.workspace = true
+adoken-model.workspace = true
+adoken-notify.workspace = true
+adoken-nudge.workspace = true
+adoken-ken.workspace = true
+adoken-sync.workspace = true
+adoken-richtext.workspace = true
+adoken-store.workspace = true
+adoken-theme.workspace = true
+adoken-ui.workspace = true
+gpui.workspace = true
+gpui_platform.workspace = true
+time.workspace = true
+
+[dev-dependencies]
+anyhow.workspace = true
+adoken-perf = { workspace = true, features = ["gpui"] }
+adoken-store.workspace = true
+gpui = { workspace = true, features = ["test-support"] }
+gpui_platform = { workspace = true, features = ["test-support"] }
+gpui_tokio.workspace = true
+image.workspace = true
+tempfile.workspace = true
+toml.workspace = true
+tokio.workspace = true
+url.workspace = true
+
+# Runs on the main thread (harness = false): the Metal headless renderer and
+# CoreText are driven the way zeron's resource-profile fixture drives them.
+[[test]]
+name = "snapshots"
+harness = false
+
+# 0007 AC-8: code surfaces stay opaque over a custom background (headless pixels).
+[[test]]
+name = "backdrop"
+harness = false
+
+# Theme library + picker: preview/revert, pairing, persistence, hot reload.
+[[test]]
+name = "theme_picker"
+harness = false
+
+# Settings (spec 0009): coalesced safe writes, outside edits, live apply, every tab renders.
+[[test]]
+name = "settings"
+harness = false
+
+# Review writes (spec 0004) through a window: posted comment and Complete close
+# their composer / sheet from the async result without re-leasing the review.
+[[test]]
+name = "review_writes"
+harness = false
+
+# Review loading (spec 0004 States) through a window: the file list and a file's
+# blobs fail, ⇧L retries each, and no load is left spinning.
+[[test]]
+name = "review_loading"
+harness = false
+
+# PR links (spec 0004 §3 step 9) through a window: copy id / link from the review
+# and the list selection land in the clipboard with a toast; the demo org opens nothing.
+[[test]]
+name = "pr_links"
+harness = false
+
+# Pull requests navigation (spec 0004 §3.1) through a window with real keystrokes:
+# list keys work on focus, ↩ opens the full-width review, Esc / ⌘[ return with the
+# same row selected and the scroll kept.
+[[test]]
+name = "pr_list_nav"
+harness = false
+
+[[test]]
+name = "pins_smoke"
+harness = false
+
+# Activity drawer (spec 0016 AC-S6, AC-B11) through the real shell on the demo
+# store with fixture activity: keys, expand/open, filters, export, frame p99.
+[[test]]
+name = "activity_smoke"
+harness = false
+
+# Work item editing (spec 0015) through the real shell on the demo org.
+[[test]]
+name = "workitems_smoke"
+harness = false
+
+# The work item list's area / iteration dropdown (spec 0008 FR-8) through
+# the real shell on the demo org.
+[[test]]
+name = "workitems_filter_smoke"
+harness = false
+
+# Back / forward across views (spec 0018) through the real shell on the
+# demo org: owner scenarios, push rules, mouse and titlebar buttons.
+[[test]]
+name = "nav_history"
+harness = false
+
+# Today (spec 0017 AC-33, AC-25, AC-28, AC-30) through the real shell on the
+# demo org, and the mood art through a Today view with the frame trace.
+[[test]]
+name = "today_smoke"
+harness = false
+
+# Resource meter (spec 0023) through the real shell: ⌘P on/off, no
+# repaint while the text is steady, copy resource usage.
+[[test]]
+name = "resource_meter"
+harness = false
+
+# Celebrations (spec 0022) through the real shell on the demo org: effects
+# on their confirming frames, Reduce Motion glyph, PR paths, K.O. handoff.
+[[test]]
+name = "celebrate_smoke"
+harness = false
+
+# PR review polish (spec 0019) through a window with real keystrokes: the
+# tree filter, the Threads view, list status actions and copy.
+[[test]]
+name = "review_polish"
+harness = false
+
+# PR review polish (spec 0019 AC-S2, AC-A6, AC-B9) on the L+T fixture: frame
+# and heap budgets, and the real shell on the demo org with L+T seeded.
+[[test]]
+name = "review_polish_smoke"
+harness = false
+
+# Guided tours (spec 0020 AC-7): every step's anchor visible in its story,
+# every cited key bound, copy limits.
+[[test]]
+name = "tour_anchors"
+harness = false
+
+# Guided tours (spec 0020 AC-13): the real shell on the demo store — auto-start
+# gates, tour keys, replay from ⌘P, Reduce Motion, frame p99.
+[[test]]
+name = "tours_smoke"
+harness = false

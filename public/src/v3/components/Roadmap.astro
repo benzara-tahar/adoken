@@ -1,0 +1,113 @@
+---
+/** What's next, set like a table of contents: each stage carries a seal (done, next, planned). */
+import Hanko from './Hanko.astro';
+import { roadmap } from '../copy';
+
+type Status = keyof typeof roadmap.stamps;
+---
+
+<section class="section roadmap" aria-labelledby="roadmap-title">
+  <div class="wrap rm-grid">
+    <div>
+      <p class="eyebrow">{roadmap.eyebrow}</p>
+      <h2 id="roadmap-title" class="h2 rm-title">{roadmap.title}</h2>
+      <p class="fig rm-note">{roadmap.note}</p>
+    </div>
+    <ol class="rm-list">
+      {
+        roadmap.items.map(([status, version, text]) => (
+          <li class:list={['rm-item', `rm-${status}`]}>
+            <Hanko
+              text={roadmap.stamps[status as Status]}
+              variant={status === 'done' ? 'solid' : 'line'}
+              class="rm-seal"
+              label={roadmap.stampLabels[status as Status]}
+            />
+            <span class="rm-text">{text}</span>
+            <span class="rm-dots" aria-hidden="true" />
+            <span class="rm-v">{version}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .roadmap {
+    border-top: 1px solid var(--ink);
+  }
+
+  .rm-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: start;
+  }
+
+  .rm-title {
+    margin: 1rem 0 1.4rem;
+  }
+
+  .rm-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--ink);
+  }
+
+  .rm-item {
+    display: grid;
+    grid-template-columns: 2.4rem auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .rm-item :global(.rm-seal) {
+    width: 2.2rem;
+  }
+
+  .rm-later :global(.rm-seal) {
+    opacity: 0.55;
+  }
+
+  .rm-text {
+    font: 400 1.08rem/1.35 var(--serif);
+  }
+
+  .rm-done .rm-text {
+    color: var(--ink-2);
+  }
+
+  .rm-next .rm-text {
+    font-style: italic;
+  }
+
+  .rm-dots {
+    min-width: 1rem;
+    border-bottom: 1.5px dotted var(--dim);
+  }
+
+  .rm-v {
+    font: 500 0.85rem/1 var(--mono);
+    color: var(--dim);
+  }
+
+  @media (max-width: 960px) {
+    .rm-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .rm-item {
+      grid-template-columns: 2rem 1fr auto;
+    }
+
+    .rm-dots {
+      display: none;
+    }
+  }
+</style>

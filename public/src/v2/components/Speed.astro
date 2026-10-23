@@ -1,0 +1,314 @@
+---
+/** Browser vs adoken, per task. The browser bars fill in real time; adoken's are done before you look. */
+import { speed } from '../copy';
+import { icons } from '../lib';
+
+const max = Math.max(...speed.rows.map((row) => row.browser));
+const fmt = (ms: number) => (ms >= 1000 ? `${(ms / 1000).toFixed(1)} s` : `${ms} ms`);
+---
+
+<section class="section" id="speed">
+  <div class="wrap">
+    <div class="section-head center rv">
+      <span class="eyebrow">{speed.eyebrow}</span>
+      <h2 class="h2">{speed.title}</h2>
+      <p class="lede">{speed.lede}</p>
+    </div>
+
+    <div class="spd glass rv" data-speed>
+      <div class="spd-top">
+        <span class="spd-legend">
+          <span><i class="spd-dot-b"></i>{speed.browser}</span>
+          <span><i class="spd-dot-a"></i>{speed.adoken}</span>
+        </span>
+        <button class="spd-replay" type="button" data-replay hidden>
+          <svg viewBox="0 0 16 16" aria-hidden="true"
+            ><path d="M13 8a5 5 0 1 1-1.6-3.7M13 2.5v3h-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg
+          >
+          Replay
+        </button>
+      </div>
+      {
+        speed.rows.map((row) => (
+          <div
+            class="spd-row"
+            data-row
+            data-browser={row.browser}
+            data-adoken={row.adoken}
+            style={`--ms:${row.browser};--ams:${row.adoken}`}
+          >
+            <span class="spd-task">{row.task}</span>
+            <div class="spd-bars">
+              <div class="spd-bar spd-b" style={`--w:${row.browser / max}`}>
+                <span class="spd-track">
+                  <i />
+                </span>
+                <span class="spd-v num" data-b>
+                  {fmt(row.browser)}
+                </span>
+              </div>
+              <div class="spd-bar spd-a" style={`--w:${row.adoken / max}`}>
+                <span class="spd-track">
+                  <i />
+                </span>
+                <span class="spd-v num" data-a>
+                  {fmt(row.adoken)}
+                  <span class="spd-check" set:html={icons.check} />
+                </span>
+              </div>
+            </div>
+            <span class="sr-only">
+              {speed.browser}: {fmt(row.browser)}. {speed.adoken}: {fmt(row.adoken)}.
+            </span>
+          </div>
+        ))
+      }
+      <div class="spd-total">
+        <span class="spd-total-v">{speed.total.value}</span>
+        <span class="spd-total-l">{speed.total.label}</span>
+      </div>
+    </div>
+    <p class="spd-note rv">{speed.note}</p>
+  </div>
+</section>
+
+<script>
+  import { onceVisible, reducedMotion } from '../scripts/motion';
+
+  const root = document.querySelector<HTMLElement>('[data-speed]');
+  const fmt = (ms: number) => (ms >= 1000 ? `${(ms / 1000).toFixed(1)} s` : `${Math.round(ms)} ms`);
+
+  function race() {
+    if (!root) return;
+    const rows = [...root.querySelectorAll<HTMLElement>('[data-row]')];
+    root.classList.remove('is-racing', 'is-done');
+    void root.offsetWidth;
+    root.classList.add('is-racing');
+    const start = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      let running = false;
+      for (const row of rows) {
+        const browser = Number(row.dataset.browser);
+        const adoken = Number(row.dataset.adoken);
+        row.querySelector('[data-b]')!.textContent = fmt(Math.min(elapsed, browser));
+        const a = row.querySelector('[data-a]')!.firstChild!;
+        a.textContent = `${fmt(Math.min(elapsed, adoken))} `;
+        row.classList.toggle('is-a-done', elapsed >= adoken);
+        row.classList.toggle('is-b-done', elapsed >= browser);
+        if (elapsed < browser) running = true;
+      }
+      if (running) requestAnimationFrame(tick);
+      else root.classList.add('is-done');
+    };
+    requestAnimationFrame(tick);
+  }
+
+  if (root && !reducedMotion) {
+    root.classList.add('is-live');
+    const replay = root.querySelector<HTMLButtonElement>('[data-replay]')!;
+    replay.hidden = false;
+    replay.addEventListener('click', race);
+    onceVisible(root, race, 0.45);
+  }
+</script>
+
+<style>
+  .spd {
+    max-width: 980px;
+    margin-inline: auto;
+    padding: clamp(20px, 3vw, 36px);
+    border-radius: 24px;
+  }
+  .spd-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .spd-legend {
+    display: flex;
+    gap: 18px;
+    font-size: 0.84rem;
+    color: var(--soft);
+  }
+  .spd-legend span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .spd-legend i {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+  }
+  .spd-dot-b {
+    background: #5a5d6a;
+  }
+  .spd-dot-a {
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+  }
+  .spd-replay {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    color: var(--soft);
+    cursor: pointer;
+    border-radius: 99px;
+    border: 1px solid var(--line-2);
+    background: rgb(255 255 255 / 0.04);
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+  }
+  .spd-replay:hover {
+    color: var(--text);
+    border-color: rgb(255 255 255 / 0.25);
+  }
+  .spd-replay svg {
+    width: 14px;
+    height: 14px;
+  }
+  .spd-row {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.9fr) 2fr;
+    align-items: center;
+    gap: 24px;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+  }
+  .spd-task {
+    font-weight: 500;
+    color: var(--text);
+    text-wrap: balance;
+  }
+  .spd-bars {
+    display: grid;
+    gap: 8px;
+  }
+  .spd-bar {
+    display: grid;
+    grid-template-columns: 1fr 92px;
+    align-items: center;
+    gap: 14px;
+  }
+  .spd-track {
+    height: 10px;
+    overflow: hidden;
+    border-radius: 99px;
+    background: rgb(255 255 255 / 0.04);
+  }
+  .spd-track i {
+    display: block;
+    width: max(8px, calc(var(--w) * 100%));
+    height: 100%;
+    border-radius: inherit;
+    transform-origin: left;
+  }
+  .spd-b .spd-track i {
+    background: repeating-linear-gradient(-45deg, #4a4c57 0 6px, #555864 6px 12px);
+  }
+  .spd-a .spd-track i {
+    background: linear-gradient(90deg, var(--accent), var(--accent-hi));
+    box-shadow: 0 0 14px var(--accent);
+  }
+  .spd-v {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+  .spd-b .spd-v {
+    color: var(--muted);
+  }
+  .spd-a .spd-v {
+    color: var(--accent-hi);
+  }
+  .spd-check {
+    display: inline-flex;
+  }
+  .spd-check :global(svg) {
+    width: 13px;
+    color: var(--ok);
+  }
+
+  /* live race: bars grow at the real pace of each side */
+  .spd.is-live:not(.is-racing) .spd-track i {
+    transform: scaleX(0);
+  }
+  .spd.is-racing .spd-row .spd-track i {
+    transform: scaleX(0);
+  }
+  .spd.is-racing .spd-row .spd-b .spd-track i {
+    animation: grow calc(var(--ms) * 1ms) linear forwards;
+  }
+  .spd.is-racing .spd-row .spd-a .spd-track i {
+    animation: grow calc(max(var(--ams), 120) * 1ms) var(--ease) forwards;
+  }
+  .spd.is-racing .spd-row:not(.is-a-done) .spd-check {
+    visibility: hidden;
+  }
+  .spd.is-racing .spd-row:not(.is-b-done) .spd-b .spd-v::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid var(--muted);
+    border-top-color: transparent;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes grow {
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .spd-total {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+  .spd-total-v {
+    font: 650 clamp(2rem, 4vw, 2.8rem) / 1 var(--sans);
+    letter-spacing: -0.045em;
+    background: linear-gradient(92deg, #fff, var(--accent-hi) 50%, var(--amber));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .spd-total-l {
+    color: var(--soft);
+  }
+  .spd-note {
+    max-width: 980px;
+    margin: 16px auto 0;
+    font-size: 0.8rem;
+    color: var(--faint);
+    text-align: center;
+  }
+  @media (max-width: 720px) {
+    .spd-row {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .spd-bar {
+      grid-template-columns: 1fr 76px;
+    }
+    .spd-total {
+      flex-direction: column;
+      gap: 6px;
+    }
+  }
+</style>

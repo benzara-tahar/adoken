@@ -1,0 +1,39 @@
+---
+/** /v3/: "Ink & Iron", the light editorial edition of the landing page. Copy: src/v3/copy.ts. */
+import Layout from '../../v3/Layout.astro';
+import Hero from '../../v3/components/Hero.astro';
+import Race from '../../v3/components/Race.astro';
+import Contents from '../../v3/components/Contents.astro';
+import PullQuote from '../../v3/components/PullQuote.astro';
+import ChapterSearch from '../../v3/components/ChapterSearch.astro';
+import ChapterReview from '../../v3/components/ChapterReview.astro';
+import ChapterCalm from '../../v3/components/ChapterCalm.astro';
+import ChapterNudges from '../../v3/components/ChapterNudges.astro';
+import ChapterInk from '../../v3/components/ChapterInk.astro';
+import ChapterDesk from '../../v3/components/ChapterDesk.astro';
+import ChapterKen from '../../v3/components/ChapterKen.astro';
+import Roadmap from '../../v3/components/Roadmap.astro';
+import Colophon from '../../v3/components/Colophon.astro';
+import { quotes } from '../../v3/copy';
+---
+
+<Layout>
+  <main>
+    <Hero />
+    <Race />
+    <PullQuote quote={quotes.spinner} />
+    <Contents />
+    <PullQuote quote={quotes.search} />
+    <ChapterSearch />
+    <PullQuote quote={quotes.review} />
+    <ChapterReview />
+    <PullQuote quote={quotes.inbox} />
+    <ChapterCalm />
+    <ChapterNudges />
+    <ChapterInk />
+    <ChapterDesk />
+    <ChapterKen />
+    <Roadmap />
+  </main>
+  <Colophon />
+</Layout>
