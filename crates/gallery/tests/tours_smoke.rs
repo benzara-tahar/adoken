@@ -175,7 +175,7 @@ mod macos {
             "tours_smoke frames: n={}, p50={:?}, p99={:?}, max={:?}",
             summary.count, summary.p50, summary.p99, summary.max
         );
-        ensure!(summary.p99 < FRAME, "frame p99 {:?} ≥ 16 ms", summary.p99);
+        adoken_perf::ensure_budget!(summary.p99 < FRAME, "frame p99 {:?} ≥ 16 ms", summary.p99);
         drop(frames);
         let window: AnyWindowHandle = run.window.into();
         run.cx

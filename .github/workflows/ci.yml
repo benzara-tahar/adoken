@@ -11,6 +11,9 @@ concurrency:
 
 env:
   CARGO_TERM_COLOR: always
+  # Hosted runners render on a virtual GPU: frame budgets are reported, not enforced
+  # (scripts/perf.sh on a real Mac is the gate).
+  ADOKEN_PERF_ADVISORY: 1
 
 jobs:
   check:
@@ -22,7 +25,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - run: cargo fmt --all --check
       - run: cargo clippy --workspace --all-targets
-      - run: cargo test --workspace
+      - run: cargo test --workspace --no-fail-fast
       - name: Bundle (ad hoc signature)
         run: scripts/bundle.sh --adhoc
       - name: Upload snapshot failures

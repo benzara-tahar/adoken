@@ -276,8 +276,8 @@ mod macos {
         println!("activity_smoke frames: {all}");
         println!("activity_smoke scroll 10k: {scroll}");
         println!("activity_smoke open Network: {open_network:?}, filter: {filter:?}");
-        ensure!(all.p99 < FRAME, "frame p99 {:?} ≥ 16 ms", all.p99);
-        ensure!(scroll.p99 < FRAME, "scroll p99 {:?} ≥ 16 ms", scroll.p99);
+        adoken_perf::ensure_budget!(all.p99 < FRAME, "frame p99 {:?} ≥ 16 ms", all.p99);
+        adoken_perf::ensure_budget!(scroll.p99 < FRAME, "scroll p99 {:?} ≥ 16 ms", scroll.p99);
         drop(frames);
         cx.update_window(window.into(), |_, window, _| window.remove_window())?;
         demo_feed_smoke(&mut cx, &hub)?;

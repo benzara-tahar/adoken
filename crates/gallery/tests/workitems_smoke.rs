@@ -300,7 +300,7 @@ mod macos {
                 "workitems_smoke frames: n={}, p50={:?}, p99={:?}",
                 summary.count, summary.p50, summary.p99
             );
-            ensure!(
+            adoken_perf::ensure_budget!(
                 summary.p99 < Duration::from_millis(16),
                 "frame p99 under 16 ms: {:?}",
                 summary.p99

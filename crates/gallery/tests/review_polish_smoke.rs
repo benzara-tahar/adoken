@@ -181,7 +181,7 @@ mod macos {
             "⇧T turns on Only files with threads"
         );
         println!("review_polish_smoke: ⇧T handled + painted {}", ms(shift_t));
-        ensure!(shift_t < FRAME, "⇧T took {}", ms(shift_t));
+        adoken_perf::ensure_budget!(shift_t < FRAME, "⇧T took {}", ms(shift_t));
         press(cx, any, "shift-t")?;
 
         // AC-B9: `t` paints the Threads view in its first frame.
@@ -194,7 +194,7 @@ mod macos {
             "the first frame after t shows Threads with its focused card ({mode:?}, {card:?})"
         );
         println!("review_polish_smoke: t handled + painted {}", ms(t));
-        ensure!(t < FRAME, "t took {}", ms(t));
+        adoken_perf::ensure_budget!(t < FRAME, "t took {}", ms(t));
         save(cx, any, "budget-threads")?;
 
         // AC-B9: top to bottom at maximum velocity (a viewport per frame,
@@ -294,7 +294,7 @@ mod macos {
             "review_polish_smoke: ↩ to a computed diff handled + painted {}",
             ms(enter)
         );
-        ensure!(enter < FRAME, "↩ took {}", ms(enter));
+        adoken_perf::ensure_budget!(enter < FRAME, "↩ took {}", ms(enter));
         save(cx, any, "budget-open-in-diff")?;
         close(cx, any)
     }
@@ -582,7 +582,7 @@ mod macos {
             ms(summary.p99),
             ms(summary.max)
         );
-        ensure!(summary.p99 < FRAME, "frame p99 {} ≥ 16 ms", ms(summary.p99));
+        adoken_perf::ensure_budget!(summary.p99 < FRAME, "frame p99 {} ≥ 16 ms", ms(summary.p99));
         drop(frames);
         close(cx, any)
     }

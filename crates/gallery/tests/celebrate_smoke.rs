@@ -148,7 +148,7 @@ mod macos {
             "celebrate_smoke effect frames: n={}, p50={:?}, p99={:?}, max={max:?}",
             frames.count, frames.p50, frames.p99
         );
-        ensure!(
+        adoken_perf::ensure_budget!(
             frames.p99 < Duration::from_millis(16),
             "frames during effects under 16 ms: p99 {:?}, max {max:?}",
             frames.p99

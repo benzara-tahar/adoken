@@ -200,7 +200,7 @@ mod macos {
                 draws[0].as_secs_f64() * 1e3,
                 check.row(),
             );
-            ensure!(check.passed(), "warm frames over budget: {}", check.row());
+            adoken_perf::ensure_budget!(check.passed(), "warm frames over budget: {}", check.row());
             cx.update_window(window.into(), |_, window, _| window.remove_window())?;
         }
         Ok(())

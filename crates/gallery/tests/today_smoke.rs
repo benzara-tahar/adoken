@@ -356,7 +356,7 @@ mod macos {
             "today_smoke shell frames: n={}, p50={:?}, p99={:?}, max={:?}",
             summary.count, summary.p50, summary.p99, summary.max
         );
-        ensure!(summary.p99 < FRAME, "frame p99 {:?} ≥ 16 ms", summary.p99);
+        adoken_perf::ensure_budget!(summary.p99 < FRAME, "frame p99 {:?} ≥ 16 ms", summary.p99);
         drop(frames);
         cx.update_window(window.into(), |_, window, _| window.remove_window())?;
         Ok(())
@@ -601,7 +601,7 @@ mod macos {
             ART_LOADS.load(Ordering::SeqCst),
             ART_LOADS_IN_FRAME.load(Ordering::SeqCst)
         );
-        ensure!(fade.max < FRAME, "a crossfade frame took {:?}", fade.max);
+        adoken_perf::ensure_budget!(fade.max < FRAME, "a crossfade frame took {:?}", fade.max);
         drop(frames);
         cx.update_window(handle, |_, window, _| window.remove_window())?;
         Ok(())

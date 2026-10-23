@@ -6,6 +6,28 @@ use std::time::Duration;
 
 use crate::stats::{Ms, Summary};
 
+/// Whether a missed timing budget fails a test. `ADOKEN_PERF_ADVISORY=1`
+/// (set in CI: hosted macOS runners render on a virtual GPU, so their frame
+/// times say nothing about a real Mac) reports misses instead;
+/// `scripts/perf.sh` on real hardware stays the gate.
+pub fn enforced() -> bool {
+    std::env::var_os("ADOKEN_PERF_ADVISORY").is_none()
+}
+
+/// `anyhow::ensure!` for timing budgets: bails while budgets are
+/// [`enforced`], otherwise prints the miss to stderr and carries on.
+#[macro_export]
+macro_rules! ensure_budget {
+    ($cond:expr, $($arg:tt)+) => {
+        if !($cond) {
+            if $crate::budget::enforced() {
+                ::anyhow::bail!($($arg)+);
+            }
+            eprintln!("perf budget missed (advisory): {}", format_args!($($arg)+));
+        }
+    };
+}
+
 /// Which order statistic a budget constrains.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Stat {
