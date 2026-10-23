@@ -1,13 +1,106 @@
-# adoken
+<p align="center">
+  <img src="crates/app/bundle/icon-1024.png" width="120" alt="adoken icon: a pixel fist">
+</p>
 
-ADO + 拳 (ken, "fist"): a local-first desktop client for Azure DevOps. Rust + GPUI, macOS first.
+<h1 align="center">adoken</h1>
+
+<p align="center">
+  <b>Azure DevOps, with a punch.</b><br>
+  A native, local-first desktop client for Azure DevOps. Pull requests, work items, pipelines and people live on your
+  machine, so search, review and triage move at the speed you think.
+</p>
+
+<p align="center">
+  <a href="https://github.com/benzara-tahar/adoken/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/benzara-tahar/adoken?label=release&color=f26b3a"></a>
+  <a href="https://github.com/benzara-tahar/adoken/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/benzara-tahar/adoken/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue"></a>
+  <img alt="macOS 12+ on Apple silicon" src="https://img.shields.io/badge/macOS-12%2B%20%C2%B7%20Apple%20silicon-111?logo=apple">
+  <img alt="Rust 2024" src="https://img.shields.io/badge/Rust-2024-dea584?logo=rust&logoColor=white">
+  <img alt="Built with GPUI" src="https://img.shields.io/badge/UI-GPUI-6e56cf">
+  <a href="https://x.com/BenzyPrime"><img alt="Follow the build on X" src="https://img.shields.io/badge/follow-%40BenzyPrime-000?logo=x"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/benzara-tahar/adoken/releases/latest/download/adoken-macos-arm64.dmg"><b>Download for macOS</b></a>
+  ·
+  <a href="https://adoken.dev">Website</a>
+  ·
+  <a href="CHANGELOG.md">Changelog</a>
+  ·
+  <a href="docs/roadmap.md">Roadmap</a>
+  ·
+  <a href="CONTRIBUTING.md">Contributing</a>
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/readme/hero.png" alt="Reviewing a pull request in adoken: side-by-side diff with an inline comment thread">
+</p>
+
+ADO + 拳 (*ken*, "fist"). The Azure DevOps web UI makes you wait on spinners and floods you with email. adoken
+syncs what matters into a local SQLite store, so every view opens in a frame and ⌘P finds anything in under 50 ms,
+and it turns the notification flood into one quiet inbox. No adoken server sits between you and Azure DevOps.
+
+## Features
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/readme/palette.png" alt="The ⌘P palette searching open pull requests">
+      <p><b>⌘P for everything.</b> Pull requests, work items, runs, people, repos and commands from one local
+      index. Filters like <code>author:@me</code>, <code>state:</code>, <code>is:open</code> and
+      <code>updated:&lt;7d</code>; paste an Azure DevOps link to jump straight to it.</p>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/readme/today.png" alt="Today: your pull requests, what's next and what's waiting on you">
+      <p><b>Today and smart nudges.</b> Your day at a glance: your PRs with their review state, the next thing
+      to unblock, and what's waiting on you. Nudges for stale reviews, failing builds and conflicts, at most
+      three a day.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/readme/workitems.png" alt="Work items: a bug with fields, links and discussion">
+      <p><b>Work items without the browser.</b> Change state, assignee, area, iteration and description in
+      place, link items and comment with @mentions. Works with any process template: Agile, Scrum, CMMI or your
+      own custom states.</p>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/readme/themes.png" alt="The same review in a dark and a light theme">
+      <p><b>Make it yours.</b> 33 built-in theme variants, custom backgrounds, optional sounds, and Ken, an
+      opt-in arcade layer for review streaks. Everything respects Reduce Motion.</p>
+    </td>
+  </tr>
+</table>
+
+Also in the box: a quiet **inbox** (one row per item, priorities, snooze, mute, quiet hours, macOS banners),
+**pins** for up to 20 items, **back/forward** history, a global shortcut, and an **activity drawer** that logs every
+request adoken sends to Azure DevOps.
+
+## Install
+
+1. Download [`adoken-macos-arm64.dmg`](https://github.com/benzara-tahar/adoken/releases/latest/download/adoken-macos-arm64.dmg)
+   (macOS 12+ on Apple silicon), open it and drag adoken onto Applications.
+2. This early preview isn't notarized yet, so macOS blocks the first launch. Open adoken once, dismiss the warning,
+   then click **Open Anyway** in System Settings → Privacy & Security. Or run
+   `xattr -dr com.apple.quarantine /Applications/adoken.app`.
+3. Connect your organization with the Azure CLI (`az login`) or a pasted Personal Access Token. The token is kept in
+   the macOS Keychain and never written to disk or logs.
+
+Just looking? `open --env ADOKEN_DEMO=1 /Applications/adoken.app` opens a fictional Contoso org with no sign-in and
+no network.
+
+Supported: Azure DevOps Services (`dev.azure.com` and `*.visualstudio.com`), one organization per install. Azure
+DevOps Server (on-premises) and Windows are on the [roadmap](docs/roadmap.md).
+
+# Development
+
 Product rules, layout and workflow: [`AGENTS.md`](AGENTS.md). Roadmap: [`docs/roadmap.md`](docs/roadmap.md).
 
 ## Desktop app vs website
 
 | | Desktop app | Website |
 | :-- | :-- | :-- |
-| What | adoken itself: the Azure DevOps client | adoken.dev, the pre-launch page and launch list |
+| What | adoken itself: the Azure DevOps client | adoken.dev, the product page and download link |
 | Where | `crates/` (Rust workspace, binary `adoken`) | `public/` (Astro, static) |
 | Runs on | macOS 12+ on Apple silicon; Windows at v0.3 | Cloudflare (Workers or Pages) |
 | Docs | this file, [`docs/release.md`](docs/release.md) | [`public/README.md`](public/README.md) |
@@ -125,6 +218,18 @@ The dmg opens to `adoken.app` next to an `Applications` link; drag one onto the 
 Only send these builds to people you trust to bypass Gatekeeper.
 
 ### Public release
+
+Releases are built by [`.github/workflows/release.yml`](.github/workflows/release.yml). Bump `version` in
+`Cargo.toml`, move the `[Unreleased]` notes in `CHANGELOG.md` under the new version, then tag and push:
+
+```sh
+git tag v0.0.2 && git push origin v0.0.2
+```
+
+The workflow builds the release bundle, packages the dmg and publishes a GitHub Release with that version's
+changelog section. `adoken-macos-arm64.dmg` keeps the same name in every release, so
+`releases/latest/download/adoken-macos-arm64.dmg` (the adoken.dev download button) always serves the newest build.
+Those builds carry an ad hoc signature, so Gatekeeper asks once per Mac (see Install).
 
 Anyone-can-open downloads need an Apple Developer Program membership and a Developer ID Application certificate.
 Then: sign with hardened runtime, notarize, staple, package the dmg, and sign + notarize + staple the dmg too.
